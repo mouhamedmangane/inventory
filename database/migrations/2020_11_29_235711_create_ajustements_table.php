@@ -13,6 +13,7 @@ class CreateAjustementsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('ajustements', function (Blueprint $table) {
             $table->id();
             $table->timestamps();

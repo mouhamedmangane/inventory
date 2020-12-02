@@ -13,6 +13,7 @@ class CreateProduitsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('produits', function (Blueprint $table) {
             $table->id();
             $table->string('libelle', 100);
@@ -20,10 +21,19 @@ class CreateProduitsTable extends Migration
             $table->double('qteStock', 15, 3);
             $table->double('qteSeuil',15,3);
             $table->double('prix', 10, 2);
-            $table->double('prixAchat', 10, 2);          
+            $table->double('prixAchat', 10, 2); 
+            $table->unsignedBigInteger('groupe_produit_id');
+
+            $table->foreign('groupe_produit_id')
+            ->references('id')
+            ->on('groupe_produit')
+            ->onDelete('restrict')
+            ->onUpdate('restrict');         
             
             
             $table->timestamps();
+            
+
         });
     }
 

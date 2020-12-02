@@ -13,9 +13,11 @@ class CreateProprietairesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('proprietaires', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
+            
             $table->timestamps();
         });
     }

@@ -13,14 +13,23 @@ class CreateDepensesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('depenses', function (Blueprint $table) {
             $table->id();
             $table->string('libelle', 100);
             $table->string('descriptions', 10000);
             $table->double('prix', 10, 2);
             $table->unsignedBigInteger('user_id');
+            
+            
 
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('user')
+            ->onDelete('restrict')
+            ->onUpdate('restrict');
             $table->timestamps();
+
         });
     }
 

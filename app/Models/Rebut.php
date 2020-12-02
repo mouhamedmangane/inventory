@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Rebut extends Model
 {
     use HasFactory;
+    public function produit()
+    {
+        return $this->belongsTo('App\Models\Produit');
+    }
 }

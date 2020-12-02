@@ -13,13 +13,27 @@ class CreateLigneVentesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('ligne_ventes', function (Blueprint $table) {
             $table->id();
-            $table->double('prixUnité', 15, 2);
-            $table->double('quantité',15,2);
+            $table->double('prixUnite', 15, 2);
+            $table->double('quantite',15,2);
 
             $table->unsignedBigInteger('vente_id');
+            
+            $table->foreign('vente_id')
+                ->references('id')
+                ->on('vente')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
+                
             $table->unsignedBigInteger('produit_id');
+            $table->foreign('produit_id')
+            ->references('id')
+            ->on('produit')
+            ->onDelete('restrict')
+            ->onUpdate('restrict');
+            
             $table->timestamps();
         });
     }

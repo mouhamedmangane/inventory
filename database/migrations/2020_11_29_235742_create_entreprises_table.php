@@ -13,6 +13,7 @@ class CreateEntreprisesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('entreprises', function (Blueprint $table) {
             $table->id();
             $table->string('nom');

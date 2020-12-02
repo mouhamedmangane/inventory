@@ -13,6 +13,7 @@ class CreateRebutsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('rebuts', function (Blueprint $table) {
             $table->id();
             $table->timestamps();

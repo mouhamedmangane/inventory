@@ -13,6 +13,7 @@ class CreateVentesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('ventes', function (Blueprint $table) {
             $table->id();
             $table->string('numeroVente', 100);

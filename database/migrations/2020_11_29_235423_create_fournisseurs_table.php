@@ -13,6 +13,7 @@ class CreateFournisseursTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('fournisseurs', function (Blueprint $table) {
             $table->id();
             $table->timestamps();

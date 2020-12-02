@@ -13,6 +13,7 @@ class CreateBoutiquesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('boutiques', function (Blueprint $table) {
             $table->id();
             $table->string('nom', 100);
