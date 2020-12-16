@@ -19,7 +19,7 @@ class CreateEntreprisesTable extends Migration
             $table->string('nom');
             $table->string('adresse');
 
-            //$table->unsignedBigInteger('user_id')->nullable()->index();   
+            
 
             $table->timestamps();
         });
