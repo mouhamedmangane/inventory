@@ -3,19 +3,23 @@
 namespace App\View\Components\Sidebar;
 
 use Illuminate\View\Component;
-use App\ViewModel\Nav\NavGroupModel;
+use App\ViewModel\Navs\NavtestClasse;
 
 class NavGroup extends Component
 {
-    public $model;
+    use NavTestClasse; 
+
+    public $name,$icon, $navElementModels;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($navGroup)
-    {
-        $this->model = $navGroup;
+    public function __construct($navElementModels,$name,$icon="")
+    {   
+        $this->icon = $icon;
+        $this->name=$name;
+        $this->navElementModels = $navElementModels;
     }
 
     /**

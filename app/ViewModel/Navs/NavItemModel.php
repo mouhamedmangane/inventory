@@ -13,6 +13,6 @@ Class NavItemModel implements NavElementModel{
     }
 
     public function getName(){
-        return $this->name();
+        return $this->name;
     }
 }    

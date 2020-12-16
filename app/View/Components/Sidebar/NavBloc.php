@@ -3,27 +3,25 @@
 namespace App\View\Components\Sidebar;
 
 use Illuminate\View\Component;
-
-use App\ViewModel\Navs\NavModel;
 use App\ViewModel\Navs\NavtestClasse;
 
-class Nav extends Component
+class NavBloc extends Component
 {
+    use NavTestClasse;
 
-
-    public $navModel;
-
+    public $name;
+    public $navElementModels;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct( $navModel)
-    {
-        $this->navModel = $navModel;
+    public function __construct($navElementModels,$name ="")
+    {   
+        $this->name = $name;
+        $this->navElementModels = $navElementModels;
     }
-
 
     /**
      * Get the view / contents that represent the component.
@@ -32,6 +30,6 @@ class Nav extends Component
      */
     public function render()
     {
-        return view('components.sidebar.nav');
+        return view('components.sidebar.nav-bloc');
     }
 }

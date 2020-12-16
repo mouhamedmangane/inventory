@@ -2,45 +2,31 @@
 
 namespace App\ViewModel\Navs;
 
-class NavModel {
-    public $navElementModels;
+class NavModel  {
 
-    public function __construct(){
-        $this->navElemtModels = [];
+    public $navBlocModels;
+
+
+    public function __construct($navBlocModels=[]){
+        $this->navBlocModels = $navBlocModels;
     }
 
-    public function addNavElement (NavElementModel $navElementModel){
-        $this.$navElementModel[] = $navElementModel;
+     function addNavBlocModel (NavBlocModel $navBlocModel){
+        $this->navBlocModels[] = $navBlocModel;
         return $this;
     }
 
-    public function removeNavElement(NavElementModel $navElementModel){
-        $index = array_search($navElement,$navElementModels);
+    public function removeNavBlocModel(NavBlocModel $navBlocModel){
+        $index = array_search($navBloc,$navBlocModels);
         if($index)
-            array_splice($navElementModels,$index,$index);
+            array_splice($navBlocModels,$index,$index);
         else
             throw new \Excpetion("La suppresion ne marche pas car index no trouvé");
         
         return $this;
     }
-    public function addNavItem($name,$url){
-        $this->navElementModels[] =new NavItemModel($name,$url);
-        return $this;
-    }
+
+ 
 
 
-
-    public function isNavItemModel(NavElementModel $navElementModel){
-        if($navElementModel instanceof NavItemModel){
-            return true;
-        }
-        return false;
-    }
-
-    public function isNavGroupModel(NavElementModel $navElementModel){
-        if($navElementModel instanceof NavGroupModel){
-            return true;
-        }
-        return false;
-    }
 }
