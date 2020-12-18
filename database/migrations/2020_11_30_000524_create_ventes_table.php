@@ -13,13 +13,15 @@ class CreateVentesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('ventes', function (Blueprint $table) {
             $table->id();
             $table->string('numeroVente', 100);
             $table->double('montantTotal', 15, 2);
 
             $table->unsignedBigInteger('client_id')->index();
-            
+
+           
             $table->timestamps();   
         });
     }
@@ -31,6 +33,6 @@ class CreateVentesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ventes');
+       Schema::dropIfExists('ventes');
     }
 }

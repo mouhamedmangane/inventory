@@ -13,8 +13,13 @@ class CreateFournisseursTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('fournisseurs', function (Blueprint $table) {
             $table->id();
+            $table->string('nom', 700);
+            $table->double('compte', 15, 2);
+            $table->string('ncni', 50);
+            $table->integer('tel')->unsigned()->default(700000000);
             $table->timestamps();
         });
     }

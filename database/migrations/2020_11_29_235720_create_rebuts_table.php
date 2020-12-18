@@ -13,9 +13,15 @@ class CreateRebutsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('rebuts', function (Blueprint $table) {
             $table->id();
+            $table->double('quantiteRejete', 15, 2);
             $table->timestamps();
+
+
+            $table->unsignedBigInteger('produit_id');
+            $table->foreign('produit_id')->references('id')->on('produits')->onDelete('restrict')->onUpdate('restrict');
         });
     }
 

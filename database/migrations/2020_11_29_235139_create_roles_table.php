@@ -13,10 +13,15 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('roles', function (Blueprint $table) {
-            $table->id();
+           
+            $table->string('role')->primary();
             $table->timestamps();
         });
+
+
+        
     }
 
     /**

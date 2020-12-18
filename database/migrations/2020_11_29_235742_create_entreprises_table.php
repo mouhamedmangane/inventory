@@ -13,12 +13,13 @@ class CreateEntreprisesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('entreprises', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
             $table->string('adresse');
 
-            //$table->unsignedBigInteger('user_id')->nullable()->index();   
+            
 
             $table->timestamps();
         });

@@ -13,10 +13,19 @@ class CreateDroitsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('droits', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->enum('pourmoi', ['ajout', 'modif','delete']);
+            $table->enum('pourlesautres', ['ajout', 'modif','delete']);
+
+                         
+
+
+            
+
         });
+
     }
 
     /**

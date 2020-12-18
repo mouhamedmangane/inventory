@@ -13,4 +13,13 @@ class Entreprise extends Model
     // {
     //     return $this->belongsTo('App\Models\User');
     // }
+    
+    public function boutiques()
+    {
+        return $this->hasMany('App\Models\Boutique');
+    }
+    public function proprietaire()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }
