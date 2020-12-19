@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class GroupeProduit extends Model
+class Composant extends Model
 {
     use HasFactory;
-
-    public function produits()
+    
+    public function paquet()
     {
-        return $this->hasMany('App\Models\Produit');
+        return $this->belongsTo('App\Models\Produit', 'produit_id', 'composant_id');
     }
 }

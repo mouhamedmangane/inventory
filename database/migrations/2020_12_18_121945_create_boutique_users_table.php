@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEvenementsTable extends Migration
+class CreateBoutiqueUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,14 @@ class CreateEvenementsTable extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
-        Schema::create('evenements', function (Blueprint $table) {
+        Schema::create('boutique_users', function (Blueprint $table) {
             $table->id();
-            $table->string('action');
-        
-            $table->string('description', 2000);
+            $table->unsignedBigInteger('boutique_id');
             
+            $table->foreign('boutique_id')->references('id')->on('boutiques')->onDelete('restrict');
             $table->unsignedBigInteger('user_id');
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
-
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
             $table->timestamps();
         });
     }
@@ -36,6 +32,6 @@ class CreateEvenementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('evenements');
+        Schema::dropIfExists('boutique_users');
     }
 }

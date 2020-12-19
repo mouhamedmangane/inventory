@@ -19,7 +19,9 @@ class CreateClientsTable extends Migration
             $table->string('nom', 700);
             $table->double('compte', 15, 2);
             $table->string('ncni', 50);
-            $table->integer('tel')->unsigned()->nullable()->default(700000000);
+            $table->integer('tel')->unsigned()->nullable()->unique();
+            
+
             $table->timestamps();
         });
     }

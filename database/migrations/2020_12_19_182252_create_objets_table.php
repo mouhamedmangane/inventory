@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEnsemblesTable extends Migration
+class CreateObjetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class CreateEnsemblesTable extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
-        Schema::create('ensembles', function (Blueprint $table) {
-        
-            $table->string('object_name');
-            $table->primary('object_name');          
+        Schema::create('objets', function (Blueprint $table) {
+            $table->string('objet_name')->primary();
             $table->timestamps();
-
-            
         });
     }
 
@@ -31,6 +26,6 @@ class CreateEnsemblesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ensembles');
+        Schema::dropIfExists('objets');
     }
 }

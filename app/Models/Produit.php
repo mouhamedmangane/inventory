@@ -38,6 +38,9 @@ class Produit extends Model
         return $this->belongsTo('App\Models\GroupeProduit');
     }
 
-    
+    public function composants()
+    {
+        return $this->hasMany('App\Models\Composant', 'paquet_id', 'produit_id');
+    }
 
 }

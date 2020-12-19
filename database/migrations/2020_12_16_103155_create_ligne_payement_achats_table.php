@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLignePayementsTable extends Migration
+class CreateLignePayementAchatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateLignePayementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ligne_payements', function (Blueprint $table) {
+        Schema::create('ligne_payement_achats', function (Blueprint $table) {
             $table->id();
             $table->double('montant', 15, 2);
+            $table->double('montantRestant',15,2);
 
-            $table->bigInteger('achat_id');
+            $table->unsignedBigInteger('achat_id');
+        
+            $table->foreign('achat_id')->references('id')->on('achats')->onDelete('cascade');
         
             $table->timestamps();
         });
@@ -30,6 +33,6 @@ class CreateLignePayementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ligne_payements');
+        Schema::dropIfExists('ligne_payement_achats');
     }
 }

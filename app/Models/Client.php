@@ -9,9 +9,9 @@ class Client extends Model
 {
     use HasFactory;
 
-    public function achats()
+    public function ventes()
     {
-        return $this->hasMany('App\Models\Achat');
+        return $this->hasMany('App\Models\Vente');
     }
     
 }
