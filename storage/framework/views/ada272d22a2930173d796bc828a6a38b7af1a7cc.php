@@ -6,7 +6,7 @@
         <span><?php echo e($name); ?></span>
         <i class="material-icons-outlined float-right" style="margin-top:5px;">expand_more</i>
     </a>
-    <ul id="sidebar<?php echo e($name); ?>" class="collapse list-unstyled" >
+    <ul id="sidebar<?php echo e($name); ?>" class="" >
             <?php $__currentLoopData = $navElementModels; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $navElementModel): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <?php if($isNavItemModel($navElementModel)): ?>
                      <?php if (isset($component)) { $__componentOriginaldb7423b05257673c87a08e268ffab18545ff1b40 = $component; } ?>

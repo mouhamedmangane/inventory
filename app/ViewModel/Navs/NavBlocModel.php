@@ -28,7 +28,7 @@ class NavBlocModel implements NavElementModel {
         return $this;
     }
 
-    public function addNavItemModel($name,$url,$icon=""){
+    public function addNavItemModel($name,$url="",$icon=""){
         return $this->addNavElementModel(new NavItemModel($name,$url,$icon));
     }
 

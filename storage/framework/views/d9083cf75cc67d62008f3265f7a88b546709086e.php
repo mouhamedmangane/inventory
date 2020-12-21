@@ -33,34 +33,9 @@
 
         <div class="wrapper">
 
-            <?php
-                $navModel = App\ViewModel\Navs\NavModelFactory::navModel()
-                    ->addNavBlocModel(
-                        App\ViewModel\Navs\NavModelFactory::navBlocModel()
-                        ->addNavItemModel("Dashbord","/ ","home")
-                        ->addNavItemModel("Contact","/dashbord","account_box ")
-                        ->addNavGroupModel(App\ViewModel\Navs\NavModelFactory::navGroupModel("Produit Groupe","home")
-                            ->addNavItemModel("Ajustement","/dashbord")
-                            ->addNavItemModel("Rebut","/dashbord")
-                        )
-
-                    )
-                    ->addNavBlocModel(
-                        App\ViewModel\Navs\NavModelFactory::navBlocModel()
-                        ->addNavItemModel("Vente","/dashbord","shopping_cart")
-                        ->addNavItemModel("Achat","/dashbord","receipt")
-                        ->addNavItemModel("Depense","/dashbord","remove_shopping_cart")
-                        
-                    ) 
-                    ->addNavBlocModel(
-                        App\ViewModel\Navs\NavModelFactory::navBlocModel()
-                        ->addNavItemModel("Integration","/Integration","integration_instructions")
-                        ->addNavItemModel("Rapport","/dashbord","flag")
-                    ) 
-                    ;
-            ?>
+           
              <?php if (isset($component)) { $__componentOriginal8657c882124c642086aac91278435e4ed45f75e5 = $component; } ?>
-<?php $component = $__env->getContainer()->make(App\View\Components\Sidebar\Nav::class, ['navModel' => $navModel]); ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Sidebar\Nav::class, ['navModel' => App\ViewConstante\Navs\DefaultNav::page()]); ?>
 <?php $component->withName('sidebar.nav'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
@@ -73,7 +48,18 @@
 <?php endif; ?> 
            
             <div id="content">
-
+                 <?php if (isset($component)) { $__componentOriginal9d14d1bdeb06043bdb35fba2d8a850bb5af14d0e = $component; } ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Produit\ListView::class, []); ?>
+<?php $component->withName('produit.list-view'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes([]); ?>
+<?php if (isset($__componentOriginal9d14d1bdeb06043bdb35fba2d8a850bb5af14d0e)): ?>
+<?php $component = $__componentOriginal9d14d1bdeb06043bdb35fba2d8a850bb5af14d0e; ?>
+<?php unset($__componentOriginal9d14d1bdeb06043bdb35fba2d8a850bb5af14d0e); ?>
+<?php endif; ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?> 
 
             </div>
         
@@ -85,6 +71,8 @@
 
         
         <script src="<?php echo e(URL::asset('dist/js/jquery.js')); ?>"></script>
+        <script src="<?php echo e(URL::asset('dist/js/popper.js')); ?>"></script>
+        <script src="<?php echo e(URL::asset('plugin/bootstrap441/js/bootstrap.bundle.js')); ?>"></script>
     </body>
 </html>
 <?php /**PATH C:\noppal_workspace\laravel_project\inventory\resources\views/welcome.blade.php ENDPATH**/ ?>

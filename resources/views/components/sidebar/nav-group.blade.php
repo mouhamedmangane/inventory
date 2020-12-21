@@ -6,7 +6,7 @@
         <span>{{ $name }}</span>
         <i class="material-icons-outlined float-right" style="margin-top:5px;">expand_more</i>
     </a>
-    <ul id="sidebar{{ $name }}" class="collapse list-unstyled" >
+    <ul id="sidebar{{ $name }}" class="" >
             @foreach ($navElementModels as $navElementModel)
                 @if ($isNavItemModel($navElementModel))
                     <x-sidebar.nav-item :name="$navElementModel->name" :url="$navElementModel->url"  />           

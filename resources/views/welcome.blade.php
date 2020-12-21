@@ -33,36 +33,11 @@
 
         <div class="wrapper">
 
-            @php
-                $navModel = App\ViewModel\Navs\NavModelFactory::navModel()
-                    ->addNavBlocModel(
-                        App\ViewModel\Navs\NavModelFactory::navBlocModel()
-                        ->addNavItemModel("Dashbord","/ ","home")
-                        ->addNavItemModel("Contact","/dashbord","account_box ")
-                        ->addNavGroupModel(App\ViewModel\Navs\NavModelFactory::navGroupModel("Produit Groupe","home")
-                            ->addNavItemModel("Ajustement","/dashbord")
-                            ->addNavItemModel("Rebut","/dashbord")
-                        )
-
-                    )
-                    ->addNavBlocModel(
-                        App\ViewModel\Navs\NavModelFactory::navBlocModel()
-                        ->addNavItemModel("Vente","/dashbord","shopping_cart")
-                        ->addNavItemModel("Achat","/dashbord","receipt")
-                        ->addNavItemModel("Depense","/dashbord","remove_shopping_cart")
-                        
-                    ) 
-                    ->addNavBlocModel(
-                        App\ViewModel\Navs\NavModelFactory::navBlocModel()
-                        ->addNavItemModel("Integration","/Integration","integration_instructions")
-                        ->addNavItemModel("Rapport","/dashbord","flag")
-                    ) 
-                    ;
-            @endphp
-            <x-sidebar.nav :navModel="$navModel" class="bg-green"/>
+           
+            <x-sidebar.nav :navModel="App\ViewConstante\Navs\DefaultNav::page()" class="bg-green" />
            
             <div id="content">
-
+                <x-produit.list-view />
 
             </div>
         
@@ -74,5 +49,7 @@
 
         
         <script src="{{ URL::asset('dist/js/jquery.js') }}"></script>
+        <script src="{{ URL::asset('dist/js/popper.js') }}"></script>
+        <script src="{{ URL::asset('plugin/bootstrap441/js/bootstrap.bundle.js') }}"></script>
     </body>
 </html>
