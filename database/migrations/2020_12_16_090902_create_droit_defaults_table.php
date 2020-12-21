@@ -43,5 +43,6 @@ class CreateDroitDefaultsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('droit_defaults');
+        Schema::enableForeignKeyConstraints();
     }
 }

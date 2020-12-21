@@ -39,5 +39,6 @@ class CreateVentesTable extends Migration
     public function down()
     {
        Schema::dropIfExists('ventes');
+       Schema::enableForeignKeyConstraints();
     }
 }

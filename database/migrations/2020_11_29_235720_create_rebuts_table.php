@@ -33,5 +33,6 @@ class CreateRebutsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('rebuts');
+        Schema::enableForeignKeyConstraints();
     }
 }

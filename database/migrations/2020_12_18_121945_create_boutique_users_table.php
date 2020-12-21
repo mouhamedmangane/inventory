@@ -33,5 +33,7 @@ class CreateBoutiqueUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('boutique_users');
+         Schema::enableForeignKeyConstraints();
+
     }
 }

@@ -39,5 +39,6 @@ class CreateComposantsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('composants');
+        Schema::enableForeignKeyConstraints();
     }
 }

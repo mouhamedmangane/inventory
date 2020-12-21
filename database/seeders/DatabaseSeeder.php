@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
+use App\Models;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,7 +15,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-       // \App\Models\User::factory(10)->create();
+        Models\Entreprise::factory(1)->create();
+        Models\Boutique::factory(5)->create();
+       Models\User::factory(10)->create();
+        // App\Models\Role::factory(10)->create();
+        // App\Models\DroitSpecifique::factory(5)->create();
+        // App\Models\DroitDefault::factory(6)->create();
+        // App\Models\Client::factory(10)->create();
+        // App\Models\Fournisseur::factory(10)->create();
+        // App\Models\Depense::factory(10)->create();
+        // App\Models\Evenement::factory(10)->create();
+        // App\Models\GroupeProduit::factory(10)->create();
+        // App\Models\Achat::factory(10)->create();
+        // App\Models\Vente::factory(10)->create();
+        // App\Models\Produit::factory(50)->create();
+        // App\Models\LigneAchatRecu::factory(7)->create();
+        // App\Models\LigneAchatDemande::factory(5)->create();
+        // App\Models\LignePayementAchats::factory(10)->create();
+        // App\Models\LignePayementVentes::factory(10)->create();
+       
        
     }
 }
+// 
