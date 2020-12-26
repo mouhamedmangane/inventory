@@ -1,23 +1,29 @@
 <?php
 
-namespace App\View\Components\Composant;
+namespace App\View\Components\Generic\Navs;
 
 use Illuminate\View\Component;
-use App\View\Components\ComponentWithId;
 
-class DropDownTitre extends ComponentWithId
+use App\ViewModel\Navs\NavModel;
+use App\ViewModel\Navs\NavtestClasse;
+
+class Nav extends Component
 {
+
+
     public $navModel;
+
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($navModel,$id="")
+    public function __construct( $navModel)
     {
-        parent::__construct($id);
         $this->navModel = $navModel;
     }
+
 
     /**
      * Get the view / contents that represent the component.
@@ -26,6 +32,6 @@ class DropDownTitre extends ComponentWithId
      */
     public function render()
     {
-        return view('components.composant.drop-down-titre');
+        return view('components.generic.navs.nav');
     }
 }

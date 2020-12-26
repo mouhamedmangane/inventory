@@ -1,16 +1,25 @@
 <div class="header d-flex align-items-center">
-    <div class="header-title bg-tertiere" style="" >
-        <span class="title-app">
-            <i class="fas fa-boxes text-success  "></i>
-            Noppal INVENTAIRE
+    <div class="header-title " style="" >
+        <span class="title-app d-flex">
+            <span class="nav-v-item-container-icon">
+                <i class="material-icons " style="font-size:24px;">apps</i>
+            </span>
+            
+            <span style="margin: 0px 2px;">
+                NOPPAL INVENTORY
+            </span>
+            
         </span>        
     </div>
+
+
     <div class="header-content d-flex justify-content-between align-items-center">
+
         <div class="header-content-1" style="padding:0px 12px;">
             <div>
-                <button class="btn  btn-light" >
+                <a class="btn  btn-default" >
                     <i class="material-icons md-24 text-primary"  aria-hidden="true">add_circle</i>
-                </button>
+                </a>
                 <div class="input-in">
                     <input type="text" name="search" 
                             placeholder="Search"
@@ -25,30 +34,7 @@
                 
             </div>
         </div>
-        <div class="header-content-1 d-flex align-items-center">
-            <div class="header-content-item pr-2 name-user">
-                <span class="text-normal font-weight-bold" >Test Nom</span>
-                <i class="material-icons-outlined md-24">expand_more</i>
-            </div>
-            <div class="header-content-item header-alert">
-                <button class="btn btn-light">
-                    <i class="material-icons-outlined md-24">notifications</i>
-                </button>
-            </div>
-            <div class="header-content-item header-param">
-                <button class="btn btn-light">
-                    <i class="material-icons-outlined md-24 " aria-hidden="true">brightness_7</i>
-                </button>
-            </div>
-            <div class="header-content-item header-info">
-                <button class="btn btn-light">
-                    <i class="material-icons-outlined md-24" aria-hidden="true">contact_support</i>
-                </button>
-            </div>
-            <div class="header-content-item " style="padding:0px 12px;">
-                <img src="{{ URL::asset('images/profig.jpg') }}" alt="" width="30px" height="30px"  class="rounded-circle">
-            </div>
-
-        </div>
+            
+        <x-util.headBarAction.bar/>
     </div>
 </div>

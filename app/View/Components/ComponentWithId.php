@@ -8,8 +8,8 @@ abstract class ComponentWithId  extends Component{
 
     public $id;
 
-    public function __construct(){
-        $this->id = GenId::newId();
+    public function __construct($id=""){
+        $this->id = $id;
     }
 
     public abstract function render();

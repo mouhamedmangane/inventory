@@ -9,8 +9,9 @@ class ListView extends  ComponentWithId
 {
 
 
-    public $navModel;
-    public $actions;
+    public $selectTitreItems;
+    public $actionItems;
+
     /**
      * Create a new component instance.
      *
@@ -18,32 +19,26 @@ class ListView extends  ComponentWithId
      */
     public function __construct()
     {
-        $this->navModel = $this->initNavModel();
-        $this->action =$this->initActions();   
+        $this->selectTitreItems = $this->initSelectTitreItems();
+        $this->actionItems = $this->initActionItems();  
     }
-    public function initNavModel(){
-        return NavModelFactory::navModel()
-        ->addNavBlocModel(
-            NavModelFactory::navBlocModel()
-            ->addNavItemModel("Dashbord","","home")
-            ->addNavItemModel("Contact","","account_box ")
-        )
-        ->addNavBlocModel(
-            NavModelFactory::navBlocModel()
-            ->addNavItemModel("Vente","","shopping_cart")
-            ->addNavItemModel("Achat","","receipt")
-            ->addNavItemModel("Depense","","remove_shopping_cart")
-        );
+    public function initSelectTitreItems(){
+        return 
+        [
+            ["name"=>"Tous","icon"=>"add","filter"=>'tous'],
+            ["name"=>"Actif","icon"=>"add","filter"=>'tous'],
+            ["name"=>"Desactive","icon"=>"add","filter"=>'tous']
+        ];
     }
 
-    public function initActions(){
-        return [
-            ["name"=>"add","icon"=>"add","priority"=>1],
-            ["name"=>"add","icon"=>"add","priority"=>1],
-            ["name"=>"add","icon"=>"add","priority"=>1],
-            ["name"=>"add","icon"=>"add","priority"=>1],
-            ["name"=>"add","icon"=>"add","priority"=>1],
+    public function initActionItems(){
+        return (object) 
+        [
+            (object)  ["tag"=>"a", "id"=>"i", "link"=>url('\dashbord'), "name"=>"Add", "icon"=>"add", "priority"=>0, "class" =>"btn btn-success"],
+            (object)  ["tag"=>"button", "id"=>"i", "name"=>"Remove", "icon"=>"add", "priority"=>1,"class" =>"btn"],
+            (object)  ["tag"=>"button", "id"=>"i", "name"=>"Archiver", "icon"=>"add", "priority"=>1,"class" =>"btn"]
         ];
+        
     }
     /**
      * Get the view / contents that represent the component.

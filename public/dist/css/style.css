@@ -3,6 +3,17 @@
 body {
     background: #fafafa;
 }
+/* 
+|------------------------------------------------------------------------------
+|    
+|
+|                 Generic md
+|
+|-------------------------------------------------------------------------------
+*/
+
+
+
 
 
 /* Backgound */
@@ -15,16 +26,16 @@ body {
 /* Header */
 
 .header{
-    height: 40px;
     width: 100%;
-    line-height: 40px;
+    line-height: 48px;
+    background-color: darkblue;
+    color: white;
 }
 .header-title{  
     width: 250px;
-    height: 40px;
+    line-height: 48px;
 }
 .title-app{
-    padding-left: 10px;
     font-size: 16px;
 }
 .header-content{
@@ -63,7 +74,6 @@ a, a:hover, a:focus {
 
 
 /* Wrapper */
-
 .wrapper {
     display: flex;
     align-items: stretch;
@@ -72,60 +82,85 @@ a, a:hover, a:focus {
 
 
 /* Sidebar */
-
 #sidebar {
     /* don't forget to add all the previously mentioned styles here too */
     background: #2e373c;
     color: #fff;
     transition: all 0.3s;
-    min-width: 250px;
-    max-width: 250px;
-    min-height: calc(100vh - 40px);
+    min-width: 208px;
+    max-width: 208px;
+    min-height: calc(100vh - 48px);
 }
+.sidebar-toggle{
+    width: 48px !important;
+    max-width: 48px !important;
+    min-width: 48px !important;
 
+}
 #sidebar .sidebar-header {
     padding: 10px 15px;
     background: #2e373c;
 }
 
-#sidebar ul.components {
+.nav-v ul.components {
     padding: 10px 0;
     /* border-bottom: 1px solid #47748b; */
     margin-top: 0px;
     margin-bottom: 0px;;
 }
 
-#sidebar ul p {
+.nav-v ul.components-group{
+    padding:0px;
+}
+
+.nav-v ul p {
     color: #fff;
     padding: 10px;
 }
 
-#sidebar ul li a {
-    padding: 10px 15px;
-    font-size: 16px;
+.nav-v-item a {
+    line-height: 40px;;
+    font-size: 14px;
     display: block;
+    border: 1px solid transparent;  
+    min-height: 40px;
 }
-#sidebar ul li a:hover {
+.nav-v-item  a:hover {
     color:#4f98cc ;
     background: #1e2926;
+    
 }
 
-#sidebar ul li.active > a, a[aria-expanded="true"] {
+.nav-v-item.active > a, a[aria-expanded="true"] {
     color: #4f98cc;
     background: #1f282d;
 }
-#sidebar ul li.active  .trait-vertical{
+.nav-v-item.active  .trait-vertical{
     background-color: #4f98cc;
 }
-
+.nav-v-item-container-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    min-width: 48px;
+    line-height: 40px;
+}
+.nav-v-icon{
+    font-size: 16px; 
+    width: 16px;
+    display:inline-block;
+}
 
 /* dropdown */
 a.dropdown-toggle::after{
     display: none;
 }
 
-/* INput */
 
+
+
+/* INput */
 .input-in{
     position: relative;
     display: inline-block;
@@ -144,6 +179,44 @@ a.dropdown-toggle::after{
     align-items: center;
     color: #545454;
 }
+
+
+
+
+/* form */
+.form-p-group{
+    display: flex;
+    align-items: center;
+    margin-top:15px;
+}
+.form-p-label{
+    width: 150px;
+    display: inline-block;
+}
+.form-p-input{
+    display: inline-block;
+    margin:0px 10px;
+    flex-grow : 1;
+    max-width: 500px;
+    width: auto;
+}
+.form-label-section{
+    display: inline-block;
+
+}
+
+
+
+
+/* 
+|------------------------------------------------------------------------------
+|    
+|
+|                  PHONE 
+|
+|-------------------------------------------------------------------------------
+*/
+
 
 @media (max-width: 768px) {
     /* Wrapper */

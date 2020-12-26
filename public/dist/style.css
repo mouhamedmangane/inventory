@@ -27,3 +27,19 @@
 .text-normal{
     font-size: 0.8em;
 }
+
+
+/* form */
+.form-p-group{
+    display: flex;
+    align-items: center;
+}
+.form-p-label{
+    width: 150px;
+    display: inline-block;
+}
+.form-p-input{
+    margin:0px 10px;
+    flex-grow : 1;
+    max-width: 400px;
+}

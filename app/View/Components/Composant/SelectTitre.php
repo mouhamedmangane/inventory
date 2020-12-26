@@ -2,21 +2,20 @@
 
 namespace App\View\Components\Composant;
 
-use Illuminate\View\Component;
 use App\View\Components\ComponentWithId;
 
-class DropDownTitre extends ComponentWithId
+class SelectTitre extends ComponentWithId
 {
-    public $navModel;
+    public $items;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($navModel,$id="")
+    public function __construct($items,$id)
     {
         parent::__construct($id);
-        $this->navModel = $navModel;
+        $this->items = $items;
     }
 
     /**
@@ -26,6 +25,6 @@ class DropDownTitre extends ComponentWithId
      */
     public function render()
     {
-        return view('components.composant.drop-down-titre');
+        return view('components.composant.select-titre');
     }
 }

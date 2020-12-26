@@ -22,7 +22,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+
 Route::get('/newProduct', [NewProductController::class]);
+
 
 
 require __DIR__.'/auth.php';
