@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Composant;
 
+use Illuminate\View\Component;
 use App\View\Components\ComponentWithId;
 
 class DropDownTitre extends ComponentWithId
@@ -12,9 +13,9 @@ class DropDownTitre extends ComponentWithId
      *
      * @return void
      */
-    public function __construct($navModel)
+    public function __construct($navModel,$id="")
     {
-        parent::__construct();
+        parent::__construct($id);
         $this->navModel = $navModel;
     }
 

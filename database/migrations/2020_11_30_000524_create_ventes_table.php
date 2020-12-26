@@ -20,7 +20,8 @@ class CreateVentesTable extends Migration
             $table->double('montantTotal', 15, 2);
 
             $table->unsignedBigInteger('client_id')->index();
-            
+
+           
             $table->timestamps();   
         });
     }
@@ -32,6 +33,6 @@ class CreateVentesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ventes');
+       Schema::dropIfExists('ventes');
     }
 }

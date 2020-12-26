@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
-
+        <?php echo $__env->yieldContent('input'); ?>
 
 
         <!-- Fonts -->
@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="<?php echo e(URL::asset('plugin/bootstrap441/css/bootstrap.min.css')); ?>">
         <link rel="stylesheet" href="<?php echo e(URL::asset('plugin/font/css/all.min.css')); ?>">
         <link rel="stylesheet" href="<?php echo e(URL::asset('dist/css/materialize.css')); ?>">
+        <link rel="stylesheet" href="<?php echo e(asset('css/app.css')); ?>">
         <link rel="stylesheet" href="<?php echo e(URL::asset('dist/css/style.css')); ?>">
 
         
@@ -22,57 +23,58 @@
         
         <style>
             body {
-                font-family: 'Nunito';
+                font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
             }
         </style>
         
     </head>
+    
     <body >
         
         <?php echo $__env->make('header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-        <div class="wrapper">
+        <div class="r-bar">
 
-           
-             <?php if (isset($component)) { $__componentOriginal8657c882124c642086aac91278435e4ed45f75e5 = $component; } ?>
-<?php $component = $__env->getContainer()->make(App\View\Components\Sidebar\Nav::class, ['navModel' => App\ViewConstante\Navs\DefaultNav::page()]); ?>
-<?php $component->withName('sidebar.nav'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'bg-green']); ?>
-<?php if (isset($__componentOriginal8657c882124c642086aac91278435e4ed45f75e5)): ?>
-<?php $component = $__componentOriginal8657c882124c642086aac91278435e4ed45f75e5; ?>
-<?php unset($__componentOriginal8657c882124c642086aac91278435e4ed45f75e5); ?>
-<?php endif; ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?> 
-           
-            <div id="content">
-                 <?php if (isset($component)) { $__componentOriginal9d14d1bdeb06043bdb35fba2d8a850bb5af14d0e = $component; } ?>
-<?php $component = $__env->getContainer()->make(App\View\Components\Produit\ListView::class, []); ?>
-<?php $component->withName('produit.list-view'); ?>
+        </div>
+
+        <div class="wrapper">
+             <?php if (isset($component)) { $__componentOriginal0eb33314df2f0924aeaa7a5dd45d1a929853d11d = $component; } ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Util\Sidebar::class, []); ?>
+<?php $component->withName('util.sidebar'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes([]); ?>
-<?php if (isset($__componentOriginal9d14d1bdeb06043bdb35fba2d8a850bb5af14d0e)): ?>
-<?php $component = $__componentOriginal9d14d1bdeb06043bdb35fba2d8a850bb5af14d0e; ?>
-<?php unset($__componentOriginal9d14d1bdeb06043bdb35fba2d8a850bb5af14d0e); ?>
+<?php if (isset($__componentOriginal0eb33314df2f0924aeaa7a5dd45d1a929853d11d)): ?>
+<?php $component = $__componentOriginal0eb33314df2f0924aeaa7a5dd45d1a929853d11d; ?>
+<?php unset($__componentOriginal0eb33314df2f0924aeaa7a5dd45d1a929853d11d); ?>
 <?php endif; ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?> 
-
+            <div id="content" style="flex-grow: 1;">
+                
+                
+                 <?php if (isset($component)) { $__componentOriginal157239f4a51e95f485226d593604361d8ae44898 = $component; } ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Produit\Nouveau::class, []); ?>
+<?php $component->withName('produit.nouveau'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes([]); ?>
+<?php if (isset($__componentOriginal157239f4a51e95f485226d593604361d8ae44898)): ?>
+<?php $component = $__componentOriginal157239f4a51e95f485226d593604361d8ae44898; ?>
+<?php unset($__componentOriginal157239f4a51e95f485226d593604361d8ae44898); ?>
+<?php endif; ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?> 
+                                    
             </div>
-        
         </div>  
         
 
-
-
-
-        
         <script src="<?php echo e(URL::asset('dist/js/jquery.js')); ?>"></script>
         <script src="<?php echo e(URL::asset('dist/js/popper.js')); ?>"></script>
         <script src="<?php echo e(URL::asset('plugin/bootstrap441/js/bootstrap.bundle.js')); ?>"></script>
+        <?php echo $__env->yieldPushContent('script'); ?>
+            
     </body>
 </html>
 <?php /**PATH C:\noppal_workspace\laravel_project\inventory\resources\views/welcome.blade.php ENDPATH**/ ?>

@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
 
             $table->foreign('boutique_id')
             ->references('id')
-            ->on('boutique')
+            ->on('boutiques')
             ->onDelete('restrict')
             ->onUpdate('restrict');
 

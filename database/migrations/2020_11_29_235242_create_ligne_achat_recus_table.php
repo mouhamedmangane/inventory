@@ -23,14 +23,14 @@ class CreateLigneAchatRecusTable extends Migration
             
             $table->foreign('achat_id')
                 ->references('id')
-                ->on('achat')
+                ->on('achats')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
 
             $table->unsignedBigInteger('produit_id');
             $table->foreign('produit_id')
             ->references('id')
-            ->on('produit')
+            ->on('produits')
             ->onDelete('restrict')
             ->onUpdate('restrict');
             

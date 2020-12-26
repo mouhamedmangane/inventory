@@ -23,7 +23,7 @@ class CreateLigneVentesTable extends Migration
             
             $table->foreign('vente_id')
                 ->references('id')
-                ->on('vente')
+                ->on('ventes')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
                 

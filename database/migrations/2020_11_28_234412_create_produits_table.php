@@ -22,11 +22,11 @@ class CreateProduitsTable extends Migration
             $table->double('qteSeuil',15,3);
             $table->double('prix', 10, 2);
             $table->double('prixAchat', 10, 2); 
-            $table->unsignedBigInteger('groupe_produit_id');
+            $table->unsignedBigInteger('groupe_produit_id')->nullable();
 
             $table->foreign('groupe_produit_id')
             ->references('id')
-            ->on('groupe_produit')
+            ->on('groupe_produits')
             ->onDelete('restrict')
             ->onUpdate('restrict');         
             

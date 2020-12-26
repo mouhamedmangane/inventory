@@ -20,12 +20,7 @@ class CreateAchatsTable extends Migration
             $table->double('montantTotal', 15, 2);
             $table->timestamps();
 
-            $table->unsignedBigInteger('produit_id');
-            $table->foreign('produit_id')
-            ->references('id')
-            ->on('produit')
-            ->onDelete('restrict')
-            ->onUpdate('restrict');
+          
         });
     }
 

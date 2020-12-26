@@ -16,6 +16,7 @@ class CreateGroupeProduitsTable extends Migration
         Schema::disableForeignKeyConstraints();
         Schema::create('groupe_produits', function (Blueprint $table) {
             $table->id();
+            
             $table->timestamps();
         });
     }

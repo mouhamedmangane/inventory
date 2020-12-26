@@ -13,6 +13,7 @@ class CreateReductionsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('reductions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();

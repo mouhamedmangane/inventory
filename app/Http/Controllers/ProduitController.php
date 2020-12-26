@@ -41,7 +41,7 @@ class ProduitController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illumina te\Http\Response
      */
     public function show($id)
     {
