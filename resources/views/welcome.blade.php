@@ -6,14 +6,16 @@
 
         <title>Laravel</title>
 
+
+
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-        
-        <!-- Styles -->
 
+        
         <link rel="stylesheet" href="{{ URL::asset('plugin/bootstrap441/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ URL::asset('plugin/font/css/all.min.css') }}">
-        <link rel="stylesheet" href="{{ URL::asset('dist/style.css') }}">
+        <link rel="stylesheet" href="{{ URL::asset('dist/css/materialize.css') }}">
+        <link rel="stylesheet" href="{{ URL::asset('dist/css/style.css') }}">
 
         
     
@@ -26,18 +28,28 @@
         
     </head>
     <body >
-
+        
         @include('header')
+
+        <div class="wrapper">
+
+           
+            <x-sidebar.nav :navModel="App\ViewConstante\Navs\DefaultNav::page()" class="bg-green" />
+           
+            <div id="content">
+                <x-produit.list-view />
+
+            </div>
         
-        @php
-            $navModel = App\ViewModel\Navs\NavModelFactory::navModel()
-                ->addNavItem("dashbord","/dashbord");
-        @endphp
-        <x-sidebar.nav :model="$navModel" />
+        </div>  
+        
+
 
 
 
         
-        <script src="{{ URL::asset('dist/jquery.js') }}"></script>
+        <script src="{{ URL::asset('dist/js/jquery.js') }}"></script>
+        <script src="{{ URL::asset('dist/js/popper.js') }}"></script>
+        <script src="{{ URL::asset('plugin/bootstrap441/js/bootstrap.bundle.js') }}"></script>
     </body>
 </html>

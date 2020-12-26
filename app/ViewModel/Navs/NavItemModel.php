@@ -5,7 +5,7 @@ namespace App\ViewModel\Navs;
 Class NavItemModel implements NavElementModel{
     public $name,$url,$icon;
 
-    public function __construct($name,$url,$icon="")
+    public function __construct($name,$url="",$icon="")
     {   
         $this->name = $name;
         $this->url = $url;
@@ -13,6 +13,6 @@ Class NavItemModel implements NavElementModel{
     }
 
     public function getName(){
-        return $this->name();
+        return $this->name;
     }
 }    

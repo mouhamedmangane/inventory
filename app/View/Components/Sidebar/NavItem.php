@@ -8,7 +8,7 @@ use App\ViewModel\Navs\NavItemModel;
 class NavItem extends Component
 {   
 
-    public $model;
+    public $name,$url,$icon;
     /**
      * Create a new component instance.
      *
@@ -16,7 +16,9 @@ class NavItem extends Component
      */
     public function __construct($name,$url,$icon="")
     {
-        $this->model = new NavItemModel($name,$url,$icon);
+        $this->name = $name;
+        $this->url = $url;
+        $this->icon = $icon;
     }
 
     /**
