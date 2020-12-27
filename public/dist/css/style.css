@@ -22,12 +22,32 @@ body {
     background-color: #ededed;
 }
 
+/* form */
+.form-p-group{
+    display: flex;
+    align-items: center;
+    margin-top:15px;
+}
+.form-p-label{
+    width: 150px;
+    display: inline-block;
+}
+.form-p-input{
+    display: inline-block;
+    margin:0px 10px;
+    flex-grow : 1;
+    max-width: 500px;
+    width: auto;
+}
+.form-label-section{
+    display: inline-block;
+
+}
 
 /* Header */
 
 .header{
     width: 100%;
-    line-height: 48px;
     background-color: darkblue;
     color: white;
 }
@@ -35,16 +55,77 @@ body {
     width: 250px;
     line-height: 48px;
 }
-.title-app{
+.header .title-app{
     font-size: 16px;
 }
 .header-content{
     flex-grow: 2;
-    padding:0px 10px ;
-    border-bottom: 1px solid #dedede;
+    padding:0px ;
+    /* border-bottom: 1px solid #dedede; */
 }
-.header-content-item{
+.header-content-item a{
+    display: inline-block;
+    padding: 12px 15px;
 }
+.header-content-item a:hover{
+    background-color: rgba(0,0,0,0.2);
+}
+.header-content-item-profil{
+    padding: 8px 15px;
+}
+
+#head-bar-action{
+    z-index: 9999;
+}
+#head-bar-action > .content{
+    width: 320px;
+    height: calc(100vh - 48px);
+    position:fixed;
+    border-left: 1px solid rgba(0,0,0,.125);;
+    right: -320px;
+    top: 48px;
+    z-index: 999;
+    background-color: white;
+    
+}
+#head-bar-action > .content.active{
+    right: 0px;
+}
+#head-bar-action > .content > .close{
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    z-index: 99999;
+    position: absolute;
+    right: 0px;
+    top:0px;
+    float: none;
+}
+
+#head-bar-action .action-btn.active{
+    background-color: white;
+    color:black;
+}
+#head-bar-action .content-item{
+    width: 100%;
+    position: absolute;
+    right: -320px;
+    top:0px;
+    padding : 10px 20px;
+    z-index: 9999;
+    color:black;
+    transition: right 0.3s ease-out;
+}
+#head-bar-action .content-item.active{
+    position: absolute;
+    right: 0px;
+    top:0px;
+}
+
+/* Nav  */
+
+
 
 
 /* Text  */
@@ -81,26 +162,6 @@ a, a:hover, a:focus {
 
 
 
-/* Sidebar */
-#sidebar {
-    /* don't forget to add all the previously mentioned styles here too */
-    background: #2e373c;
-    color: #fff;
-    transition: all 0.3s;
-    min-width: 208px;
-    max-width: 208px;
-    min-height: calc(100vh - 48px);
-}
-.sidebar-toggle{
-    width: 48px !important;
-    max-width: 48px !important;
-    min-width: 48px !important;
-
-}
-#sidebar .sidebar-header {
-    padding: 10px 15px;
-    background: #2e373c;
-}
 
 .nav-v ul.components {
     padding: 10px 0;
@@ -151,6 +212,15 @@ a, a:hover, a:focus {
     width: 16px;
     display:inline-block;
 }
+.nav-link-primary{
+    color: inherit;
+}
+.nav-link-primary:hover{
+    color: var(--primary);
+}
+.nav-link-primary i:hover{
+    color: var(--primary);
+}
 
 /* dropdown */
 a.dropdown-toggle::after{
@@ -183,28 +253,28 @@ a.dropdown-toggle::after{
 
 
 
-/* form */
-.form-p-group{
-    display: flex;
-    align-items: center;
-    margin-top:15px;
+
+
+/* Sidebar */
+#sidebar {
+    /* don't forget to add all the previously mentioned styles here too */
+    background: #2e373c;
+    color: #fff;
+    transition: all 0.3s;
+    min-width: 208px;
+    max-width: 208px;
+    min-height: calc(100vh - 48px);
 }
-.form-p-label{
-    width: 150px;
-    display: inline-block;
-}
-.form-p-input{
-    display: inline-block;
-    margin:0px 10px;
-    flex-grow : 1;
-    max-width: 500px;
-    width: auto;
-}
-.form-label-section{
-    display: inline-block;
+.sidebar-toggle{
+    width: 48px !important;
+    max-width: 48px !important;
+    min-width: 48px !important;
 
 }
-
+#sidebar .sidebar-header {
+    padding: 10px 15px;
+    background: #2e373c;
+}
 
 
 
