@@ -17,7 +17,8 @@
         <link rel="stylesheet" href="<?php echo e(URL::asset('dist/css/materialize.css')); ?>">
         <link rel="stylesheet" href="<?php echo e(asset('css/app.css')); ?>">
         <link rel="stylesheet" href="<?php echo e(URL::asset('dist/css/style.css')); ?>">
-
+        
+        
         
     
         

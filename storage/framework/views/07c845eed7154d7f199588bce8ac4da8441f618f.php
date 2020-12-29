@@ -9,7 +9,7 @@
 <?php unset($__defined_vars); ?>
 <li class="nav-v-item">
     <a href="#navdown<?php echo e($id); ?>" data-toggle="collapse" aria-expanded="false" 
-        class="dropdown-toggle  d-flex pr-3"
+        class="d-flex pr-3"
         style="position: relative;">
         <span class="nav-v-item-container-icon">
             <i class="material-icons-outlined nav-v-icon" style=""><?php echo e($icon); ?></i>

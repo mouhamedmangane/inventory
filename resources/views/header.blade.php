@@ -13,27 +13,21 @@
     </div>
 
 
-    <div class="header-content d-flex justify-content-between align-items-center">
+    <div class="header-content d-flex justify-content-end align-items-center">
 
-        <div class="header-content-1" style="padding:0px 12px;">
-            <div>
-                <a class="btn  btn-default" >
-                    <i class="material-icons md-24 text-primary"  aria-hidden="true">add_circle</i>
-                </a>
-                <div class="input-in">
+        {{-- <div class="d-flex justify-content-between ml-4" >
+            
+                <div class="input-in " style="height: 30px;width:300px;">
                     <input type="text" name="search" 
                             placeholder="Search"
-                            class="form-control rounded-pill d-inline-block ml-1  input-in-input" 
-                            style="height: 28px;width:250px;">
+                            class="form-control  input-in-input" 
+                            >
                     <div class="input-in-in">
                         <i class="fas fa-search " style="font-size: 12px;"></i>
-                        <i class="fas fa-caret-down pl-1"></i>
                     </div>
                 </div>
-                
-                
-            </div>
-        </div>
+          
+        </div> --}}
             
         <x-util.headBarAction.bar/>
     </div>

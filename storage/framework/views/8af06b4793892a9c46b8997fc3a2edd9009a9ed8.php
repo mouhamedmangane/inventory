@@ -1,5 +1,5 @@
 <div class="" id="sidebar">
-    <button class=" btn btn-default text-white nav-v-item-container-icon mt-2 " id="toggle-sidebar">
+    <button class=" btn btn-default  nav-v-item-container-icon mt-2 " id="toggle-sidebar">
         <i class="material-icons nav-v-icon" >menu</i>
     </button>
      <?php if (isset($component)) { $__componentOriginala178278bad1dc278dbb4a01da18dd08bccc26fe9 = $component; } ?>
@@ -16,7 +16,7 @@
 <?php endif; ?> 
 </div>
 
-<?php if (! $__env->hasRenderedOnce('2c5b9475-8ef0-4eba-8cbe-6310590b8312')): $__env->markAsRenderedOnce('2c5b9475-8ef0-4eba-8cbe-6310590b8312'); ?>
+<?php if (! $__env->hasRenderedOnce('31938292-baf0-4af3-8853-ed5f6b84c911')): $__env->markAsRenderedOnce('31938292-baf0-4af3-8853-ed5f6b84c911'); ?>
     <?php $__env->startPush('script'); ?>
         <script type="text/javascript">
             $(document).ready(function()

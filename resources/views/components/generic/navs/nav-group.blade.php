@@ -1,7 +1,7 @@
 @props(['id' => App\ViewModel\GenId::newId(),])
 <li class="nav-v-item">
     <a href="#navdown{{ $id }}" data-toggle="collapse" aria-expanded="false" 
-        class="dropdown-toggle  d-flex pr-3"
+        class="d-flex pr-3"
         style="position: relative;">
         <span class="nav-v-item-container-icon">
             <i class="material-icons-outlined nav-v-icon" style="">{{ $icon }}</i>

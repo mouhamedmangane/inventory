@@ -2,27 +2,60 @@
 
 body {
     background: #fafafa;
+    overflow-y: hidden;
 }
 /* 
 |------------------------------------------------------------------------------
 |    
 |
-|                 Generic md
+|                 Init
 |
 |-------------------------------------------------------------------------------
 */
-
-
-
-
-
-/* Backgound */
-
-.bg-tertiere{
-    background-color: #ededed;
+.wrapper {
+    display: flex;
+    align-items: stretch;
+    overflow-y: hidden;
+}
+#content{
+    overflow-y: auto;
+    min-height: calc(100vh - 48px);
+    max-height: calc(100vh - 48px);
 }
 
-/* form */
+.text-normal{
+    font-size: 1.em;
+}
+
+
+/* lien */
+a > i,  a > span{
+    display: inline-block;
+    vertical-align: middle;
+}
+a, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+.lien-sp{
+    color:var(--primary);
+    
+}
+.lien-sp:hover{
+    opacity: 0.9;
+    color:var(--primary);
+    text-decoration: underline;
+}
+
+/* 
+|------------------------------------------------------------------------------
+|    
+|
+|                 form 
+|
+|-------------------------------------------------------------------------------
+*/
 .form-p-group{
     display: flex;
     align-items: center;
@@ -43,13 +76,21 @@ body {
     display: inline-block;
 
 }
-
-/* Header */
-
+/* 
+|------------------------------------------------------------------------------
+|    
+|
+|                 Header 
+|
+|-------------------------------------------------------------------------------
+*/
 .header{
     width: 100%;
     background-color: darkblue;
     color: white;
+    position: sticky;
+    top: 0px;
+    z-index: 9;
 }
 .header-title{  
     width: 250px;
@@ -61,26 +102,28 @@ body {
 .header-content{
     flex-grow: 2;
     padding:0px ;
+
     /* border-bottom: 1px solid #dedede; */
 }
-.header-content-item a{
-    display: inline-block;
-    padding: 12px 15px;
+
+
+/* head-bar-action */
+.c-head-bar-action{
+    display: flex;
+    position: relative;
+    
 }
-.header-content-item a:hover{
-    background-color: rgba(0,0,0,0.2);
-}
-.header-content-item-profil{
-    padding: 8px 15px;
+#head-bar-action{
+    z-index: 99;
 }
 
-#head-bar-action{
-    z-index: 9999;
-}
-#head-bar-action > .content{
+
+/* head action bar content */
+.head-bar-action-content{
     width: 320px;
+    max-width: 320px;
     height: calc(100vh - 48px);
-    position:fixed;
+    position: fixed;
     border-left: 1px solid rgba(0,0,0,.125);;
     right: -320px;
     top: 48px;
@@ -88,10 +131,10 @@ body {
     background-color: white;
     
 }
-#head-bar-action > .content.active{
+.head-bar-action-content.active{
     right: 0px;
-}
-#head-bar-action > .content > .close{
+    }
+.head-bar-action-content > .close{
     width: 40px;
     height: 40px;
     line-height: 40px;
@@ -99,16 +142,11 @@ body {
     z-index: 99999;
     position: absolute;
     right: 0px;
-    top:0px;
+    top:15px;
     float: none;
 }
-
-#head-bar-action .action-btn.active{
-    background-color: white;
-    color:black;
-}
-#head-bar-action .content-item{
-    width: 100%;
+.head-bar-action-content-item{
+    width:320px;
     position: absolute;
     right: -320px;
     top:0px;
@@ -116,69 +154,77 @@ body {
     z-index: 9999;
     color:black;
     transition: right 0.3s ease-out;
+    visibility: hidden;
+    z-index: 9999;
 }
-#head-bar-action .content-item.active{
+.head-bar-action-content-item.active{
     position: absolute;
     right: 0px;
     top:0px;
-}
-
-/* Nav  */
-
-
-
-
-/* Text  */
-
-p {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.1em;
-    font-weight: 300;
-    line-height: 1.7em;
-    color: #999;
-}
-.text-normal{
-    font-size: 1.em;
+    visibility: visible;
+    z-index: 9999;
 }
 
 
-/* lien */
-a > i,  a > span{
-    display: inline-block;
-    vertical-align: middle;
+/* c header-button */
+.c-head-button-profil {
+    padding: 8px 15px;
 }
-a, a:hover, a:focus {
-    color: inherit;
-    text-decoration: none;
-    transition: all 0.3s;
+.c-head-button button {
+    height: 48px;
+    padding: 0px 15px;
+    line-height: 48px;
+}
+.c-head-button button:hover{
+    background-color: rgba(0,0,0,0.2);
+}
+.c-head-button .action-btn{
+    background-color: transparent;
+    color:white;
+    border-radius: 0px;
+}
+.c-head-button .action-btn:hover{
+    background-color: rgba(0,0,0, 0.2);
+}
+.c-head-button .action-btn:focus{
+    outline: none;
+}
+.c-head-button .action-btn.active{
+    background-color: rgba(255, 255, 255, 0.99);
+    outline: 1px solid white;
+    color:black;
 }
 
-
-/* Wrapper */
-.wrapper {
-    display: flex;
-    align-items: stretch;
+/* notif */
+.c-notif-item{
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 9999999;
+}
+.c-notif-item:hover{
+    box-shadow: 4px 4px 4px  #dee2e6;
 }
 
-
-
-
+/* 
+|------------------------------------------------------------------------------
+|    
+|
+|                 NAV
+|
+|-------------------------------------------------------------------------------
+*/
 .nav-v ul.components {
     padding: 10px 0;
-    /* border-bottom: 1px solid #47748b; */
     margin-top: 0px;
     margin-bottom: 0px;;
 }
-
 .nav-v ul.components-group{
     padding:0px;
 }
-
 .nav-v ul p {
     color: #fff;
     padding: 10px;
 }
-
 .nav-v-item a {
     line-height: 40px;;
     font-size: 14px;
@@ -191,7 +237,6 @@ a, a:hover, a:focus {
     background: #1e2926;
     
 }
-
 .nav-v-item.active > a, a[aria-expanded="true"] {
     color: #4f98cc;
     background: #1f282d;
@@ -222,10 +267,7 @@ a, a:hover, a:focus {
     color: var(--primary);
 }
 
-/* dropdown */
-a.dropdown-toggle::after{
-    display: none;
-}
+
 
 
 
@@ -234,11 +276,34 @@ a.dropdown-toggle::after{
 .input-in{
     position: relative;
     display: inline-block;
+    background-color: rgba(255, 255, 255, 0.8);
+    cursor:text;
 }
+
 .input-in-input{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
     padding-left: 35px;
-    border-color: #cbcbcb;
+    height: 30px;
+    line-height: 30px;
+    background-color: transparent;
+    z-index: 2;
 }
+.input-in-input:focus{
+    background-color: transparent;
+}
+.input-in-input:active{
+    background-color: transparent;
+}
+.input-in-input:focus .input-in{
+    background-color: white;
+}
+.input-in-input:active .input-in{
+    background-color: white;
+}
+
 .input-in-in{
     position: absolute;
     font-size: 12px;
@@ -248,24 +313,36 @@ a.dropdown-toggle::after{
     display: flex;
     align-items: center;
     color: #545454;
+    z-index: 1;
 }
 
 
 
-
-
+/* 
+|------------------------------------------------------------------------------
+|    
+|
+|                 SIDEBAR
+|
+|-------------------------------------------------------------------------------
+*/
 
 /* Sidebar */
 #sidebar {
     /* don't forget to add all the previously mentioned styles here too */
-    background: #2e373c;
-    color: #fff;
+    background:#edebe9;
+    color: black;
+    border-left: 1px solid rgb(50, 49, 48);
     transition: all 0.3s;
     min-width: 208px;
     max-width: 208px;
     min-height: calc(100vh - 48px);
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    z-index: 999999;
 }
 .sidebar-toggle{
+    color: black;
     width: 48px !important;
     max-width: 48px !important;
     min-width: 48px !important;
@@ -278,14 +355,7 @@ a.dropdown-toggle::after{
 
 
 
-/* 
-|------------------------------------------------------------------------------
-|    
-|
-|                  PHONE 
-|
-|-------------------------------------------------------------------------------
-*/
+
 
 
 @media (max-width: 768px) {

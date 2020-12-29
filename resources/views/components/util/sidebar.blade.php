@@ -1,5 +1,5 @@
 <div class="" id="sidebar">
-    <button class=" btn btn-default text-white nav-v-item-container-icon mt-2 " id="toggle-sidebar">
+    <button class=" btn btn-default  nav-v-item-container-icon mt-2 " id="toggle-sidebar">
         <i class="material-icons nav-v-icon" >menu</i>
     </button>
     <x-generic.navs.nav :navModel="$navModel" class="bg-green" />

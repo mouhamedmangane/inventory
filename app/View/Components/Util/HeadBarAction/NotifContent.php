@@ -6,6 +6,7 @@ use Illuminate\View\Component;
 
 class NotifContent extends Component
 {
+    public $notifications;
     /**
      * Create a new component instance.
      *
@@ -13,7 +14,16 @@ class NotifContent extends Component
      */
     public function __construct()
     {
-        //
+        $this->notifications =$this->initNotifications();
+    }
+
+    public function initNotifications(){
+        return [
+            (object)["type"=>"important","titre"=>"Epuissement Stock","link"=>"Voir Plus;/dashbord#test",
+            "message"=>"le produit chololat est au niveau seuil veiller lancer reappro"],
+            (object)["type"=>"info","titre"=>"Epuissement Stock","link"=>"Voir plus;/dashbord#test",
+            "message"=>"le produit chololat est au niveau seuil veiller lancer reappro"],
+        ];
     }
 
     /**

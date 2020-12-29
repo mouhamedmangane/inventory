@@ -17,7 +17,8 @@
         <link rel="stylesheet" href="{{ URL::asset('dist/css/materialize.css') }}">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ URL::asset('dist/css/style.css') }}">
-
+        
+        
         
     
         
