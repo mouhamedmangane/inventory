@@ -25,6 +25,7 @@ class CreateReductionsTable extends Migration
             $table->dateTime('expiration_date')->nullable();
 
             $table->unsignedBigInteger('produit_id')->nullable();
+            
 
             
             

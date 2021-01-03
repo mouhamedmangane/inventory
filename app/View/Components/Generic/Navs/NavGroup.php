@@ -3,7 +3,7 @@
 namespace App\View\Components\Generic\Navs;
 
 use Illuminate\View\Component;
-use App\ViewModel\Navs\NavtestClasse;
+use App\ViewModel\Navs\NavTestClasse;
 
 class NavGroup extends Component
 {

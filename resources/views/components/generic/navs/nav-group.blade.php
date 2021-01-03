@@ -12,7 +12,7 @@
         </span>
         
     </a>
-    <ul class="list-unstyled components-group collapse show " id="navdown{{$id }}">
+    <ul class="list-unstyled components-group collapse show " id="navdown{{$id}}">
         @foreach ($navElementModels as $navElementModel)
             @if ($isNavItemModel($navElementModel))
                 <x-generic.navs.nav-item :name="$navElementModel->name" :url="$navElementModel->url" :icon="$navElementModel->icon"  />           
@@ -21,4 +21,5 @@
             @endif
         @endforeach
     </ul>
+    
 </li>

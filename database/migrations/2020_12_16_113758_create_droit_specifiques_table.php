@@ -41,5 +41,6 @@ class CreateDroitSpecifiquesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('droit_specifiques');
+        Schema::enableForeignKeyConstraints();
     }
 }

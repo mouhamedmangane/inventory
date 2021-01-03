@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
-        @yield('input')
+        <?php echo $__env->yieldContent('input'); ?>
 
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
         
-        <link rel="stylesheet" href="{{ URL::asset('plugin/bootstrap441/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ URL::asset('plugin/font/css/all.min.css') }}">
-        <link rel="stylesheet" href="{{ URL::asset('dist/css/materialize.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        <link rel="stylesheet" href="{{ URL::asset('dist/css/style.css') }}">
+        <link rel="stylesheet" href="<?php echo e(URL::asset('plugin/bootstrap441/css/bootstrap.min.css')); ?>">
+        <link rel="stylesheet" href="<?php echo e(URL::asset('plugin/font/css/all.min.css')); ?>">
+        <link rel="stylesheet" href="<?php echo e(URL::asset('dist/css/materialize.css')); ?>">
+        <link rel="stylesheet" href="<?php echo e(asset('css/app.css')); ?>">
+        <link rel="stylesheet" href="<?php echo e(URL::asset('dist/css/style.css')); ?>">
 
         
     
@@ -30,20 +30,28 @@
     </head>
     
     <body > 
-        @include('header')
+        <?php echo $__env->make('header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
         <div class="r-bar">
 
         </div>
 
         <div class="wrapper">
-            <x-util.sidebar  />
+             <?php if (isset($component)) { $__componentOriginal0eb33314df2f0924aeaa7a5dd45d1a929853d11d = $component; } ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Util\Sidebar::class, []); ?>
+<?php $component->withName('util.sidebar'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes([]); ?>
+<?php if (isset($__componentOriginal0eb33314df2f0924aeaa7a5dd45d1a929853d11d)): ?>
+<?php $component = $__componentOriginal0eb33314df2f0924aeaa7a5dd45d1a929853d11d; ?>
+<?php unset($__componentOriginal0eb33314df2f0924aeaa7a5dd45d1a929853d11d); ?>
+<?php endif; ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?> 
             <div id="content" style="flex-grow: 1;">
                 
-                {{-- <div class="p-2">
-                    <x-produit.list-view />
-                    
-                </div> --}}
+                
                  
                 <div style="height: 40px; background-color:beige; "> 
                     <div class="btn">
@@ -131,3 +139,4 @@
 
     </body>
 </html>
+<?php /**PATH /var/www/html/PointDEVENTe/inventory/resources/views/components/produit/list-view.blade.php ENDPATH**/ ?>

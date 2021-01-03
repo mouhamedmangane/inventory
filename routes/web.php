@@ -22,6 +22,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/produits', function () {
+    return view('components.produit.list-view');
+
+});
+
 
 Route::get('/newProduct', [NewProductController::class]);
 

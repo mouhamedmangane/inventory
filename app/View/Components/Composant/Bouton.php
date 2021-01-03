@@ -1,11 +1,13 @@
 <?php
 
-namespace App\View\Components\Test;
+namespace App\View\Components\Composant;
 
 use Illuminate\View\Component;
 
-class Re extends Component
+class Bouton extends Component
 {
+    public $name,$url,$type;
+    
     /**
      * Create a new component instance.
      *
@@ -14,6 +16,7 @@ class Re extends Component
     public function __construct()
     {
         //
+        
     }
 
     /**
@@ -23,6 +26,6 @@ class Re extends Component
      */
     public function render()
     {
-        return view('components.test.re');
+        return view('components.composant.bouton');
     }
 }

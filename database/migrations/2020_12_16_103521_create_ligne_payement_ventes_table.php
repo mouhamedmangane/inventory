@@ -33,5 +33,6 @@ class CreateLignePayementVentesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('ligne_payement_ventes');
+        Schema::enableForeignKeyConstraints();
     }
 }

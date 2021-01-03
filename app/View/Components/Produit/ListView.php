@@ -3,7 +3,9 @@
 namespace App\View\Components\Produit;
 
 use App\View\Components\ComponentWithId;
+use App\View\Components\Generic\Action;
 use App\ViewModel\Navs\NavModelFactory;
+use App\ViewModel\BarreActions\Barre;
 
 class ListView extends  ComponentWithId
 {
