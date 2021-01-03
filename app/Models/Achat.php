@@ -22,10 +22,18 @@ class Achat extends Model
         return $this->belongsTo('App\Models\Fournisseur');
     }
 
-    public function evenements()
+    public function user()
     {
-        return $this->hasMany('App\Comment', 'foreign_key', 'local_key');
+        return $this->belongsTo('App\Models\User');
     }
+    public function ligne_payement_achats()
+    {
+        return $this->hasMany('App\Models\LignePayementAchats');
+    }
+
+   
+
+
 
 
 }

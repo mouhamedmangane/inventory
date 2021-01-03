@@ -18,6 +18,8 @@ class CreateAchatsTable extends Migration
             $table->id();
             $table->string('numeroAchat', 100);
             $table->double('montantTotal', 15, 2);
+
+            
             $table->timestamps();
 
           

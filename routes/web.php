@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Crontollers\NewProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +15,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('page.dashbord.dashboard');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+// Produit
+Route::get('produit/create', function () {
+    return view('page.produit.create');
+});
+Route::get('/newProduct', [NewProductController::class]);
+
+
 
 require __DIR__.'/auth.php';

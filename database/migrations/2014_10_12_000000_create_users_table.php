@@ -20,16 +20,9 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('tel', 30);
-            $table->integer('ncni');
-            $table->unsignedBigInteger('boutique_id');
-
-            $table->foreign('boutique_id')
-            ->references('id')
-            ->on('boutiques')
-            ->onDelete('restrict')
-            ->onUpdate('restrict');
-
+            $table->string('tel', 30)->unique();
+            $table->integer('ncni')->unique();
+           
             
             
         

@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 class CreateReductionsTable extends Migration
-{
+{   
     /**
      * Run the migrations.
      *
@@ -16,6 +16,18 @@ class CreateReductionsTable extends Migration
         Schema::disableForeignKeyConstraints();
         Schema::create('reductions', function (Blueprint $table) {
             $table->id();
+            $table->string('reduction_name', 100)->nullable();
+            $table->integer('pourcentage')->unsigned()->nullable();
+            $table->double('apartir', 15, 2);
+            $table->string('unite', 50);
+            $table->double('montant', 15, 2)->nullable();
+
+            $table->dateTime('expiration_date')->nullable();
+
+            $table->unsignedBigInteger('produit_id')->nullable();
+
+            
+            
             $table->timestamps();
         });
     }
