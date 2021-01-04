@@ -24,8 +24,8 @@ Class NavGroupModel implements NavElementModel{
         return $this;
     }
 
-    public function addNavItemModel($name,$url){
-        return $this->addNavElementModel(new NavItemModel($name,$url));
+    public function addNavItemModel($name,$url,$active=false){
+        return $this->addNavElementModel(new NavItemModel($name,$url,"",$active));
     }
 
     public function addNavGroupModel(NavGroupModel $navGroupModel){

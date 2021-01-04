@@ -1,15 +1,15 @@
 
 
 <?php $__env->startSection('content'); ?>
-     <?php if (isset($component)) { $__componentOriginal810fcb8dc7e0fc42842b98207979a343f756cdfd = $component; } ?>
-<?php $component = $__env->getContainer()->make(App\View\Components\Generic\ToolBar\Bar::class, []); ?>
-<?php $component->withName('generic.tool-bar.bar'); ?>
+     <?php if (isset($component)) { $__componentOriginal157239f4a51e95f485226d593604361d8ae44898 = $component; } ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Produit\Nouveau::class, []); ?>
+<?php $component->withName('produit.nouveau'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes([]); ?>
-<?php if (isset($__componentOriginal810fcb8dc7e0fc42842b98207979a343f756cdfd)): ?>
-<?php $component = $__componentOriginal810fcb8dc7e0fc42842b98207979a343f756cdfd; ?>
-<?php unset($__componentOriginal810fcb8dc7e0fc42842b98207979a343f756cdfd); ?>
+<?php if (isset($__componentOriginal157239f4a51e95f485226d593604361d8ae44898)): ?>
+<?php $component = $__componentOriginal157239f4a51e95f485226d593604361d8ae44898; ?>
+<?php unset($__componentOriginal157239f4a51e95f485226d593604361d8ae44898); ?>
 <?php endif; ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?> 

@@ -1,5 +1,5 @@
 @extends('layouts.noppal')
 
 @section('content')
-    <x-generic.tool-bar.bar/>
+    <x-produit.nouveau />
 @endsection

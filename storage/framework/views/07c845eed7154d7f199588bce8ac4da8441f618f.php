@@ -24,7 +24,7 @@
         <?php $__currentLoopData = $navElementModels; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $navElementModel): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <?php if($isNavItemModel($navElementModel)): ?>
                  <?php if (isset($component)) { $__componentOriginalfe139c6cca0468aaad0baab853810ffdfd54eff1 = $component; } ?>
-<?php $component = $__env->getContainer()->make(App\View\Components\Generic\Navs\NavItem::class, ['name' => $navElementModel->name,'url' => $navElementModel->url,'icon' => $navElementModel->icon]); ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Generic\Navs\NavItem::class, ['name' => $navElementModel->name,'url' => $navElementModel->url,'icon' => $navElementModel->icon,'active' => $navElementModel->active]); ?>
 <?php $component->withName('generic.navs.nav-item'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>

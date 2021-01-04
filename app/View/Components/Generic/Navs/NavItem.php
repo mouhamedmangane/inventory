@@ -8,17 +8,18 @@ use App\ViewModel\Navs\NavItemModel;
 class NavItem extends Component
 {   
 
-    public $name,$url,$icon;
+    public $name,$url,$icon,$active;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name,$url,$icon="")
+    public function __construct($name,$url,$icon="",$active=false)
     {
         $this->name = $name;
         $this->url = $url;
         $this->icon = $icon;
+        $this->active = $active;
     }
 
     /**
