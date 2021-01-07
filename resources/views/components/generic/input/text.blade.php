@@ -1,4 +1,4 @@
-<input  type="text" 
+<input  type="@if($type){{ $type }}@else text @endif" 
         name="{{ $name }}" 
         value="{{ $value }}"
         id="{{ $attributes['id'] }}" 

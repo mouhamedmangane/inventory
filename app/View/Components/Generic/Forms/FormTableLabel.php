@@ -1,22 +1,21 @@
 <?php
 
-namespace App\View\Components\Generic\Input;
+namespace App\View\Components\Generic\Forms;
 
 use Illuminate\View\Component;
 
-class Text extends Component
+class FormTableLabel extends Component
 {
-    public $type,$name,$value;
+    public $labelText,$required;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name,$type="",$value="")
+    public function __construct($labelText,$required=false)
     {
-        $this->name = $name;
-        $this->value = $value;
-        $this->type = $type;
+        $this->labelText = $labelText;
+        $this->required = $required;
     }
 
     /**
@@ -26,6 +25,6 @@ class Text extends Component
      */
     public function render()
     {
-        return view('components.generic.input.text');
+        return view('components.generic.forms.form-table-label');
     }
 }

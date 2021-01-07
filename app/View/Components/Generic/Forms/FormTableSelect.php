@@ -6,16 +6,16 @@ use Illuminate\View\Component;
 
 class FormTableSelect extends Component
 {
-    public $name,$data,$labelText,$value;
+    public $name,$dt,$labelText,$value;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name,$data,$labelText,$value="")
+    public function __construct($name,$dt,$labelText,$value="")
     {
         $this->name = $name;
-        $this->data = $data;
+        $this->dt = $dt;
         $this->labelText = $labelText;
         $this->value = $value;
     }

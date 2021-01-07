@@ -4,19 +4,21 @@ namespace App\View\Components\Generic\Input;
 
 use Illuminate\View\Component;
 
-class Text extends Component
+class Photo extends Component
 {
-    public $type,$name,$value;
+    public $id,$name,$url,$x,$y;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name,$type="",$value="")
+    public function __construct($id,$name,$url="",$x="100",$y="100")
     {
+        $this->id = $id;
         $this->name = $name;
-        $this->value = $value;
-        $this->type = $type;
+        $this->url = $url;
+        $this->x = $x;
+        $this->y = $y;
     }
 
     /**
@@ -26,6 +28,6 @@ class Text extends Component
      */
     public function render()
     {
-        return view('components.generic.input.text');
+        return view('components.generic.input.photo');
     }
 }

@@ -4,19 +4,21 @@ namespace App\View\Components\Generic\Forms;
 
 use Illuminate\View\Component;
 
-class FormTableCheckbox extends Component
+class FormTablePhoto extends Component
 {
-    public $name,$value,$labelText;
+    public $id,$name,$url,$x,$y;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name,$labelText,$value="")
+    public function __construct($id,$name,$url="",$x="100",$y="100")
     {
+        $this->id = $id;
         $this->name = $name;
-        $this->value = $value;
-        $this->labelText = $labelText;
+        $this->url = $url;
+        $this->x = $x;
+        $this->y = $y;
     }
 
     /**
@@ -26,6 +28,6 @@ class FormTableCheckbox extends Component
      */
     public function render()
     {
-        return view('components.generic.forms.form-table-checkbox');
+        return view('components.generic.forms.form-table-photo');
     }
 }

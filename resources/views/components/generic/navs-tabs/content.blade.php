@@ -1,3 +1,3 @@
-<div class="tab-content  mt-3 {{ $attributes['class'] }} " id="{{ $id }}">
+<div class="tab-content   {{ $attributes['class'] }} " id="{{ $id }}">
     {{ $slot }}
 </div>

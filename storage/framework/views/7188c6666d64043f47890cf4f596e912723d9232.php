@@ -14,29 +14,79 @@
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?> 
 <div class=" ">
-<div class="d-flex align-items-center px-4">
-    <div  class="rounded-circle bg-info text-align center d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-        <i class="material-icons text-white">add_shopping_cart</i>
+<div class="d-flex align-items-center justify-content-between px-4 mt-1">
+    <div class="d-flex align-items-center">
+        <div  class="rounded-circle border  text-align center d-flex align-items-center justify-content-center" 
+            style="width: 50px; height: 50px; background: rgba(0,0,0,.1);<?php if(!$attributes['img']): ?>border-color:black!important;<?php endif; ?>">
+            <?php if($attributes['img']): ?>
+                <img src="<?php echo e(asset("images/profig.jpg")); ?>"  
+              width="100px"
+              height="100px"
+              class="rounded-circle" 
+              style="">
+            <?php else: ?> 
+             <i class="material-icons">add_shopping_cart</i>
+            <?php endif; ?>
+            
+        </div>
+        <h5 class="my-4 ml-2">
+            <span>Nouveau Article Simple</span>
+            <i class="material-icons">arrow_drop_down</i>
+        </h5>
     </div>
-    <h4 class="my-4 ml-2">
-        <span>Nouveau Article</span>
-        <i class="material-icons">keyboard_arrow_down</i>
-    </h4>
+    <div class="">
+         <?php if (isset($component)) { $__componentOriginal889d0f813e0a0e13f7806bf1d2ea069acb525c28 = $component; } ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Generic\Infos\InfoList::class, []); ?>
+<?php $component->withName('generic.infos.info-list'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes([]); ?>
+             <?php if (isset($component)) { $__componentOriginal4a14f8fbe4f7f75848b776b31d8aa2dd679bbfc0 = $component; } ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Generic\Infos\InfoItem::class, ['title' => 'Ratio Vente','value' => '3 100 / Mois']); ?>
+<?php $component->withName('generic.infos.info-item'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['icon' => 'equalizer']); ?>
+<?php if (isset($__componentOriginal4a14f8fbe4f7f75848b776b31d8aa2dd679bbfc0)): ?>
+<?php $component = $__componentOriginal4a14f8fbe4f7f75848b776b31d8aa2dd679bbfc0; ?>
+<?php unset($__componentOriginal4a14f8fbe4f7f75848b776b31d8aa2dd679bbfc0); ?>
+<?php endif; ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?> 
+             <?php if (isset($component)) { $__componentOriginal4a14f8fbe4f7f75848b776b31d8aa2dd679bbfc0 = $component; } ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Generic\Infos\InfoItem::class, ['title' => 'Ratio Vente','value' => '2 100/ Mois']); ?>
+<?php $component->withName('generic.infos.info-item'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['icon' => 'trending_down']); ?>
+<?php if (isset($__componentOriginal4a14f8fbe4f7f75848b776b31d8aa2dd679bbfc0)): ?>
+<?php $component = $__componentOriginal4a14f8fbe4f7f75848b776b31d8aa2dd679bbfc0; ?>
+<?php unset($__componentOriginal4a14f8fbe4f7f75848b776b31d8aa2dd679bbfc0); ?>
+<?php endif; ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?> 
+         <?php if (isset($__componentOriginal889d0f813e0a0e13f7806bf1d2ea069acb525c28)): ?>
+<?php $component = $__componentOriginal889d0f813e0a0e13f7806bf1d2ea069acb525c28; ?>
+<?php unset($__componentOriginal889d0f813e0a0e13f7806bf1d2ea069acb525c28); ?>
+<?php endif; ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?> 
+    </div>
 </div>
 
-<form action="" class="">
+<form action="" class=" mt-4">
      <?php if (isset($component)) { $__componentOriginal93f6fdc7d388430b82d3ecf07ca2c3dab2babb02 = $component; } ?>
 <?php $component = $__env->getContainer()->make(App\View\Components\Generic\NavsTabs\Nav::class, ['id' => 'myTab']); ?>
 <?php $component->withName('generic.navs-tabs.nav'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['class' => 'mt-2 mb-5 px-4']); ?>
+<?php $component->withAttributes(['class' => ' mb-4 px-2']); ?>
          <?php if (isset($component)) { $__componentOriginal7f0aa301b6bbe7ba31632fed74f1d167b5619810 = $component; } ?>
 <?php $component = $__env->getContainer()->make(App\View\Components\Generic\NavsTabs\Item::class, ['text' => 'Information Générale','idPane' => 'general','id' => 'general-tab','active' => 'true']); ?>
 <?php $component->withName('generic.navs-tabs.item'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes([]); ?>
+<?php $component->withAttributes(['classLink' => 'ml-3']); ?>
 <?php if (isset($__componentOriginal7f0aa301b6bbe7ba31632fed74f1d167b5619810)): ?>
 <?php $component = $__componentOriginal7f0aa301b6bbe7ba31632fed74f1d167b5619810; ?>
 <?php unset($__componentOriginal7f0aa301b6bbe7ba31632fed74f1d167b5619810); ?>
@@ -73,12 +123,14 @@
 <?php endif; ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?> 
+
      <?php if (isset($component)) { $__componentOriginal8d8996fe40e6d65f3ac2b761371961e3456c9568 = $component; } ?>
 <?php $component = $__env->getContainer()->make(App\View\Components\Generic\NavsTabs\Content::class, ['id' => 'myTabContent']); ?>
 <?php $component->withName('generic.navs-tabs.content'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes(['class' => 'px-4']); ?>
+
          <?php if (isset($component)) { $__componentOriginal8d3b78db3bd0cb00622b24a1756649d89ee8ea89 = $component; } ?>
 <?php $component = $__env->getContainer()->make(App\View\Components\Generic\NavsTabs\Pane::class, ['id' => 'general','active' => 'true']); ?>
 <?php $component->withName('generic.navs-tabs.pane'); ?>
@@ -86,28 +138,9 @@
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes([]); ?>
             <div class="row">
-                <div class="col-md-2" style="">
-                    <div >
-                        <div style="width: 150px; height:150px;position: relative; background-image:url('<?php echo e(asset("images/profig.jpg")); ?>') ;"
-                             class="border">
-                            <img src=""  width="150px" height="150px" alt="">
-                            <div style="position: absolute;right: 0px;bottom:0px;;" >
-                                <i class="material-icons">camera_alt</i>
-                            </div>
-                        </div>
-                        
-                        <div class="d-flex mt-1">
-                            <button class="btn btn-sm text-white mr-1" style="background: rgba(0,0,139,.8);">
-                                <i class="material-icons">edit</i>
-                            </button>
-                            <button class="btn btn-sm btn-danger mr-1" style="background: rgba(0,0,0,139,.8);">
-                                <i class="material-icons">delete</i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="col-md-5">
+                
+
+                <div class="col-md-6 col-sm-12">
                      <?php if (isset($component)) { $__componentOriginalfc1c8e7232779478c338f051b4f2beef20ffff46 = $component; } ?>
 <?php $component = $__env->getContainer()->make(App\View\Components\Generic\Forms\FormTable::class, []); ?>
 <?php $component->withName('generic.forms.form-table'); ?>
@@ -119,83 +152,151 @@
 <?php $component->withName('generic.forms.form-table-text'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['required' => 'true','placeholder' => 'Nom Produit']); ?>
+<?php $component->withAttributes(['required' => 'true','placeholder' => 'Nom Produit','id' => 'nom']); ?>
 <?php if (isset($__componentOriginalbf1545a0b67ab14ce1029feedfa6823638111137)): ?>
 <?php $component = $__componentOriginalbf1545a0b67ab14ce1029feedfa6823638111137; ?>
 <?php unset($__componentOriginalbf1545a0b67ab14ce1029feedfa6823638111137); ?>
 <?php endif; ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>  
+                         <?php if (isset($component)) { $__componentOriginalc5dcf18029325b815f804d377c290b4c755daec9 = $component; } ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Generic\Forms\FormTableRadios::class, ['name' => 'type','labelText' => 'Type Produit','dt' => ['consomable'=>'consommable','service'=>'service'],'value' => 'consomable']); ?>
+<?php $component->withName('generic.forms.form-table-radios'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['required' => 'true','id' => 'type']); ?>
+<?php if (isset($__componentOriginalc5dcf18029325b815f804d377c290b4c755daec9)): ?>
+<?php $component = $__componentOriginalc5dcf18029325b815f804d377c290b4c755daec9; ?>
+<?php unset($__componentOriginalc5dcf18029325b815f804d377c290b4c755daec9); ?>
+<?php endif; ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>  
+                         <?php if (isset($component)) { $__componentOriginalae2621711ecec9b48e523322e33635c73535c38f = $component; } ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Generic\Forms\FormTableSelect::class, ['name' => 'categorie','labelText' => 'Categorie Produit','dt' => ['tous'=>'Tous','informatique'=>'Informatiqughghe'],'value' => 'informatique']); ?>
+<?php $component->withName('generic.forms.form-table-select'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['required' => 'true','id' => 'categorie']); ?>
+<?php if (isset($__componentOriginalae2621711ecec9b48e523322e33635c73535c38f)): ?>
+<?php $component = $__componentOriginalae2621711ecec9b48e523322e33635c73535c38f; ?>
+<?php unset($__componentOriginalae2621711ecec9b48e523322e33635c73535c38f); ?>
+<?php endif; ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?> 
+                        
+                         <?php if (isset($component)) { $__componentOriginal20b5016e43432d97a7e72c9fb4f4da48773c193c = $component; } ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Generic\Forms\FormTableMultiCheck::class, ['name' => 'va','labelText' => 'Le Produit','dt' => ['vendre'=>'Peut être vendu','acheter'=>'Peut être acheté'],'value' => ['vendre','acheter']]); ?>
+<?php $component->withName('generic.forms.form-table-multi-check'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['required' => 'true','type' => 'switch']); ?>
+<?php if (isset($__componentOriginal20b5016e43432d97a7e72c9fb4f4da48773c193c)): ?>
+<?php $component = $__componentOriginal20b5016e43432d97a7e72c9fb4f4da48773c193c; ?>
+<?php unset($__componentOriginal20b5016e43432d97a7e72c9fb4f4da48773c193c); ?>
+<?php endif; ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>  
+                       
+                        
                      <?php if (isset($__componentOriginalfc1c8e7232779478c338f051b4f2beef20ffff46)): ?>
 <?php $component = $__componentOriginalfc1c8e7232779478c338f051b4f2beef20ffff46; ?>
 <?php unset($__componentOriginalfc1c8e7232779478c338f051b4f2beef20ffff46); ?>
 <?php endif; ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?> 
-                    <table class="table border">
-                        <tr class="">
-                            <td style="white-space: nowrap;min-width:" class="pr-3 py-3">Nom Produit :</td>
-                            <td style="width: 100%;" class="mr-2">
-                                <input type="text" name="nom" id="nom" 
-                                        class="form-control    w-100" 
-                                        placeholder="nom Produit">
-                            </td>
-                        </tr>
-                        <tr class="">
-                            <td style="white-space: nowrap;min-width:" class="pr-3 py-3">Type Acticle:</td>
-                            <td style="width: 100%;" class="mr-2">
-                                <input type="text" name="nom" id="nom" 
-                                        class="form-control   w-100" 
-                                        placeholder="Type de produit">
-                            </td>
-                        </tr>
-                        <tr class="">
-                            <td style="white-space: nowrap;min-width:" class="pr-3 py-3">Reference Interne:</td>
-                            <td style="width: 100%;" class="mr-2">
-                                <input type="text" name="nom" id="nom" 
-                                        class="form-control   w-100" 
-                                        placeholder="Reference">
-                            </td>
-                        </tr>
-                        <tr class="">
-                            <td style="white-space: nowrap;min-width:" class="pr-3 py-3">SKU</td>
-                            <td style="width: 100%;" class="mr-2">
-                                <input type="text" name="nom" id="nom" 
-                                        class="form-control  w-100" 
-                                        placeholder="SKU">
-                            </td>
-                        </tr>
-                    </table>
                 </div>
-                <div class="col-md-5">
-                    <table class="table border">
+                <div class="col-md-6 col-sm-12">
+                     <?php if (isset($component)) { $__componentOriginalfc1c8e7232779478c338f051b4f2beef20ffff46 = $component; } ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Generic\Forms\FormTable::class, []); ?>
+<?php $component->withName('generic.forms.form-table'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes([]); ?>
+                         
+                         <?php if (isset($component)) { $__componentOriginalbf1545a0b67ab14ce1029feedfa6823638111137 = $component; } ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Generic\Forms\FormTableText::class, ['name' => 'reference','labelText' => 'Réference Interne']); ?>
+<?php $component->withName('generic.forms.form-table-text'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['placeholder' => 'Réference interne','id' => 'reference']); ?>
+<?php if (isset($__componentOriginalbf1545a0b67ab14ce1029feedfa6823638111137)): ?>
+<?php $component = $__componentOriginalbf1545a0b67ab14ce1029feedfa6823638111137; ?>
+<?php unset($__componentOriginalbf1545a0b67ab14ce1029feedfa6823638111137); ?>
+<?php endif; ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?> 
+                         <?php if (isset($component)) { $__componentOriginalbf1545a0b67ab14ce1029feedfa6823638111137 = $component; } ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Generic\Forms\FormTableText::class, ['name' => 'sku','labelText' => 'SKU']); ?>
+<?php $component->withName('generic.forms.form-table-text'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['placeholder' => 'code barre ou QR','id' => 'sku']); ?>
+<?php if (isset($__componentOriginalbf1545a0b67ab14ce1029feedfa6823638111137)): ?>
+<?php $component = $__componentOriginalbf1545a0b67ab14ce1029feedfa6823638111137; ?>
+<?php unset($__componentOriginalbf1545a0b67ab14ce1029feedfa6823638111137); ?>
+<?php endif; ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?> 
+                         <?php if (isset($component)) { $__componentOriginalbf1545a0b67ab14ce1029feedfa6823638111137 = $component; } ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Generic\Forms\FormTableText::class, ['name' => 'prix_vente','labelText' => 'Prix de Vente','value' => '1']); ?>
+<?php $component->withName('generic.forms.form-table-text'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['typpe' => 'number','id' => 'prix_vente']); ?>
+<?php if (isset($__componentOriginalbf1545a0b67ab14ce1029feedfa6823638111137)): ?>
+<?php $component = $__componentOriginalbf1545a0b67ab14ce1029feedfa6823638111137; ?>
+<?php unset($__componentOriginalbf1545a0b67ab14ce1029feedfa6823638111137); ?>
+<?php endif; ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?> 
                         
-                        <tr class="">
-                            <td style="white-space: nowrap;min-width:" class="pl-3 py-3">Categorie d'article :</td>
-                            <td style="width: 100%;" class="mr-2">
-                                <input type="text" name="nom" id="nom" 
-                                        class="form-control w-100 " 
-                                        placeholder="categorie d'article"
-                                        value="All">
-                            </td>
-                        </tr>
-                        <tr class="">
-                            <td style="white-space: nowrap;min-width:" class="pl-3 py-3">Prix Vente :</td>
-                            <td style="width: 100%;" class="mr-2">
-                                <input type="text" name="nom" id="nom" 
-                                        class="form-control w-100 " 
-                                        placeholder="Prix de vente">
-                            </td>
-                        </tr>
-                        <tr class="">
-                            <td style="white-space: nowrap;min-width:" class="pl-3 py-3">Taxes  :</td>
-                            <td style="width: 100%;" class="mr-2">
-                                <input type="text" name="nom" id="nom" 
-                                        class="form-control   w-100" 
-                                        placeholder="TVA">
-                            </td>
-                        </tr>
-                    </table>
+                         <?php if (isset($component)) { $__componentOriginal2b1fd042062e78adc541ff5dcc2b3363b94f991e = $component; } ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Generic\Forms\FormTableLine::class, []); ?>
+<?php $component->withName('generic.forms.form-table-line'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes(['class' => ''.e($attributes['class']).'']); ?>
+
+                             <?php $__env->slot('label'); ?> 
+                                 <?php if (isset($component)) { $__componentOriginaleda0a21c33e632858c782536041b3163c9e230a9 = $component; } ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Generic\Forms\FormTableLabel::class, ['labelText' => 'Image','required' => false]); ?>
+<?php $component->withName('generic.forms.form-table-label'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes([]); ?>
+<?php if (isset($__componentOriginaleda0a21c33e632858c782536041b3163c9e230a9)): ?>
+<?php $component = $__componentOriginaleda0a21c33e632858c782536041b3163c9e230a9; ?>
+<?php unset($__componentOriginaleda0a21c33e632858c782536041b3163c9e230a9); ?>
+<?php endif; ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?> 
+                             <?php $__env->endSlot(); ?>
+                             <?php if (isset($component)) { $__componentOriginalfed0467d96b1c22f09709400d61d8c4d90d0c6a7 = $component; } ?>
+<?php $component = $__env->getContainer()->make(App\View\Components\Generic\Input\Photo::class, ['id' => 'photo','name' => 'photo','url' => '','x' => '150','y' => '150']); ?>
+<?php $component->withName('generic.input.photo'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php $component->withAttributes([]); ?>
+<?php if (isset($__componentOriginalfed0467d96b1c22f09709400d61d8c4d90d0c6a7)): ?>
+<?php $component = $__componentOriginalfed0467d96b1c22f09709400d61d8c4d90d0c6a7; ?>
+<?php unset($__componentOriginalfed0467d96b1c22f09709400d61d8c4d90d0c6a7); ?>
+<?php endif; ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?> 
+                        
+                         <?php if (isset($__componentOriginal2b1fd042062e78adc541ff5dcc2b3363b94f991e)): ?>
+<?php $component = $__componentOriginal2b1fd042062e78adc541ff5dcc2b3363b94f991e; ?>
+<?php unset($__componentOriginal2b1fd042062e78adc541ff5dcc2b3363b94f991e); ?>
+<?php endif; ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?> 
+
+                     <?php if (isset($__componentOriginalfc1c8e7232779478c338f051b4f2beef20ffff46)): ?>
+<?php $component = $__componentOriginalfc1c8e7232779478c338f051b4f2beef20ffff46; ?>
+<?php unset($__componentOriginalfc1c8e7232779478c338f051b4f2beef20ffff46); ?>
+<?php endif; ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?> 
                 </div>
                 
             </div>
@@ -205,6 +306,7 @@
 <?php endif; ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?> 
+
          <?php if (isset($component)) { $__componentOriginal8d3b78db3bd0cb00622b24a1756649d89ee8ea89 = $component; } ?>
 <?php $component = $__env->getContainer()->make(App\View\Components\Generic\NavsTabs\Pane::class, ['id' => 'vente','active' => 'true']); ?>
 <?php $component->withName('generic.navs-tabs.pane'); ?>
@@ -218,6 +320,7 @@
 <?php endif; ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?> 
+
          <?php if (isset($component)) { $__componentOriginal8d3b78db3bd0cb00622b24a1756649d89ee8ea89 = $component; } ?>
 <?php $component = $__env->getContainer()->make(App\View\Components\Generic\NavsTabs\Pane::class, ['id' => 'achat','active' => 'true']); ?>
 <?php $component->withName('generic.navs-tabs.pane'); ?>
@@ -242,7 +345,7 @@
 
 </div>
 
-<?php if (! $__env->hasRenderedOnce('f98b0177-968a-45d2-8359-2398e5cc35b5')): $__env->markAsRenderedOnce('f98b0177-968a-45d2-8359-2398e5cc35b5'); ?>
+<?php if (! $__env->hasRenderedOnce('8da4d651-ba82-439d-8e7f-717490f398f7')): $__env->markAsRenderedOnce('8da4d651-ba82-439d-8e7f-717490f398f7'); ?>
     <?php $__env->startPush('script'); ?>
         <script type="text/javascript">
 

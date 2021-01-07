@@ -1,22 +1,22 @@
 <?php
 
-namespace App\View\Components\Generic\Input;
+namespace App\View\Components\Generic\Infos;
 
 use Illuminate\View\Component;
 
-class Text extends Component
+class InfoItem extends Component
 {
-    public $type,$name,$value;
+    public $title,$value,$link;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name,$type="",$value="")
+    public function __construct($value,$title="",$link="")
     {
-        $this->name = $name;
+        $this->title = $title;
         $this->value = $value;
-        $this->type = $type;
+        $this->link = $link;
     }
 
     /**
@@ -26,6 +26,6 @@ class Text extends Component
      */
     public function render()
     {
-        return view('components.generic.input.text');
+        return view('components.generic.infos.info-item');
     }
 }

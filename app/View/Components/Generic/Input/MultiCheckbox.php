@@ -6,17 +6,17 @@ use Illuminate\View\Component;
 
 class MultiCheckbox extends Component
 {
-    public $name,$value,$data;
+    public $name,$value,$dt;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name,$data,$value="")
+    public function __construct($name,$dt,$value="")
     {
         $this->name = $name;
         $this->value = $value;
-        $this->data = $data;
+        $this->dt = $dt;
     }
 
     /**

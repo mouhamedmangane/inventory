@@ -1,4 +1,4 @@
-<div class="c-head-bar-action" id="head-bar-action">
+<div class="c-head-bar-action" id="head-bar-action" >
      <?php if (isset($component)) { $__componentOriginald9ba04d15e7af484ec7315b63d610c0f905923d7 = $component; } ?>
 <?php $component = $__env->getContainer()->make(App\View\Components\Util\HeadBarAction\HeadButton::class, ['idContent' => '#head-bar-action-notif','icon' => 'campaign']); ?>
 <?php $component->withName('util.head-bar-action.head-button'); ?>
@@ -84,7 +84,7 @@
     </div>
 </div>
 
-<?php if (! $__env->hasRenderedOnce('dea9ed63-94a4-4c03-9525-5bc855eeefc1')): $__env->markAsRenderedOnce('dea9ed63-94a4-4c03-9525-5bc855eeefc1'); ?>
+<?php if (! $__env->hasRenderedOnce('0e65ed1a-d59a-4e3a-adda-068612849259')): $__env->markAsRenderedOnce('0e65ed1a-d59a-4e3a-adda-068612849259'); ?>
     <?php $__env->startPush('script'); ?>
         <script type="text/javascript">
             $(document).ready(function(){

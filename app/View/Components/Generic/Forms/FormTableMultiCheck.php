@@ -1,22 +1,23 @@
 <?php
 
-namespace App\View\Components\Generic\Input;
+namespace App\View\Components\Generic\Forms;
 
 use Illuminate\View\Component;
 
-class Text extends Component
+class FormTableMultiCheck extends Component
 {
-    public $type,$name,$value;
+    public $name,$dt,$labelText,$value;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name,$type="",$value="")
+    public function __construct($name,$dt,$labelText,$value="")
     {
         $this->name = $name;
+        $this->dt = $dt;
+        $this->labelText = $labelText;
         $this->value = $value;
-        $this->type = $type;
     }
 
     /**
@@ -26,6 +27,6 @@ class Text extends Component
      */
     public function render()
     {
-        return view('components.generic.input.text');
+        return view('components.generic.forms.form-table-multi-check');
     }
 }

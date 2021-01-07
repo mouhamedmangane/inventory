@@ -6,17 +6,18 @@ use Illuminate\View\Component;
 
 class FormTableText extends Component
 {
-    public $name,$value,$labelText;
+    public $name,$type,$value,$labelText;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name,$labelText,$value="")
+    public function __construct($name,$labelText,$type="",$value="")
     {
         $this->name = $name;
         $this->value = $value;
         $this->labelText = $labelText;
+        $this->type =$type;
     }
 
     /**

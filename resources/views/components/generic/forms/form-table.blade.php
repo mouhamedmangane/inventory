@@ -1,3 +1,3 @@
-<table class="table border">
+<table class="table border shadow">
     {{ $slot }}
 </table>

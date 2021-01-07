@@ -1,4 +1,4 @@
-<div class="c-head-bar-action" id="head-bar-action">
+<div class="c-head-bar-action" id="head-bar-action" >
     <x-util.head-bar-action.head-button idContent="#head-bar-action-notif" icon="campaign" />
     <x-util.head-bar-action.head-button idContent="#head-bar-param-bar" icon="brightness_7" />
     <x-util.head-bar-action.head-button idContent="#head-bar-aide-bar" icon="contact_support" />

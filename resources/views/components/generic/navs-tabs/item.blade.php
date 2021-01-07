@@ -1,5 +1,8 @@
-<li class="nav-item " role="presentation" >
-    <a class="nav-link @if ($active) active @endif" id="{{ $id }}" data-toggle="tab" href="#{{ $idPane }}" 
+<li class="nav-item " role="presentation"  >
+    <a class="nav-link @if ($active) active @endif {{ $attributes['classLink'] }}" 
+    id="{{ $id }}" 
+        data-toggle="tab" 
+        href="#{{ $idPane }}" 
         role="tab" 
         aria-controls="home" 
         aria-selected="true">

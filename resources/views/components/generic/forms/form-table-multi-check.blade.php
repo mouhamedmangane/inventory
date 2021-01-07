@@ -10,10 +10,11 @@
         <x-generic.forms.form-table-label  :labelText="$labelText" :required="$req" />
     </x-slot>
 
-    <x-generic.input.select :name="$name" 
+    <x-generic.input.multi-checkbox :name="$name" 
                             :dt="$dt"
                             :value="$value"
                             id="{{ $attributes['id'] }}" 
                             required="{{ $req }}"
+                            type="{{ $attributes['type'] }}"
                             />
 </x-generic.forms.form-table-line>
