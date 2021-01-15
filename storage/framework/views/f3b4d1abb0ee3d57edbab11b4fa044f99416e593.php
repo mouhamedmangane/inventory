@@ -2,7 +2,7 @@
     <div class="header-title " style="" >
         <span class="title-app d-flex">
             <span class="nav-v-item-container-icon">
-                <i class="material-icons " style="font-size:24px;">apps</i>
+                <i class="material-icons-outlined " style="font-size:24px;">nature_people</i>
             </span>
             
             <span style="margin: 0px 2px;">

@@ -2,7 +2,7 @@
 namespace App\ViewModel;
 
 class GenId{
-    static $id;
+    static $id=0;
     static function getId(){
         return self::$id;
     }

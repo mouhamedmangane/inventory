@@ -89,6 +89,18 @@ a, a:hover, a:focus {
 }
 
 
+/* form table */
+.n-form-table tr{
+   
+}
+.n-form-table-row > td{
+}
+.n-form-table-col-label{
+}
+.n-form-table-col-input{
+}
+
+
 /* 
 |------------------------------------------------------------------------------
 |    
@@ -99,7 +111,7 @@ a, a:hover, a:focus {
 */
 .header{
     width: 100%;
-    background-color: #007bff;
+    background-color: #3F51B5;
     color: white;
     position: sticky;
     top: 0px;
@@ -187,6 +199,7 @@ a, a:hover, a:focus {
     height: 48px;
     padding: 0px 15px;
     line-height: 48px;
+    border:none;
 }
 .c-head-button button:hover{
     background-color: rgba(0,0,0,0.2);
@@ -217,7 +230,17 @@ a, a:hover, a:focus {
 .c-notif-item:hover{
     box-shadow: 4px 4px 4px  #dee2e6;
 }
-
+/* 
+|------------------------------------------------------------------------------
+|    
+|
+|                 datatabmle
+|
+|-------------------------------------------------------------------------------
+*/
+.dataTables_paginate .pagination{
+    margin-bottom: 0px;
+}
 /* 
 |------------------------------------------------------------------------------
 |    
@@ -252,14 +275,14 @@ a, a:hover, a:focus {
 }
 .input-img-content:hover {
     
-    border: 1px solid #007bff;
+    border: 1px solid #3F51B5;
 }
 .input-img-content:hover .input-img-action{
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #007bff;
-    background-color: rgba(0,123,255,0.2);
+    border: 1px solid #3F51B5;
+    background-color: rgba(63,81,181,0.2);
     
 }
 .input-image-text{
@@ -303,12 +326,12 @@ a, a:hover, a:focus {
     
 }
 .nav-v-item.active > a, a[aria-expanded="true"] {
-    color: rgba(0,123,255,1.0);;
-    background: rgba(0,123,255,0.1);
+    color: rgba(63,81,181,1.0);;
+    background: rgba(63,81,181,0.1);
     font-weight: bold;
 }
 .nav-v-item.active  .trait-vertical{
-    background-color: rgba(0,123,255,1.0);
+    background-color: rgba(63,81,181,1.0);
 }
 .nav-v-item-container-icon{
     display: flex;
@@ -334,7 +357,7 @@ a, a:hover, a:focus {
 }
 
 .nav-tabs > .nav-item > .nav-link.active{
-    border-top:1px solid #007bff;
+    border-top:1px solid #3F51B5;
 }
 
 .nav-p-tabs{
@@ -469,4 +492,21 @@ a, a:hover, a:focus {
     #sidebar.active {
         margin-left: 0;
     }
+
+
+    /* form table */
+    .n-form-table tr{
+        border:1px solid rgba(0,0,0, 0.5);
+    }
+    .n-form-table-row > td{
+        display: block;
+        border:none;
+    }
+    .n-form-table-col-label{
+        padding-bottom: 0px!important;
+    }
+    .n-form-table-col-input{
+        padding-top: 5px!important;
+    }
+    
 }

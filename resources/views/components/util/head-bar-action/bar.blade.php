@@ -10,7 +10,7 @@
     
     <div class="head-bar-action-content">
         <div class="close">
-            <button href="#">
+            <button href="#" class="border-0">
                 <i class="material-icons">close</i>
             </button>
         </div>

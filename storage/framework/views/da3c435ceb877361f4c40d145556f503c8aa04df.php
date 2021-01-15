@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
     <head>
+        <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Laravel</title>
-        <?php echo $__env->yieldContent('input'); ?>
+        <?php echo $__env->yieldContent('header'); ?>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="<?php echo e(asset('css/app.css')); ?>">
+        
         <link rel="stylesheet" href="<?php echo e(URL::asset('plugin/font/css/all.min.css')); ?>">
         <link rel="stylesheet" href="<?php echo e(URL::asset('dist/css/materialize.css')); ?>">
         <link rel="stylesheet" href="<?php echo e(URL::asset('plugin/bootstrap441/css/bootstrap.min.css')); ?>">
+        <link rel="stylesheet" href="<?php echo e(URL::asset('dist/css/components.css')); ?>">
         <link rel="stylesheet" href="<?php echo e(URL::asset('dist/css/style.css')); ?>">
         <style>
             body {
@@ -57,6 +59,7 @@
         <script src="<?php echo e(URL::asset('dist/js/jquery.js')); ?>"></script>
         <script src="<?php echo e(URL::asset('dist/js/popper.js')); ?>"></script>
         <script src="<?php echo e(URL::asset('plugin/bootstrap441/js/bootstrap.bundle.js')); ?>"></script>
+        <script src="<?php echo e(URL::asset('dist/js/components.js')); ?>"></script>
         <?php echo $__env->yieldPushContent('script'); ?>
             
     </body>

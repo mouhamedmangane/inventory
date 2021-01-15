@@ -1,3 +1,3 @@
-<table class="table border shadow">
+<table class="table border shadow n-form-table">
     {{ $slot }}
 </table>

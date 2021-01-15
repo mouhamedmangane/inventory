@@ -8,7 +8,7 @@ class ButtonSubmit extends Component
 {
     public $idForm;
     public $id;
-    public $nameForm;
+    public $idContentAlert;
     public $icon;
     public $text;
 
@@ -20,13 +20,13 @@ class ButtonSubmit extends Component
      *
      * @return void
      */
-    public function __construct($idForm,$id,$text,$icon="",$nameForm="")
+    public function __construct($idForm,$id,$text,$icon="",$idContentAlert="")
     {
         $this->idForm =$idForm;
         $this->id = $id;
         $this->text = $text;
         $this->icon = $icon;
-        $this->nameForm = $nameForm;
+        $this->idContentAlert = $idContentAlert;
     }
 
     /**

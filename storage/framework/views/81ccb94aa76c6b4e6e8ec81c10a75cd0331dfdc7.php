@@ -53,7 +53,7 @@
     
     <div class="head-bar-action-content">
         <div class="close">
-            <button href="#">
+            <button href="#" class="border-0">
                 <i class="material-icons">close</i>
             </button>
         </div>
@@ -84,7 +84,7 @@
     </div>
 </div>
 
-<?php if (! $__env->hasRenderedOnce('0e65ed1a-d59a-4e3a-adda-068612849259')): $__env->markAsRenderedOnce('0e65ed1a-d59a-4e3a-adda-068612849259'); ?>
+<?php if (! $__env->hasRenderedOnce('60532ee5-dbaf-4c55-9a20-cce16b66b855')): $__env->markAsRenderedOnce('60532ee5-dbaf-4c55-9a20-cce16b66b855'); ?>
     <?php $__env->startPush('script'); ?>
         <script type="text/javascript">
             $(document).ready(function(){

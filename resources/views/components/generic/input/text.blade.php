@@ -4,4 +4,5 @@
         id="{{ $attributes['id'] }}" 
         class="form-control @if ($attributes['sm']) form-control-sm @endif {{ $attributes['class'] }}"
         required="{{ $attributes['required'] }}" 
-        placeholder="{{ $attributes['placeholder'] }}">
+        placeholder="{{ $attributes['placeholder'] }}"
+        style="{{ $attributes['style'] }}">
