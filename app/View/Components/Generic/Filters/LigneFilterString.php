@@ -6,14 +6,17 @@ use Illuminate\View\Component;
 
 class LigneFilterString extends Component
 {
+    public $name,$valeur,$label;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($name,$label,$valeur="")
     {
-        //
+        $this->name = $name;
+        $this->valeur = $valeur;
+        $this->label = $label;
     }
 
     /**

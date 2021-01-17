@@ -1,5 +1,8 @@
-<table class="dataTable-simple table w-100" id="{{ $name }}">
-    <thead class="dataTable-simple-head">
+<div class="position-relative">
+
+
+<table class="dataTable-simple table table-borderless w-100 {{ $attributes['class'] }}" id="{{ $name }}">
+    <thead class="dataTable-simple-head border-bottom">
         {{-- si selectionnable --}}
         @if ($attributes["selectName"])
             <th>
@@ -8,12 +11,26 @@
         @endif
         {{-- les autres titres --}}
         @foreach ($columns as $column)
-            <th class="position-relative @if ($loop->last) dataTable-simple-th-end  @endif">
+            <th class="@if ($loop->last) dataTable-simple-th-end  @endif">
                 {{ $column->name }}
                 @if (isset($column->badge))
                     <span class="bagde {{ $column->badge->styleClass }}"> {{ $column->badge->value }}</span>
                 @endif
-                @if ($loop->last)
+                
+            </th>
+        @endforeach
+    </thead>
+    <tbody class="dataTable-simple-body">
+
+    </tbody>
+    <tfoot class="dataTable-simple-foot">
+        @foreach ($columns as $column)
+            <td></td>
+        @endforeach
+    </tfoot>
+</table>
+
+
                     <div class="dropdown position-absolute" style="right: 3px;top:10px;">
                         <a data-toggle="dropdown" href="#">
                             <i class="material-icons">more_vert</i>
@@ -24,7 +41,7 @@
                                 <span href="#" class="dropdown-item">
                                     <input type="checkbox"
                                             id="{{ $idd }}"
-                                            data-key ="{{ $key }}"
+                                            data-key ="@if($attributes['selectName']){{ $key+1 }}@else {{ $key }}@endif"
                                             data-var-table="{{ $name }}"
                                             value="{{ $key }}"
                                            class="dataTable-simple-visible-check"
@@ -41,20 +58,8 @@
 
                         </div>
                     </div>
-                @endif
-            </th>
-        @endforeach
-    </thead>
-    <tbody class="dataTable-simple-body">
 
-    </tbody>
-    <tfoot class="dataTable-simple-foot">
-        @foreach ($columns as $column)
-            <td></td>
-        @endforeach
-    </tfoot>
-</table>
-
+                </div>
 {{-- push datatable src --}}
 @once
     @push('script')

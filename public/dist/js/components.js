@@ -27,5 +27,19 @@ $(function(){
             });
         }
     });
+
+
+   
+ 
+    // show and hide dropdown
+    $(function(){
+  
+        $('.ddw-cacha').on('show.bs.dropdown',function(){
+               $('.cacha').css('z-index','-10'); 
+        });
+        $('.ddw-cacha').on('hide.bs.dropdown',function(){
+               $('.cacha').css('z-index','auto'); 
+        });
+    });
  
 });

@@ -14,7 +14,7 @@
 }
 /* selectLink */
 .n-select-link{
-    font-size: 23px;
+    font-size: 28px;
     font-weight: 400;
     border:none;
 }
@@ -23,7 +23,8 @@
 .ly-toolbar{
     min-height: 43px;
     max-height: 43px;
-    overflow-y: hidden;
+    z-index: 30;
+    position: relative;
 }
 
 .ly-content{
@@ -32,14 +33,10 @@
     overflow-y: hidden;
     display: flex;
     flex-direction: column;
+    z-index: 0;
 }
+
 .ly-title{
-    min-height: 0px;
-    max-height: 90px;
-    overflow-y: hidden;
-}
-.ly-title{
-    min-height: 0px;
     max-height: 90px;
     overflow-y: hidden;
 }
@@ -50,21 +47,20 @@
     flex-direction: column;
 }
 .ly-main-top{
-    z-index: 2;
+    z-index: 0;
     max-height: 39px;
-    min-height: 39px;
     overflow-y:  hidden;
 }
 .ly-main-content{
     flex-grow: 2;
-    z-index: 1;
+    z-index: 0;
     overflow-y:  auto;
 }
 
 .ly-main-bot{
-    z-index: 2;
-    max-height: 35px;
-    min-height: 35px;
+    z-index: 0;
+    max-height: 37px;
+    min-height: 37px;
     margin-bottom: 30px;
     overflow-y:  hidden;
 }
@@ -83,7 +79,9 @@
 .dataTable-simple table{
 
 }
-
+.dataTable-simple  td:nth-child(1) , .dataTable-simple th:nth-child(1){  
+    padding-left: 30px;
+ }
 .dataTable-simple-th-end:before{
     right: 3em!important;
 }

@@ -4,17 +4,20 @@ namespace App\View\Components\Generic\Filters;
 
 use Illuminate\View\Component;
 
-class LigneFilterOr extends Component
-{
+class LigneFilterSelect extends Component
+{   
+    public $name;
+    public  $datas;
     /**
-     * Create a new component instance.
+     * Create a new  component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($name, $datas)
     {
-        //
-    }
+        $this->name = $name;
+        $this->datas = $datas;
+    } 
 
     /**
      * Get the view / contents that represent the component.
@@ -23,6 +26,6 @@ class LigneFilterOr extends Component
      */
     public function render()
     {
-        return view('components.generic.filters.ligne-filter-or');
+        return view('components.generic.filters.ligne-filter-select');
     }
 }

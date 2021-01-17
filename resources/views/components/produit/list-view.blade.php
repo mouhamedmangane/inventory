@@ -19,9 +19,9 @@
 
 
 @section('ly-title')
-<div class="d-flex align-items-center justify-content-between px-3 mt-1">
+<div class="d-flex align-items-center justify-content-between pl-3 mt-1" >
     <div class="d-flex align-items-center my-2">
-        <div  class="bg-primary text-white rounded-circle border  text-align center d-flex align-items-center justify-content-center" 
+        {{-- <div  class="bg-primary text-white rounded-circle border  text-align center d-flex align-items-center justify-content-center" 
             style="width: 43px; height: 43px;@if ($attributes['img'])border-color:black!important;@endif">
             @if ($attributes['img'])
                 <img src="{{ asset("images/profig.jpg") }}"  
@@ -33,16 +33,16 @@
              <i class="material-icons md-18 ">assignment</i>
             @endif
             
-        </div>
+        </div> --}}
          <x-generic.links.select-link contentCible="my-main" value="test1"  class="ml-2"
                                       :dt="['/test1'=>'Liste Produits','/test2'=>'Produit  Vendable']" />
         
     </div>
-    <div class="col-md-5 d-flex">
+    <div class="col-md-5 d-flex aligns-items-center pr-2" >
 
-        <div class="w-100 position-relative">
-            <input type="text" class="form-control border " style="width: 100%;z-index:2;" placeholder="Rechercher">
-            <i class="material-icons position-absolute text-muted" style="top:6px;right: 10px;z-index:1;">search</i>
+        <div class="w-100 position-relative "  >
+            <input type="text" class="form-control border" style="width: 100%;" placeholder="Rechercher">
+            <i class="material-icons text-muted position-absolute" style="top:6px;right: 10px;color:#dee2e6;">search</i>
         </div>
     </div>
 </div>
@@ -57,7 +57,7 @@
        idDivPaginate="bass-right"
        idDivInfo="bas-left"
        selectName="myDataTableSelect"
-       pageLength="10" />
+       pageLength="3" />
 </div>
    
 @endsection

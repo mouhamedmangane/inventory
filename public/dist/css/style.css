@@ -116,6 +116,8 @@ a, a:hover, a:focus {
     position: sticky;
     top: 0px;
     z-index: 9;
+    position: relative;
+    z-index: 99;
 }
 .header-title{  
     width: 250px;
