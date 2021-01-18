@@ -26,7 +26,8 @@ class Sidebar extends Component
             ->addNavItemModel("Dashbord","/ ","home")
             ->addNavItemModel("Contact","/dashbord","account_box ")
             ->addNavGroupModel(NavModelFactory::navGroupModel("Produit Groupe","home")
-                ->addNavItemModel("Ajustement","/dashbord")
+                ->addNavItemModel("Produits","/dashbord",true)
+                ->addNavItemModel("Ajustement","/dashbord",)
                 ->addNavItemModel("Rebut","/dashbord")
             )
 

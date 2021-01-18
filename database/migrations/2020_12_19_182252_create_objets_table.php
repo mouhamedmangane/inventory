@@ -13,10 +13,10 @@ class CreateObjetsTable extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
+        //Schema::disableForeignKeyConstraints();
        
-        Schema::create('objets', function (Blueprint $table) {
-            $table->string('objet_name')->primary();
+        Schema::create('ensemble', function (Blueprint $table) {
+            $table->string('id')->primary();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateObjetsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('objets');
-        Schema::enableForeignKeyConstraints();
+        //Schema::enableForeignKeyConstraints();
     }
 }
