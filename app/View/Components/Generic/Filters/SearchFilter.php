@@ -4,19 +4,19 @@ namespace App\View\Components\Generic\Filters;
 
 use Illuminate\View\Component;
 
-class LigneFilterString extends Component
+class SearchFilter extends Component
 {
-    public $name,$valeur,$label;
+    public $id,$name,$dataTableId;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name,$label,$valeur="")
+    public function __construct($id,$name,$dataTableId="")
     {
+        $this->id = $id;
         $this->name = $name;
-        $this->valeur = $valeur;
-        $this->label = $label;
+        $this->dataTableId =$dataTableId;
     }
 
     /**
@@ -26,6 +26,6 @@ class LigneFilterString extends Component
      */
     public function render()
     {
-        return view('components.generic.filters.ligne-filter-string');
+        return view('components.generic.filters.search-filter');
     }
 }

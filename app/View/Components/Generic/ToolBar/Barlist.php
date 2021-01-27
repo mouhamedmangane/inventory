@@ -3,18 +3,19 @@
 namespace App\View\Components\Generic\ToolBar;
 
 use Illuminate\View\Component;
+use App\ViewModel\Filter\FilterMd;
 
 class Barlist extends Component
 {   
-    public $url;
+    public $url,$filter;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(FilterMd $filter=null)
     {
-        
+        $this->filter=$filter;
     }
 
     /**

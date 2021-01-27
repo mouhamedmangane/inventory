@@ -5,7 +5,7 @@
 @endif
 
 <select  id="{{ $idd }}" 
-        class="n-select-link {{ $attributes['class'] }} border-none "
+        class="n-select-link {{ $attributes['class'] }} border-none  n-col-sm-12 "
         data-content-cible="{{ $contentCible }}" >
     @foreach ($dt as $key=>$item )
         <option value="{{ $key }}"

@@ -3,17 +3,19 @@
 namespace App\View\Components\Generic\Filters;
 
 use Illuminate\View\Component;
+use App\ViewModel\Filter\LigneFilterIntervalMd;
 
-class SeachFilter extends Component
+class LigneFilterInterval extends Component
 {
+    public $ligne;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(LigneFilterIntervalMd $ligne)
     {
-        //
+        $this->ligne =$ligne;
     }
 
     /**
@@ -23,6 +25,6 @@ class SeachFilter extends Component
      */
     public function render()
     {
-        return view('components.generic.filters.seach-filter');
+        return view('components.generic.filters.ligne-filter-interval');
     }
 }

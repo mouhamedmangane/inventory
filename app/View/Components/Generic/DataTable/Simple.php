@@ -8,18 +8,20 @@ class Simple extends Component
 {
     public $name,//nom de la variable datatable dans le js
            $columns,
-           $url;
+           $url,
+           $searchId;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name,$columns,$url="")
+    public function __construct($name,$columns,$url="",$searchId="")
     {
         $this->name = $name;
         $this->columns = $columns;
         $this->url = $url;
+        $this->searchId =$searchId;
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\View\Components\Produit;
 
 use App\View\Components\ComponentWithId;
 use App\ViewModel\Navs\NavModelFactory;
+use App\ViewModel\Filter\FilterFactory;
 
 class ListView extends  ComponentWithId
 {
@@ -11,6 +12,7 @@ class ListView extends  ComponentWithId
 
     public $selectTitreItems;
     public $actionItems;
+    public $filter;
 
     /**
      * Create a new component instance.
@@ -21,6 +23,19 @@ class ListView extends  ComponentWithId
     {
         $this->selectTitreItems = $this->initSelectTitreItems();
         $this->actionItems = $this->initActionItems();  
+    }
+
+    public function getFilter(){
+        return  FilterFactory::filterMd('mySearch')
+                ->add(FilterFactory::ligneSelectMd('type_produit','Type Produit')
+                      ->addLIgne("consommable",'Consommable')
+                      ->addLigne('service','Service')
+                )
+                ->add(FilterFactory::ligneIntervalMd('prix','Prix','number',0,0,0))
+                ->add(FilterFactory::ligneOneMd('categore','Categorie','text','egal'))
+                ->add(FilterFactory::ligneIntervalMd('date_creation','Date Creation','date',0,0,0))
+
+                ;
     }
     public function initSelectTitreItems(){
         return 

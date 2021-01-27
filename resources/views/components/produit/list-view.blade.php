@@ -8,7 +8,7 @@
 
 
 @section('ly-toolbar')
-    <x-generic.tool-bar.barlist/>
+    <x-generic.tool-bar.barlist :filter="$getFilter()"/>
 @endsection
 
 
@@ -19,8 +19,8 @@
 
 
 @section('ly-title')
-<div class="d-flex align-items-center justify-content-between pl-3 mt-1" >
-    <div class="d-flex align-items-center my-2">
+<div class="d-flex align-items-center justify-content-between pl-3 mt-1 w-100 flex-wrap-sm" style="overflow-x: hidden;" >
+    <div class="d-flex align-items-center my-2 n-col-sm-12">
         {{-- <div  class="bg-primary text-white rounded-circle border  text-align center d-flex align-items-center justify-content-center" 
             style="width: 43px; height: 43px;@if ($attributes['img'])border-color:black!important;@endif">
             @if ($attributes['img'])
@@ -34,16 +34,13 @@
             @endif
             
         </div> --}}
-         <x-generic.links.select-link contentCible="my-main" value="test1"  class="ml-2"
+         <x-generic.links.select-link contentCible="my-main" value="test1"  class="mx-2"
                                       :dt="['/test1'=>'Liste Produits','/test2'=>'Produit  Vendable']" />
         
     </div>
-    <div class="col-md-5 d-flex aligns-items-center pr-2" >
+    <div class="flex-grow-1 d-flex aligns-items-center pr-2 justify-content-end w-100 " style="overflow-x: hidden;"  >
 
-        <div class="w-100 position-relative "  >
-            <input type="text" class="form-control border" style="width: 100%;" placeholder="Rechercher">
-            <i class="material-icons text-muted position-absolute" style="top:6px;right: 10px;color:#dee2e6;">search</i>
-        </div>
+        <x-generic.filters.search-filter id="mySearch" name="all" dataTableId='myDataTable'/>
     </div>
 </div>
 @endsection
@@ -57,6 +54,7 @@
        idDivPaginate="bass-right"
        idDivInfo="bas-left"
        selectName="myDataTableSelect"
+       searchId='mySearch'
        pageLength="3" />
 </div>
    

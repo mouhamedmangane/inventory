@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Crontollers\NewProductController;
 use Illuminate\Http\Request;
+use App\Rules\Ninterval;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,11 +51,19 @@ Route::post('produit/test', function(Request $request){
 
 // test datatable
 Route::get('produit/testDataTable', function(Request $request){
-
+    $messages="";
+    $data_validation= Validator::make($request->all(),[
+        'prix'=>[new Ninterval(Ninterval::NUMBER) ]
+    ]);
+    if($data_validation->fails()){
+        $messages = $data_validation->messages();
+    }
     return response()->json([
 
             "status"=>true,
-            "message"=>"Saisie Incorrent veillee mettre des donnees valide",
+            "message"=> "Saisie Incorrent veillee mettre des donnees valide",
+            "validation"=> $messages,
+            "request"=>$request->all(),
             'data'=>[
                 (object)['prenom'=> 'boubou','nom'=>'ce invalide','age'=>15],
                 (object)['prenom'=> 'boubou','nom'=>'Livre','age'=>41],
