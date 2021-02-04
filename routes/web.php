@@ -74,6 +74,23 @@ Route::get('produit/testDataTable', function(Request $request){
     ]);
 });
 
+//Editor Table by Noppal
+Route::get('/editorTable', function(Request $request){
+    return view('page.test.editor');
+});
+Route::get('/test/categorie/{id}', function(Request $request){
+    $json=[];
+    $json['status']=true;
+    $json['data']=[
+        (object)['value'=>'11','text'=>'onze'],
+        (object)['value'=>'12','text'=>'douze'],
+        (object)['value'=>'13','text'=>'treize'],
+        (object)['value'=>'14','text'=>'quate']
+    ];
+    return response()->json($data);
+});
+
+
 
 
 require __DIR__.'/auth.php';
