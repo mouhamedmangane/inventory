@@ -87,7 +87,7 @@ Route::get('/test/categorie/{id}', function(Request $request){
         (object)['value'=>'13','text'=>'treize'],
         (object)['value'=>'14','text'=>'quate']
     ];
-    return response()->json($data);
+    return response()->json($json);
 });
 
 

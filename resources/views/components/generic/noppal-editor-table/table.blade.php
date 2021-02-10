@@ -14,9 +14,9 @@
 @once
 @push('script')
 <script src="{{ URL::asset('dist/js/editorTable/api.js') }}"></script>
-<script src="{{ URL::asset('dist/js/editorTable/column.js') }}"></script>
-<script src="{{ URL::asset('dist/js/editorTable/column-select.js') }}"></script>
-<script src="{{ URL::asset('dist/js/editorTable/column-text.js') }}"></script>
+<script src="{{ URL::asset('dist/js/editorTable/gcell.js') }}"></script>
+<script src="{{ URL::asset('dist/js/editorTable/gcell-select.js') }}"></script>
+<script src="{{ URL::asset('dist/js/editorTable/gcell-text.js') }}"></script>
 @endpush
 @endonce
 
@@ -26,7 +26,7 @@
             let editorTable = $("#{{ $idTable }}").nplEditorTable({
                 columns:[
                     @foreach($columns as $column)
-                        new $.fn.NplEditorTable.{{ $column->classColumn }}(@json($column)),
+                        new $.fn.NplEditorTable.{{ $column->classGCell }}(@json($column)),
                     @endforeach
                 ],
                 data:@json($dd),
@@ -36,6 +36,7 @@
             row.prix=55888;
             editorTable.update();
             editorTable.addEmptyRow();
+        
         });
     </script>
 @endpush

@@ -1,7 +1,7 @@
 $(function(){
-    // Column Input
-    $.fn.NplEditorTable.ColumnText = function(ob){
-        $.fn.NplEditorTable.Column.call(this,ob);
+    // GCell Input
+    $.fn.NplEditorTable.GCellText = function(ob){
+        $.fn.NplEditorTable.GCell.call(this,ob);
         this.createInput=function(i,value){
             let input = document.createElement('input');
             input.name=this.name+'[]';
@@ -13,8 +13,9 @@ $(function(){
             return input;
         };
         this.updateInput=function(i,value){
-            if(cell=$(this.editor.seletor).find('.npl-editor-input [name="'+this.name+'"]')){
-                cell.value=value;
+            let inputs = this.inputs();
+            if(inputs){
+                inputs.get(i).value=value;
             }
             else{
                 throw new Exception("Impossible de selectionner la ligne "+i+" colonne "+this.name);
@@ -23,7 +24,7 @@ $(function(){
         };
         
     };
-    $.fn.NplEditorTable.ColumnText.prototype = Object.create($.fn.NplEditorTable.Column.prototype);
-    $.fn.NplEditorTable.ColumnText.prototype.constructor = $.fn.NplEditorTable.ColumnText;
+    $.fn.NplEditorTable.GCellText.prototype = Object.create($.fn.NplEditorTable.GCell.prototype);
+    $.fn.NplEditorTable.GCellText.prototype.constructor = $.fn.NplEditorTable.GCellText;
     
 });

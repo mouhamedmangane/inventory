@@ -1,5 +1,20 @@
 
 $(function(){
+    $.chargement=function(){
+        $('#content').append('<div id="apieditorchargement" \
+                                    class="position-absolute w-100 "\
+                                    style="top:0px;left:0px;height:calc(100vh - 48px);background:rgba(0,0,0,0.5);"\
+                              ></div>');
+        $('#content').append('<div id="apieditorchargementmessage" \
+                                    class="position-absolute  text-align-center px-4 py-2"\
+                                    style="top:calc(50% - 20px);left:calc(50% - 125px);background:white;color:black; width:300px;text-align:center;">\
+                                    Requete Asynchrone chargment ...\
+                             </div>');
+    };
+    $.rmchargement=function(){
+        $('#apieditorchargement').remove();
+        $('#apieditorchargementmessage').remove();
+    };
     $.fn.NplEditorTable={};
     
     // Constantes
@@ -57,9 +72,9 @@ $(function(){
         this.updateInput=(i,name,value)=>{
             this.getColumn(name).update(i,value);
         };
-        this.update =()=>{
+        this.update =async ()=>{
             for (const column of this.columns) {
-                column.update();
+                await column.update();
             }
         };
         this.getTr=function(i){
@@ -101,7 +116,11 @@ $(function(){
     $.fn.NplEditorTable.Intances=[];
     $.fn.extend({
         nplEditorTable:function(ob=null){
-            let api = $.fn.NplEditorTable.Intances.find((instance)=> instance.selector == this.prop('id'));
+            let api = $.fn.NplEditorTable.Intances.find((instance)=>{
+                console.log(instance.selector );
+                console.log(this.prop('id'));
+               return  instance.selector == ('#'+this.prop('id'))
+            } );
             if(!api){
                 api = new $.fn.NplEditorTable.Api(this.prop('id'),ob);
                 $.fn.NplEditorTable.Intances.push(api);
@@ -111,6 +130,7 @@ $(function(){
            
         },
     });
+    
 
     
 

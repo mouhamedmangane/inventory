@@ -1,5 +1,5 @@
 $(function(){
-    $.fn.NplEditorTable.Column = function(ob){
+    $.fn.NplEditorTable.GCell = function(ob){
         this.name=ob.name;
         this.options=ob.options;
         this.classNameInput= $.fn.NplEditorTable.defaultClassInput;
@@ -60,6 +60,7 @@ $(function(){
             this.eventInputs.push({name:eventName,fonction:fonction}); 
      
         };
+        // permet d'enregistrer un evenment apres l'affectation a l' api
         this.addEventInput=(eventName,fonction)=>{
             this.addEventInputBefore(eventName,fonction); 
             let elements= this.inputs();
@@ -70,6 +71,7 @@ $(function(){
                 column.pushEvent(element,{name:eventName,fonction:fonction},index);
             });
         };
+        // cette fonction permet d'appliquer un evement passer en parametre a un input
         this.pushEvent=(input,eventI,rowIndex)=>{
             let column=this;
             let editorTable=this.editorTable;
@@ -87,17 +89,24 @@ $(function(){
             }
             
         };
+        //cette fonction permet d'appliquer toutes les evenement a un input s
         this.pushAllEvent=(input,rowIndex)=>{
             for (const eventInput of this.eventInputs ) {
                 this.pushEvent(input,eventInput,rowIndex);  
             }
         };
-        
+        // permet d'enregistrer des evements au sein des Gcell avant meme
+        // de renseigner le tableau
         this.addEventInputBefore('change',function(e){
             e.column.setCellData(e.rowIndex,e.target.value);
             console.log(e.editorTable.data);
             console.log('change 1');
         });
+
+        //cette fonction permet recuperer les donnres d'une cellule 
+        this.getDataCell=(rowIndex)=>{
+            
+        };
         
     };
 
