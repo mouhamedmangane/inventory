@@ -49,7 +49,7 @@
 <?php endif; ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?> 
-            <div id="content" style="flex-grow: 1;">
+            <div id="content" class="position-relative" style="flex-grow: 1;">
                 <?php echo $__env->yieldContent('content'); ?>           
             </div>
         </div>  

@@ -27,7 +27,7 @@
         
         <div class="wrapper">
             <x-util.sidebar  />
-            <div id="content" style="flex-grow: 1;">
+            <div id="content" class="position-relative" style="flex-grow: 1;">
                 @yield('content')           
             </div>
         </div>  
