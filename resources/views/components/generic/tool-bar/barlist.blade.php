@@ -39,12 +39,9 @@
     <div class=" mx-3 bg-secondary" style="height:18px;width: 1px;"></div>
 
     <div class="d-flex" style="z-index: 99999;">
-        <x-generic.filters.filter >
-            <x-generic.filters.ligne-filter-select name="type_produit"  :datas="['service'=>'Service','consommable'=>'Consommable']" />
-            <div class="dropdown-divider"></div>
-            <x-generic.filters.ligne-filter-string name="fournisseur"  label="Fournisseur" valeur="" />
-            <div class="dropdown-divider"></div>
-        </x-generic.filters.filter>
+        @if($filter)
+            <x-generic.filters.filter :filter="$filter"/>
+        @endif
        
 
         <button class="btn btn-sm d-flex align-items-center mr-3"  >

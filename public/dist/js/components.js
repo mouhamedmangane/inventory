@@ -25,7 +25,23 @@ $(function(){
 
                 $(this).append($(div));
             });
-        }
+        },
+        serializeObject : function()
+        {
+           var o = {};
+           var a = this.serializeArray();
+           $.each(a, function() {
+               if (o[this.name]) {
+                   if (!o[this.name].push) {
+                       o[this.name] = [o[this.name]];
+                   }
+                   o[this.name].push(this.value || '');
+               } else {
+                   o[this.name] = this.value || '';
+               }
+           });
+           return o;
+        },
     });
 
 
@@ -41,5 +57,48 @@ $(function(){
                $('.cacha').css('z-index','auto'); 
         });
     });
+
+    // Filter & Search add filter tosearch
+    // NB : class_name avec point
+    $.pushFilterToSearch=(idSearch,idElement,idChecks,name,values,titre,text,class_name='')=>{
+        let textHtml='';
+        for (const k in values) {
+            textHtml +="<input type='hidden' name='"+name+"["+k+"]' value='"+values[k]+"'>"; 
+        }
+         textHtml +=  "                               \
+                <span class='search-item-title bg-success pl-2 pr-1  py-1'>"+titre+": </span>\
+                <span class='search-item-text py-1 px-2 no-wrap'>"+text+"</span>\
+                <button class='search-item-close btn btn-secondary' type='button' data-id-check='"+idChecks+"'><i class='material-icons md-14'>close</i></button>\
+        ";
+        if($('#'+idElement).length)
+            $('#'+idElement).html(textHtml)
+        else
+            $(idSearch).append(
+                "<div id='"+idElement+"' class='search-item mx-1 rounded-pill '> "
+                +textHtml+
+                "</div> " 
+             );
+             $(idSearch).trigger('n-resize');
+        $('#'+idElement).find(".search-item-close").bind('click',function(){
+                if(!class_name.length){
+                    console.log(idChecks+" ");
+                    $(idChecks).prop('checked',false);
+                    $(idChecks).trigger('change');
+                }
+                else{
+                    console.log(idChecks+" "+class_name);
+                    $(idChecks).find(class_name).prop('checked',false);
+                    $(idChecks).find(class_name).trigger('change');
+                }
+     
+        });
+    };
+    
+
+    $.removeFilterToSearch=(idElement,idSearch)=>{
+        $(idElement).remove();
+        if($(idSearch))
+            $(idSearch).trigger('n-resize');
+    };
  
 });

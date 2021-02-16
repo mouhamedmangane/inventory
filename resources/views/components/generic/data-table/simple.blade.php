@@ -98,6 +98,11 @@
           @endif
           "ajax":{
              "url":"{{ $url }}",
+             @if($searchId && !empty($searchId))
+                "data": function(d){
+                    return $('#{{ $searchId }}').serializeObject();
+                },
+             @endif
              "dataSrc": function ( json ) {
                  console.log(json)
                 @if($attributes['selectName'])            

@@ -3,20 +3,18 @@
 namespace App\View\Components\Generic\Filters;
 
 use Illuminate\View\Component;
-
+use App\ViewModel\Filter\LigneFilterSelectMd;
 class LigneFilterSelect extends Component
 {   
-    public $name;
-    public  $datas;
+    public $ligne;
     /**
      * Create a new  component instance.
      *
      * @return void
      */
-    public function __construct($name, $datas)
+    public function __construct(LigneFilterSelectMd $ligne)
     {
-        $this->name = $name;
-        $this->datas = $datas;
+        $this->ligne = $ligne;
     } 
 
     /**

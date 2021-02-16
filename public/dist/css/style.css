@@ -5,6 +5,58 @@ body {
     overflow-y: hidden;
     font-size: 14px;
 }
+/* TODO Button
+|------------------------------------------------------------------------------
+|    
+|
+|                  Button
+|
+|-------------------------------------------------------------------------------
+*/
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-spinner {
+  -moz-appearance: textfield;
+}
+
+.no-date-spinner::-webkit-calendar-picker-indicator {
+    display: none;
+}
+/* TODO Focus
+|------------------------------------------------------------------------------
+|    
+|
+|                 form 
+|
+|-------------------------------------------------------------------------------
+*/
+.no-focusable:focus{
+    border:none!important;
+}
+.focus{
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+/* TODO Flex
+|------------------------------------------------------------------------------
+|    
+|
+|                 form 
+|
+|-------------------------------------------------------------------------------
+*/
+.order-5{
+    order: 10;
+}
+
 /* 
 |------------------------------------------------------------------------------
 |    
@@ -24,12 +76,13 @@ body {
     max-height: calc(100vh - 48px);
 }
 
+/* TODO text */
 .text-normal{
     font-size: 1.em;
 }
 
 
-/* lien */
+/* TODO Lien */
 a > i,  a > span{
     display: inline-block;
     vertical-align: middle;
@@ -40,8 +93,7 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 .lien-sp{
-    color:var(--primary);
-    
+    color:var(--primary); 
 }
 .lien-sp:hover{
     opacity: 0.9;
@@ -49,7 +101,7 @@ a, a:hover, a:focus {
     text-decoration: underline;
 }
 
-/* 
+/* TODO form et input
 |------------------------------------------------------------------------------
 |    
 |
@@ -89,7 +141,7 @@ a, a:hover, a:focus {
 }
 
 
-/* form table */
+/* TODO form table */
 .n-form-table tr{
    
 }
@@ -101,7 +153,7 @@ a, a:hover, a:focus {
 }
 
 
-/* 
+/*TODO header 
 |------------------------------------------------------------------------------
 |    
 |
@@ -435,8 +487,23 @@ a, a:hover, a:focus {
 .input-p-required{
     border-bottom: 1px solid black!important;
 }
+/*  TODO scroll
+|------------------------------------------------------------------------------
+|    
+|
+|                sCROLL
+|
+|-------------------------------------------------------------------------------
+*/
+.no-scrollbar::-webkit-scrollbar{
+    display: none;;
+}
+.no-scrollbar{
+    -ms-overflow-style:none;
+    scrollbar-width: none;
+}
 
-/* 
+/* TODO Sidebar
 |------------------------------------------------------------------------------
 |    
 |
@@ -476,6 +543,31 @@ a, a:hover, a:focus {
 
 
 @media (max-width: 768px) {
+    /* TODO SM Flex
+|------------------------------------------------------------------------------
+|    
+|
+|                 D-flex sm
+|
+|-------------------------------------------------------------------------------
+*/
+.flex-wrap-sm{
+    flex-wrap: wrap;
+}
+    .n-col-sm-12{
+        width: 100%;
+    }
+    .overflow-sm-hidden{
+        overflow-x: hidden;
+    }
+    .n-max-width-sm-content{
+        
+        max-width: max-content;
+        max-width: -webkit-fill-available;
+
+    }
+
+
     /* Wrapper */
 
 

@@ -3,10 +3,15 @@
         <i class="material-icons-outlined " style="font-size:16px;">filter_alt</i>
         <span class="ml-1"> Filtrer</span>    
     </button>
-    <div class="dropdown-menu ct-cacha" style="width: 250px;" >
+    <div class="dropdown-menu ct-cacha" style="width: 240px;" >
+        @foreach ($filter->rows() as $ligne )
+            <x-dynamic-component :component="$ligne->getComponentName()" :ligne="$ligne"  />
+            @if (!$loop->last)
+                <div class="dropdown-divider"></div>
+            @endif
+        @endforeach 
         {{ $slot }}
     </div>
-    
 </div>
 
 @once
