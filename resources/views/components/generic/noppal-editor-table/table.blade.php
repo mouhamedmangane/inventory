@@ -32,9 +32,12 @@
                 data:@json($dd),
             });
             console.log(editorTable);
-            let row = editorTable.data[0];
-            row.prix=55888;
-            editorTable.update();
+            //let row = editorTable.data[0];
+            //row.prix=55888;
+            //editorTable.update();
+            //editorTable.addEmptyRow();
+            //editorTable.removeRow(0);
+           // editorTable.update()
             editorTable.addEmptyRow();
         
         });

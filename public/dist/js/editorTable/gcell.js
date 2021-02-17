@@ -8,16 +8,16 @@ $(function(){
         this.defaultValue= ob.options.defaultValue;
         // data et table
         this.editorTable=null;
-        this.getCellData=(index)=>{
+        this.getCellValue=(index)=>{
             let row=this.editorTable.data[index];
-            console.log(index);
+            //console.log(index);
             return row[this.name];
         }
-        this.setCellData=(index,value)=>{
+        this.setCellValue=(index,value)=>{
             console.log(this.editorTable.data);
             console.log(index);
             let row =  this.editorTable.data[index];
-            console.log(row);
+            //console.log(row);
             row[this.name]=value;
         }
       ;
@@ -32,7 +32,7 @@ $(function(){
         };
         this.update = function(){
             let inputs=this.inputs();console.log(inputs);
-            let fngetDataCell =this.getCellData;
+            let fngetDataCell =this.getCellValue;
             inputs.each(function(index,element){
                 element.value= fngetDataCell(index);
             });
@@ -66,8 +66,8 @@ $(function(){
             let elements= this.inputs();
             let column =this;
             elements.each(function (index, element) {
-                console.log('eeeeeeeeeeeee');
-                console.log(element);
+                //console.log('eeeeeeeeeeeee');
+                //console.log(element);
                 column.pushEvent(element,{name:eventName,fonction:fonction},index);
             });
         };
@@ -76,8 +76,8 @@ $(function(){
             let column=this;
             let editorTable=this.editorTable;
             if(eventI){
-                input.addEventListener(eventI.name,function(e){ 
-                    console.log('test');
+                $(input).on(eventI.name,function(e){ 
+                    //console.log('test');
                     e.column= column;
                     e.editorTable= editorTable;
                     e.rowIndex=rowIndex;
@@ -98,9 +98,9 @@ $(function(){
         // permet d'enregistrer des evements au sein des Gcell avant meme
         // de renseigner le tableau
         this.addEventInputBefore('change',function(e){
-            e.column.setCellData(e.rowIndex,e.target.value);
-            console.log(e.editorTable.data);
-            console.log('change 1');
+            e.column.setCellValue(e.rowIndex,e.target.value);
+            //console.log(e.editorTable.data);
+            //console.log('change 1');
         });
 
         //cette fonction permet recuperer les donnres d'une cellule 

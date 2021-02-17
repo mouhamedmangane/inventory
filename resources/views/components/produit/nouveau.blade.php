@@ -26,7 +26,7 @@
             @endif
             
         </div>
-         <x-generic.links.select-link contentCible="my-main" value="test1" :dt="['/test1'=>'linkA','/test2'=>'linkB']" />
+         <x-generic.links.select-link contentCible="my-main" value="/test2/e" :dt="['/test2/e'=>'linkA','/test2/r'=>'linkB']" />
         
     </div>
     <div class="">

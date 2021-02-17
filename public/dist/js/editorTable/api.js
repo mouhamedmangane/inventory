@@ -78,14 +78,18 @@ $(function(){
             }
         };
         this.getTr=function(i){
-            return $(selector).find('.'+$.fn.NplEditorTable.defaultClassTr).get(i);
+            return $(this.selector).find('.'+$.fn.NplEditorTable.defaultClassTr).get(i);
         };
         this.getTd=function(i,name){
-            return $(selector).find('.'+$.fn.NplEditorTable.defaultClassTD+'"'+name+'"]').get(i);
+            return $(this.selector).find('.'+$.fn.NplEditorTable.defaultClassTD+'"'+name+'"]').get(i);
         };
         this.getInput=function(i,name){
-            return $(selector).find('.'+$.fn.NplEditorTable.defaultClassTD+'"'+name+'"]').get(i);
+            return $(this.selector).find('.'+$.fn.NplEditorTable.defaultClassTD+'"'+name+'"]').get(i);
         };
+        this.getInputValue=(columnName,rowIndex)=>{
+            let row=this.data[rowIndex];
+            return row[columnName];
+        }
 
         this.newEmptyData=function(){
             let data={};
@@ -95,8 +99,9 @@ $(function(){
             return data;
         };
 
-        this.addEmptyRow=function(){
-            let row= this.newEmptyData();
+        this.addEmptyRow=function(row){
+            if(!row)
+                row= this.newEmptyData();
             this.data.push(row);
             console.log(this.data.length-1);
             let tr=this.drawRow(row,this.data.length-1);
@@ -105,6 +110,13 @@ $(function(){
 
             
         };
+
+        this.removeRow=(i)=>{
+            this.data = this.data.splice(i,1);
+            let tr= this.getTr(i);
+            tr.remove();
+            this.update();
+        }
         
         this.draw();
         for (const column of this.columns) {

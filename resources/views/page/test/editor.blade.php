@@ -73,9 +73,12 @@
           let editor =  $('#testEditor').nplEditorTable();
           console.log(editor);
           editor.getColumn('produit').addEventInput('change',function(e){
-            alert('bonjour');
-            editor.getColumn('prix').updateInput(e.rowIndex,542);
-           });
+              //alert('bonjour');
+              let dataValueProduit = editor.getColumn('produit').getDataCell(e.rowIndex);
+              let prix= dataValueProduit['prix'];
+              editor.getColumn('prix').updateInput(e.rowIndex,prix);
+
+          });
       });
     </script>
 @endpush

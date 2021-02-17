@@ -44,7 +44,7 @@
                     },
                     error:function(){
                         $("#"+select_link_jq.data("content-cible")).try_component(function(){
-                            n_select_link_on_change($(this));
+                            n_select_link_on_change(select_link_jq);
                         });
                     }
                 });

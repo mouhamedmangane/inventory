@@ -38,14 +38,14 @@ $(function(){
                 return tab;
             }
             else{
-                 return[];
+                 return [];
             }
            
         };
         this.createOption=function(item,value,getValue,getText){
-            console.log(item);
-            console.log(getValue);
-            console.log(getText);
+            // console.log(item);
+            // console.log(getValue);
+            // console.log(getText);
             
 
             let valueIpt=item[getValue];
@@ -65,7 +65,7 @@ $(function(){
 
         this.updateElementOption=async function(restant,element,value,i){
             
-            let optionDefault=this.createOption(this.defaultOption,'');
+            let optionDefault=this.createOption(this.defaultOption,'','value','text');
             optionDefault.selected=false;
             let fnCreateOption = this.createOption;
             let valueProp =this.valueProp;
@@ -90,7 +90,7 @@ $(function(){
                     } 
                 } catch (error) {
                    // alert("la connexion n'est pas bonne, alors les données ne sont pas recuperées au niveau du serveur.\nVeuiller revoir votre connexion et retenter l'action !");
-                    console.log(error);
+                   // console.log(error);
                 }
                 
             }
@@ -121,21 +121,31 @@ $(function(){
     
 
         this.update = async function(){
-            let inputs=this.inputs();console.log(inputs);
+            let inputs=this.inputs();
+            inputs.off();
+            console.log(inputs);
             
             for (let index = 0; index < this.editorTable.data.length; index++) {
                 let restant = await  this.dataRestant(index);
                 
                 let element = inputs.get(index);
-                console.log(element);
-                value = this.getCellData(index);
+                
+                //console.log(element);
+                value = this.getCellValue(index);
                 if(value && element){
                     element.value=value;
                 }
                 else{
                     value='';
                 }
-                this.updateElementOption(restant,element,value,index);                    
+                this.updateElementOption(restant,element,value,index);  
+                console.log('tttttttt'+index);
+                console.log(element);
+               
+                if(element){
+                    this.pushAllEvent(element,index); 
+                }
+                                 
             }
         };
         
@@ -146,7 +156,17 @@ $(function(){
         });
         
         this.getDataCell=(rowIndex)=>{
-            let input
+            let valueCellDep = this.editorTable.getInputValue(this.nameDep,rowIndex);
+            let valueCell= this.editorTable.getInputValue(this.name,rowIndex);
+            let dataCell=null;
+            for(const row of this.data){
+                if(row[this.valueProp] == valueCell){
+                    dataCell=row;
+                    break;
+                }
+
+            }
+            return dataCell;
         };
       
     };
@@ -192,7 +212,7 @@ $(function(){
             if(!this.once){
                 let name=this.name;
                 this.editorTable.getColumn(this.nameDep).addEventInput('change',function(e){
-                    alert('bonjour');
+                    //alert('bonjour');
                     e.editorTable.getColumn(name).update();
                 });
             }
@@ -200,7 +220,19 @@ $(function(){
             this.once=true;
         }
   
+        this.getDataCell=(rowIndex)=>{
+            let valueCellDep = this.editorTable.getInputValue(this.nameDep,rowIndex);
+            let valueCell= this.editorTable.getInputValue(this.name,rowIndex);
+            let dataCell=null;
+            for(const row of this.data[valueCellDep]){
+                if(row[this.valueProp] == valueCell){
+                    dataCell=row;
+                    break;
+                }
 
+            }
+            return dataCell;
+        };
         
                 
     };

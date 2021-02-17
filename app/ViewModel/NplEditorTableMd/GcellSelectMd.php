@@ -1,32 +1,44 @@
 <?php
 
-namespace ViewModel\NplEditorTableMd;
-use ViewModel\NplEditorTableMd\GCellMd;
+namespace App\ViewModel\NplEditorTableMd;
+
 class GCellSelectMd extends GCellMd{
 
     private const OP_UNIQUE='unique';
+    //Default Select
     private const OP_DEFAULT_OPTION='defaultOption';
+    private const DEFAULT_OPTION_TEXT='text';
+    private const DEFAULT_OPTION_VALUE='value';
     private const DEFAULT_SELECT_TEXT='selectionner';
 
-    private $textProp;
-    private $valueProp;
+    //Default ValueProp and TextProp
+    private const DEFAULT_VALUE_PROP='value';
+    private const DEFAULT_TEXT_PROP='text';
 
-    public function __construct($name,$refName,$label,$textProp,$valueProp){
-        parent::__construt($name,$refName,$label);
+    public $textProp;
+    public $valueProp;
+
+    public function __construct($name,$refName,$label){
+        parent::__construct($name,$refName,$label);
         $this->classGCell="GCellSelect";
-        $this->textProp=$textProp;
-        $this->valueProp=$valueProp;
-        $selectText=self::DEFAULT_SELECT_TEXT'selectionnne'
-        $this->options[self::OP_UNIQUE]=(object)[$textProp=>];
+        $this->valueProp = self::DEFAULT_VALUE_PROP;
+        $this->textProp = self::DEFAULT_TEXT_PROP;
+        $selectText=self::DEFAULT_SELECT_TEXT.$name;
+        $this->options[self::OP_DEFAULT_OPTION]=(object)[$this->textProp=>$selectText];
     }
 
+    public function setProp($textProp,$valueProp){
+        $this->textProp=$textProp;
+        $this->valueProp=$valueProp;
+        return $this;
+    }
     public function unique($isunique){
         $this->options['unique'] = $isunique;
         return $this;
     }
 
-    public function defaultOption($text,$value){
-        $this->options['defaultOption']=(object)[$this->valueProp=>$value,$this->textProp=>$text];
+    public function defaultOption($text,$value=''){
+        $this->options['defaultOption']=(object)[self::DEFAULT_OPTION_VALUE=>$value,self::DEFAULT_OPTION_TEXT=>$text];
         return $this;
     }
 
