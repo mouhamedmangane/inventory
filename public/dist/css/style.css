@@ -26,6 +26,10 @@ body {
 .no-date-spinner::-webkit-calendar-picker-indicator {
     display: none;
 }
+.hv-danger-btn-oultline{
+    color: var(--danger);
+    border-color:var(--danger);
+}
 /* TODO Focus
 |------------------------------------------------------------------------------
 |    

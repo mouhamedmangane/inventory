@@ -5,7 +5,11 @@ $(function(){
         this.classNameInput= $.fn.NplEditorTable.defaultClassInput;
         this.classNameTd= $.fn.NplEditorTable.defaultClassTd;
         this.isVisible=ob.visible;
-        this.defaultValue= ob.options.defaultValue;
+        
+        this.defaultValue= undefined;
+        if(ob.options){
+            this.defaultValue= ob.options.defaultValue;
+        }
         // data et table
         this.editorTable=null;
         this.getCellValue=(index)=>{
@@ -31,12 +35,15 @@ $(function(){
                 throw new Exception("editorTable de la colonne est undefined");
         };
         this.update = function(){
-            let inputs=this.inputs();console.log(inputs);
+            let inputs=this.inputs();
+            inputs.off();
             let fngetDataCell =this.getCellValue;
+            let fnPushAll = this.pushAllEvent;
             inputs.each(function(index,element){
                 element.value= fngetDataCell(index);
+                fnPushAll(element,index);
             });
-        }
+        };
 
         
         //Cellule
@@ -109,5 +116,42 @@ $(function(){
         };
         
     };
+
+    $.fn.NplEditorTable.GcellSup = function(ob){
+        $.fn.NplEditorTable.GCell.call(this,ob);
+        this.eventInputs=[];
+        this.classNameInput='npl___editor___sup___row';
+        this.inputs= function(){
+            if(this.editorTable)
+                return $(this.editorTable.selector).find('.'+this.classNameInput);
+            else
+                throw new Exception("editorTable de la colonne est undefined");
+        };
+        this.createInput=function(i,value){
+            let input = document.createElement('button');
+            input.innerHTML='<i class="material-icons md-20">delete</i>'
+            input.className=this.classNameInput+' ml-1 btn btn-sm btn-outline-secondary hv-danger-btn-oultline';
+            input.style.fontSize='14px';
+            this.pushAllEvent(input,i);
+            return input;
+        };
+        this.update = function(){
+            let inputs=this.inputs();
+            inputs.off();
+            let fnPushAll = this.pushAllEvent;
+            inputs.each(function(index,element){
+                fnPushAll(element,index);
+            });
+        }
+        
+        this.addEventInputBefore('click',function(e){
+            alert('bonjour'+e.rowIndex);
+            e.editorTable.removeRow(e.rowIndex);
+        });
+       
+        
+    };
+    $.fn.NplEditorTable.GcellSup.prototype = Object.create($.fn.NplEditorTable.GCell.prototype);
+    $.fn.NplEditorTable.GcellSup.prototype.constructor = $.fn.NplEditorTable.GcellSup;
 
 });

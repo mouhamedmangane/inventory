@@ -29,7 +29,9 @@ $(function(){
         this.data=ob.data;
         this.columns=ob.columns;
         this.hideColumns=ob.hideColumns;
-
+        this.columns.push(new $.fn.NplEditorTable.GcellSup({
+            name:'sup__col',
+        }));
         // init column
         for (const column of this.columns) {
             column.editorTable=this;  
@@ -112,7 +114,13 @@ $(function(){
         };
 
         this.removeRow=(i)=>{
-            this.data = this.data.splice(i,1);
+            console.log('ssssssssssssssssssssss');
+            console.log(this.data);
+            console.log(i);
+            this.data.splice(i,1);
+            console.log(this.data);
+            console.log('ssssssssssssssssssssss');
+            console.log('ssssssssssssssssssssss');
             let tr= this.getTr(i);
             tr.remove();
             this.update();

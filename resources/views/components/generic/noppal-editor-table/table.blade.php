@@ -8,8 +8,14 @@
     </thead>
     <tbody>
     </tbody>
-    
+
 </table>
+<div>
+    <a href="#" class="text-primary" id="{{ $idTable }}__btn___add">
+        Ajouter une nouvelle Ligne
+    </a>
+</div>
+
 
 @once
 @push('script')
@@ -23,6 +29,7 @@
 @push('script')
     <script>
         $(function(){
+            let  btn_add = "{{ $idTable }}__btn___add";
             let editorTable = $("#{{ $idTable }}").nplEditorTable({
                 columns:[
                     @foreach($columns as $column)
@@ -38,8 +45,11 @@
             //editorTable.addEmptyRow();
             //editorTable.removeRow(0);
            // editorTable.update()
-            editorTable.addEmptyRow();
-        
+            //editorTable.addEmptyRow();
+             $('#'+btn_add).on('click',function(){
+                editorTable.addEmptyRow(); 
+            });
         });
+        
     </script>
 @endpush
