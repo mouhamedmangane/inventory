@@ -65,6 +65,12 @@ Route::get('/test/categorie/{id}', function(Request $request){
     return response()->json($json);
 });
 
+Route::get('/test2/{type}', function(Request $request,$type){
+    if($type=='r'){
+        return 'salut';
+    }
+    return 'bonjour';
+});
 
 
 
