@@ -145,7 +145,8 @@ $(function(){
         }
         
         this.addEventInputBefore('click',function(e){
-          e.editorTable.removeRow(e.rowIndex);
+            alert('bonjour'+e.rowIndex);
+            e.editorTable.removeRow(e.rowIndex);
         });
        
         
