@@ -23,6 +23,10 @@ class Vente extends Model
     {
         return $this->belongsTo('App\Models\Client');
     }
+    public function ligne_payement_ventes()
+    {
+        return $this->hasMany('App\Models\LignePayementVentes');
+    }
 
 
     

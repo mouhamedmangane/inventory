@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class GroupeProduit extends Model
 {
     use HasFactory;
+
+    public function produits()
+    {
+        return $this->hasMany('App\Models\Produit');
+    }
 }

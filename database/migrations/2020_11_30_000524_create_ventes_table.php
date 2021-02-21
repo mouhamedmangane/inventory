@@ -19,7 +19,12 @@ class CreateVentesTable extends Migration
             $table->string('numeroVente', 100);
             $table->double('montantTotal', 15, 2);
 
-            $table->unsignedBigInteger('client_id')->index();
+            $table->unsignedBigInteger('client_id')->nullable()->default(NULL);
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('restrict');
+            
+
 
            
             $table->timestamps();   
@@ -34,5 +39,6 @@ class CreateVentesTable extends Migration
     public function down()
     {
        Schema::dropIfExists('ventes');
+       Schema::enableForeignKeyConstraints();
     }
 }

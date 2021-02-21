@@ -24,10 +24,12 @@ class CreateDroitDefaultsTable extends Migration
             $table->boolean('mme')->default(false);
             $table->boolean('open')->default(false);
             $table->string('role_name');
-            $table->string('object_name');    
-            
+            $table->string('objet_name');
+           
+        
             $table->foreign('role_name')->references('role')->on('roles')->onDelete('cascade');
-            $table->foreign('object_name')->references('object')->on('ensembles')->onDelete('cascade');
+          $table->foreign('objet_name')->references('objet_name')->on('objets')->onDelete('cascade');
+
             $table->timestamps();
 
         });
@@ -41,5 +43,6 @@ class CreateDroitDefaultsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('droit_defaults');
+        Schema::enableForeignKeyConstraints();
     }
 }

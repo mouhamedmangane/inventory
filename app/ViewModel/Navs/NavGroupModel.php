@@ -3,28 +3,40 @@
 namespace App\ViewModel\Navs;
 
 Class NavGroupModel implements NavElementModel{
-    public $name;
-    public $navItemModels;
 
-    public function __construct($name="",$navItemModels=[])
+
+    public $name,$icon;
+    public $navElementModels;
+
+    public function __construct($name,$icon="",$navElementModels=[])
     {   
         $this->name = $name;
-        $this->navItemsModels= $navItemModels;
+        $this->icon = $icon;
+        $this->navElementModels= $navElementModels;
     }
 
     public function getName(){
-        return $this->name();
+        return $this->name;
     }
 
-    public function add(NavItemModel $navItemeModel){
-        $this->navItemModels[]=$navItemModel;
+    public function addNavElementModel(NavElementModel $navElementModel){
+        $this->navElementModels[]=$navElementModel;
         return $this;
     }
 
-    public function remove(NavItemModel $navItemModel){
-        $index = array_search($navItemModel,$navItemModels);
+    public function addNavItemModel($name,$url,$active=false){
+        return $this->addNavElementModel(new NavItemModel($name,$url,"",$active));
+    }
+
+    public function addNavGroupModel(NavGroupModel $navGroupModel){
+        $this->addNavElement($navGroupModel);
+        return $this;
+    }
+
+    public function removeNavElementModel(NavElement $navElementModel){
+        $index = array_search($navElementModels,$navElementModels);
         if($index)
-            array_splice($navItemModels,$index,$index);
+            array_splice($navElementModels,$index,$index);
         else
             throw new \Excpetion("La suppresion ne marche pas car index no trouvé");
         
