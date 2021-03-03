@@ -1,0 +1,54 @@
+<?php
+
+namespace App\View\Components\Generic\NoppalEditorTable;
+
+use Illuminate\View\Component;
+use App\ViewModel\NplEditorTableMd\GCellFactory;
+
+class Table extends Component
+{
+    public $idTable,$columns,$dd;
+    /**
+     * Create a new component instance.
+     *
+     * @return void
+     */
+    public function __construct($idTable,$columns,$dd=null)
+    {
+        $this->idTable = $idTable;
+        $this->columns = $columns;
+        $this->dd  =$dd;
+    }
+    public function getColumns(){
+        $columns=[];
+        $columns[]= GCellFactory::select("categorie",'categorie','categorie')
+                    ->setProp('text','value')
+                    ->setData([
+                        (object)['value'=>'ct1','text'=>'informatique'],
+                        (object)['value'=>'ct2','text'=>'boutique'],
+                        (object)['value'=>'ct3','text'=>'boutique'],
+                    ])
+                    ->defaultOption('selectionner categorie');
+        $columns[]= GCellFactory::selectFree('produit','produit','produit','categorie',url('/test/categorie'))
+                    ->setProp('text','value')
+                    ->setData([
+                         
+                    ])
+                    ->unique(true)
+                    ->defaultOption('selectionner Produit');
+        $columns[]= GCellFactory::text('prix','prix','prix')
+                    ->type('number')
+                    ->defaultValue(0);
+        return $columns;
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     *
+     * @return \Illuminate\Contracts\View\View|string
+     */
+    public function render()
+    {
+        return view('components.generic.noppal-editor-table.table');
+    }
+}

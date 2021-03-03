@@ -1,1 +1,0 @@
-<span class="badge {{$styleClass}}">{{$name}}</span>

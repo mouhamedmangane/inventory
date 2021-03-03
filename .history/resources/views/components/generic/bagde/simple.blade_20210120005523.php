@@ -1,1 +1,0 @@
-<span class='badge {{ $classStyle  }} circle'> {{ $name }} </span>
