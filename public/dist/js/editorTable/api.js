@@ -86,7 +86,7 @@ $(function(){
             return $(this.selector).find('.'+$.fn.NplEditorTable.defaultClassTD+'"'+name+'"]').get(i);
         };
         this.getInput=function(i,name){
-            return $(this.selector).find('.'+$.fn.NplEditorTable.defaultClassTD+'"'+name+'"]').get(i);
+            return this.getColumn(name).inputs().get(i);
         };
         this.getInputValue=(columnName,rowIndex)=>{
             let row=this.data[rowIndex];
