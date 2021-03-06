@@ -26,6 +26,7 @@ $(function(){
                 $(this).append($(div));
             });
         },
+
         serializeObject : function()
         {
            var o = {};
@@ -42,10 +43,26 @@ $(function(){
            });
            return o;
         },
+
+    
     });
 
 
-   
+//    les arlert
+    $.fn.nplAlertShow= function (idContentAlert,message,typeClass,removeClass,fade=0){
+        idContentAlert="#"+idContentAlert;
+        $(idContentAlert).removeClass(removeClass);
+        $(idContentAlert).html(message);
+        $(idContentAlert).addClass(typeClass);
+        $(idContentAlert).fadeIn();
+        if(fade!=1){
+            $(idContentAlert).delay(fade*2000).fadeOut(500);
+        }
+
+    };
+    $.fn.nplAlertHide = function(idContentAlert){
+        $('#'+idContentAlert).alert('close');
+    }
  
     // show and hide dropdown
     $(function(){
@@ -63,7 +80,29 @@ $(function(){
     $.pushFilterToSearch=(idSearch,idElement,idChecks,name,values,titre,text,class_name='')=>{
         let textHtml='';
         for (const k in values) {
-            textHtml +="<input type='hidden' name='"+name+"["+k+"]' value='"+values[k]+"'>"; 
+            let x=k;
+            let nameValue='';
+            
+            
+            if(Array.isArray(values[k])){
+                nameParent=name+'['+k+']';
+                let valueChild=values[k];
+                loop1:
+                for(const o of valueChild.keys()){ 
+                    if(Array.isArray(o)){
+                        valueChild=valueChild[o];
+                        nameParent+='['+o+']';
+                        continue loop1;
+                    }
+                    nameValue=nameParent+'[]';
+                    textHtml +="<input type='hidden' name='"+nameValue+"' value='"+valueChild[o]+"'>";
+                }
+            }
+            else{
+                textHtml +="<input type='hidden' name='"+name+"["+k+"]' value='"+values[k]+"'>";
+            }
+            
+             
         }
          textHtml +=  "                               \
                 <span class='search-item-title bg-success pl-2 pr-1  py-1'>"+titre+": </span>\
