@@ -65,10 +65,11 @@ Route::get('produit/testDataTable', function(Request $request){
             "validation"=> $messages,
             "request"=>$request->all(),
             'data'=>[
-                (object)['prenom'=> 'boubou','nom'=>'ce invalide','age'=>15],
-                (object)['prenom'=> 'boubou','nom'=>'Livre','age'=>41],
-                (object)['prenom'=> 'boubou','nom'=>'koro','age'=>78],
-                (object)['prenom'=> 'boubou','nom'=>'TeBA','age'=>45]
+                (object)['id'=> 1,'prenom'=> 'boubou','nom'=>'ce invalide','age'=>15],
+                (object)['id'=> 2,'prenom'=> 'boubou','nom'=>'Livre','age'=>41],
+                (object)['id'=> 6,'prenom'=> 'asee','nom'=>'Livre','age'=>441],
+                (object)['id'=> 3,'prenom'=> 'boubou','nom'=>'koro','age'=>78],
+                (object)['id'=> 4,'prenom'=> 'boubou','nom'=>'TeBA','age'=>45]
             
         ]
     ]);

@@ -7,11 +7,11 @@
         
     </div>
     <div class="d-flex ">
-        <button class="btn btn-sm  d-flex align-items-center  mr-3" disabled >
+        <button class="btn btn-sm  d-flex align-items-center  mr-3" disabled id="update_id_btn">
             <i class="material-icons-outlined " style="font-size:16px;">edit</i>
             <span class="ml-1"> Modifier</span>       
         </button>
-        <button class="btn btn-sm d-flex align-items-center  mr-3" disabled >
+        <button class="btn btn-sm d-flex align-items-center  mr-3" disabled id="remove_action_bar" >
             <i class="material-icons-outlined " style="font-size:16px;">delete</i>
             <span class="ml-1"> Supprimer</span>       
         </button>
@@ -25,7 +25,7 @@
             <i class="material-icons-outlined " style="font-size:16px;">print</i>
             <span class="ml-1"> Imprimer</span>       
         </button>
-        <button class="btn btn-sm d-flex align-items-center mr-3"  >
+        <button class="btn btn-sm d-flex align-items-center mr-3" id="achive_btn_id" >
             <i class="material-icons-outlined " style="font-size:16px;">archive</i>
             <span class="ml-1"> Archiver</span>       
         </button>
@@ -42,12 +42,21 @@
         @if($filter)
             <x-generic.filters.filter :filter="$filter"/>
         @endif
-       
-
-        <button class="btn btn-sm d-flex align-items-center mr-3"  >
-            <i class="material-icons-outlined " style="font-size:16px;">table_view</i>
-            <span class="ml-1"> Regrouper Par</span>       
-        </button>
+        
+        @if($groupBy)
+        <div class="dropdown " >
+            <button class="btn btn-sm d-flex align-items-center mr-3 dropdown-toggle"  type="button"  data-toggle="dropdown" >
+                <i class="material-icons-outlined " style="font-size:16px;">table_view</i>
+                <span class="ml-1"> Regrouper Par</span>       
+            </button>
+            <div class="dropdown-menu "  >
+                @foreach($groupBy as $key => $value)
+                    <a class="dropdown-item">{{ $value }}<a>
+                @endforeach
+            </div>
+        </div>
+        @endif
+        
 
     </div>
 </div>

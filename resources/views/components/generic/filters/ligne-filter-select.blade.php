@@ -37,12 +37,13 @@ $(function(){
                     'op_name':op_name,
             };
             let text='';
+            value['op']=[];
             $(id).find('.{{ $filterSelect }}').each(function(index){
                 if($(this).prop('checked')){
                     if(index!=0)
                         text+=" ou "
                     text+=$(this).val();
-                    value['op'+index]=$(this).val()+';';
+                    value['op'].push($(this).val());
                 }
             })
             if(text.length){

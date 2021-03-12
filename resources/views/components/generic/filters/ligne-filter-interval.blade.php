@@ -71,16 +71,16 @@ $(function(){
             let idElement =$(idBtnOperation).data('id-element');
             let i=$(idBtnOperation).data('it');
             let text=(ops[i].text!='=')
-                         ? ($(idInputMax).val()+" " +ops[i].text+" "+$(idInputMin).val())
+                         ? ($(idInputMin).val()+" " +ops[i].text+" "+$(idInputMax).val())
                          : ($(idInputMax).val());
             if($(idCkeck).prop('checked') && ($(idInputMax).val() || $(idInputMin).val()) ){
                 let min = $(idInputMin).val();
                 if(ops[i].op_name=='egal')
                     min=$(idInputMax).val();
                 let value={
-                    'op_name':op_name,
+                    'op_name':ops[i].op_name,
                     'max':$(idInputMax).val(),
-                    'min':min,
+                    'min':min+' qsf',
                 };
                 
                 $.pushFilterToSearch(idSearch,idElement,idCkeck,name,value,label,text);

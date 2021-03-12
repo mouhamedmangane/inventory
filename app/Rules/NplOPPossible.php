@@ -4,16 +4,19 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class NOne implements Rule
+class NplOPPossible implements Rule
 {
+    private $possible_ops;
+    private $op;
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($op,$possible_ops)
     {
-        //
+        $this->op=$op;
+        $this->possible_ops = $possible_ops;
     }
 
     /**
@@ -25,7 +28,12 @@ class NOne implements Rule
      */
     public function passes($attribute, $value)
     {
-        //
+
+        if(in_array($this->op,$this->possible_ops)){
+            return true;
+            
+        }
+        return false;
     }
 
     /**
@@ -35,6 +43,6 @@ class NOne implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return trans('validation.custom.ninterval.operation');
     }
 }

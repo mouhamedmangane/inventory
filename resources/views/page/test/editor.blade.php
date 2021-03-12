@@ -75,8 +75,12 @@
           editor.getColumn('produit').addEventInput('change',function(e){
               //alert('bonjour');
               let dataValueProduit = editor.getColumn('produit').getDataCell(e.rowIndex);
-              let prix= dataValueProduit['prix'];
+              let prix= dataValueProduit['zzz'];
               editor.getColumn('prix').updateInput(e.rowIndex,prix);
+              let input = editor.getInput(e.rowIndex,'prix');
+              console.log(input);
+              input.min=prix;
+              input.max=prix;
 
           });
       });

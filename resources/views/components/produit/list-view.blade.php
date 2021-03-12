@@ -55,7 +55,16 @@
        idDivInfo="bas-left"
        selectName="myDataTableSelect"
        searchId='mySearch'
-       pageLength="3" />
+       pageLength="25"
+       idAlert="addProduitAlert"
+       groupBy="nom"
+       :actions="[
+            ['op'=>'Suppression','id'=>'remove_action_bar','url'=>'/testRemove','type'=>'action','canSelect'=>'*','confirm'=>true,'typeAlert'=>'modal'],
+            ['op'=>'Archivage','id'=>'achive_btn_id','url'=>'/testRemove','type'=>'action','canSelect'=>'*','confirm'=>true],
+            ['op'=>'Favoris','id'=>'favoris_btn_id','url'=>'/testRemove','type'=>'action','canSelect'=>'*','confirm'=>true],
+            ['op'=>'Modifier','id'=>'update_id_btn','url'=>'/produit','type'=>'link','canSelect'=>'1'],
+       ]"
+       />
 </div>
    
 @endsection

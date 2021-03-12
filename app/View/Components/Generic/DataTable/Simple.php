@@ -24,6 +24,15 @@ class Simple extends Component
         $this->searchId =$searchId;
     }
 
+    public function nameColumns(){
+        $names=[];
+        foreach($this->columns as $col){
+            $names[]=$col->propertyName;
+        }
+        return $names; 
+    }
+    
+
     /**
      * Get the view / contents that represent the component.
      *

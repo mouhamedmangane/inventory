@@ -7,15 +7,19 @@ use App\ViewModel\Filter\FilterMd;
 
 class Barlist extends Component
 {   
-    public $url,$filter;
+    public $url,
+           $filter,
+           $groupBy;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(FilterMd $filter=null)
+    public function __construct($groupBy, FilterMd $filter=null)
     {
         $this->filter=$filter;
+        $this->groupBy =$groupBy;
+        $this->groupBy =[];
     }
 
     /**
