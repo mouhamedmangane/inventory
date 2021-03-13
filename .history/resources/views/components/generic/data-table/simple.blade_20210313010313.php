@@ -97,7 +97,6 @@
             "pageLength": 20,
           @endif
           
-            
           "ajax":{
              "url":"{{ $url }}",
              @if($searchId && !empty($searchId))
@@ -119,8 +118,6 @@
                  "type":$('#{{ $attributes['idForm'] }}').attr('method'),
              @endif
           } ,
-
-
           "columns":[
             @if($attributes['selectName'])
                 { data:"select"} ,

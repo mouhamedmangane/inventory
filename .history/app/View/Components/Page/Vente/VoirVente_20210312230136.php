@@ -18,7 +18,7 @@ class VoirVente extends Component
         $this->vente=$vente;
         //
     }
- 
+
     /**
      * Get the view / contents that represent the component.
      *
@@ -66,13 +66,10 @@ class VoirVente extends Component
             return $ligneVentes->prixUnite;
         })
         ->addColumn('mtotal',function($ligneVentes){      
-            return $ligneVentes->prixUnite*$ligneVentes->quantiteDemande;;
+            return $ligneVentes->prixUnite;
         })
-        ->addColumn('reduction',function($ligneVentes){ 
-            if($ligneVentes->reduction_note)     
-                return $ligneVentes->reduction_note;
-            else 
-                return "Pas de reduction";
+        ->addColumn('reduction',function($ligneVentes){      
+            return $ligneVentes->reduction_note;
         })
         ;
     }

@@ -127,7 +127,6 @@ class VenteController extends Controller
                        $produit->qteStock-=$quantite;//decrémenté le stock
                        $produit->save();                       
                         $ligneVenteRecu= new LigneVenteRecu();
-                       // $ligneVenteRecu-> quantité et la quantité restant pour le produit
                         $montant+=$lv->prixUnite * $lv->quantiteDemande;
                    }  
 

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\GroupeProduit;
 use App\Models\LignePayementVentes;
-use App\Models\LigneVente;
-use App\Models\LigneVenteRecu;
 use App\Models\LigneVentes;
 use App\Models\Produit;
 use App\Models\Vente;
@@ -81,7 +79,7 @@ class VenteController extends Controller
             if($request->quantiteD){
                 for ($i=0; $i <count($request->produits) ; $i++) {
                     if($request->quantiteD[$i]<$request->quantiteR[$i]){
-                        
+                        echo'dddd';
                         $validator->errors()->add('quantiteD','La quantite Demande doit etre superieur à la quantité reçue ');
                     }
                  }
@@ -123,11 +121,10 @@ class VenteController extends Controller
                     $quantite=$lv->quantiteRecu; 
                     
                 
-                     if($lv->save()){
-                       $produit->qteStock-=$quantite;//decrémenté le stock
+                     if( $lv->save()){
+                       $produit->qteStock-=$quantite;
                        $produit->save();                       
-                        $ligneVenteRecu= new LigneVenteRecu();
-                       // $ligneVenteRecu-> quantité et la quantité restant pour le produit
+                     
                         $montant+=$lv->prixUnite * $lv->quantiteDemande;
                    }  
 

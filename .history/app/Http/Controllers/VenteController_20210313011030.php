@@ -6,7 +6,6 @@ use App\Models\Client;
 use App\Models\GroupeProduit;
 use App\Models\LignePayementVentes;
 use App\Models\LigneVente;
-use App\Models\LigneVenteRecu;
 use App\Models\LigneVentes;
 use App\Models\Produit;
 use App\Models\Vente;
@@ -126,8 +125,7 @@ class VenteController extends Controller
                      if($lv->save()){
                        $produit->qteStock-=$quantite;//decrémenté le stock
                        $produit->save();                       
-                        $ligneVenteRecu= new LigneVenteRecu();
-                       // $ligneVenteRecu-> quantité et la quantité restant pour le produit
+                        $ligneVenteR
                         $montant+=$lv->prixUnite * $lv->quantiteDemande;
                    }  
 

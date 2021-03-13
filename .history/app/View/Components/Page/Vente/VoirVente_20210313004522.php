@@ -67,12 +67,12 @@ class VoirVente extends Component
         })
         ->addColumn('mtotal',function($ligneVentes){      
             return $ligneVentes->prixUnite*$ligneVentes->quantiteDemande;;
-        })
+        })  if($ligneVentes->reduction_note)  
         ->addColumn('reduction',function($ligneVentes){ 
-            if($ligneVentes->reduction_note)     
+             
                 return $ligneVentes->reduction_note;
             else 
-                return "Pas de reduction";
+                return ""
         })
         ;
     }

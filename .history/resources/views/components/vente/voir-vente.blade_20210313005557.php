@@ -45,11 +45,11 @@
                   </x-generic.forms.form-table >
                </div>
             @endif
-            <div class="col-md-9 col-sm-12">
-               <x-generic.data-table.simple name="myDataTable" url="{{ url('/produit/data/') }}" :columns="$titre()"
+            {{-- <div class="col-md-9 col-sm-12">
+               <x-generic.data-table.simple name="myDataTable" url="" :columns="$titre()"
                idDivPaginate="bass-right" idDivInfo="bas-left" selectName="myDataTableSelect" searchId='mySearch'
                pageLength="10" />
-            </div>
+            </div> --}}
          </div> 
       </x-generic.navs-tabs.pane>
 

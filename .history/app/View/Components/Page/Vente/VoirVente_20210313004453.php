@@ -69,10 +69,8 @@ class VoirVente extends Component
             return $ligneVentes->prixUnite*$ligneVentes->quantiteDemande;;
         })
         ->addColumn('reduction',function($ligneVentes){ 
-            if($ligneVentes->reduction_note)     
-                return $ligneVentes->reduction_note;
-            else 
-                return "Pas de reduction";
+            if($ligneVentes->reduction_not)     
+            return $ligneVentes->reduction_note;
         })
         ;
     }

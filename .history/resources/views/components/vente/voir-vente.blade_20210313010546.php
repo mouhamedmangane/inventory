@@ -46,9 +46,9 @@
                </div>
             @endif
             <div class="col-md-9 col-sm-12">
-               <x-generic.data-table.simple name="myDataTable" url="{{ url('/produit/data/') }}" :columns="$titre()"
+               {{-- <x-generic.data-table.simple name="myDataTable" url="{{ url('/produit/data/') }}" :columns="$columns()"
                idDivPaginate="bass-right" idDivInfo="bas-left" selectName="myDataTableSelect" searchId='mySearch'
-               pageLength="10" />
+               pageLength="10" /> --}}
             </div>
          </div> 
       </x-generic.navs-tabs.pane>

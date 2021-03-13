@@ -4,6 +4,7 @@ namespace App\View\Components\Page\Vente;
 
 use Illuminate\View\Component;
 use DataTables;
+use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
 
 class VoirVente extends Component
 {
@@ -18,7 +19,7 @@ class VoirVente extends Component
         $this->vente=$vente;
         //
     }
- 
+    DataTables
     /**
      * Get the view / contents that represent the component.
      *
@@ -38,7 +39,7 @@ class VoirVente extends Component
     }
     public function ventes(){
         $ligneVentes=$this->vente->ligne_ventes();
-        $json = DataTables::of($ligneVentes)
+        $json = FacadesDataTables::of($ligneVentes)
         ->addColumn('image',function($ligneVentes){                
                 $srcImag='images/produits/'.$ligneVentes->produit->img;
                  if(!is_file($srcImag))    
@@ -68,11 +69,8 @@ class VoirVente extends Component
         ->addColumn('mtotal',function($ligneVentes){      
             return $ligneVentes->prixUnite*$ligneVentes->quantiteDemande;;
         })
-        ->addColumn('reduction',function($ligneVentes){ 
-            if($ligneVentes->reduction_note)     
-                return $ligneVentes->reduction_note;
-            else 
-                return "Pas de reduction";
+        ->addColumn('reduction',function($ligneVentes){      
+            return $ligneVentes->reduction_note;
         })
         ;
     }

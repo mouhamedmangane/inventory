@@ -18,7 +18,7 @@ class VoirVente extends Component
         $this->vente=$vente;
         //
     }
- 
+
     /**
      * Get the view / contents that represent the component.
      *
@@ -51,30 +51,23 @@ class VoirVente extends Component
                         >";
             })        
         ->addColumn('categorie',function($ligneVentes){      
-            return $ligneVentes->produit->groupe_produit->groupe_name;
-            })  
-        ->addColumn('produit',function($ligneVentes){      
-            return $ligneVentes->produit->libelle;
-            })
-        ->addColumn('quantiteD',function($ligneVentes){      
-            return $ligneVentes->quantiteDemande;
-        })
-        ->addColumn('quantiteR',function($ligneVentes){      
-            return $ligneVentes->quantiteRecu;
-        })
-        ->addColumn('prix',function($ligneVentes){      
-            return $ligneVentes->prixUnite;
-        })
-        ->addColumn('mtotal',function($ligneVentes){      
-            return $ligneVentes->prixUnite*$ligneVentes->quantiteDemande;;
-        })
-        ->addColumn('reduction',function($ligneVentes){ 
-            if($ligneVentes->reduction_note)     
-                return $ligneVentes->reduction_note;
-            else 
-                return "Pas de reduction";
-        })
-        ;
+            $classStyle = 'badge-success';
+            if($produit->qteStock <=0 && $produit->qteSeuil<=0){
+                return view('components.generic.bagde.simple')
+                ->with('name','')
+                ->with('classStyle','badge-danger')
+                ->with('unite','');
+            }
+            else if($produit->qteStock < $produit->qteSeuil) 
+                $classStyle = 'badge-danger';
+            else if($produit->qteStock == $produit->qteSeuil)
+                $classStyle = 'badge-warning';
+            
+            return view('components.generic.bagde.simple')
+                        ->with('name',$produit->qteStock.'  |  '.$produit->qteSeuil)
+                        ->with('classStyle',$classStyle)
+                        ->with('unite',$produit->unite);    
+        });
     }
     public function render()
     {

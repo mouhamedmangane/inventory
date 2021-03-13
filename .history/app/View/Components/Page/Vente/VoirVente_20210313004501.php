@@ -71,8 +71,6 @@ class VoirVente extends Component
         ->addColumn('reduction',function($ligneVentes){ 
             if($ligneVentes->reduction_note)     
                 return $ligneVentes->reduction_note;
-            else 
-                return "Pas de reduction";
         })
         ;
     }

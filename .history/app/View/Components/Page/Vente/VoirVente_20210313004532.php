@@ -72,9 +72,8 @@ class VoirVente extends Component
             if($ligneVentes->reduction_note)     
                 return $ligneVentes->reduction_note;
             else 
-                return "Pas de reduction";
-        })
-        ;
+                return ""
+        });
     }
     public function render()
     {

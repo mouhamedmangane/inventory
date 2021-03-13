@@ -18,7 +18,7 @@ class VoirVente extends Component
         $this->vente=$vente;
         //
     }
- 
+
     /**
      * Get the view / contents that represent the component.
      *
@@ -57,24 +57,8 @@ class VoirVente extends Component
             return $ligneVentes->produit->libelle;
             })
         ->addColumn('quantiteD',function($ligneVentes){      
-            return $ligneVentes->quantiteDemande;
-        })
-        ->addColumn('quantiteR',function($ligneVentes){      
-            return $ligneVentes->quantiteRecu;
-        })
-        ->addColumn('prix',function($ligneVentes){      
-            return $ligneVentes->prixUnite;
-        })
-        ->addColumn('mtotal',function($ligneVentes){      
-            return $ligneVentes->prixUnite*$ligneVentes->quantiteDemande;;
-        })
-        ->addColumn('reduction',function($ligneVentes){ 
-            if($ligneVentes->reduction_note)     
-                return $ligneVentes->reduction_note;
-            else 
-                return "Pas de reduction";
-        })
-        ;
+            return $ligneVentes->produit->groupe_produit->groupe_name;
+        });
     }
     public function render()
     {
