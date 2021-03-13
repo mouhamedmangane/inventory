@@ -43,7 +43,7 @@
             <x-generic.filters.filter :filter="$filter"/>
         @endif
         
-        @if($groupBy)
+        {{-- @if($groupBy)
         <div class="dropdown " >
             <button class="btn btn-sm d-flex align-items-center mr-3 dropdown-toggle"  type="button"  data-toggle="dropdown" >
                 <i class="material-icons-outlined " style="font-size:16px;">table_view</i>
@@ -55,7 +55,7 @@
                 @endforeach
             </div>
         </div>
-        @endif
+        @endif --}}
         
 
     </div>

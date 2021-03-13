@@ -19,7 +19,7 @@ $(function(){
     
     // Constantes
     $.fn.NplEditorTable.defaultClassTr ='npl-editor-tr';
-    $.fn.NplEditorTable.defaultClassTD ='npl-editor-td';
+    $.fn.NplEditorTable.defaultClassTd ='npl-editor-td';
     $.fn.NplEditorTable.defaultClassInput ='npl-editor-input';
     
 

@@ -16,7 +16,7 @@ class Table extends Component
     public function __construct($idTable,$columns,$dd=null)
     {
         $this->idTable = $idTable;
-        $this->columns = $this->getColumns();
+        $this->columns = $columns;
         $this->dd  =$dd;
     }
     public function getColumns(){

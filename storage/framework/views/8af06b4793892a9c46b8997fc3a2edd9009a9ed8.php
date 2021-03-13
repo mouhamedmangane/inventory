@@ -16,7 +16,7 @@
 <?php endif; ?> 
 </div>
 
-<?php if (! $__env->hasRenderedOnce('977efe2b-1ac1-463f-86db-d90310c73456')): $__env->markAsRenderedOnce('977efe2b-1ac1-463f-86db-d90310c73456'); ?>
+<?php if (! $__env->hasRenderedOnce('9ec21e5a-a36f-423f-b573-02208a5b0738')): $__env->markAsRenderedOnce('9ec21e5a-a36f-423f-b573-02208a5b0738'); ?>
     <?php $__env->startPush('script'); ?>
         <script type="text/javascript">
             $(document).ready(function()
@@ -24,7 +24,9 @@
                 $('#toggle-sidebar').on('click',function(){
                     $("#sidebar").toggleClass('sidebar-toggle');
                 });
+             
             }); 
+
         </script>
 
     <?php $__env->stopPush(); ?>

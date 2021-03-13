@@ -1,0 +1,2 @@
+
+    <x-page.produit.list/>

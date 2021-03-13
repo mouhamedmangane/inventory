@@ -9,6 +9,7 @@ class Simple extends Component
     public $name,//nom de la variable datatable dans le js
            $columns,
            $url,
+           $data,
            $searchId;
 
     /**
@@ -16,11 +17,12 @@ class Simple extends Component
      *
      * @return void
      */
-    public function __construct($name,$columns,$url="",$searchId="")
+    public function __construct($name,$columns,$url=null,$data=null,$searchId="")
     {
         $this->name = $name;
         $this->columns = $columns;
         $this->url = $url;
+        $this->data=$data;
         $this->searchId =$searchId;
     }
 
@@ -38,8 +40,7 @@ class Simple extends Component
      *
      * @return \Illuminate\Contracts\View\View|string
      */
-    public function render()
-    {
+    public function render(){
         return view('components.generic.data-table.simple');
     }
 }

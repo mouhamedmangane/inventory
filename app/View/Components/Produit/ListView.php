@@ -3,6 +3,7 @@
 namespace App\View\Components\Produit;
 
 use App\View\Components\ComponentWithId;
+use App\View\Components\Generic\Action;
 use App\ViewModel\Navs\NavModelFactory;
 use App\ViewModel\Filter\FilterFactory;
 
@@ -14,15 +15,34 @@ class ListView extends  ComponentWithId
     public $actionItems;
     public $filter;
 
+  //  public $data;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
+   // public function __construct($data="non_archived")
     public function __construct()
     {
+        //$this->data=$data;
         $this->selectTitreItems = $this->initSelectTitreItems();
-        $this->actionItems = $this->initActionItems();  
+        $this->actionItems = $this->initActionItems(); 
+         
+    }
+
+    public function columns(){
+        return [
+            (object)  ['name'=>'Image','propertyName'=>'image'],
+            (object)  ['name'=>'Code Produit','propertyName'=>'code'],
+            (object)  ['name'=>'Libelle','propertyName'=>'libelle'], 
+            (object)  ['name'=>'Categorie','propertyName'=>'categorie'],
+            (object)  ['name'=>'Stock|Seuil','propertyName'=>'seuilstock'],
+            (object)  ['name'=>'Prix Vente','propertyName'=>'prixVente'],
+            (object)  ['name'=>'Prix Achat','propertyName'=>'prixAchat','visible'=>false],
+            (object)  ['name'=>'Référence Interne ','propertyName'=>'rI','visible'=>false],
+            (object)  ['name'=>'Fournisseur ','propertyName'=>'fournisseur','visible'=>false],
+        ];
     }
 
     public function getFilter(){

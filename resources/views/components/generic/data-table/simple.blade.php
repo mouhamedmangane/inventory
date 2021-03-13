@@ -12,6 +12,13 @@
 
 
 
+
+@if ($attributes['selectName'])
+    @props(['init'=> 1 ])  
+@else
+    @props(['init'=> 0])
+@endif
+
 <div class="position-relative">
 
 
@@ -133,6 +140,7 @@
           @endif
 
           //ajax
+          @if($url)
           "ajax":{
              "url":"{{ $url }}",
              @if($searchId && !empty($searchId))
@@ -155,6 +163,9 @@
                  "type":$('#{{ $attributes['idForm'] }}').attr('method'),
              @endif
           } ,
+          @else
+            data:@json($data),
+          @endif
           
           //columns   
           "columns":[
@@ -298,7 +309,7 @@
         // cacher certain colonne
         @foreach($columns as $key=>$column)
             @if(isset($column->visible) && !$column->visible)
-            {{ $name }}.column({{ $key }}).visible(false);
+                {{ $name }}.column({{ $key+ $init }}).visible(false);
             @endif
         @endforeach
 

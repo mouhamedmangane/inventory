@@ -553,6 +553,31 @@ a, a:hover, a:focus {
     background: #2e373c;
 }
 
+    /* TODO NPL EDITOR TABLE
+|------------------------------------------------------------------------------
+|    
+|
+|                 NPL EDITOR TABLE
+|
+|-------------------------------------------------------------------------------
+*/
+.npl-editor-td{
+    font-size: 12px;
+}
+
+.npl-editor-input {
+    font-size: 12px!important;
+}
+.npl-editor-td select{
+    font-size: 12px!important;
+}
+
+.npl-editor-td-md{
+    max-width: 140px;
+}
+.npl-editor-td-sm{
+    max-width: 100px;
+}
 
 
 

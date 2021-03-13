@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\AjustementController;
+use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\VenteController;
+use App\Models\Ajustement;
 use Illuminate\Support\Facades\Route;
-use App\Http\Crontollers\NewProductController;
 use Illuminate\Http\Request;
 use App\Rules\Ninterval;
 
@@ -24,30 +27,28 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+
+
 // Produit
-Route::get('produit/create', function () {
+
+Route::get('produit/create', [ProduitController::class, 'create']);
+
+Route::get('produit/produit', function () {
     return view('page.produit.create');
 });
-Route::get('produit/list', function () {
-    return view('page.produit.list');
+
+Route::get('produit/ajustements/create',[AjustementController::class,'create' ]);
+
+Route::get('produit/list/', [ProduitController::class,'index']);
+Route::post('produit/save',[ProduitController::class,'store'])->name('produit.save');
+
+Route::get('produit/data/', [ProduitController::class, 'returnData']);
+Route::post('produit/newProd', function(){
+    return view('components.produit.new-product');
 });
 
-Route::get('/newProduct', [NewProductController::class]);
+Route::get('produit/{id}/update', [ProduitController::class,'update']);
 
-Route::post('produit/test', function(Request $request){
-
-    return response()->json([
-
-            "status"=>true,
-            "message"=>"Saisie Incorrent veillee mettre des donnees valide",
-            'errors'=>[
-                ['name'=> 'nom','message'=>'ce invalide'],
-                ['name'=> 'reference','message'=>'ce invalide'],
-                ['name'=> 'type','message'=>'ce invalide'],
-            
-        ]
-    ]);
-});
 
 // test datatable
 Route::get('produit/testDataTable', function(Request $request){
@@ -79,6 +80,11 @@ Route::get('produit/testDataTable', function(Request $request){
 Route::get('/editorTable', function(Request $request){
     return view('page.test.editor');
 });
+
+Route::get('produit/categorie/{id}',[ProduitController::class,'getProducts']);
+Route::get('produit/unite/{id}',[ProduitController::class,'getUnit']);
+Route::get('produit/modif/{id}',[ProduitController::class,'update']);
+
 Route::get('/test/categorie/{id}', function(Request $request){
     $json=[];
     $json['status']=true;
@@ -99,5 +105,11 @@ Route::get('/test2/{type}', function(Request $request,$type){
 });
 
 
+
+
+Route::post('vente/save',  [VenteController::class,'store']);
+Route::get('vente/{id}/view', [VenteController::class,'show']);
+Route::get('vente/new',[VenteController::class,'create']);
+Route::get('venteProduit/categorie/{id}',[VenteController::class,'getProducts']);
 
 require __DIR__.'/auth.php';
