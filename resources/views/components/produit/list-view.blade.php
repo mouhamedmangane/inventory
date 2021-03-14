@@ -8,7 +8,13 @@
 
 
 @section('ly-toolbar')
-    <x-generic.tool-bar.barlist :filter="$getFilter()" />
+    <x-generic.tool-bar.bar >
+        <x-generic.tool-bar.link id="nouveau_prod_tb" text="Nouveau" icon="add" url="/produit/new" evidence="btn-primary" />
+        <x-generic.tool-bar.button id="modifier_prod_tb" text="Modifier" icon="edit"  disabled="disabled" />
+        <x-generic.tool-bar.button id="supprimer_prod_tb" text="Supprimer" icon="delete"  disabled="disabled" />
+        <x-generic.tool-bar.divider/>
+        <x-generic.tool-bar.button id="imprimer_prod_tb" text="Imprimer" icon="print"  />
+    </x-generic.tool-bar.bar>
 @endsection
 
 
@@ -47,9 +53,11 @@
 
 @section('ly-main-content')
     <div class=" pt-2">
-        <x-generic.data-table.simple name="myDataTable" url="{{ url('/produit/data/') }}" :columns="$columns()"
-            idDivPaginate="bass-right" idDivInfo="bas-left" selectName="myDataTableSelect" searchId='mySearch'
-            pageLength="10" />
+        <x-generic.data-table.simple 
+            name="myDataTable" url="{{ url('/produit/data/') }}" :columns="$columns()"
+            idDivPaginate="bass-right" idDivInfo="bas-left" pageLength="10"
+            selectName="myDataTableSelect" searchId='mySearch'
+            />
     </div>
 
 @endsection

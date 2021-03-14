@@ -1,5 +1,6 @@
 <div class="toolbar d-flex align-items-center pl-3 border-bottom" >
     <div class="d-flex">
+        {{ $slot }}
         <button class="btn btn-sm btn-primary d-flex align-items-center  mr-3" >
             <i class="material-icons-outlined " style="font-size:16px;">add</i>
             <span class="ml-1"> Nouveau</span>       
@@ -43,19 +44,7 @@
             <x-generic.filters.filter :filter="$filter"/>
         @endif
         
-        {{-- @if($groupBy)
-        <div class="dropdown " >
-            <button class="btn btn-sm d-flex align-items-center mr-3 dropdown-toggle"  type="button"  data-toggle="dropdown" >
-                <i class="material-icons-outlined " style="font-size:16px;">table_view</i>
-                <span class="ml-1"> Regrouper Par</span>       
-            </button>
-            <div class="dropdown-menu "  >
-                @foreach($groupBy as $key => $value)
-                    <a class="dropdown-item">{{ $value }}<a>
-                @endforeach
-            </div>
-        </div>
-        @endif --}}
+        
         
 
     </div>
