@@ -51,6 +51,30 @@ Route::get('produit/{id}/update', [ProduitController::class,'update']);
 
 
 // test datatable
+Route::get('produit/testDataTable', function(Request $request){
+    $messages="";
+    $data_validation= Validator::make($request->all(),[
+        'prix'=>[new Ninterval(Ninterval::NUMBER) ]
+    ]);
+    if($data_validation->fails()){
+        $messages = $data_validation->messages();
+    }
+    return response()->json([
+
+            "status"=>true,
+            "message"=> "Saisie Incorrent veillee mettre des donnees valide",
+            "validation"=> $messages,
+            "request"=>$request->all(),
+            'data'=>[
+                (object)['id'=> 1,'prenom'=> 'boubou','nom'=>'ce invalide','age'=>15],
+                (object)['id'=> 2,'prenom'=> 'boubou','nom'=>'Livre','age'=>41],
+                (object)['id'=> 6,'prenom'=> 'asee','nom'=>'Livre','age'=>441],
+                (object)['id'=> 3,'prenom'=> 'boubou','nom'=>'koro','age'=>78],
+                (object)['id'=> 4,'prenom'=> 'boubou','nom'=>'TeBA','age'=>45]
+            
+        ]
+    ]);
+});
 
 //Editor Table by Noppal
 Route::get('/editorTable', function(Request $request){

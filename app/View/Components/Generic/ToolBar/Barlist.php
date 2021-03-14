@@ -7,7 +7,8 @@ use App\ViewModel\Filter\FilterMd;
 
 class Barlist extends Component
 {   
-    public $url,$filter;
+    public $url,
+           $filter;
     /**
      * Create a new component instance.
      *

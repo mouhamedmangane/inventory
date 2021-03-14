@@ -55,7 +55,7 @@ $(function(){
         $(idContentAlert).html(message);
         $(idContentAlert).addClass(typeClass);
         $(idContentAlert).fadeIn();
-        if(fade!=1){
+        if(fade!=0){
             $(idContentAlert).delay(fade*2000).fadeOut(500);
         }
 

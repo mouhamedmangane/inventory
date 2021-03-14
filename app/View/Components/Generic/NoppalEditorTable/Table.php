@@ -34,10 +34,10 @@ class Table extends Component
                     ->setData([
                         
                             'ct1'=>[
-                                (object)['value'=>'1','text'=>'premier','prix'=>50],
-                                (object)['value'=>'2','text'=>'deuxieme','prix'=>56],
-                                (object)['value'=>'3','text'=>'troisime','prix'=>570],
-                                (object)['value'=>'4','text'=>'quatriéme','prix'=>80]
+                                (object)['value'=>'1','text'=>'premier','zzz'=>[]],
+                                (object)['value'=>'2','text'=>'deuxieme','zzz'=>56],
+                                (object)['value'=>'3','text'=>'troisime','zzz'=>570],
+                                (object)['value'=>'4','text'=>'quatriéme','zzz'=>80]
                             ],
                            'ct2'=>[
                               (object)['value'=>'5','text'=>'cinq'],
