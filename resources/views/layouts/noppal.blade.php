@@ -14,6 +14,8 @@
         <link rel="stylesheet" href="{{ URL::asset('plugin/bootstrap441/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ URL::asset('dist/css/components.css') }}">
         <link rel="stylesheet" href="{{ URL::asset('dist/css/style.css') }}">
+        {{-- <link rel="stylesheet" href="{{ URL::asset('css/table-fixed.css') }}"> --}}
+
         <style>
             body {
                 font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;

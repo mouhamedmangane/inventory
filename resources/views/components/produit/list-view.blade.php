@@ -1,4 +1,4 @@
-@extends('layouts.ly')
+@extends('layouts.ly-list')
 
 
 @section('header')
@@ -14,6 +14,11 @@
         <x-generic.tool-bar.button id="supprimer_prod_tb" text="Supprimer" icon="delete"  disabled="disabled" />
         <x-generic.tool-bar.divider/>
         <x-generic.tool-bar.button id="imprimer_prod_tb" text="Imprimer" icon="print"  />
+        <x-generic.tool-bar.button id="archiver_prod_tb" text="Archiver" icon="archive" disabled="disabled" />
+        <x-generic.tool-bar.button id="favoris_prod_tb" text="Favoris" icon="grade"  disabled="disabled" />
+        <x-generic.filters.filter :filter="$getFilter()"/>
+        <x-generic.data-table.group-by-btn id="groupby_prod_tb"  label="Grouper Par" idDataTable="myDataTable"
+                                           :dt="['categorie'=>'categorie','fournisseur'=>'Fournisseur']" defaultSelected=''  />
     </x-generic.tool-bar.bar>
 @endsection
 
@@ -40,7 +45,7 @@
             @endif
             
         </div>
-            <x-generic.links.select-link contentCible="my-main" value="test1" class="mx-2"
+            <x-generic.links.select-link contentCible="my-main" value="test1" class="mx-2" 
                 :dt="['/produit/data/'=>'Mes Produits','/produit/list/non_archived'=>'Produit Composés','/produit/list/archived'=>'Produits Archivés','/test2'=>'Produit  Vendable']" />
 
      </div>
@@ -52,13 +57,25 @@
 
 
 @section('ly-main-content')
-    <div class=" pt-2">
+    
         <x-generic.data-table.simple 
+            class="ly-list-table table-fixed"
+            scrollY="100"
             name="myDataTable" url="{{ url('/produit/data/') }}" :columns="$columns()"
             idDivPaginate="bass-right" idDivInfo="bas-left" pageLength="10"
             selectName="myDataTableSelect" searchId='mySearch'
+            pageLength="25"
+            idAlert="addProduitAlert"
+            groupByEnable="true"
+            {{-- groupBy="categorie" --}}
+            :actions="[
+                ['op'=>'Suppression','id'=>'supprimer_prod_tb','url'=>'/testRemove','type'=>'action','canSelect'=>'*','confirm'=>true,'typeAlert'=>'modal'],
+                ['op'=>'Archivage','id'=>'archiver_prod_tb','url'=>'/testRemove','type'=>'action','canSelect'=>'*','confirm'=>true],
+                ['op'=>'Favoris','id'=>'favoris_btn_id','url'=>'/testRemove','type'=>'action','canSelect'=>'*','confirm'=>true],
+                ['op'=>'Modifier','id'=>'modifier_prod_tb','url'=>'/produit','type'=>'link','canSelect'=>'1'],
+            ]"
             />
-    </div>
+ 
 
 @endsection
 

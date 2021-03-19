@@ -1,4 +1,4 @@
-<button class="btn btn-sm {{ $attributes['evidence'] }} d-flex align-items-center  mr-3 {{ $attributes['class'] }}" 
+<button class=" btn btn-sm {{ $attributes['evidence'] }} d-flex align-items-center  mr-3 {{ $attributes['class'] }}" 
         id="{{ $id }}" 
         @if($attributes['disabled']) disabled="{{ $attributes['disabled'] }}" @endif>
     @if($attributes['icon'])

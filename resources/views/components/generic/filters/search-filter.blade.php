@@ -1,23 +1,24 @@
 @props(['idInput'=>App\ViewModel\GenId::newId()])
-<form class="search-filter scrollable no-scrollbar  n-col-sm-12 flex-wrap-sm overflow-sm-hidden "   
-      style="overflow-x: auto!important;" id="{{ $id }}" >
+
+<button type="button" class="btn-scroll btn-scroll-left  btn btn-primary btn-default btn-sm px-0"><</button>
+<form class="position-relative search-filter scrollable no-scrollbar  n-col-sm-12 flex-wrap-sm overflow-sm-hidden border px-1 rounded "   
+      style="overflow-x: auto!important;padding-right:20px;"  >
     
-    <div  id="{{ $id }}" class="d-flex align-items-center flex-grow-1 idSearch n-col-sm-12 flex-wrap-sm ">
+    <div  id="{{ $id }}" class="d-flex align-items-center flex-grow-1 idSearch n-col-sm-12 flex-wrap-sm  ">
 
     </div>
     
-    <div class="position-relative n-col-sm-12" style="order:2;">
+    <div class=" position-relative n-col-sm-12" style="order:2;">
         <input type="text" name="{{ $name }}" 
-                class="form-control flex-grow-1  search-input  n-max-width-sm-content search-search" 
+                class="form-control flex-grow-1  search-input  n-max-width-sm-content search-search border-0" 
                 placeholder="Rechercher" id="{{ $idInput }}">
         <i class="material-icons text-muted position-absolute" style="top:6px;right: 10px;color:#dee2e6;">search</i>
+
     </div>
 </form>
-<span class="ml-1"></span>
-<button type="button" class="btn-scroll btn-scroll-left  btn btn-primary btn-default btn-sm px-0 mx-1" 
-style="max-width: 15px;min-width: 15px; position:ab"><</button>
-<button type="button" class="btn-scroll btn-scroll-right btn btn-primary btn-default btn-sm px-0 mx-1" 
-style="max-width: 15px;min-width: 15px;">></button>
+{{-- <span class="ml-1"></span> --}}
+
+<button type="button" class="btn-scroll btn-scroll-right btn btn-primary btn-default btn-sm px-0">></button>
 
 
 @once
@@ -25,10 +26,9 @@ style="max-width: 15px;min-width: 15px;">></button>
 <script>
 $(function(){
     let timeout = null;
-  
+    
     $(".btn-scroll").hide();
     $(".idSearch").on("n-resize",function(){
-        
         console.log($(this).parent()[0].scrollWidth);
         console.log($(this).parent()[0].offsetWidth);
         if($(this).parent()[0].scrollWidth > $(this).parent()[0].offsetWidth){

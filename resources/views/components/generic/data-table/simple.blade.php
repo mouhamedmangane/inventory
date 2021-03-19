@@ -19,11 +19,11 @@
     @props(['init'=> 0])
 @endif
 
+
 <div class="position-relative">
 
-
-    <table class="dataTable-simple table table-borderless w-100 {{ $attributes['class'] }}" id="{{ $name }}">
-        <thead class="dataTable-simple-head border-bottom">
+    <table class="dataTable-simple table table-borderless w-100  {{ $attributes['class'] }}" id="{{ $name }}">
+        <thead class="dataTable-simple-head table-head-border border-bottom border-top shadow bg-green py-2">
             {{-- si selectionnable --}}
             @if ($attributes["selectName"])
                 <th>
@@ -67,7 +67,7 @@
                             value="{{ $key }}"
                            class="dataTable-simple-visible-check"
                            @if (isset($column->visible) && !$column->visible)
-                            checked="false"
+                            
                            @else
                            checked="true"
                            @endif>
@@ -80,8 +80,8 @@
         </div>
     </div>
 
-                
-</div>
+</div>               
+
 
 <x-generic.modal.optional-confirm />
 <x-generic.modal.optional-alert />
@@ -118,7 +118,7 @@
 
 
         // Pour RowGroup
-        @if($attributes['groupBy'])
+        @if($attributes['groupByEnable'])
             var collapsedGroups = {};//  enregistre les group masquer
             let defaultCollapse=true; // designe si les group sont masquer les du premier affichage 
             var checkedGroups = {}; // enregistre les groups qui son coché
@@ -130,6 +130,11 @@
 
         //le datatable
         let {{ $name }} = $('#{{ $name }}').DataTable({
+            @if($attributes['scrollY'])
+                scrollResize: true,
+                scrollY: 100,
+                scrollCollapse: true,
+            @endif
           //le dom
           "dom": @if($attributes['dom']) '{{ $attributes['dom'] }}' @else 'tip' @endif,
 
@@ -201,11 +206,18 @@
 
           },
           
-          // rowGroup   
-          @if($attributes['groupBy'])
-          orderFixed: [[names.indexOf("{{ $attributes['groupBy'] }}"), 'asc']],
+          // rowGroup  
+          @if($attributes['groupByEnable']) 
+            @if($attributes['groupBy'])
+                orderFixed: [[names.indexOf("{{ $attributes['groupBy'] }}"), 'asc']],
+            @endif
           rowGroup: {
-                dataSrc: "{{ $attributes['groupBy'] }}",
+                 @if($attributes['groupBy'])
+                    dataSrc: "{{ $attributes['groupBy'] }}",
+                 @else
+                    enable: false,
+                 @endif
+                
                 startRender: function (rows, group) {
                     var collapsed = !!collapsedGroups[group];
                     if(defaultCollapse){
@@ -243,8 +255,10 @@
                         if(collapsed)
                             $(r).addClass('collapsed');
                         let check=$(r).find('.dataTable-simple-selectItem');
+                        //check.css('margin-left','10px');
                         if(checked){
                             check.prop("checked",checked);
+                            
                         }
                         $(check).on('change',function(){
                             let count=0;
@@ -270,9 +284,25 @@
 
                     
                     let td=document.createElement('td');
+                    let div=document.createElement('div');
+                    let divLeft=document.createElement('div');
+                    let divRight=document.createElement('div');
+                    let triangle=document.createElement('span');
+                    
+                    divLeft.appendChild(checkbox);
+                    divLeft.appendChild(document.createTextNode(group + ' (' + rows.count() + ')'));
+                    if(collapsed){
+                        triangle.innerHTML="&#9654;";	
+                    }
+                    else{
+                        triangle.innerHTML="&#9660;";
+                    }
+                    divRight.appendChild(triangle); 
+                    div.className="d-flex justify-content-between"
+                    div.appendChild(divLeft);
+                    div.appendChild(divRight);
                     td.colSpan='8';
-                    td.appendChild(checkbox);
-                    td.appendChild(document.createTextNode(group + ' (' + rows.count() + ')'));
+                    td.appendChild(div);
                     return $('<tr/>')
                         .append(td)
                         .attr('data-name', group)
@@ -284,7 +314,7 @@
         });
 
         //ROWGROUP
-        @if($attributes['groupBy'])
+        @if($attributes['groupByEnable'])
         // Lors d'une clique sur un group
         $("#{{ $name }} tbody").on('click', 'tr.dtrg-start,checkbox-group-dt', function (e) {
             if(e.target.type=='checkbox'){
@@ -299,11 +329,17 @@
         });
         //lors d'un changement du dataSrc du rowGroup
         {{ $name }}.on( 'rowgroup-datasrc', function ( e, dt, val ) {
+            disabledAllActions(true);
+            collapsedGroups = {};
+            defaultCollapse=true;
+            checkedGroups = {};
             let index=names.indexOf(val);
             {{ $name }}.order.fixed( {pre: [[ index, 'asc' ]]} ).draw();
+            defaultCollapse=false;
         } );
-        {{ $name }}.rowGroup().dataSrc('prenom');
-
+            // {{ $name }}.rowGroup().enable().draw();
+            // {{ $name }}.rowGroup().dataSrc('categorie');
+        
         @endif
 
         // cacher certain colonne
@@ -329,6 +365,7 @@
                     $('#'+action.id).prop('disabled',masque); 
                 }
             }
+
         }
         //activation/desactivation de tous les buttons d'actions 
         function disabledAllActions(masque){
@@ -418,6 +455,7 @@
                     success: function (response) {
                         if(response.status){
                             alerter(btn_data,'Operation effectuée '+btn_data.op,message,true);
+                            disabledAllActions(false);
                         }
                         else{
                             alerter(btn_data,'Echec Opération '+btn_data.op,message,false);
