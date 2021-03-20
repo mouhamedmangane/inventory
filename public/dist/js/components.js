@@ -117,7 +117,8 @@ $(function(){
                 +textHtml+
                 "</div> " 
              );
-             $(idSearch).trigger('n-resize');
+        console.log(idSearch); 
+        $(idSearch).trigger('n-resize');
         $('#'+idElement).find(".search-item-close").bind('click',function(){
                 if(!class_name.length){
                     console.log(idChecks+" ");

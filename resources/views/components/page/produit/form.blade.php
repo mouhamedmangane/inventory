@@ -1,6 +1,17 @@
 @extends('layouts.ly')
 @section('ly-toolbar')
-    <x-generic.tool-bar.bar/>
+    <x-generic.tool-bar.bar >
+        <x-generic.input.button-submit  id="test-button-submit"
+                                        idForm="addProduct"
+                                        idContentAlert="addProduitAlert"
+                                        class="btn btn-primary btn-sm d-flex align-items-center"
+                                        text="Enregistrer"
+                                        isReset="true"                                       
+                                        {{-- hrefId="/produit/list" --}}
+                                        parentMessageClass="n-form-table-col-input"
+                                        elementMessageClass="form-table-feedback"
+                                        icon="save"/>
+    </x-generic.tool-bar.bar >
 @endsection
 
 @section('ly-alert')
