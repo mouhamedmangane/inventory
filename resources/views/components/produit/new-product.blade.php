@@ -19,7 +19,7 @@
                         <x-slot name="label">
                             <x-generic.forms.form-table-label  labelText="Image" :required="false" />
                         </x-slot>
-                        <x-generic.input.photo id="photo" name="photo" url="" x="250" y="150"/>
+                        <x-generic.input.photo id="photo" name="photo" url="" x="150" y="150"/>
                      </x-generic.forms.form-table-line>
                 </div>
                 <div class="col-md-8 col-sm-12 " >

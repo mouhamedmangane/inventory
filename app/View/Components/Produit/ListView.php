@@ -33,15 +33,16 @@ class ListView extends  ComponentWithId
 
     public function columns(){
         return [
-            (object)  ['name'=>'Image','propertyName'=>'image'],
-            (object)  ['name'=>'Code Produit','propertyName'=>'code'],
-            (object)  ['name'=>'Libelle','propertyName'=>'libelle'], 
-            (object)  ['name'=>'Categorie','propertyName'=>'categorie'],
-            (object)  ['name'=>'Stock|Seuil','propertyName'=>'seuilstock'],
-            (object)  ['name'=>'Prix Vente','propertyName'=>'prixVente'],
-            (object)  ['name'=>'Prix Achat','propertyName'=>'prixAchat','visible'=>false],
-            (object)  ['name'=>'Référence Interne ','propertyName'=>'rI','visible'=>false],
-            (object)  ['name'=>'Fournisseur ','propertyName'=>'fournisseur','visible'=>false],
+            (object)  ['name'=>'Image','propertyName'=>'image','taille'=>"75px","classStyle"=>""],
+            (object)  ['name'=>'Code ','propertyName'=>'code','taille'=>"75px","classStyle"=>""],
+            (object)  ['name'=>'Libelle','propertyName'=>'libelle',"classStyle"=>""], 
+            (object)  ['name'=>'Categorie','propertyName'=>'categorie',"classStyle"=>""],
+            (object)  ['name'=>'S. Stock','propertyName'=>'status_stock',"classStyle"=>"dt-col-1 text-align-center"],
+            (object)  ['name'=>'Stock / Seuil','propertyName'=>'seuilstock',"classStyle"=>"dt-col-1 text-align-center"],
+            (object)  ['name'=>'Prix Vente','propertyName'=>'prixVente',"classStyle"=>"dt-col-3"],
+            (object)  ['name'=>'Prix Achat','propertyName'=>'prixAchat','visible'=>false,"classStyle"=>""],
+            (object)  ['name'=>'Référence Interne ','propertyName'=>'rI','visible'=>false,"classStyle"=>""],
+            (object)  ['name'=>'Fournisseur ','propertyName'=>'fournisseur','visible'=>false,"classStyle"=>""],
         ];
     }
 

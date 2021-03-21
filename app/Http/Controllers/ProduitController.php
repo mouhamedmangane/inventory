@@ -44,24 +44,31 @@ class ProduitController extends Controller
            $status=true;
 
          $json = DataTables::of($produits)
-            ->addColumn('seuilstock',function($produit){               
-                $classStyle = 'badge-success';
+            ->addColumn('libelle',function($produit){    
+               return "<a href='".url("produit/".$produit->id)."' class='lien-sp ft-14px '>".$produit->libelle."</a>";
+            }) 
+            ->addColumn('seuilstock',function($produit){    
+                return view('components.generic.bagde.compare')
+                            ->with('text1',$produit->qteStock)
+                            ->with('text2',$produit->qteSeuil)
+                            ->with('separateur','/');
+            })    
+            ->addColumn('status_stock',function($produit){               
+                $classStyle = 'bg-success';
                 if($produit->qteStock <=0 && $produit->qteSeuil<=0){
                     return view('components.generic.bagde.simple')
                     ->with('name','')
-                    ->with('classStyle','badge-danger')
-                    ->with('unite','');
+                    ->with('classStyle','bg-danger');
                 }
                 else if($produit->qteStock < $produit->qteSeuil) 
-                    $classStyle = 'badge-danger';
+                    $classStyle = 'bg-danger';
                 else if($produit->qteStock == $produit->qteSeuil)
-                    $classStyle = 'badge-warning';
+                    $classStyle = 'bg-warning';
                 
                 return view('components.generic.bagde.simple')
-                            ->with('name',$produit->qteStock.'  |  '.$produit->qteSeuil)
-                            ->with('classStyle',$classStyle)
-                            ->with('unite',$produit->unite);
-            })           
+                            ->with('name','')
+                            ->with('classStyle',$classStyle);
+            })          
             ->addColumn('categorie',function($produit){                
                 $categorie = GroupeProduit::find($produit->groupe_produit_id);
                 return $categorie->groupe_name;

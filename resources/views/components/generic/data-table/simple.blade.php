@@ -22,8 +22,8 @@
 
 <div class="position-relative">
 
-    <table class="dataTable-simple table table-borderless w-100  {{ $attributes['class'] }}" id="{{ $name }}">
-        <thead class="dataTable-simple-head table-head-border border-bottom border-top shadow bg-green py-2">
+    <table class="dataTable-simple table table-borderless w-100 table-hover  {{ $attributes['class'] }}" id="{{ $name }}">
+        <thead class="dataTable-simple-head  py-2 ">
             {{-- si selectionnable --}}
             @if ($attributes["selectName"])
                 <th>
@@ -32,7 +32,7 @@
             @endif
             {{-- les autres titres --}}
             @foreach ($columns as $column)
-                <th class="@if ($loop->last) dataTable-simple-th-end  @endif">
+                <th class="@if ($loop->last) dataTable-simple-th-end  @endif @isset($column->classStyleHead) {{ $column->classStyleHead }} @endisset">
                     {{ $column->name }}
                     @if (isset($column->badge))
                         <span class="bagde {{ $column->badge->styleClass }}"> {{ $column->badge->value }}</span>
@@ -180,6 +180,24 @@
             @foreach($columns as $column)
                 { data:"{{ $column->propertyName }}",name: "{{ $column->propertyName }}"},
             @endforeach
+          ],
+
+          //scolumnDef
+          "columnDefs": [
+                @isset($attributes['selectName'] )  
+                    {'targets':[0],'width':'50px;','className':'valign-center'},
+                @endisset
+                @foreach($columns as $key => $column)
+                   { 
+                       "targets": [ @isset($attributes['selectName'] ) {{ $key+1 }} @else {{ $key }} @endisset   ],
+                       @isset($column->classStyle)
+                           className: "{{ $column->classStyle }} valign-center",
+                       @endisset
+                       @isset($column->taille)
+                           width: "{{ $column->taille }};",
+                       @endisset
+                   },
+                @endforeach
           ],
 
           //initComplete

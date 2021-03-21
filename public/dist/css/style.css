@@ -59,8 +59,8 @@ body {
 .decaler-a-droit-1{
     margin-left:15px;
 }
-.dataTable-simple-head > .tr{
-  border-bottom: 1px solid #dee2e6!important;
+.dataTables_scrollHeadInner .dataTable-simple-head{
+  border-bottom: 1px solid #dee2e6!important; 
   border-top: 1px solid #dee2e6!important;
 
   
@@ -72,7 +72,39 @@ body {
   background-color: white!important;
   border-top: 1px solid #dee2e6!important;
 }
+.dt-col-1{
+  max-width: 25px;
+}
+.dt-col-2{
+  max-width: 50px;
+}
+.dt-col-3{
+  max-width: 75px;
+}
+.dt-col-4{
+  max-width: 100px;
+}
+.dt-col-5{
+  max-width: 125px!important;
+  min-width: 125px!important;
+}
+.dt-col-6{
+  max-width: 150px!important;
+  min-width: 150px!important;
+}
+.dt-col-7{
+  max-width: 175px;
+}
+.dt-col-8{
+  max-width: 200px;
+}
+.dt-col-9{
+  max-width: 250px;
+}
 
+.valign-center{
+  vertical-align: middle!important;
+}
 
 /* TODO Flex
 |------------------------------------------------------------------------------
@@ -110,7 +142,9 @@ body {
 .text-normal{
     font-size: 1.em;
 }
-
+.text-align-center{
+  text-align: center;
+}
 
 /* TODO Lien */
 a > i,  a > span{
@@ -130,6 +164,10 @@ a, a:hover, a:focus {
     color:var(--primary);
     text-decoration: underline;
 }
+.ft-14{
+  font-size: 14px;
+}
+
 
 /* TODO form et input
 |------------------------------------------------------------------------------
@@ -344,10 +382,10 @@ a, a:hover, a:focus {
 }
 .input-img{
     position:absolute;
-    top:10px;
-    left:10px;
-    width:calc(100% - 20px);
-    height:calc(100% - 20px);
+    top:0px;
+    left:0px;
+    width:calc(100%);
+    height:calc(100%);
 }
 .input-img-action{
     position:absolute;
