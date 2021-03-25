@@ -1,3 +1,5 @@
-<div>
-    <!-- Well begun is half done. - Aristotle -->
-</div>
+<form action="" method="post">
+    @csrf
+    
+
+</form>

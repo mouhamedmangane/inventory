@@ -1,6 +1,6 @@
-@extends('layouts.noppal')
 
-@section('content')
+
+
     <div class="ly-toolbar">
         @yield('ly-toolbar')
     </div>
@@ -21,4 +21,4 @@
             </div>
         </div>
     </div>
-@endsection
+

@@ -1,0 +1,2 @@
+
+    <x-page.vente.liste/>

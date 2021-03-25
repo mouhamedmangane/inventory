@@ -24,7 +24,9 @@
     </head>
    
     <body>
-        @yield('header')
+
+        @yield('head')
+
         <div class="r-bar"></div>
         
         <div class="wrapper">

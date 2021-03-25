@@ -1,6 +1,6 @@
 <?php
 namespace App\Constante\ParamCompte;
-
+use App\ViewModel\Navs\NavModelFactory;
 
 class SidebarData{
     

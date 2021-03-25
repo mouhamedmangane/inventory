@@ -1,4 +1,3 @@
-@extends('layouts.noppal')
 
 @section('content')
     <div class="ly-toolbar">

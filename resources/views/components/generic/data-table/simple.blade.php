@@ -319,7 +319,7 @@
                     div.className="d-flex justify-content-between"
                     div.appendChild(divLeft);
                     div.appendChild(divRight);
-                    td.colSpan='8';
+                    td.colSpan='{{count($columns)+1}}';
                     td.appendChild(div);
                     return $('<tr/>')
                         .append(td)

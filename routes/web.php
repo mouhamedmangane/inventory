@@ -1,12 +1,14 @@
 <?php
 
-use App\Http\Controllers\AjustementController;
-use App\Http\Controllers\ProduitController;
-use App\Http\Controllers\VenteController;
+use App\Http\Controllers\Produit\AjustementController;
+use App\Http\Controllers\Produit\ProduitController;
+use App\Http\Controllers\Vente\VenteController;
+use App\Http\Controllers\ParamCompte\UserController as PCUserController;
 use App\Models\Ajustement;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Rules\Ninterval;
+use Illuminate\Contracts\Validation\Validator;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +33,7 @@ Route::get('/dashboard', function () {
 
 // Produit
 
-Route::get('produit/create', [ProduitController::class, 'create']);
+Route::get('produit/new', [ProduitController::class, 'create']);
 
 Route::get('produit/produit', function () {
     return view('page.produit.create');
@@ -39,7 +41,7 @@ Route::get('produit/produit', function () {
 
 Route::get('produit/ajustements/create',[AjustementController::class,'create' ]);
 
-Route::get('produit/list/', [ProduitController::class,'index']);
+Route::get('produit', [ProduitController::class,'index']);
 Route::post('produit/save',[ProduitController::class,'store'])->name('produit.save');
 
 Route::get('produit/data/', [ProduitController::class, 'returnData']);
@@ -108,8 +110,19 @@ Route::get('/test2/{type}', function(Request $request,$type){
 
 
 Route::post('vente/save',  [VenteController::class,'store']);
-Route::get('vente/{id}/view', [VenteController::class,'show']);
 Route::get('vente/new',[VenteController::class,'create']);
+Route::get('vente/data',[VenteController::class,'returnVentes']);
+Route::get('vente/{date?}', [VenteController::class,'index']);
+Route::get('vente/view/{id}', [VenteController::class,'show']);
+
 Route::get('venteProduit/categorie/{id}',[VenteController::class,'getProducts']);
+
+// Param User
+Route::resources([
+    'param-compte/users'=>PCUserController::class]
+);
+
+
+
 
 require __DIR__.'/auth.php';

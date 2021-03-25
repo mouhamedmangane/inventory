@@ -1,7 +1,7 @@
 @extends('layouts-page.noppal')
 
-@section('header')
-    <x-util.header/>
+@section('head')
+    <x-util.header />
 @endsection
 
 @section('sidebar')
