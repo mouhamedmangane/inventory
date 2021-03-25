@@ -1,25 +1,10 @@
 <?php
+namespace App\Constante\Inventory;
 
-namespace App\View\Components\Util;
 
-use Illuminate\View\Component;
-use App\ViewModel\Navs\NavModelFactory;
-
-class Sidebar extends Component
-{
-
-    public $navModel;
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->navModel = $this->initNavModel();   
-    }
-
-    public function initNavModel(){
+class SidebarData{
+    
+    public static function data(){
         return NavModelFactory::navModel()
         ->addNavBlocModel(
             NavModelFactory::navBlocModel()
@@ -45,15 +30,5 @@ class Sidebar extends Component
             ->addNavItemModel("Rapport","/dashbord","flag")
         ) 
         ;
-    }
-
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|string
-     */
-    public function render()
-    {
-        return view('components.util.sidebar');
     }
 }

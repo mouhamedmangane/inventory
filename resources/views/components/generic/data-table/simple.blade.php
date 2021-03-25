@@ -20,13 +20,13 @@
 @endif
 
 
-<div class="position-relative">
+<div class="position-relative table-responsive w-100" id="{{ $name }}__content">
 
-    <table class="dataTable-simple table table-borderless w-100 table-hover  {{ $attributes['class'] }}" id="{{ $name }}">
+    <table class="dataTable-simple table table-condensed  table-borderless w-100 table-hover   {{ $attributes['class'] }}" id="{{ $name }}">
         <thead class="dataTable-simple-head  py-2 ">
             {{-- si selectionnable --}}
             @if ($attributes["selectName"])
-                <th>
+                <th >
                     <input type="checkbox" class="dataTable-simple-selectAll" id="{{ $idSelectAll }}" data-var-table="{{ $name }}">
                 </th>
             @endif
@@ -137,7 +137,7 @@
             @endif
           //le dom
           "dom": @if($attributes['dom']) '{{ $attributes['dom'] }}' @else 'tip' @endif,
-
+          "responsive": true,
           @if($attributes['pageLength'])
             "pageLength": {{ $attributes['pageLength'] }},
           @else
@@ -368,7 +368,31 @@
         @endforeach
 
         
-     
+        let x=0;
+        let c=0;
+        const resizeObserver = new ResizeObserver(entries => {
+            let x1=$('#{{ $name }}__tbody').width();
+            console.log(entries);
+            if(x!=x1 && c==0){
+                    x=x1;
+                    c=1;
+                    setTimeout(function(){
+                        c=0;
+                        {{ $name }}.columns.adjust().draw();
+                                                
+                    },299);
+                    
+            }
+          console.log('Size changed');
+        });
+        //presizeObserver.observe($("#{{ $name }}__tbody").get(0));
+        $("#{{ $name }}__tbody ").resize(function(){
+                
+                
+                
+            
+            
+        });
 
         // constante
         let idAlert='{{ $attributes['idAlert'] }}';

@@ -24,11 +24,11 @@
     </head>
    
     <body>
-        <x-util.header/>
+        @yield('header')
         <div class="r-bar"></div>
         
         <div class="wrapper">
-            <x-util.sidebar  />
+            @yield('sidebar')
             <div id="content" class="position-relative" style="flex-grow: 1;">
                 @yield('content')           
             </div>
