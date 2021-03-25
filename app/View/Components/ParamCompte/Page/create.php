@@ -23,6 +23,6 @@ class create extends Component
      */
     public function render()
     {
-        return view('components.gs-user.page.create');
+        return view('components.param-compte.page.create');
     }
 }
