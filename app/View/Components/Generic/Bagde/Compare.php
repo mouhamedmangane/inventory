@@ -1,0 +1,31 @@
+<?php
+
+namespace App\View\Components\Generic\Bagde;
+
+use Illuminate\View\Component;
+
+class Compare extends Component
+{
+    public $text1,$text2,$separateur;
+    /**
+     * Create a new component instance.
+     *
+     * @return void
+     */
+    public function __construct($text1,$text2,$separateur)
+    {
+        $this->text1=$text1;
+        $this->text2=$text2;
+        $this->separateur=$separateur;
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     *
+     * @return \Illuminate\Contracts\View\View|string
+     */
+    public function render()
+    {
+        return view('components.generic.bagde.compare');
+    }
+}
