@@ -5,6 +5,23 @@ body {
     overflow-y: hidden;
     font-size: 14px;
 }
+/* TODO Bg-evience  
+|------------------------------------------------------------------------------
+|    
+|
+|                  Bg-evidence
+|
+|---*/
+.bg-evidence-1{
+  background-color:rgba(0,123,255, 0.1);
+}
+.bg-evidence-2{
+  background-color:rgba(40,137,69, 0.1);
+}
+.bg-evidence-3{
+  background-color:rgba(16,65,27, 0.1);
+}
+
 /* TODO Boule
 |------------------------------------------------------------------------------
 |    

@@ -47,51 +47,7 @@
         </x-generic.navs-tabs.pane>
         {{-- droit --}}
         <x-generic.navs-tabs.pane id="droit"  >
-            <div class="row">
-                <div class="col-lg-8 col-md-10 col-sm-12">
-                    <table class="table table-borderless">
-                        <tr class="border bg-light" style="background: #dee2e6!important;">
-                            <td class="align-middle "> 
-                                <input type="hidden" name="boutique[]" value="1">
-                                Boutique Dakar Plateau
-                            </td>
-                            <td class="align-middle">
-                                <x-generic.input.select name="role[]"  id="ligne1"
-                                    :dt="['aucun'=>'Aucun','admin'=>'admin','vendeurs'=>'Vendeur',]" value="" disabled="true" />   
-                            </td>
-                            <td class="align-middle text-right">
-                                <x-generic.input.checkbox name="active[]" value="active" type="switch" class="h1" id="stssest"/>
-                            </td>
-                        </tr>
-                        <tr class="border bg-light">
-                            <td class="align-middle "> 
-                                <input type="hidden" name="boutique[]" value="1">
-                                Boutique Pikine
-                            </td>
-                            <td class="align-middle">
-                                <x-generic.input.select name="role[]"  id="ligne1"
-                                    :dt="['aucun'=>'Aucun','admin'=>'admin','vendeurs'=>'Vendeur',]" value=""  />   
-                            </td>
-                            <td class="align-middle text-right">
-                                <x-generic.input.checkbox name="active[]" value="active" type="switch" class="h1" id="sstest" checked='true' />
-                            </td>
-                        </tr>
-                        <tr class="border bg-light" style="background: #dee2e6!important;">
-                            <td class="align-middle "> 
-                                <input type="hidden" name="boutique[]" value="1">
-                                Boutique Guediavaye
-                            </td>
-                            <td class="align-middle">
-                                <x-generic.input.select name="role[]"  id="ligne1"
-                                    :dt="['aucun'=>'Aucun','admin'=>'admin','vendeurs'=>'Vendeur',]" value="" disabled="true" />   
-                            </td>
-                            <td class="align-middle text-right">
-                                <x-generic.input.checkbox name="active[]" value="active" type="switch" class="h1" id="stessst"/>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+           {{-- <x-user.util.boutiques-access /> --}}
             
         </x-generic.navs-tabs.pane>
 

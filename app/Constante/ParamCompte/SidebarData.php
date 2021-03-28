@@ -9,8 +9,8 @@ class SidebarData{
         ->addNavBlocModel(
             NavModelFactory::navBlocModel()
             ->addNavItemModel("l'Entreprise","entreprise","shopping_cart")
-            ->addNavItemModel("Role","role","shopping_cart")
-            ->addNavItemModel("Utilisateur","user","receipt")     
+            ->addNavItemModel("Role","param-compte/roles/create","shopping_cart")
+            ->addNavItemModel("Utilisateur","param-compte/users/create","receipt")     
             ->addNavItemModel("Securité","user","receipt")            
        
         )

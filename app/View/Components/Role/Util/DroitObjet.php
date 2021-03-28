@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components\Role;
+namespace App\View\Components\Role\Util;
 
 use Illuminate\View\Component;
 
-class Create extends Component
+class DroitObjet extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class Create extends Component
      */
     public function render()
     {
-        return view('components.role.create');
+        return view('components.role.util.droit-objet');
     }
 }
