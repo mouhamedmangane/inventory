@@ -34,7 +34,7 @@
         <x-slot name="image">
             <x-generic.icon.simple name="assignment" taille="16" />
         </x-slot>
-        <x-generic.links.select-link contentCible="my-main" value="test1" class="mx-2" 
+        <x-generic.links.select-link contentCible="my-main" value="test1" class="mx-2"
             :dt="['/produit/data/'=>'Mes Produits','/produit/list/non_archived'=>'Produit Composés','/produit/list/archived'=>'Produits Archivés','/test2'=>'Produit  Vendable']" />
 
         <x-slot name="right">
@@ -45,7 +45,7 @@
 
 
 @section('ly-main-content')
-    
+
 
 
 @section('ly-main-content')

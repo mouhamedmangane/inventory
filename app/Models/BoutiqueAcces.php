@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class BoutiqueAcces extends Model
 {
     use HasFactory;
+
+
 }

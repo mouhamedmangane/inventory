@@ -1,1 +1,1 @@
-@extends('layouts.noppal')
+@extends('layouts-page.inventory')

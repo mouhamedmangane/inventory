@@ -58,7 +58,7 @@ class VenteController extends Controller
             'produits.*'=>'required|distinct',
             'quantiteD.*'=>'nullable|integer',
             'quantiteR.*'=>'required|integer',
-            'categories.*'=>'required',            
+            'categories.*'=>'required',
             'unites.*'=>'required',
             'prix.*'=>'required',
             'montantT.*'=>'nullable|integer',
@@ -67,7 +67,7 @@ class VenteController extends Controller
                 Rule::in(['complet', 'incomplet']),
                 ],
         ];
-        $messages=[ 
+        $messages=[
 
         ];
         if($request->client==0){//s'il n est pas un client
@@ -78,43 +78,42 @@ class VenteController extends Controller
         $validator = Validator::make($request->all(), $rules,$messages);
 
         $validator->after(function ($validator) use ($request){
-           
+
             if(!$request->produits){
                 $msg="Aucune ligne de vente n'a été enregistrée";
                 $validator->errors()->add('',$msg);
             }
             if($request->quantiteD){
                 for ($i=0; $i <count($request->produits) ; $i++) {
-                    if($request->quantiteD[$i]<$request->quantiteR[$i]){                        
+                    if($request->quantiteD[$i]<$request->quantiteR[$i]){
                         $validator->errors()->add('quantiteD','La quantite Demande doit etre superieur à la quantité reçue ');
                     }
                  }
             }
         });
-       
-        if($validator->fails()){ 
+
+        if($validator->fails()){
             return response()->json([
                 "status"=>false,
                 "message"=>"Certains valeurs du formulaire ne sont pas renseigné ou sont incorrects:",
                 'errors'=>$validator->errors()
                 ])  ;
-                                   
+
         }
-       
+
 
         $vente= new Vente();
         $client= new Client();
-    
+
 
         $vente->numeroVente="CL".$request->client."V".(DB::table('ventes')->count()+1);
-       
-        DB::beginTransaction();
-        try {                   
-            $vente->save(); 
 
+        DB::beginTransaction();
+        try {
+            $vente->save();
             if($request->produits){//existe au moins 1 produit selectionné
                 $montant=0;
-               for ($i=0; $i <count($request->produits) ; $i++) {                 
+               for ($i=0; $i <count($request->produits) ; $i++) {
                     $lv=new LigneVente();
                     $produit=Produit::findOrFail($request->produits[$i]);
                     $lv->produit_id=$produit->id;
@@ -122,43 +121,44 @@ class VenteController extends Controller
                     $lv->prixUnite=$request->prix[$i];
                     $lv->quantiteDemande=$request->quantiteD[$i];;
                     $lv->quantiteRecu=$request->quantiteR[$i];;
-                    $lv->unite=$request->unites[$i]; 
-                    $quantite=0;                   
-                    $quantite=$lv->quantiteRecu;             
-                
+                    $lv->unite=$request->unites[$i];
+                    $quantite=0;
+                    $quantite=$lv->quantiteRecu;
+
                      if($lv->save()){
                        $produit->qteStock-=$quantite;//decrémenté le stock
-                       $produit->save();                       
+                       $produit->save();
                         $ligneVenteRecu= new LigneVenteRecu();
-                        
+
                         //pour enregistrer livraison
                        // $ligneVenteRecu-> quantité et la quantité restant pour le produit
                         $montant+=$lv->prixUnite * $lv->quantiteDemande;
-                   }       
-                            
+                   }
+
 
                 }
 
-                $lignePaie=new LignePayementVentes();                
+                $lignePaie=new LignePayementVentes();
                 $lignePaie->montant=$request->mrecu;
                 $lignePaie->montantRestant=$montant-$request->mrecu;
-                $lignePaie->vente_id=$vente->id;                         
+                $lignePaie->vente_id=$vente->id;
                 $lignePaie->save();
-                $vente->montantTotal=$montant;                    
+                echo $montant;
+                //$vente->montantTotal=$montant;
                 if($request->client>0){//s'il le client est mentionné
                     $client= Client::findOrFail($request->client);
                     $vente->client_id=$client->id;
-                    $client->compte-=$montant;   
+                    $client->compte-=$montant;
                     if($request->mrecu){
-                        $client->compte+=$request->mrecu;                        
+                        $client->compte+=$request->mrecu;
                     }
                     $client->save();
                 }
                 else
                     $vente->client_id=null;
 
-                $vente->save();            
-            }       
+                $vente->save();
+            }
 
 
          DB::commit();
@@ -167,17 +167,17 @@ class VenteController extends Controller
             "message"=>"Vente effectué avec succès",
             'errors'=>''
             ])  ;
-                        
+
         } catch(\Exception $ex){
             DB::rollBack();
             return response()->json([
                 "status"=>false,
                 "message"=>"Quelque chose s'est mal passé lors de l'enregistrement. Veuillez  réessayer plus tard!",
-                'data'=>$ex->getMessage(),                 
+                'data'=>$ex->getMessage(),
             ]);
-        
+
          }
-       
+
     }
 
     /**
@@ -188,11 +188,11 @@ class VenteController extends Controller
      */
     public function show($id)
     {
-        
+
         $vente= Vente::findOrFail($id);
         return view('page.vente.voir',compact('vente'));
-        
-        
+
+
     }
 
     /**
@@ -239,11 +239,11 @@ class VenteController extends Controller
                                                                                             ->where('vendable',true)
                                                                                             ->get();
             $json['data']=$produits;
-        
-        }   
-        
+
+        }
+
         return response()->json($json);
-    
+
     }
     public function saveLivraison(){
 
@@ -256,45 +256,45 @@ class VenteController extends Controller
         $ventes=Vente::all();
         $status="true";
         $message='';
-   
+
         $data = DataTables::of($ventes)
-            
+
             ->addColumn('client',function($vente){
                 if($vente->client)
                     return $vente->client->nom;
                 return "_";
-            })  
+            })
             ->addColumn('montantRestant',function($vente){
                 return $vente->montantTotal - $vente->ligne_payement_ventes->sum('montant')." FCFA" ;
-            })  
+            })
             ->addColumn('produits',function($vente){
                 return $vente->ligne_ventes->count()." produits achetés";
-            })   
+            })
             ->addColumn('statut',function($vente){
-                if($vente->complet) 
+                if($vente->complet)
                    return '<span class="badge bagde-success circle">ok</span> ' ;
                 else
                     return '<span class="badge bagde-danger circle">ok</span>';
-            }) 
-        
+            })
+
             ->addColumn('numeroVente',function($vente){
-                return '<a href='.asset("/vente/view/$vente->id").'>' 
+                return '<a href='.asset("/vente/view/$vente->id").'>'
                         .$vente->numeroVente.
-                        '</a>';     
-            }) 
+                        '</a>';
+            })
             ->addColumn('date',function($vente){
-                return date('d-m-Y', strtotime($vente->created_at));    
-            }) 
+                return date('d-m-Y', strtotime($vente->created_at));
+            })
             ->addColumn('heure',function($vente){
                 return date('H:i:s', strtotime($vente->created_at));
-            }) 
+            })
             ->rawColumns(['numeroVente','client','montantTotal','montantRestant','produits','date','heure','statut'])
             ->with('status',$status)
             ->with('message',$message)
             ->toJson();
-        
+
         return $data;
 
-       
+
     }
 }

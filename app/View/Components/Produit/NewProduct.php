@@ -29,7 +29,7 @@ class NewProduct extends Component
         $columns=[];
         $categories = GroupeProduit::all();
 
-        // name refName label 
+        // name refName label
         $columns[]= GCellFactory::select("categories",'categories','categories')
                     ->setProp('groupe_name','id')
                     ->setData($categories)
@@ -45,7 +45,7 @@ class NewProduct extends Component
         $columns[]= GCellFactory::selectFree('produits','produits','produits','categories',url('/produit/categorie'))
                     ->setProp('libelle','id')
                     ->setData([
-                         
+
                     ])
                     ->unique(true)
                     ->defaultOption('selectionner Produit');
@@ -54,17 +54,17 @@ class NewProduct extends Component
                     ->defaultValue('0')
                     ->setClassTd('npl-editor-td-sm');
         $columns[]= GCellFactory::text('unites','unites','unites')
-                   
+
                     ->setClassTd('npl-editor-td-sm')
                     ->defaultValue('U');
 
-        
+
         return $columns;
     }
     public function getColumnsReductions(){
         $columns=[];
 
-        
+
     }
 
     /**
