@@ -1,6 +1,6 @@
 @extends('layouts-page.noppal')
 
-@section('header')
+@section('head-body')
     <x-util.header/>
 @endsection
 

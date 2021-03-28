@@ -5,6 +5,28 @@ body {
     overflow-y: hidden;
     font-size: 14px;
 }
+/* TODO Boule
+|------------------------------------------------------------------------------
+|    
+|
+|                  Boule
+|
+|-------------------------------------------------------------------------------
+*/
+.boule{
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  transition: all  0.6s;
+  border-radius: 50%;
+  display:inline-block;
+}
+.boule.active{
+  width: 18px;
+  height: 18px;
+  background-color: white;
+}
+
 /* TODO Button
 |------------------------------------------------------------------------------
 |    

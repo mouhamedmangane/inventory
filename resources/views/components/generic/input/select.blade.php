@@ -3,6 +3,9 @@
         @if($attributes['required'] && $attributes['required']=='true')
                 required 
         @endif
+        @if($attributes['disabled'] && $attributes['disabled']=='true')
+            disabled
+        @endif
     >
     @foreach ($dt as $key=>$text )
         <option value="{{ $key }}" 

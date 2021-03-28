@@ -8,7 +8,7 @@
                     @endforeach
               @endif
                 
-    
+            
                 class="custom-control {{  $attributes['class'] }}
                 @if ($attributes['type'] == 'switch') 
                     custom-switch

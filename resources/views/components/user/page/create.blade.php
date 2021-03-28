@@ -3,7 +3,7 @@
     <x-generic.tool-bar.bar> 
         <x-generic.tool-bar.prev-button id="prev_tb" url=""/>
         <x-generic.input.button-submit id="submit_produit_tb"
-                                       idForm=""
+                                       idForm="create_user_form"
                                        idContentAlert="listUserAlert"
                                        class="btn btn-primary btn-sm d-flex align-items-center mr-3"
                                        text="Enregistrer"
@@ -35,3 +35,6 @@
     </x-generic.title-bar.bar>
 @endsection
 
+@section('ly-main-content')
+    <x-user.util.create  />
+@endsection

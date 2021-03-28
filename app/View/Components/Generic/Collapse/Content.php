@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components\GsUser\Util;
+namespace App\View\Components\Generic\Collapse;
 
 use Illuminate\View\Component;
 
-class create extends Component
+class Simple extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class create extends Component
      */
     public function render()
     {
-        return view('components.param-compte.util.create');
+        return view('components.generic.collapse.content');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\GsUser\Page;
+namespace App\View\Components\User\Page;
 
 use Illuminate\View\Component;
 
@@ -23,6 +23,6 @@ class create extends Component
      */
     public function render()
     {
-        return view('components.param-compte.page.create');
+        return view('components.user.page.create');
     }
 }
