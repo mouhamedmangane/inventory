@@ -1,1 +1,0 @@
-    <x-page.produit.form/>

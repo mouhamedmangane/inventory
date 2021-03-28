@@ -22,7 +22,6 @@ class CreateLigneVenteRecusTable extends Migration
             $table->foreign('ligne_vente_id')->references('id')->on('ligne_ventes')->onDelete('restrict');
             
             $table->timestamps();
-            $table->timestamps();
         });
     }
 

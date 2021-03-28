@@ -1,2 +1,0 @@
-
-    <x-page.page.list/>

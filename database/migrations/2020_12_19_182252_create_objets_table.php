@@ -15,7 +15,7 @@ class CreateObjetsTable extends Migration
     {
         //Schema::disableForeignKeyConstraints();
        
-        Schema::create('ensemble', function (Blueprint $table) {
+        Schema::create('objets', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->timestamps();
         });
