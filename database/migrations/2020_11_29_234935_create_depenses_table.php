@@ -17,15 +17,15 @@ class CreateDepensesTable extends Migration
 
         Schema::create('depenses', function (Blueprint $table) {
             $table->id();
-            
             $table->string('libelle', 100);
             $table->string('motif', 100);
             $table->string('descriptions', 10000);
             $table->double('prix', 10, 2);
-            $table->unsignedBigInteger('user_id');     
-            
+            $table->unsignedBigInteger('user_id');
 
-            $table->foreign('user_id')
+
+            $table->unsignedBigInteger('done_by_user')->default(1);//Auth::user()->id) par defaut user connecté
+            $table->foreign('done_by_user')
             ->references('id')
             ->on('users')
             ->onDelete('restrict')

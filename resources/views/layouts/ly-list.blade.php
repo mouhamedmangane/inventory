@@ -5,7 +5,7 @@
         @yield('ly-toolbar')
     </div>
     
-    <div class="ly-content ">
+    <div class="ly-content ly-list-content">
         <div class="ly-alert">
             @yield('ly-alert')
        </div>

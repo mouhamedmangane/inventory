@@ -1,33 +1,47 @@
 @extends('layouts.ly')
 @section('ly-toolbar')
-    <x-generic.tool-bar.bar/>
+    <x-generic.tool-bar.bar >
+        <x-generic.tool-bar.prev-button id="prev_tb"  url="/vente/"  />
+        <x-generic.input.button-submit  id="test-button-submit"
+                                        idForm="addVente"
+                                        idContentAlert="addVenteAlert"
+                                        class="btn btn-primary btn-sm d-flex align-items-center mr-3 "
+                                        text="Enregistrer"
+                                        isReset="true"
+                                        {{-- hrefId="/produit/list" --}}
+                                        parentMessageClass="n-form-table-col-input"
+                                        elementMessageClass="form-table-feedback"
+                                        icon="save"/>
+        <x-generic.tool-bar.button id="" text="Annuler" icon="clear" evidence=""  />
+
+    </x-generic.tool-bar.bar >
 @endsection
 
 
 @section('ly-alert')
-<div class="" id="addVenteAlert" style="position: sticky;top:43px;border-radius:0px;"></div>
+    <div class="" id="addVenteAlert" style="position: sticky;top:43px;border-radius:0px;"></div>
 @endsection
 
 @section('ly-title')
 <div class="d-flex align-items-center justify-content-between px-4 mt-1">
     <div class="d-flex align-items-center">
-        <div class="rounded-circle border  text-align center d-flex align-items-center justify-content-center" 
-             style="width: 43px; height: 43px; background: rgba(0,0,0,.1);"{{--@if ($attributes['img'])border-color:black!important;@endif"--}}> 
+        <div class="rounded-circle border  text-align center d-flex align-items-center justify-content-center"
+             style="width: 43px; height: 43px; background: rgba(0,0,0,.1);"{{--@if ($attributes['img'])border-color:black!important;@endif"--}}>
            {{-- @if ($attributes['img'])    ! --}}
            @if(false)
-                <img src="{{ asset("images/profig.jpg") }}"  
+                <img src="{{ asset("images/profig.jpg") }}"
                     width="43px"
                     height="43px"
-                    class="rounded-circle" 
+                    class="rounded-circle"
                     style=""
                 >
-            @else 
+            @else
              <i class="material-icons">add_shopping_cart</i>
-            @endif            
+            @endif
         </div>
          <x-generic.links.select-link contentCible="my-main" value="test1" :dt="['/vente/new'=>'Nouvelle Vente','/test2'=>'Nouveau Produit Composé']" />
     </div>
-    
+
 </div>
 @endsection
 
@@ -40,12 +54,15 @@
 
 <div class="d-flex justify-content-end">
     <div id="" class="px-3 py-2" style="font-size:24px;" >
-        Monnaie  : <label id="monnaie" for="">15 000 </label>FCFA
+        <x-generic.infos.info-item title="Montant TOTAL" value="10 000 FCFA" icon="assignment_turned_in" couleur="success" />
+
     </div>
-    <div id="" class="px-3 py-2 ml-2" style="font-size:24px;"> 
-        Total : <label id="mtotal" for="">350 000 </label> FCFA
+    <div id="" class="px-3 py-2 ml-2" style="font-size:24px;">
+        {{-- Total : <label id="mtotal" for="">350 000 </label> FCFA --}}
+        <x-generic.infos.info-item title="Monnaie" value="3000 FCFA" icon="assignment_turned_in" couleur="danger" />
+
     </div>
-    
+
 </div>
 
 @endsection

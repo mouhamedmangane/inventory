@@ -6,14 +6,23 @@ use Illuminate\View\Component;
 
 class DroitObjetGroup extends Component
 {
+    public $role;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($role=null)
     {
-        //
+        $this->role=$role;
+    }
+
+    public function getRoleObjectByObjet($objet){
+      
+        return  collect($this->role->role_objects)->first(function($value,$key){
+            return $value->objet_id == $objet->id;
+        });
+           
     }
 
     /**

@@ -1,8 +1,14 @@
 @props(['dispo'=>"Positionner sur l'image pour la changer ou la supprimer",
         'no_dispo'=>"Positionner sur l'image pour la changer"])
+<<<<<<< HEAD
 <div class="d-flex align-items-center " >
     <div style="width: {{ $x }}px; height:{{ $y }}px;background-size:{{ $x-10 }}px {{ $y-10 }}px;"
          class="border {{ $attributes['class'] }} input-img-content">
+=======
+<div class="d-flex align-items-center">
+    <div style="width: {{ $x }}px; height:{{ $y }}px;background-size:{{ $x-10 }}px {{ $y-10 }}px;"
+         class="border rounded input-img-content">
+>>>>>>> 3d9119e184b9abe2f3cc882c372b2137e868f455
          
          <img src="{{ $url }}"  
               id="{{ $id }}-image" 
@@ -13,7 +19,11 @@
         <div class="input-img-action" >
                 <input type="file" 
                        accept="image/png, image/jpeg"
+<<<<<<< HEAD
                        class="border rounded {{ $attributes['classImage'] }}"
+=======
+                       class="border rounded"
+>>>>>>> 3d9119e184b9abe2f3cc882c372b2137e868f455
                        name={{ $name }}
                        id={{ $id }} 
                        style="display: none;">

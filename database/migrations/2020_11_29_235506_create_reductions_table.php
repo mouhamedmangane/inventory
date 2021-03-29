@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 class CreateReductionsTable extends Migration
-{   
+{
     /**
      * Run the migrations.
      *
@@ -22,7 +22,6 @@ class CreateReductionsTable extends Migration
             $table->string('unite', 50);
             $table->double('montant', 15, 2)->nullable();
             $table->boolean('etat')->default(true);
-                
             $table->dateTime('expiration_date')->nullable();
 
             $table->unsignedBigInteger('produit_id')->nullable();
@@ -33,8 +32,16 @@ class CreateReductionsTable extends Migration
             ->references('id')
             ->on('produits')
             ->onDelete('cascade')
-            ->onUpdate('cascade');                  
-            
+            ->onUpdate('cascade');
+
+            $table->unsignedBigInteger('done_by_user')->default(1);//Auth::user()->id) par defaut user connecté
+            $table->foreign('done_by_user')
+            ->references('id')
+            ->on('users')
+            ->onDelete('restrict')
+            ->onUpdate('restrict');
+
+
             $table->timestamps();
         });
     }

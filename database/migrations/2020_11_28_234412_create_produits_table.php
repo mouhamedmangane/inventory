@@ -26,9 +26,9 @@ class CreateProduitsTable extends Migration
             $table->double('qteStock', 15, 3)->nullable();
             $table->double('qteSeuil',15,3)->nullable();
             $table->double('prixVenteMin', 10, 2)->unsigned()->nullable();
-            $table->double('prixAchatMin', 10, 2)->unsigned()->nullable(); 
+            $table->double('prixAchatMin', 10, 2)->unsigned()->nullable();
             $table->double('prixVenteMax', 10, 2)->unsigned()->nullable();
-            $table->double('prixAchatMax', 10, 2)->unsigned()->nullable(); 
+            $table->double('prixAchatMax', 10, 2)->unsigned()->nullable();
             $table->boolean('archived')->default(false);
             $table->boolean('vendable')->default(true);
             $table->boolean('achetable')->default(true);
@@ -37,11 +37,17 @@ class CreateProduitsTable extends Migration
             ->references('id')
             ->on('groupe_produits')
             ->onDelete('restrict')
-            ->onUpdate('restrict');         
-            
-            
+            ->onUpdate('restrict');
+
+            $table->unsignedBigInteger('done_by_user')->default(1);//Auth::user()->id) par defaut user connecté
+            $table->foreign('done_by_user')
+            ->references('id')
+            ->on('users')
+            ->onDelete('restrict')
+            ->onUpdate('restrict');
+
             $table->timestamps();
-            
+
 
         });
     }

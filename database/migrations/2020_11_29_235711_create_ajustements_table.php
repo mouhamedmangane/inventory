@@ -19,9 +19,19 @@ class CreateAjustementsTable extends Migration
             $table->id();
             $table->text('note')->nullable();
             $table->timestamps();
-            });
+
+
+            $table->unsignedBigInteger('done_by_user')->default(1);//Auth::user()->id) par defaut user connecté
+            $table->foreign('done_by_user')
+            ->references('id')
+            ->on('users')
+            ->onDelete('restrict')
+            ->onUpdate('restrict');
+         });
+
+
         }
-        
+
         /**
          * Reverse the migrations.
          *

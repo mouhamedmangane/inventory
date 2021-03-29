@@ -16,17 +16,18 @@ class CreateDroitSpecifiquesTable extends Migration
         Schema::disableForeignKeyConstraints();
         Schema::create('droit_specifiques', function (Blueprint $table) {
             $table->id();
-            $table->boolean('ao')->default(false);
+            $table->boolean('c')->default(false);
+            $table->boolean('r')->default(false);
+            $table->boolean('u')->default(false);
+            $table->boolean('d')->default(false);
+            $table->boolean('co')->default(false);
+            $table->boolean('ro')->default(false);
+            $table->boolean('uo')->default(false);
             $table->boolean('do')->default(false);
-            $table->boolean('mo')->default(false);
-            $table->boolean('ame')->default(false);
-            $table->boolean('dme')->default(false);
-            $table->boolean('mme')->default(false);
-            $table->boolean('open')->default(false);
             $table->unsignedBigInteger('user_id');
-            $table->string('objet_name');    
+            $table->unsignedBigInteger('objet_id');    
             
-            $table->foreign('objet_name')->references('objet_name')->on('objets')->onDelete('cascade');            
+            $table->foreign('objet_id')->references('id')->on('objets')->onDelete('cascade');            
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
 

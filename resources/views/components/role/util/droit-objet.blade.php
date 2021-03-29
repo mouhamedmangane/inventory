@@ -1,6 +1,6 @@
 <tr>
     <td>
-        nome
+        {{ ob }}
     </td>
 
     <td class="bg-evidence-1" ><x-generic.input.checkbox name="c[]" label="c" checked="false"/></td>

@@ -22,16 +22,21 @@ class CreateVentesTable extends Migration
             $table->boolean('complet')->nullable()->default(false);
             $table->boolean('oneSaveComplet')->nullable()->default(true);
             $table->string('notes',100)->nullable();
-            
+
             $table->unsignedBigInteger('client_id')->nullable()->default(NULL);
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('restrict');
-            
+
+            $table->unsignedBigInteger('done_by_user')->default(1);//Auth::user()->id) par defaut user connecté
+            $table->foreign('done_by_user')
+            ->references('id')
+            ->on('users')
+            ->onDelete('restrict')
+            ->onUpdate('restrict');
 
 
-           
-            $table->timestamps();   
+
+
+            $table->timestamps();
         });
     }
 

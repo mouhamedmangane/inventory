@@ -29,7 +29,11 @@ class UserFactory extends Factory
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
             'tel' => $this->faker->numberBetween(76,79)." ".$this->faker->randomNumber(7,true),
+<<<<<<< HEAD
             'ncni' => $this->faker->randomNumber(13,true),
+=======
+           // 'ncni' => $this->faker->randomNumber(13,true),
+>>>>>>> 3d9119e184b9abe2f3cc882c372b2137e868f455
 
         ];
     }

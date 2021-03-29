@@ -20,6 +20,14 @@ class CreateFournisseursTable extends Migration
             $table->double('compte', 15, 2);
             $table->string('ncni', 50);
             $table->integer('tel')->unsigned()->unique();
+
+            $table->unsignedBigInteger('done_by_user')->default(1);//Auth::user()->id) par defaut user connecté
+            $table->foreign('done_by_user')
+            ->references('id')
+            ->on('users')
+            ->onDelete('restrict')
+            ->onUpdate('restrict');
+
             $table->timestamps();
         });
     }

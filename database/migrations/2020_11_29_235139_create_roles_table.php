@@ -15,13 +15,24 @@ class CreateRolesTable extends Migration
     {
         Schema::disableForeignKeyConstraints();
         Schema::create('roles', function (Blueprint $table) {
-           
-            $table->string('role')->primary();
+            $table->id();
+            $table->string('role',250)->unique();
+            $table->string('description',1000);
+
             $table->timestamps();
+
+            $table->unsignedBigInteger('done_by_user')->default(1);//Auth::user()->id) par defaut user connecté
+            $table->foreign('done_by_user')
+            ->references('id')
+            ->on('users')
+            ->onDelete('restrict')
+            ->onUpdate('restrict');
+
+
         });
 
 
-        
+
     }
 
     /**
