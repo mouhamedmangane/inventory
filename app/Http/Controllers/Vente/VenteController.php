@@ -245,6 +245,12 @@ class VenteController extends Controller
         return response()->json($json);
 
     }
+    public function getClient($client,$by ="id"){
+        if($by="id")
+             return Client::findOrFail($client)->get('nom','tel','code');
+        return Client::where('code',$client)->get('nom','tel','code');
+
+    }
     public function saveLivraison(){
 
     }
