@@ -17,7 +17,6 @@ class CreateDepensesTable extends Migration
 
         Schema::create('depenses', function (Blueprint $table) {
             $table->id();
-
             $table->string('libelle', 100);
             $table->string('motif', 100);
             $table->string('descriptions', 10000);

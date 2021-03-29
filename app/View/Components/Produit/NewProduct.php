@@ -45,7 +45,6 @@ class NewProduct extends Component
         $columns[]= GCellFactory::selectFree('produits','produits','produits','categories',url('/produit/categorie'))
                     ->setProp('libelle','id')
                     ->setData([
-
                     ])
                     ->unique(true)
                     ->defaultOption('selectionner Produit');
@@ -63,7 +62,6 @@ class NewProduct extends Component
     }
     public function getColumnsReductions(){
         $columns=[];
-
 
     }
 

@@ -100,10 +100,9 @@
                     prix=inputPrix.min;
                     quantite=editor.getColumn('quantiteD').getDataCell(e.rowIndex);
 
-                let unite=dataValueProduit['unite'];
-              //  console.log("l'unite"+unite);
+                
+
                     editor.getColumn('prix').updateInput(e.rowIndex,inputPrix.min);
-                    editor.getColumn('unites').updateInput(e.rowIndex,unite);
                     editor.getColumn('montantT').updateInput(e.rowIndex,prix*quantite);
                     console.log(dataValueProduit);
 

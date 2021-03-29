@@ -29,16 +29,6 @@ class DatabaseSeeder extends Seeder
         // App\Models\Depense::factory(10)->create();
         // App\Models\Evenement::factory(10)->create();
 
-
-      //  Models\GroupeProduit::factory()->count(10)->create();
-        // App\Models\Achat::factory(10)->create();
-        // App\Models\Vente::factory(10)->create();
-      //  Models\Produit::factory(50)->create();
-        // App\Models\LigneAchatRecu::factory(7)->create();
-        // App\Models\LigneAchatDemande::factory(5)->create();
-        // App\Models\LignePayementAchats::factory(10)->create();
-        // App\Models\LignePayementVentes::factory(10)->create();
-
         DB::table('users')->insert([
             'name' => Str::random(10),
             'email' => Str::random(10).'@gmail.com',

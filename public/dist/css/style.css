@@ -5,6 +5,48 @@ body {
     overflow-y: hidden;
     font-size: 14px;
 }
+<<<<<<< HEAD
+/* TODO Bg-evience  
+|------------------------------------------------------------------------------
+|    
+|
+|                  Bg-evidence
+|
+|---*/
+.bg-evidence-1{
+  background-color:rgba(0,123,255, 0.1);
+}
+.bg-evidence-2{
+  background-color:rgba(40,137,69, 0.1);
+}
+.bg-evidence-3{
+  background-color:rgba(16,65,27, 0.1);
+}
+
+/* TODO Boule
+|------------------------------------------------------------------------------
+|    
+|
+|                  Boule
+|
+|-------------------------------------------------------------------------------
+*/
+.boule{
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  transition: all  0.6s;
+  border-radius: 50%;
+  display:inline-block;
+}
+.boule.active{
+  width: 18px;
+  height: 18px;
+  background-color: white;
+}
+
+=======
+>>>>>>> 3d9119e184b9abe2f3cc882c372b2137e868f455
 /* TODO Button
 |------------------------------------------------------------------------------
 |    

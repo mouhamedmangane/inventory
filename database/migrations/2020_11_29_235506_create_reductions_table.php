@@ -22,7 +22,6 @@ class CreateReductionsTable extends Migration
             $table->string('unite', 50);
             $table->double('montant', 15, 2)->nullable();
             $table->boolean('etat')->default(true);
-
             $table->dateTime('expiration_date')->nullable();
 
             $table->unsignedBigInteger('produit_id')->nullable();

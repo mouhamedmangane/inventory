@@ -18,5 +18,13 @@ abstract class Barre{
         foreach ($actions as $action) {
             $this->actions[]=$this->addActionBarre($actions);
         }
+<<<<<<< HEAD
+    }
+
+
+
+} 
+=======
     } 
 }          
+>>>>>>> 3d9119e184b9abe2f3cc882c372b2137e868f455

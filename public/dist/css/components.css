@@ -60,8 +60,13 @@
 
 .ly-main-bot{
     z-index: 0;
+<<<<<<< HEAD
+    max-height: 30px;
+    min-height: 30px;
+=======
     max-height: 60px;
     min-height: 60px;
+>>>>>>> 3d9119e184b9abe2f3cc882c372b2137e868f455
     /* margin-bottom: 30px; */
     overflow-y:  hidden;
     background-color: #edebe9;

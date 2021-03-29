@@ -121,6 +121,9 @@ Route::get('venteProduit/categorie/{id}',[VenteController::class,'getProducts'])
 Route::resources([
     'param-compte/users'=>PCUserController::class]
 );
+Route::resources([
+    'param-compte/roles'=>App\Http\Controllers\ParamCompte\RoleController::class]
+);
 
 
 

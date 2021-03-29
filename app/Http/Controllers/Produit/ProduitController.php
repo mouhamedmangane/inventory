@@ -50,43 +50,10 @@ class ProduitController extends Controller
                             ->with('text1',$produit->qteStock)
                             ->with('text2',$produit->qteSeuil)
                             ->with('separateur','/');
-            })
-            ->addColumn('status_stock',function($produit){
-                $classStyle = 'bg-success';
-                if($produit->qteStock <=0 && $produit->qteSeuil<=0){
-                    return view('components.generic.bagde.simple')
-                    ->with('name','')
-                    ->with('classStyle','bg-danger');
-                }
-                else if($produit->qteStock < $produit->qteSeuil)
-                    $classStyle = 'bg-danger';
-                else if($produit->qteStock == $produit->qteSeuil)
-                    $classStyle = 'bg-warning';
-
-                return view('components.generic.bagde.simple')
-                            ->with('name','')
-                            ->with('classStyle',$classStyle);
-            })
-            ->addColumn('categorie',function($produit){
-                $categorie = GroupeProduit::find($produit->groupe_produit_id);
-                return $categorie->groupe_name;
-                //$produit->groupe_produit->groupe_name?$produit->groupe_produit->groupe_name:'Néant';
-            })
-            ->addColumn('image',function($produit){
-
-                $srcImag='images/produits/'.$produit->img;
-
-                 if(!is_file($srcImag))
-                    $srcImag='images/produits/0.png';//image par défaut
-
-                return "<img src=".asset($srcImag)."
-                        width='35px'
-                        height='35px'
-                        class='rounded-circle'
-                        >";
+            })    
+            ->addColumn('status_stock',function($produit){               
             })
             ->addColumn('fournisseur',function($produit){
-                return "Ass";
             })
             ->addColumn('prixVente',function($produit){
                 if($produit->prixVenteMax > 0){
@@ -125,7 +92,6 @@ class ProduitController extends Controller
     {
         //
        // $categories=GroupeProduit::all();
-
         //variable pour dire si c'est produit composé ou pas
         $estcompose=false;
 
@@ -308,7 +274,6 @@ class ProduitController extends Controller
         //$produit->save();
 
 
-
     }
     public function deleteProducts(Request $request){
         $produits =Produit::where('archived',false);
@@ -350,7 +315,6 @@ class ProduitController extends Controller
 
         $this->validator = Validator::make($request->all(), $rules
             ,$messages);
-
 
         //dd($this->validator= );
         if($request->achatable_vendable){
@@ -408,6 +372,5 @@ class ProduitController extends Controller
         $json['data']='';
         return response()->json($json);
     }
-
 
 }

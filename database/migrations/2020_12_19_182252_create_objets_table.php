@@ -29,6 +29,13 @@ class CreateObjetsTable extends Migration
         });
     }
 
+    public function definition()
+    {
+        return [
+            'nom' => $this->faker->name,
+        ];
+    }
+
     /**
      * Reverse the migrations.
      *
@@ -37,6 +44,6 @@ class CreateObjetsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('objets');
-        //Schema::enableForeignKeyConstraints();
+        Schema::enableForeignKeyConstraints();
     }
 }

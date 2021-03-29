@@ -34,7 +34,11 @@
         <x-slot name="image">
             <x-generic.icon.simple name="assignment" taille="16" />
         </x-slot>
+<<<<<<< HEAD
+        <x-generic.links.select-link contentCible="my-main" value="test1" class="mx-2" 
+=======
         <x-generic.links.select-link contentCible="my-main" value="test1" class="mx-2"
+>>>>>>> 3d9119e184b9abe2f3cc882c372b2137e868f455
             :dt="['/produit/data/'=>'Mes Produits','/produit/list/non_archived'=>'Produit Composés','/produit/list/archived'=>'Produits Archivés','/test2'=>'Produit  Vendable']" />
 
         <x-slot name="right">
@@ -45,7 +49,11 @@
 
 
 @section('ly-main-content')
+<<<<<<< HEAD
+    
+=======
 
+>>>>>>> 3d9119e184b9abe2f3cc882c372b2137e868f455
 
 
 @section('ly-main-content')
@@ -63,4 +71,8 @@
         </div>
     </div>
 
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> 3d9119e184b9abe2f3cc882c372b2137e868f455

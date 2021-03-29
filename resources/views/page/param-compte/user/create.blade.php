@@ -1,3 +1,3 @@
 @extends('layouts-page.param-compte')
 
-<x-param-compte.page.create />
+<x-user.page.create />

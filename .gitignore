@@ -3,6 +3,10 @@
 /public/storage
 /storage/*.key
 /vendor
+<<<<<<< HEAD
+/.history
+=======
+>>>>>>> 3d9119e184b9abe2f3cc882c372b2137e868f455
 .env
 .env.backup
 .phpunit.result.cache

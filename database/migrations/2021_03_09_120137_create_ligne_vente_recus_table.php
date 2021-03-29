@@ -20,7 +20,6 @@ class CreateLigneVenteRecusTable extends Migration
             $table->unsignedBigInteger('ligne_vente_id');
 
             $table->foreign('ligne_vente_id')->references('id')->on('ligne_ventes')->onDelete('restrict');
-
             $table->timestamps();
         });
     }

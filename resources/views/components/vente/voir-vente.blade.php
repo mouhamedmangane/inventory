@@ -12,12 +12,7 @@
             @if($vente->client)
                <div class="col-md-3 col-sm-6">
                   <x-generic.forms.form-table >
-                     <x-generic.forms.form-table-line  disposition="block">
-
-                        <x-slot name="label">
                            <x-generic.forms.form-table-label  labelText="Client * {{$vente->client->code}} " required="false"  disposition="block" />
-                        </x-slot>
-
                         <div class="d-flex justify-content-center my-2">
                            <img src={{asset("images/produits/8.jpeg")}}
                                                 width='75px'

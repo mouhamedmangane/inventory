@@ -22,7 +22,6 @@ class CreateBoutiquesTable extends Migration
             $table->timestamps();
 
 
-
         });
     }
 
