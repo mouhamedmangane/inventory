@@ -35,7 +35,67 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules=[
+
+            'id'=> 'numeric',
+            'nom'=> 'required|max:100',
+            
+            'objet'=> 'array|required',
+            'objet.*'=>'numeric',
+
+            'c'=>'array',
+            'r.'=>'array',
+            'u.'=>'array',
+            'd.'=>'array',
+
+            'co.'=>'array',
+            'ro.'=>'array',
+            'uo.'=>'array',
+            'do.'=>'array',
+            
+            'c.*'=>'numeric',
+            'r.*'=>'numeric',
+            'u.*'=>'numeric',
+            'd.*'=>'numeric',
+
+            'co.*'=>'numeric',
+            'ro.*'=>'numeric',
+            'uo.*'=>'numeric',
+            'do.*'=>'numeric',
+            
+            
+        ];
+        $messages=[
+
+        ];
+        
+
+        $validator = Validator::make($request->all(), $rules,$messages);
+
+        $validator->after(function ($validator) use ($request){
+            if(isset($srequest->id) && $request->id!=0 && Role::where('id', $request->id)->doesntExist()){
+                $validator->errors()->add(
+                    'id', 'l id du role n existe pas'
+                );
+            }
+        });
+
+        if($validator->fails()){
+            return response()->json([
+                "status"=>false,
+                "message"=>"Certains valeurs du formulaire ne sont pas renseigné ou sont incorrects:",
+                'errors'=>$validator->errors()
+                ])  ;
+
+        }else{
+            DB::beginTransaction();
+            $role = new Role;
+            if(isset($request->id)  && $request->id!=0){
+                $role->id=$request!=1;
+            }
+            
+        }
+        
     }
 
     /**
