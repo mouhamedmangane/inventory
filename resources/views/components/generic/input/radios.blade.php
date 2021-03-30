@@ -8,11 +8,7 @@
                     @endforeach
               @endif
                 
-<<<<<<< HEAD
-            
-=======
     
->>>>>>> 3d9119e184b9abe2f3cc882c372b2137e868f455
                 class="custom-control {{  $attributes['class'] }}
                 @if ($attributes['type'] == 'switch') 
                     custom-switch
