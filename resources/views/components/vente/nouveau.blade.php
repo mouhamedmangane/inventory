@@ -100,7 +100,7 @@
                     prix=inputPrix.min;
                     quantite=editor.getColumn('quantiteD').getDataCell(e.rowIndex);
 
-                
+
 
                     editor.getColumn('prix').updateInput(e.rowIndex,inputPrix.min);
                     editor.getColumn('montantT').updateInput(e.rowIndex,prix*quantite);

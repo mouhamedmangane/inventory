@@ -20,12 +20,12 @@ class DatabaseSeeder extends Seeder
     {
        // Models\Entreprise::factory(1)->create();
       //  Models\Boutique::factory(5)->create();
-         Models\User::factory()->count(10)->create();
+         //Models\User::factory()->count(10)->create();
         // App\Models\Role::factory(10)->create();
         // App\Models\DroitSpecifique::factory(5)->create();
         // App\Models\DroitDefault::factory(6)->create();
-        // App\Models\Client::factory(10)->create();
-        // App\Models\Fournisseur::factory(10)->create();
+        App\Models\Client::factory(10)->create();
+        App\Models\Fournisseur::factory(10)->create();
         // App\Models\Depense::factory(10)->create();
         // App\Models\Evenement::factory(10)->create();
 
