@@ -24,16 +24,26 @@ $(document).ready(function(){
         e.preventDefault();
         let form=$(idForm).get(0);
         console.log(form);
-        let data=new FormData(form);
+        let enctype=$(this).attr('enctype');
+        console.log(enctype);
+        let data=null;
+        let contentType='json';
+        if(enctype=="multipart/form-data"){
+            data= new FormData(form);
+            contentType=false;
+        } 
+        else{
+            data= $(this).serializeObject();
+        }
+            
         console.log(data);
         $.ajax({
             type: $(this).attr('method'),
-            enctype: 'multipart/form-data',
-
+            enctype: enctype,
             url: $(this).attr('action'),
             data: data,
             processData: false,
-            contentType: false,
+            contentType: contentType,
             cache: false,
             timeout: 600000,
            
