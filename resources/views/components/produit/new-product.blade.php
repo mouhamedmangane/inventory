@@ -22,23 +22,6 @@
                         <x-generic.input.photo id="photo" name="photo" url="" x="150" y="150"/>
                      </x-generic.forms.form-table-line>
                 </div>
-                <div class="col-md-8 col-sm-12 " >
-                    <x-generic.forms.form-table >
-                        <x-generic.forms.form-table-text name="libelle" labelText="Libelle Produit" required="true" placeholder="Renseigner le produit" id="libelle"/>
-                        <x-generic.forms.form-table-radios name="type" labelText="Type Produit" required="true"  id="type"
-                            :dt="['consomable'=>'Consommable','service'=>'Service']" value="consomable" />
-                        <x-generic.forms.form-table-select name="categorie" labelText="Categorie Produit" id="categorie"
-                            :dt="$categories" value="" />
-
-
-                    </x-generic.forms.form-table>
-                </div>
-                <div class="col-md-4 col-sm-12">
-                    <x-generic.forms.form-table >
-                        <x-generic.forms.form-table-text typpe="number" name="qteStock" labelText="Quantité Stock " placeholder="quantité initial du produit" id="qteStock" step="0.01"/>
-                        <x-generic.forms.form-table-text typpe="number" name="qteSeuil" labelText="Quantité Seuil "  placeholder="quantité minimal en stock" id="qteSeuil"  step="0.01" />
-                        <x-generic.forms.form-table-select name="unite" labelText="Unite | U " required="true"  id="unite"
-                            :dt="['Unite'=>'Par Unité','kilo'=>'Kilogramme | kg','m'=>'Longueur | m','L'=>'Litre | l',''=>'Mettre | m2']" value="Unite" />
 
                     </x-generic.forms.form-table>
                 </div>
