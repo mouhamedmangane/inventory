@@ -18,9 +18,10 @@
         </tr>
     </thead>
     <tbody>
-        <x-role.util.droit-objet />
-        <x-role.util.droit-objet/>
-        <x-role.util.droit-objet/>
+        @foreach ($objets as $objet )
+        <x-role.util.droit-objet :objet="$objet"  roleObjet="$getRoleObjectByObjet($objet)"  />    
+        @endforeach
+        
     </tbody>
 </table>
     

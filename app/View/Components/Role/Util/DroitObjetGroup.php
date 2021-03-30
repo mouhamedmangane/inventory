@@ -3,10 +3,11 @@
 namespace App\View\Components\Role\Util;
 
 use Illuminate\View\Component;
-
+use App\Models\Objet;
 class DroitObjetGroup extends Component
 {
     public $role;
+    public $objets;
     /**
      * Create a new component instance.
      *
@@ -15,6 +16,7 @@ class DroitObjetGroup extends Component
     public function __construct($role=null)
     {
         $this->role=$role;
+        $this->objets= Objet::all();
     }
 
     public function getRoleObjectByObjet($objet){

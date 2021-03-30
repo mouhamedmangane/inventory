@@ -14,7 +14,7 @@ class ListView extends  ComponentWithId
         return [
             (object)  ['name'=>'Image','propertyName'=>'image','taille'=>"75px","classStyle"=>""],
             (object)  ['name'=>'Code ','propertyName'=>'code','taille'=>"75px","classStyle"=>""],
-            (object)  ['name'=>'Libelle','propertyName'=>'libelle',"classStyle"=>""], 
+            (object)  ['name'=>'Libelle','propertyName'=>'libelle',"classStyle"=>""],
             (object)  ['name'=>'Categorie','propertyName'=>'categorie',"classStyle"=>""],
             (object)  ['name'=>'S. Stock','propertyName'=>'status_stock',"classStyle"=>"dt-col-1 text-align-center"],
             (object)  ['name'=>'Stock / Seuil','propertyName'=>'seuilstock',"classStyle"=>"dt-col-1 text-align-center"],
@@ -25,7 +25,7 @@ class ListView extends  ComponentWithId
         ];
     }
 
-    
+
     /**
      * Get the view / contents that represent the component.
      *

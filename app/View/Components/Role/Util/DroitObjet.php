@@ -22,12 +22,21 @@ class DroitObjet extends Component
     }
 
 
-    public function newRoleObjet(){
+    private function newRoleObjet(){
         return (object) [
             'role_id'=> 0 ,'objet_id'=>0,
-            'c'=>false,'r'=>false,'u'=>false,'d'=>false,
+            'c'=>false,'r'=>true,'u'=>false,'d'=>false,
             'co'=>false,'ro'=>false,'uo'=>false,'do'=>false
         ];
+    }
+
+    public function isCheck($element){
+        if($element){
+            return 'true';
+        }
+        else{
+            return 'false';
+        }
     }
 
     /**

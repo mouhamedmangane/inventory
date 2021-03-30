@@ -1,7 +1,8 @@
+
 @extends('layouts.ly')
 @section('ly-toolbar')
     <x-generic.tool-bar.bar >
-        <x-generic.tool-bar.prev-button id="prev_tb"  url="/produit/list"  />
+        <x-generic.tool-bar.prev-button id="prev_tb"  url="/produit/list**"  />
         <x-generic.input.button-submit  id="test-button-submit"
                                         idForm="addProduct"
                                         idContentAlert="addProduitAlert"
@@ -54,7 +55,6 @@
 @once
     @push('script')
         <script type="text/javascript">
-
         </script>
     @endpush
 @endonce

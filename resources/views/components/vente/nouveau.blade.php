@@ -1,7 +1,7 @@
 <form action="{{url('/vente/save')}}" enctype="" id="addVente" class=" mt-0" method="post">
     @csrf
-    <div class="d-flexflex-unwrap" >
-            <div class="row container ">
+    <div class="d-flexflex-unwrap " >
+            <div class="row  px-4 ">
                 <div class="col-md-5">
                     <x-generic.forms.form-table >
                         <x-generic.forms.form-table-item  >
@@ -41,14 +41,15 @@
                 </div>
                 <div class="col-md-4">
                     <x-generic.forms.form-table >
-                        <x-generic.forms.form-table-text typpe="text" name="notes" disposition="block"
-                                                        labelText="Notes "
-                                                        placeholder="Si vous avez des notes par rapport à cette vente" id="mrecu"/>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Notes</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" name="note" rows="3"></textarea>
+                          </div>
                     </x-generic.forms.form-table>
                 </div>
 
             </div>
-            <div class="row container d-flex justify-content-center">
+            <div class="row px-4 d-flex justify-content-center">
                 <div class="col-md-12 col-sm-12">
 
 
@@ -60,7 +61,7 @@
                                             classTable=""
                                             classTh="border-top-0 border-bottom-0"
                                             idTable='d'
-                                                id='ligne_vente'
+                                             id='ligne_vente'
                                             :dd="[
                                             ]"
                                             :columns="$getColumns()"/>
@@ -99,9 +100,6 @@
                     inputPrix.max=dataValueProduit['prixVenteMax'];
                     prix=inputPrix.min;
                     quantite=editor.getColumn('quantiteD').getDataCell(e.rowIndex);
-
-
-
                     editor.getColumn('prix').updateInput(e.rowIndex,inputPrix.min);
                     editor.getColumn('montantT').updateInput(e.rowIndex,prix*quantite);
                     console.log(dataValueProduit);
@@ -124,7 +122,7 @@
 
                 });
                 $('#quant').on('change',function(e){
-                   console.log( $('#compte').text(""));
+:Z                     console.log( $('#compte').text(""));
                     console.log('fait');
 
 
