@@ -39,7 +39,9 @@ Route::get('produit/produit', function () {
     return view('page.produit.create');
 });
 
-Route::get('produit/ajustements/create',[AjustementController::class,'create' ]);
+Route::get('produit/ajustement/new',[AjustementController::class,'create' ]);
+Route::get('produit/ajustement/',[AjustementController::class,'index' ]);
+Route::get('produit/ajustement/data',[AjustementController::class,'returnData   ' ]);
 
 Route::get('produit', [ProduitController::class,'index']);
 Route::post('produit/save',[ProduitController::class,'store'])->name('produit.save');
@@ -49,64 +51,17 @@ Route::post('produit/newProd', function(){
     return view('components.produit.new-product');
 });
 
-Route::get('produit/{id}/update', [ProduitController::class,'update']);
+Route::get('produit/{id}/edit', [ProduitController::class,'edit']);
+
+Route::get('produit/{id}', [ProduitController::class,'show']);
+Route::post("produit/update/{id}",[ProduitController::class ,"update"]);
 
 
 // test datatable
-Route::get('produit/testDataTable', function(Request $request){
-    $messages="";
-    $data_validation= Validator::make($request->all(),[
-        'prix'=>[new Ninterval(Ninterval::NUMBER) ]
-    ]);
-    if($data_validation->fails()){
-        $messages = $data_validation->messages();
-    }
-    return response()->json([
-
-            "status"=>true,
-            "message"=> "Saisie Incorrent veillee mettre des donnees valide",
-            "validation"=> $messages,
-            "request"=>$request->all(),
-            'data'=>[
-                (object)['id'=> 1,'prenom'=> 'boubou','nom'=>'ce invalide','age'=>15],
-                (object)['id'=> 2,'prenom'=> 'boubou','nom'=>'Livre','age'=>41],
-                (object)['id'=> 6,'prenom'=> 'asee','nom'=>'Livre','age'=>441],
-                (object)['id'=> 3,'prenom'=> 'boubou','nom'=>'koro','age'=>78],
-                (object)['id'=> 4,'prenom'=> 'boubou','nom'=>'TeBA','age'=>45]
-            
-        ]
-    ]);
-});
-
-//Editor Table by Noppal
-Route::get('/editorTable', function(Request $request){
-    return view('page.test.editor');
-});
 
 Route::get('produit/categorie/{id}',[ProduitController::class,'getProducts']);
 Route::get('produit/unite/{id}',[ProduitController::class,'getUnit']);
 Route::get('produit/modif/{id}',[ProduitController::class,'update']);
-
-Route::get('/test/categorie/{id}', function(Request $request){
-    $json=[];
-    $json['status']=true;
-    $json['data']=[
-        (object)['value'=>'11','text'=>'onze'],
-        (object)['value'=>'12','text'=>'douze'],
-        (object)['value'=>'13','text'=>'treize'],
-        (object)['value'=>'14','text'=>'quate']
-    ];
-    return response()->json($json);
-});
-
-Route::get('/test2/{type}', function(Request $request,$type){
-    if($type=='r'){
-        return 'salut';
-    }
-    return 'bonjour';
-});
-
-
 
 
 Route::post('vente/save',  [VenteController::class,'store']);
@@ -129,3 +84,54 @@ Route::resources([
 
 
 require __DIR__.'/auth.php';
+
+// TEst -------------------------------------------------------------------------------------------------
+
+Route::get('/test/categorie/{id}', function(Request $request){
+    $json=[];
+    $json['status']=true;
+    $json['data']=[
+        (object)['value'=>'11','text'=>'onze'],
+        (object)['value'=>'12','text'=>'douze'],
+        (object)['value'=>'13','text'=>'treize'],
+        (object)['value'=>'14','text'=>'quate']
+    ];
+    return response()->json($json);
+});
+
+Route::get('/test2/{type}', function(Request $request,$type){
+    if($type=='r'){
+        return 'salut';
+    }
+    return 'bonjour';
+});
+
+
+Route::get('produit/testDataTable', function(Request $request){
+    $messages="";
+    $data_validation= Validator::make($request->all(),[
+        'prix'=>[new Ninterval(Ninterval::NUMBER) ]
+    ]);
+    if($data_validation->fails()){
+        $messages = $data_validation->messages();
+    }
+    return response()->json([
+
+            "status"=>true,
+            "message"=> "Saisie Incorrent veillee mettre des donnees valide",
+            "validation"=> $messages,
+            "request"=>$request->all(),
+            'data'=>[
+                (object)['id'=> 1,'prenom'=> 'boubou','nom'=>'ce invalide','age'=>15],
+                (object)['id'=> 2,'prenom'=> 'boubou','nom'=>'Livre','age'=>41],
+                (object)['id'=> 6,'prenom'=> 'asee','nom'=>'Livre','age'=>441],
+                (object)['id'=> 3,'prenom'=> 'boubou','nom'=>'koro','age'=>78],
+                (object)['id'=> 4,'prenom'=> 'boubou','nom'=>'TeBA','age'=>45]
+
+        ]
+    ]);
+});
+//Editor Table by Noppal
+Route::get('/editorTable', function(Request $request){
+    return view('page.test.editor');
+});

@@ -14,7 +14,7 @@
 
 
 @if ($attributes['selectName'])
-    @props(['init'=> 1 ])  
+    @props(['init'=> 1 ])
 @else
     @props(['init'=> 0])
 @endif
@@ -37,12 +37,12 @@
                     @if (isset($column->badge))
                         <span class="bagde {{ $column->badge->styleClass }}"> {{ $column->badge->value }}</span>
                     @endif
-                    
+
                 </th>
             @endforeach
         </thead>
         <tbody class="dataTable-simple-body" id="{{ $name }}__tbody">
-    
+
         </tbody>
         <tfoot class="dataTable-simple-foot">
             @foreach ($columns as $column)
@@ -51,7 +51,7 @@
         </tfoot>
     </table>
 
- 
+
     <div class="dropdown position-absolute" style="right: 3px;top:10px;">
         <a data-toggle="dropdown" href="#">
             <i class="material-icons">more_vert</i>
@@ -67,20 +67,20 @@
                             value="{{ $key }}"
                            class="dataTable-simple-visible-check"
                            @if (isset($column->visible) && !$column->visible)
-                            
+
                            @else
                            checked="true"
                            @endif>
                     <label for="{{ $idd }}">
-                      {{ $column->name }}   
+                      {{ $column->name }}
                     </label>
                 </span>
             @endforeach
-    
+
         </div>
     </div>
 
-</div>               
+</div>
 
 
 <x-generic.modal.optional-confirm />
@@ -97,7 +97,7 @@
                     $("#"+$(this).data('var-table')).DataTable().column($(this).data('key')).visible($(this).prop('checked'));
                 });
                 $('.dataTable-simple-selectAll').on('change',function(e){
-                    
+
                     let checked= $(this).prop('checked');
                     table = $("#"+$(this).data('var-table')).DataTable();
                     table.rows({ page: 'current' }).nodes().to$().find(".dataTable-simple-selectItem").each(function(){
@@ -120,11 +120,11 @@
         // Pour RowGroup
         @if($attributes['groupByEnable'])
             var collapsedGroups = {};//  enregistre les group masquer
-            let defaultCollapse=true; // designe si les group sont masquer les du premier affichage 
+            let defaultCollapse=true; // designe si les group sont masquer les du premier affichage
             var checkedGroups = {}; // enregistre les groups qui son coché
         @endif
-        
-        // Noms des colonnes 
+
+        // Noms des colonnes
         let names=@json($nameColumns());
         @if($attributes['selectName']) names.unshift('select'); @endif
 
@@ -156,7 +156,7 @@
              "dataSrc": function ( json ) {
                 @if($attributes['groupBy'])collapsedGroups = {}; checkedGroups = {};@endif
                 $('#{{ $name }} .dataTable-simple-selectAll').prop('checked',false);
-                @if($attributes['selectName'])            
+                @if($attributes['selectName'])
                 for ( var i=0, ien=json.data.length ; i<ien ; i++ ) {
                     json.data[i].select = '<input type="checkbox" name="{{ $attributes['selectName'] }}[]" class="dataTable-simple-selectItem @if($attributes['groupBy']) decaler-a-droit-1 @endif" value="'+json.data[i].{{ $selectDataName }}+'"  >';
                 }
@@ -171,8 +171,8 @@
           @else
             'data':@json($dataa),
           @endif
-          
-          //columns   
+
+          //columns
           "columns":[
             @if($attributes['selectName'])
                 { data:"select",name:"select",orderable:false} ,
@@ -184,11 +184,11 @@
 
           //scolumnDef
           "columnDefs": [
-                @isset($attributes['selectName'] )  
+                @isset($attributes['selectName'] )
                     {'targets':[0],'width':'50px;','className':'valign-center'},
                 @endisset
                 @foreach($columns as $key => $column)
-                   { 
+                   {
                        "targets": [ @isset($attributes['selectName'] ) {{ $key+1 }} @else {{ $key }} @endisset   ],
                        @isset($column->classStyle)
                            className: "{{ $column->classStyle }} valign-center",
@@ -223,9 +223,9 @@
             @endif
 
           },
-          
-          // rowGroup  
-          @if($attributes['groupByEnable']) 
+
+          // rowGroup
+          @if($attributes['groupByEnable'])
             @if($attributes['groupBy'])
                 orderFixed: [[names.indexOf("{{ $attributes['groupBy'] }}"), 'asc']],
             @endif
@@ -235,7 +235,7 @@
                  @else
                     enable: false,
                  @endif
-                
+
                 startRender: function (rows, group) {
                     var collapsed = !!collapsedGroups[group];
                     if(defaultCollapse){
@@ -259,13 +259,13 @@
                             rows.nodes().each(function (r) {
                                 $(r).find(".dataTable-simple-selectItem").each(function(){
                                     $(this).prop("checked",checked);
-                                    
+
                                 });
-                            }); 
-                        }   
+                            });
+                        }
 
                         updateSelectAll();
-                                      
+
                     });
 
                     rows.nodes().each(function (r) {
@@ -276,7 +276,7 @@
                         //check.css('margin-left','10px');
                         if(checked){
                             check.prop("checked",checked);
-                            
+
                         }
                         $(check).on('change',function(){
                             let count=0;
@@ -287,35 +287,35 @@
                                         count++;
                                     }
                                 }
-                                
+
                             });
                             if(count<=0){
                                 checkbox.checked=true;
-                                
+
                             }
                             else{
                                 checkbox.checked=false;
                             }
                             $(checkbox).trigger('change','fils');;
                         })
-                    });    
+                    });
 
-                    
+
                     let td=document.createElement('td');
                     let div=document.createElement('div');
                     let divLeft=document.createElement('div');
                     let divRight=document.createElement('div');
                     let triangle=document.createElement('span');
-                    
+
                     divLeft.appendChild(checkbox);
                     divLeft.appendChild(document.createTextNode(group + ' (' + rows.count() + ')'));
                     if(collapsed){
-                        triangle.innerHTML="&#9654;";	
+                        triangle.innerHTML="&#9654;";
                     }
                     else{
                         triangle.innerHTML="&#9660;";
                     }
-                    divRight.appendChild(triangle); 
+                    divRight.appendChild(triangle);
                     div.className="d-flex justify-content-between"
                     div.appendChild(divLeft);
                     div.appendChild(divRight);
@@ -339,11 +339,11 @@
 
             }
             else{
-                var name = $(this).data('name');    
+                var name = $(this).data('name');
                 collapsedGroups[name] = !collapsedGroups[name];
                 {{ $name }}.draw();
             }
-            
+
         });
         //lors d'un changement du dataSrc du rowGroup
         {{ $name }}.on( 'rowgroup-datasrc', function ( e, dt, val ) {
@@ -357,7 +357,7 @@
         } );
             // {{ $name }}.rowGroup().enable().draw();
             // {{ $name }}.rowGroup().dataSrc('categorie');
-        
+
         @endif
 
         // cacher certain colonne
@@ -367,7 +367,7 @@
             @endif
         @endforeach
 
-        
+
         let x=0;
         let c=0;
         const resizeObserver = new ResizeObserver(entries => {
@@ -379,45 +379,45 @@
                     setTimeout(function(){
                         c=0;
                         {{ $name }}.columns.adjust().draw();
-                                                
+
                     },299);
-                    
+
             }
           console.log('Size changed');
         });
         //presizeObserver.observe($("#{{ $name }}__tbody").get(0));
         $("#{{ $name }}__tbody ").resize(function(){
-                
-                
-                
-            
-            
+
+
+
+
+
         });
 
         // constante
         let idAlert='{{ $attributes['idAlert'] }}';
         let actions=[];
-        
+
 
 
         // Activation/desactivation des button d'actions avec canSelect
         function disabledActions(canSelect,masque){
             for(let action of actions){
                 if(action.canSelect==canSelect){
-                    $('#'+action.id).prop('disabled',masque); 
+                    $('#'+action.id).prop('disabled',masque);
                 }
             }
 
         }
-        //activation/desactivation de tous les buttons d'actions 
+        //activation/desactivation de tous les buttons d'actions
         function disabledAllActions(masque){
             for(let action of actions){
                 if(action.canSelect){
-                    $('#'+action.id).prop('disabled',masque);  
+                    $('#'+action.id).prop('disabled',masque);
                 }
             }
         }
-        
+
         let selectNameSelector= '#'+'{{ $name }} .dataTable-simple-selectItem';
         @if($attributes['selectName'])
 
@@ -452,14 +452,14 @@
             gsSelectChange();
 
             {{ $name }}.on('draw',function(){
-                
+
                 saytouActionYi();
                 gsSelectChange();
             });
-            
+
 
         @endif
-        
+
         // Alerter
         function alerter(btn_data,title,message,success){
             if(btn_data.typeAlert=='modal'){
@@ -486,7 +486,7 @@
         }
 
         // Les Actions
-        @if($attributes['actions']) 
+        @if($attributes['actions'])
             actions=@json($attributes['actions']);
             function ajaxAction(btn_data){
                 $.ajax({
@@ -507,7 +507,7 @@
                         $("#modal_suppression").on('hidden.bs.modal', function (e) {
                             $("#modal_suppression").remove();
                         });
-                        await $("#modal_suppression").modal('hide');         
+                        await $("#modal_suppression").modal('hide');
                         alerter(btn_data,'Echec Opération '+btn_data.op,'Ressource Indisponible, Vérifier la connexion',false);
                     }
                 });
@@ -529,7 +529,7 @@
                     else{
                         ajaxAction(btn_data);
                     }
-                    
+
                 });
             }
 
@@ -537,11 +537,11 @@
                 $("#"+btn_data.id).on('click',function(e){
                     let selectedInput = $(selectNameSelector).filter(':checked');
                     if(selectedInput.length == 1){
-                        window.location.href=btn_data.url+'/'+selectedInput[0].value;
+                        window.location.href=btn_data.url.replace('{id}',selectedInput[0].value);
                     }
                 });
             }
-            
+
             for(action of actions){
                 if(action.type=='action'){
                     onClickBtnAction(action);
@@ -550,11 +550,11 @@
                     onClickBtnLink(action);
                 }
             }
-            
-            
-        @endif       
+
+
+        @endif
     });
-    
+
 </script>
 
 @endpush

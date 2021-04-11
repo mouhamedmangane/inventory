@@ -9,7 +9,7 @@ Class NavGroupModel implements NavElementModel{
     public $navElementModels;
 
     public function __construct($name,$icon="",$navElementModels=[])
-    {   
+    {
         $this->name = $name;
         $this->icon = $icon;
         $this->navElementModels= $navElementModels;
@@ -39,7 +39,7 @@ Class NavGroupModel implements NavElementModel{
             array_splice($navElementModels,$index,$index);
         else
             throw new \Excpetion("La suppresion ne marche pas car index no trouvé");
-        
+
         return $this;
     }
-}  
+}

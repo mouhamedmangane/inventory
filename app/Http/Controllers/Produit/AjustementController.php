@@ -21,7 +21,9 @@ class AjustementController extends Controller
     {
         //
 
-        
+        $ajustements=Ajustement::paginate(50);
+
+        return view('page.produit.ajustement.list',\compact("ajustements"));
     }
 
     /**
@@ -31,23 +33,53 @@ class AjustementController extends Controller
      */
     public function create()
     {
-         $produitNonArchived = Produit::select('id','libelle','code','rI','qteStock','unite','prixVenteMin','prixVenteMax')
+        // l'inventaire des produits non archivés
+
+         $produits = Produit::select('id','libelle','code','rI','qteStock','unite','prixVenteMin','prixVenteMax')
                             ->where('archived',false)
                             ->get();
 
 
         //ligne_ajusments id,id_produit,id_ajus,qte_ajusté,
 
-        return view('page.produit.ajustement.create');
-        
-        
-    }
-
-    public function newAjust(){
-     
+        return view('page.produit.ajustement.create',\compact("produits"));
 
 
     }
+    public function returnData(){
+
+
+         $status=true;
+         $ajustements=LigneAjustement::all();
+        // dd($ajustements);
+
+         $json = DataTables::of($ajustements)
+            ->addColumn('inventaire',function($ajustement){
+                $srcImag='images/produits/'.$ajustement->produit->img;
+                return "<img src=".asset($srcImag)."
+                       width='35px'
+                       height='35px'
+                       class='rounded-circle'
+                       >
+                <a href='".url("produit/".$produit->id)."' class='lien-sp ft-14px ml-2'>".$ajustement->produit->libelle."</a>";
+            })
+
+             ->addColumn('categorie',function($ajustement){
+                 return $ajustement->produit->groupe_produit->groupe_name;
+            })
+            ->addColumn('stock',function($ajustement){
+                return view('components.generic.bagde.compare')
+                            ->with('text1',$ajustement->qteAvant)
+                            ->with('text2',$ajustement->qteReelle)
+                            ->with('separateur',' | ');
+            })
+
+            ->rawColumns(['produit','cqtegorie','stock','ajuste','date',"prix",'notes'])
+            ->with('status',$status)
+            ->with('message',$message)
+            ->toJson();
+          return $json;
+     }
 
     /**
      * Store a newly created resource in storage.
@@ -61,42 +93,73 @@ class AjustementController extends Controller
 
         //validation
 
+        $rules=[
+            //image pour l'image de type image
+            'produits.*' => 'required|unique:produits',
+            'qteReelle.*' => 'nullable|regex:/^\d+(\.\d{1,2})?$/',//decimal
+            'notes.*' => 'nullable',
+
+
+        ];
+        $messages=[
+            'required'=>"Le champ ':attribute' doit être renseigné'",
+            'unique'=>"Le champ ':attribute' existe déjà dans la base",
+            'regex'=>"Le champ ':attribute' doit être un nombre décimal ou entier ",
+
+
+        ];
+        if($request->produits){ //composants
+            $rules['produits.*']='required';
+            $rules['quantite.*']='regex:/^\d+(\.\d{1,2})?$/|not_in:0';
+
+        }
+        // if($request->reductions){
+        //     $rules['reduction_name.*']="required|unique:reductions";
+        //     $rules['apartir.*']= 'required|numeric|min:1|not_in:0';
+        //     $rules['pourcentage.*']= 'nullable|numeric|min:0|max:100|not_in:0';
+        //     $rules['datedebut.*']= 'required|datetime|after_or_equal:today';
+        //     $rules['datefin.*']= 'nullable|datetime|after_or_equal:datedebut';
+        //     $rules['client.*']='required|integer|min:1';
+        //     $rules['pu.*']='required|integer|min:1'; //gt:champ
+
+
+
+
+        // }
+
+        $this->validator = Validator::make($request->all(), $rules,$messages);
+
+
+
       DB::beginTransaction();
       try
       {
-        $ajustement= new Ajustement();    
-        $ajustement->save();       
+        $ajustement= new Ajustement();
+        $ajustement->save();
             foreach ($request->LigneAjustements as $ligneAjus) {
                 $lA= new LigneAjustement();
-                if($ligneAjus->qteReelle){
 
-                }
-                
-                
-                if($ligneAjus->qteReelle){
-                  
-                    $lA->description= $ligneAjus->description;
-                    $lA->pu= $ligneAjus->pu;
+                    $lA->notes= $ligneAjus->notes;
+                    $lA->pu= $ligneAjus->pu;//prix pour ala valorisation de l'inventaire
                     $lA->qteAvant  = $ligneAjus->qteAvant;
                     $lA->qteReelle  = $ligneAjus->qteReelle;
                     $lA->ajustement_id=$ajustement->id;
                     //etc
-                    $produit= Produit::find($ligneAjus->produit_id);
+                    $produit= Produit::findOrFail($ligneAjus->produit_id);
                     $lA->produit_id=$produit->id;
+
+                    $lA= ($lA->qteAvant!=$lA->qtReelle);
+
                     DB::update('update produits set qteStock ='.$ligneAjus->qteReelle.'where id = ?', [$produit->id]);
                     $lA->save();
-
-
-                    DB::commit();
-                }
-            }   
-       
+            }
+            DB::commit();
 
         } catch(\Exception $ex){
             DB::rollBack();
             return response()->json(['error' => $ex->getMessage()], 500);
         }
-    }   
+    }
 
     /**
      * Display the specified resource.
@@ -107,6 +170,16 @@ class AjustementController extends Controller
     public function show($id)
     {
         //
+
+        if(\is_numeric($id)){
+            $ajustement= Ajustement::findOrFail($id);
+            $lA=$ajustement->ligne_ajustements;
+
+            return view('page.produit.ajustement.voir_ajustement');
+
+        }
+
+
     }
 
     /**
@@ -118,7 +191,7 @@ class AjustementController extends Controller
     public function edit($id)
     {
         //
-       
+
 
     }
 
@@ -132,7 +205,7 @@ class AjustementController extends Controller
     public function update(Request $request, $id)
     {
         //
-        
+
     }
 
     /**

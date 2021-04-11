@@ -9,11 +9,11 @@
         <x-generic.forms.form-table-label  :labelText="$labelText" :required="$req" />
     </x-slot>
     <x-generic.input.interval-input id="{{ $attributes['id'] }}"
-                                    :type="$type" 
-                                    :name="$name" 
+                                    :type="$type"
+                                    :name="$name"
                                     required="{{ $req }}"
-                                    :minValue="$minValue" 
+                                    :minValue="$minValue"
                                     :maxValue="$maxValue"/>
-                                
+
 
 </x-generic.forms.form-table-line>

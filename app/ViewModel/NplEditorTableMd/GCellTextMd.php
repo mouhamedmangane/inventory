@@ -3,7 +3,7 @@
 namespace App\ViewModel\NplEditorTableMd;
 
 class GCellTextMd extends GCellMd {
-    
+
     private const OP_TYPE='type';
     private const OP_DEFAULT_VALUE='defaultValue';
 

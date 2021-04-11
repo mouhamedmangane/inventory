@@ -7,7 +7,7 @@ use Illuminate\View\Component;
 class IntervalInput extends Component
 {
     public $radioData=['fixe'=>'Fixe','interval'=>'Interval'];
-    public $name,$type,$minvalue,$maxValue;
+    public $name,$type,$minValue,$maxValue;
     /**
      * Create a new component instance.
      *

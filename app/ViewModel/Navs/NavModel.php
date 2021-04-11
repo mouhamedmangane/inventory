@@ -22,11 +22,11 @@ class NavModel  {
             array_splice($navBlocModels,$index,$index);
         else
             throw new \Excpetion("La suppresion ne marche pas car index no trouvé");
-        
+
         return $this;
     }
 
- 
+
 
 
 }

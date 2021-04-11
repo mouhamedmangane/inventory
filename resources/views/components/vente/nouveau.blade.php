@@ -1,7 +1,7 @@
-<form action="{{url('/vente/save')}}" enctype="" id="addVente" class=" mt-0" method="post">
+<form action="{{url('/vente/save')}}" enctype="" id="addVente" class=" mt-2" method="post">
     @csrf
-    <div class="d-flexflex-unwrap " >
-            <div class="row  px-4 ">
+    <div class="px-4 " >
+            <div class="row   ">
                 <div class="col-md-5">
                     <x-generic.forms.form-table >
                         <x-generic.forms.form-table-item  >
@@ -49,7 +49,7 @@
                 </div>
 
             </div>
-            <div class="row px-4 d-flex justify-content-center">
+            <div class="row ">
                 <div class="col-md-12 col-sm-12">
 
 
@@ -122,7 +122,7 @@
 
                 });
                 $('#quant').on('change',function(e){
-:Z                     console.log( $('#compte').text(""));
+                   console.log( $('#compte').text(""));
                     console.log('fait');
 
 

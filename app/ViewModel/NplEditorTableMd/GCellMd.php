@@ -46,7 +46,7 @@ class GCellMd {
             $this->data[]=$row;
         else
             $this->data[$key]=$row;
-        
+
         return $this;
     }
 

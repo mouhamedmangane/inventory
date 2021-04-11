@@ -43,15 +43,45 @@ class ProduitController extends Controller
 
          $json = DataTables::of($produits)
             ->addColumn('libelle',function($produit){
-               return "<a href='".url("produit/".$produit->id)."' class='lien-sp ft-14px '>".$produit->libelle."</a>";
+                $srcImag='images/produits/'.$produit->img;
+                return " <a href='".url("produit/".$produit->id)."' class='lien-sp ft-14px ml-2'>".$produit->libelle."</a>";
             })
+            ->addColumn('image',function($produit){
+                $srcImag='images/produits/'.$produit->img;
+                return "<img src=".asset($srcImag)."
+                       width='35px'
+                       height='35px'
+                       class='rounded-circle'
+                       >";
+
+             })
+             ->addColumn('categorie',function($produit){
+                 return $produit->groupe_produit->groupe_name;
+            })
+
             ->addColumn('seuilstock',function($produit){
                 return view('components.generic.bagde.compare')
                             ->with('text1',$produit->qteStock)
                             ->with('text2',$produit->qteSeuil)
                             ->with('separateur','/');
-            })    
-            ->addColumn('status_stock',function($produit){               
+            })
+            ->addColumn('status_stock',function($produit){
+
+                $classStyle = 'bg-success';
+                if($produit->qteStock <=0 && $produit->qteSeuil<=0){
+                    return view('components.generic.bagde.simple')
+                    ->with('name','')
+                    ->with('classStyle','bg-danger');
+                }
+                else if($produit->qteStock < $produit->qteSeuil)
+                    $classStyle = 'bg-danger';
+                else if($produit->qteStock == $produit->qteSeuil)
+                    $classStyle = 'bg-warning';
+
+                return view('components.generic.bagde.simple')
+                            ->with('name','')
+                            ->with('classStyle',$classStyle);
+
             })
             ->addColumn('fournisseur',function($produit){
             })
@@ -71,7 +101,7 @@ class ProduitController extends Controller
                     return $produit->prixVenteMin;
                 }
             })
-            ->rawColumns(['image','code','libelle','categorie','seuilstock',"prixAchat",'prixVente','rI','fournisseur'])
+            ->rawColumns(['image','libelle','code','categorie','seuilstock',"prixAchat",'prixVente','rI','fournisseur'])
             ->with('status',$status)
             ->with('message',$message)
             ->toJson();
@@ -105,6 +135,8 @@ class ProduitController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+
+        //dd($request);
         $validator=$this->setValidProduct($request);
         if ( $validator->fails()) {
             return response()->json([
@@ -115,7 +147,6 @@ class ProduitController extends Controller
 
             ]);
         }
-        //dd($validator);
         $produit= new Produit();
         $produit->libelle=$request->libelle;
         $produit->code=$request->code;
@@ -141,13 +172,22 @@ class ProduitController extends Controller
         else
           $produit->prixVenteMax=$request->prix_vente_min;
 
+
+
         $produit->prixAchatMin=$request->prix_achat_min;
-        $produit->prixAchatMax=$request->prix_achat_max;
+        if($request->prix_achat_max)
+          $produit->prixAchatMax=$request->prix_achat_max;
+        else
+          $produit->prixAchatMax=$request->prix_achat_min;
+
+        $test="";
+
         //enregistrement de la photo
          try {
             DB::beginTransaction();
 
                 if($produit->save()){
+                  //  $tes="aaaa";
                     if($request->hasFile('photo')) {
                         $image = $request->file('photo');
                         $ext = $image->getClientOriginalExtension();
@@ -157,7 +197,8 @@ class ProduitController extends Controller
                         if($save)
                             $produit->save();
                         }
-                            //Produit::where('id',$produit->id)->update(['img',$produit->img]);
+
+
                     if($request->produits){
                         $products=$request->produits;
                         for ($i=0; $i <count($products); $i++) {
@@ -166,7 +207,7 @@ class ProduitController extends Controller
                             $prod = Produit::findOrFail($products[$i]);
                             $composant->produit_id=$prod->id;
                             $composant->quantite=(int) $request->quantite[$i];
-                            // $composant->unite= $prod->unite;
+                             $composant->unite= $prod->unite;
                             $composant->save();
                         }
                     }
@@ -206,9 +247,9 @@ class ProduitController extends Controller
     {
         //
         $produit= new Produit();
-        $produit = Produit::find($id);
+        $produit = Produit::findOrFail($id);
 
-        return view('page.produit.new', $produit);
+        return view('page.produit.view_product', compact("produit"));
     }
 
     /**
@@ -219,7 +260,10 @@ class ProduitController extends Controller
      */
     public function edit($id)
     {
-       return Produit::findOrFail($id);
+       $produit= Produit::findOrFail($id);
+
+       return view('page.produit.modifier',compact("produit"));
+
 
     }
 
@@ -234,29 +278,94 @@ class ProduitController extends Controller
     {
         //Validation avant la quantité stock
 
-        $validator=$this->getValidProduct($request);
+        $validator=$this->setValidProduct($request,"update");
 
-        $modif= DB::update('update produits set
-         libelle = ?,
-        groupe_produit_id = ?,
-        prixAchatMin =?,
-        prixAchatMax=?,
-        prixVenteMin =?,
-        prixVenteMax=?
-        code =?,
-        img=?,
-        vendable=?,
-        achetable=?,
-        qteSeuil=?,
-        achetable=?,
-        archived=?,
-        where id = ?',
-        [$request->libelle,$request->categorie,$request->prixAchatMin,
-        $request->PrixAchatMax,$request->prixVenteMin,$request->prixVenteMax,
-        $request->code,$request->img,$request->vendable,$request->qteSeuil,
-        $request->archived,$request->id]);
+        if ( $validator->fails()) {
+            return response()->json([
+                "status"=>false,
+                "message"=>"Certains valeurs du formulaire ne sont pas renseigné ou sont incorrects:",
+                'errors'=>$validator->errors(),
 
-        return $modif;
+
+            ]);
+        }
+       //dd($request);
+
+        if($request->prix_vente_max)
+          $prixVenteMax=$request->prix_vente_max;
+        else
+          $prixVenteMax=$request->prix_vente_min;
+
+        if($request->prix_achat_max)
+          $prixAchatMax=$request->prix_achat_max;
+        else
+          $prixAchatMax=$request->prix_achat_min;
+
+
+
+
+        $produit = Produit::findOrFail($id);
+            $produit->libelle=$request->libelle;
+            $produit->groupe_produit_id=$request->categorie;
+
+            $produit->prixAchatMin=$request->prix_achat_min;
+            $produit->prixAchatMax=$prixAchatMax;
+            $produit->prixVenteMin=$request->prix_vente_min;
+            $produit->prixVenteMax=$prixVenteMax;
+            $produit->code=$request->code;
+            $produit->vendable=$this->vendable;
+            $produit->achetable=$this->achatable;
+            $produit->qteSeuil=$request->qteSeuil;
+            if($request->hasFile('photo')) {
+                $image = $request->file('photo');
+                $ext = $image->getClientOriginalExtension();
+                $filename = $produit->id.'.'.$ext;
+                $save = $image->move('images/produits', $filename);
+                $produit->img=$filename;
+
+            }
+
+
+
+
+        // $modif= DB::update('update produits set
+        //  libelle = ?,
+        // groupe_produit_id = ?,
+        // prixAchatMin =?,
+        // prixAchatMax=?,
+        // prixVenteMin =?,
+        // prixVenteMax=?
+        // code =?,
+        // img=?,
+        // vendable=?,
+        // achetable=?,
+        // qteSeuil=?,
+        // archived=?,
+        // where id = ?',
+        // [$request->libelle,$request->categorie,$request->prixAchatMin,
+        // $request->PrixAchatMax,$request->prixVenteMin,$request->prixVenteMax,
+        // $request->code,$request->img,$request->vendable,$request->achetable,$request->qteSeuil,
+        // $request->archived,$request->id]);
+
+        if($produit->save()) {
+
+            return response()->json([
+                "status"=>true,
+                "message"=>"Modification Reussie",
+                'errors'=>'',
+
+
+            ]);
+        }
+        else{
+            return response()->json([
+                "status"=>true,
+                "message"=>"Non Modifié:",
+                'errors'=>$validator->errors(),
+
+
+            ]);
+        }
     }
 
     /**
@@ -286,8 +395,9 @@ class ProduitController extends Controller
 
     }
 
-    public function setValidProduct(Request $request){
+    public function setValidProduct(Request $request,$action="save"){
         $rules=[
+            //image pour l'image de type image
             'libelle' => 'required|unique:produits',
             'code' => 'required|unique:produits',
             'qteStock' => 'nullable|regex:/^\d+(\.\d{1,2})?$/',
@@ -296,22 +406,46 @@ class ProduitController extends Controller
             'prix_vente_max' => 'nullable|integer|not_in:0',
             'prix_achat_min' => 'nullable|integer|not_in:0',
             'prix_achat_max' => 'nullable|integer|not_in:0',
-            'prix_achat_max' => 'nullable|integer|not_in:0',
-          //  'rI' => 'unique|nullable',
+             'rI' => 'nullable|unique:produits',
+             'categorie'=>'exists:groupe_produits,id'
 
         ];
+
+        if($action!="save"){
+            $rules=[
+
+            ];
+        }
+
         $messages=[
             'required'=>"Le champ ':attribute' doit être renseigné'",
             'unique'=>"Le champ ':attribute' existe déjà dans la base",
             'regex'=>"Le champ ':attribute' doit être nombre décimal ou entierqsd ",
             'not:in'=>"Le champ ':attribute' doit être positive ",
 
+
         ];
-        if($request->produits){
+        if($request->produits){ //composants
             $rules['produits.*']='required';
-            $rules['quantite.*']='regex:/^\d+(\.\d{1,2})?$/|not_in:0';
+            $rules['quantite.*']='required|regex:/^\d+(\.\d{1,2})?$/|not_in:0';
 
         }
+
+// ----------- REDUCTION -----------------
+
+        // if($request->reductions){
+        //     $rules['reduction_name.*']="required|unique:reductions";
+        //     $rules['apartir.*']= 'required|numeric|min:1|not_in:0';
+        //     $rules['pourcentage.*']= 'nullable|numeric|min:0|max:100|not_in:0';
+        //     $rules['datedebut.*']= 'required|datetime|after_or_equal:today';
+        //     $rules['datefin.*']= 'nullable|datetime|after_or_equal:datedebut';
+        //     $rules['client.*']='required|integer|min:1';
+        //     $rules['pu.*']='required|integer|min:1'; //gt:champ
+
+
+
+
+        // }
 
         $this->validator = Validator::make($request->all(), $rules
             ,$messages);
@@ -347,6 +481,9 @@ class ProduitController extends Controller
 
 
     }
+
+
+
     public function getProducts(Request $request,$id){
         $json=[];
         $categorie=GroupeProduit::findOrFail($id);

@@ -14,7 +14,7 @@ class Form extends Component
     public function __construct()
     {
         //
-        
+
     }
 
     /**

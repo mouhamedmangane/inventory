@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components\Produit\Ajustement;
+namespace App\View\Components\Page\Produit\Rebut;
 
 use Illuminate\View\Component;
 
-class create extends Component
+class Nouveau extends Component
 {
     /**
      * Create a new component instance.
@@ -19,10 +19,10 @@ class create extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|string
+     * @return \Illuminate\Contracts\View\View|\Closure|string
      */
     public function render()
     {
-        return view('components.produit.ajustement.create');
+        return view('components.page.produit.rebut.nouveau');
     }
 }

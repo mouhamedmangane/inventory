@@ -18,7 +18,7 @@
                         <x-slot name="label">
                             <x-generic.forms.form-table-label  labelText="Image" :required="false" />
                         </x-slot>
-                        <x-generic.input.photo id="photo" name="photo" url="" x="150" y="150"/>
+                        <x-generic.input.photo id="photo" name="photo" url="" x="300" y="150"/>
                      </x-generic.forms.form-table-line>
                 </div>
                 <div class="col-md-8 col-sm-12 " >
@@ -28,16 +28,23 @@
                             :dt="['consomable'=>'Consommable','service'=>'Service']" value="consomable" />
                         <x-generic.forms.form-table-select name="categorie" labelText="Categorie Produit" id="categorie"
                             :dt="$categories" value="" />
+                            <div><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                +
+                              </button>
+                            </div>
+
 
 
                     </x-generic.forms.form-table>
                 </div>
                 <div class="col-md-4 col-sm-12">
                     <x-generic.forms.form-table >
-                        <x-generic.forms.form-table-text typpe="number" name="qteStock" labelText="Quantité Stock " placeholder="quantité initial du produit" id="qteStock" step="0.01"/>
-                        <x-generic.forms.form-table-text typpe="number" name="qteSeuil" labelText="Quantité Seuil "  placeholder="quantité minimal en stock" id="qteSeuil"  step="0.01" />
-                        <x-generic.forms.form-table-select name="unite" labelText="Unite | U " required="true"  id="unite"
-                            :dt="['Unite'=>'Par Unité','kilo'=>'Kilogramme | kg','m'=>'Longueur | m','L'=>'Litre | l',''=>'Mettre | m2']" value="Unite" />
+
+                            <x-generic.forms.form-table-text typpe="number" name="qteStock" labelText="Quantité Stock " placeholder="quantité initial du produit" id="qteStock" step="0.01"/>
+                            <x-generic.forms.form-table-text typpe="number" name="qteSeuil" labelText="Quantité Seuil "  placeholder="quantité minimal en stock" id="qteSeuil"  step="0.01" />
+                            <x-generic.forms.form-table-select name="unite" labelText="Unite | U " required="true"  id="unite"
+                                :dt="['Unite'=>'Par Unité','kilo'=>'Kilogramme | kg','m'=>'Longueur | m','L'=>'Litre | l',''=>'Mettre | m2']" value="Unite" />
+
 
                     </x-generic.forms.form-table>
                 </div>
@@ -59,10 +66,20 @@
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <x-generic.forms.form-table>
-                        <x-generic.forms.form-table-interval  name="prix_vente" labelText="Prix de Vente" id="prix_vente" type="fixe" minValue="1" maxValue="3"/>
+                        <x-generic.forms.form-table-interval  name="prix_vente" labelText="Prix de Vente" id="prix_vente" type="fixe" minValue="" maxValue=""/>
+
                     </x-generic.forms.form-table>
                 </div>
+                {{-- reductions produit --}}
+                 {{-- <div class="col-lg-12 col-md-12 col-sm-12  ">
+                    <x-generic.forms.form-table>
+                        <x-generic.noppal-editor-table.table
+                            idTable='testEditor2'
+                            :dd="[]"
+                            :columns="$getColumnsReductions()"/>
 
+                    </x-generic.forms.form-table>
+                </div> --}}
 
             </div>
         </x-generic.navs-tabs.pane>
@@ -71,7 +88,7 @@
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <x-generic.forms.form-table>
-                        <x-generic.forms.form-table-interval  name="prix_achat" labelText="Prix d'achat" id="prix_achat" type="fixe" minValue="1" maxValue="3"/>
+                        <x-generic.forms.form-table-interval  name="prix_achat" labelText="Prix d'achat" id="prix_achat" type="fixe" minValue="" maxValue=""/>
                     </x-generic.forms.form-table>
                 </div>
             </div>
@@ -79,7 +96,7 @@
         <x-generic.navs-tabs.pane id="composants" >
 
                 <div class="row">
-                    <div class="col-md-6 col-sm-12 m-auto  ">
+                    <div class="col-lg-8 col-md-10  col-sm-12  ">
                          <x-generic.noppal-editor-table.table
                             idTable='testEditor'
                             :dd="[]"
@@ -93,6 +110,26 @@
 
         </x-generic.navs-tabs.pane>
 
+
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Nouvelle Catégorie</h5>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
     </x-generic.navs-tabs.content>
 
     <button type="submit">Envoyer</button>
@@ -101,6 +138,9 @@
 @once
     @push('script')
         <script type="text/javascript">
-        </script>
+             $('#myModal').on('shown.bs.modal', function () {
+                   $('#myInput').trigger('focus')
+                })
+         </script>
     @endpush
 @endonce

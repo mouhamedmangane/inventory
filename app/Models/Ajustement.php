@@ -12,4 +12,9 @@ class Ajustement extends Model
     {
         return $this->belongsTo('App\Model\Produit');
     }
+    public function ligne_ajustements(){
+
+        return $this->hasMany(LigneAjustement::class);
+
+    }
 }

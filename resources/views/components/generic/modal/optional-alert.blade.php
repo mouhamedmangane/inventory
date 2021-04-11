@@ -26,10 +26,10 @@ $(function(){
         </div>\
         ';
         $('body').append(html);
-        
+
         return $('#'+options.id);
     };
 });
-</script>      
+</script>
 @endpush
 @endonce

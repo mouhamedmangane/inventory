@@ -49,7 +49,7 @@ class NewProduct extends Component
                     ->unique(true)
                     ->defaultOption('selectionner Produit');
         $columns[]= GCellFactory::text('quantite','quantite','quantite')
-                    ->type('numeric')
+                    ->type('number')
                     ->defaultValue('0')
                     ->setClassTd('npl-editor-td-sm');
         $columns[]= GCellFactory::text('unites','unites','unites')
@@ -60,10 +60,46 @@ class NewProduct extends Component
 
         return $columns;
     }
-    public function getColumnsReductions(){
-        $columns=[];
+    // public function getColumnsReductions(){
+    //     $columns=[];
+    //     $columns[]= GCellFactory::text("reduction_name",'reduction_name','reduction_name')
+    //                 ->setClassTd('npl-editor-td-sm')
+    //                 ->defaultValue('')
+    //                  ;
 
-    }
+    //     $columns[]= GCellFactory::text("apartir",'apartir','apartir')
+    //                 ->type('number')
+    //                 ->setClassTd('npl-editor-td-sm')
+    //                 ->defaultValue('')
+    //                 ;
+    //     $columns[]= GCellFactory::text("pourcentage","pourcentage","pourcentage")
+    //                 ->type("number")
+
+    //                 ->setClassTd('npl-editor-td-sm')
+    //                 ->defaultValue('')
+    //                 ;
+    //     $columns[]= GCellFactory::text("datedebut","datedebut","datedebut")
+    //                 ->type('datetime-local')
+    //                 ->setClassTd('npl-editor-td-md')
+    //                 ->defaultValue("")
+    //                 ;
+    // $columns[]= GCellFactory::text("datefin",'datefin','datefin')
+    //                 ->type('datetime-local')
+    //                 ->setClassTd('npl-editor-td-md')
+    //                 ->defaultValue('')
+    //                 ;
+    //     $columns[]= GCellFactory::text("Client",'Client','Client')
+    //                 ->setClassTd('npl-editor-td-sm')
+    //                 ->defaultValue('')
+    //                 ;
+    //     $columns[]= GCellFactory::text("P.Unitarie",'montant','montant')
+    //                 ->setClassTd('npl-editor-td-sm')
+    //                 ->defaultValue('')
+    //                 ;
+
+    //     return $columns;
+
+    // }
 
     /**
      * Get the view / contents that represent the component.
