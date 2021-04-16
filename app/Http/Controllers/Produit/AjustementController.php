@@ -8,6 +8,8 @@ use App\Models\Produit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Carbon;
 use DataTables;
 
 
@@ -63,7 +65,9 @@ class AjustementController extends Controller
             })
 
             ->addColumn('nbre_prod_ajuste',function($ajustement){
-                return 5;
+                $count=LigneAjustement::where('ajustement_id',$ajustement->id)->where('ajuste',true)->get()->count();
+                //$count=$count->count();
+                return $count;
            })
            ->addColumn('date',function($ajustement){
                  return $ajustement->created_at;
@@ -94,7 +98,7 @@ class AjustementController extends Controller
         $rules=[
             //image pour l'image de type image
             'produits.*' => 'required|unique:produits',
-            'qteReelle.*' => 'nullable|regex:/^\d+(\.\d{1,2})?$/',//decimal
+            'stockReelle.*' => 'regex:/^\d+(\.\d{1,2})?$/',//decimal
             'notes.*' => 'nullable',
 
 
@@ -106,26 +110,8 @@ class AjustementController extends Controller
 
 
         ];
-        if($request->produits){ //composants
-            $rules['produits.*']='required';
-            $rules['quantite.*']='regex:/^\d+(\.\d{1,2})?$/|not_in:0';
 
-        }
-        // if($request->reductions){
-        //     $rules['reduction_name.*']="required|unique:reductions";
-        //     $rules['apartir.*']= 'required|numeric|min:1|not_in:0';
-        //     $rules['pourcentage.*']= 'nullable|numeric|min:0|max:100|not_in:0';
-        //     $rules['datedebut.*']= 'required|datetime|after_or_equal:today';
-        //     $rules['datefin.*']= 'nullable|datetime|after_or_equal:datedebut';
-        //     $rules['client.*']='required|integer|min:1';
-        //     $rules['pu.*']='required|integer|min:1'; //gt:champ
-
-
-
-
-        // }
-
-        $this->validator = Validator::make($request->all(), $rules,$messages);
+       // $this->validator = Validator::make($request->all(), $rules,$messages);
 
 
 
@@ -133,29 +119,61 @@ class AjustementController extends Controller
       try
       {
         $ajustement= new Ajustement();
+        $ajustement->numero="A".now()->toDateTimeString();
         $ajustement->save();
-            foreach ($request->LigneAjustements as $ligneAjus) {
+        //dd($request);
+
+        $produits=$request->produits;
+            $tabProduits=[];
+            for ($i=0; $i<count($produits); $i++) {
                 $lA= new LigneAjustement();
 
-                    $lA->notes= $ligneAjus->notes;
-                    $lA->pu= $ligneAjus->pu;//prix pour ala valorisation de l'inventaire
-                    $lA->qteAvant  = $ligneAjus->qteAvant;
-                    $lA->qteReelle  = $ligneAjus->qteReelle;
+                    $lA->notes= $request->notes[$i];
+                    //$lA->pu= $request->prix[$i];//prix pour ala valorisation de l'inventaire
+
+                    $produit= Produit::findOrFail($produits[$i]);
+                    $lA->produit_id=$produit->id;
+                    $lA->qteAvant  = $produit->qteStock;
+                    $lA->qteReelle  = $request->stockRelle[$i];
                     $lA->ajustement_id=$ajustement->id;
                     //etc
-                    $produit= Produit::findOrFail($ligneAjus->produit_id);
-                    $lA->produit_id=$produit->id;
 
-                    $lA= ($lA->qteAvant!=$lA->qtReelle);
+                    $tabProduits[]=$produit->id;
+                    $lA->ajuste = ($lA->qteAvant!=$lA->qtReelle);
 
-                    DB::update('update produits set qteStock ='.$ligneAjus->qteReelle.'where id = ?', [$produit->id]);
+                    DB::update('update produits set qteStock ='.$lA->qteReelle.' where id = ?', [$produit->id]);
                     $lA->save();
             }
+
+            $products=Produit::all();
+           // dd($products);
+            foreach ($products as $product) {
+                $lA= new LigneAjustement();
+                if (!in_array($product->id,$tabProduits)) {
+                    //$lA->pu= 0;//prix pour a la valorisation de l'inventaire
+                    $lA->qteAvant  = $product->qteStock;
+                    $lA->qteReelle  = $product->qteStock;
+                    $lA->ajustement_id=$ajustement->id;
+                    $lA->produit_id=$product->id;
+                    $lA->save();
+
+                }
+            }
+
             DB::commit();
+            return response()->json([
+                "status"=>true,
+                "message"=>"Ajustement a été enregistré avec succès ",
+                'data'=>''
+            ]);
 
         } catch(\Exception $ex){
             DB::rollBack();
-            return response()->json(['error' => $ex->getMessage()], 500);
+            return response()->json([
+                "status"=>false,
+                "message"=>"No AJustement ",
+                'data'=>$ex->getMessage()
+            ]);
         }
     }
 

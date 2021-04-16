@@ -1,3 +1,3 @@
 @extends('layouts-page.param-compte')
 
-<x-role.page.create />
+<x-role.page.create :role="$role"/>

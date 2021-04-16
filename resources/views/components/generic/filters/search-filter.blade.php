@@ -1,7 +1,8 @@
 @props(['idInput'=>App\ViewModel\GenId::newId()])
 
 <button type="button" class="btn-scroll btn-scroll-left  btn btn-primary btn-default btn-sm px-0"><</button>
-<form class="position-relative search-filter scrollable no-scrollbar  n-col-sm-12 flex-wrap-sm overflow-sm-hidden border px-1 rounded "   
+<form class="position-relative search-filter scrollable no-scrollbar  n-col-sm-12 flex-wrap-sm overflow-sm-hidden border px-1 rounded " 
+      id="{{ $id }}__form_search"
       style="overflow-x: auto!important;padding-right:20px;"  >
     
     <div  id="{{ $id }}" class="d-flex align-items-center flex-grow-1 idSearch n-col-sm-12 flex-wrap-sm  ">
@@ -84,7 +85,14 @@ $(function(){
         clearInterval(timeout);
     });
 
-    
+    $('.search-search').on('focus',function(){
+        
+        $(this).parent().parent().addClass('search-form-focus ');
+    });
+    $('.search-search').on('blur',function(){
+        
+        $(this).parent().parent().remove('search-form-focus');
+    });
     
 });      
 </script>    
@@ -96,9 +104,9 @@ $(function(){
         $(function(){
             @if($dataTableId && !empty($dataTableId))
             $('#{{ $idInput }}').on('keyup',function(event){
-                console.log($('#{{ $id }}').serializeObject());
+                //  console.log($('#{{ $id }}__form_search').serializeObject());
                 let dataTable = $('#{{ $dataTableId }}').DataTable();
-                dataTable.ajax.data=$('#{{ $id }}').serializeObject();
+                $.chargement();
                 dataTable.ajax.reload();    
             });
              @endif

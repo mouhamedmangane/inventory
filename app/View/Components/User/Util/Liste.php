@@ -1,0 +1,40 @@
+<?php
+
+namespace App\View\Components\User\Util;
+
+use Illuminate\View\Component;
+
+class Liste extends Component
+{
+    public $users;
+    /**
+     * Create a new component instance.
+     *
+     * @return void
+     */
+    public function __construct($users)
+    {
+        $this->users=$users;
+    }
+
+    public function getHeadTable(){
+        return [
+            (object)['name'=>'Nom','propertyName'=>'nom','classStyle'=>""],
+            (object)['name'=>"Email",'propertyName'=>'email','classStyle'=>""],
+            (object)['name'=>"Tél",'propertyName'=>'tel'],
+            (object)['name'=>"Boutique(s)",'propertyName'=>'boutiques'],
+            (object)['name'=>"Crée le",'propertyName'=>'created_at_f'],
+            (object)['name'=>"Modifier le",'propertyName'=>'updated_at_f'],
+        ];
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     *
+     * @return \Illuminate\Contracts\View\View|string
+     */
+    public function render()
+    {
+        return view('components.user.util.liste');
+    }
+}

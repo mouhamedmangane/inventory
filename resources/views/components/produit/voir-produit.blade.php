@@ -1,5 +1,5 @@
 
-
+    @section('ly-main-top')
         <x-generic.navs-tabs.nav id="tabProduct" class=" ">
             <x-generic.navs-tabs.item text="Information Générale" idPane="general"  id="general-tab" active="true" classLink="ml-3" />
             {{-- <x-generic.navs-tabs.item text="Vente"  idPane="vente" id="vente-tab"  /> --}}
@@ -9,6 +9,8 @@
             <x-generic.navs-tabs.item text="Historique" idPane="historique" id="historique-tab"  />
 
         </x-generic.navs-tabs.nav>
+
+    @endsection
         <x-generic.navs-tabs.content id="tabProductContent" class="px-4 py-3" >
 
                 <x-generic.navs-tabs.pane id="general" active="true"  >
@@ -276,7 +278,7 @@
 
     @once
          @push('script')
-             <script type="text/javascript">
+             {{-- <script type="text/javascript">
                 $("#photo").on("change",function(){
                     alert("changement phote");
                     $.ajaxSetup({
@@ -284,30 +286,30 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
                     $.ajax({
-                    type:'',
-                    url: "produit/edit/img/ ",
-                    data: "data",
-                    dataType: "json",
-                    success: function (response) {
-                        if(response.status){
-                            alerter(btn_data,'Operation effectuée '+btn_data.op,message,true);
-                            disabledAllActions(false);
+                        type:'',
+                        url: "produit/edit/img/ ",
+                        data: "data",
+                        dataType: "json",
+                        success: function (response) {
+                            if(response.status){
+                                alerter(btn_data,'Operation effectuée '+btn_data.op,message,true);
+                                disabledAllActions(false);
+                            }
+                            else{
+                                alerter(btn_data,'Echec Opération '+btn_data.op,message,false);
+                            }
+                        },
+                        error: async function (err){
+                            $("#modal_suppression").on('hidden.bs.modal', function (e) {
+                                $("#modal_suppression").remove();
+                            });
+                            await $("#modal_suppression").modal('hide');
+                            alerter(btn_data,'Echec Opération '+btn_data.op,'Ressource Indisponible, Vérifier la connexion',false);
                         }
-                        else{
-                            alerter(btn_data,'Echec Opération '+btn_data.op,message,false);
-                        }
-                    },
-                    error: async function (err){
-                        $("#modal_suppression").on('hidden.bs.modal', function (e) {
-                            $("#modal_suppression").remove();
                         });
-                        await $("#modal_suppression").modal('hide');
-                        alerter(btn_data,'Echec Opération '+btn_data.op,'Ressource Indisponible, Vérifier la connexion',false);
-                    }
-                    });
-                });
+                     });
 
-             </script>
+             </script>--}}
          @endpush
      @endonce
 

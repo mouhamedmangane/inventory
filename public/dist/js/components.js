@@ -140,5 +140,31 @@ $(function(){
         if($(idSearch))
             $(idSearch).trigger('n-resize');
     };
- 
+    
+
+
+
+
+    //Chargement
+    $.chargementActive=false;
+    $.chargement=function(){
+        if($.chargementActive==false){
+        $('#content').append('<div id="apieditorchargement" \
+                                    class="position-absolute w-100 "\
+                                    style="top:0px;left:0px;height:calc(100vh - 48px);background:rgba(0,0,0,0.3);"\
+                              ></div>');
+        $('#content').append('<div id="apieditorchargementmessage" \
+                                    class="position-absolute  text-align-center px-4 py-2"\
+                                    style="top:calc(50% - 20px);left:calc(50% - 125px);background:white;color:black; width:300px;text-align:center;">\
+                                    Requete Asynchrone chargment ...\
+                             </div>');
+                             $.chargementActive=true;
+        }
+    };
+    $.rmchargement=function(){
+        $('#apieditorchargement').remove();
+        $('#apieditorchargementmessage').remove();
+        $.chargementActive=false;
+
+    };
 });

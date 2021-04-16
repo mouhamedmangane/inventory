@@ -14,5 +14,9 @@ class Role extends Model
         return $this->belongsToMany('App\Models\User', 'role_users_table', 'role', 'user_id');
     }
 
+    public function role_objets(){
+        return $this->hasMany('App\Models\RoleObjet','role_id','id');
+    }
+
 
 }

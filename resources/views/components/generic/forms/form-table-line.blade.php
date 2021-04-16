@@ -6,9 +6,9 @@
         {{ $label }} 
     </td>
 
-    <td style="width: 100%;@if($attributes['disposition']=='block')display:block;@endif" class="mr-2 n-form-table-col-input" >
+    <td style="width: 100%;@if($attributes['disposition']=='block')display:block;@endif" class="mr-2 n-form-table-col-input n__parent__message" >
         {{ $slot }}
-        <div class="form-table-feedback">
+        <div class="form-table-feedback n__element__message" id="{{ $attributes['idMessage'] }}">
             
         </div>
     </td>

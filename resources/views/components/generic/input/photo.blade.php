@@ -38,8 +38,6 @@
                     @endif
     </div>
 </div>
-
-
 @push('script')
 <script>
     $(document).ready(function(){
@@ -67,3 +65,5 @@
     });
 </script>
 @endpush
+
+

@@ -26,7 +26,12 @@ $(function(){
         </div>\
         ';
         $('body').append(html);
-
+        $('#'+options.id).on('shown.bs.modal',function(){
+            $("#"+options.id+'__btn_close').focus();
+        });
+        $('#'+options.id).on('hidden.bs.modal',function(){
+            $("#"+options.id).remove();
+        });
         return $('#'+options.id);
     };
 });

@@ -39,7 +39,7 @@
              <i class="material-icons">add_shopping_cart</i>
             @endif
         </div>
-         <x-generic.links.select-link contentCible="my-main" value="test1" :dt="['/produit/newProd'=>'Modification Produit : '.$produit->libelle,]" />
+         <x-generic.links.select-link contentCible="my-main" value="test1" :dt="['/produit/'.$produit->id.'/edit'=>'Modification Produit : '.$produit->libelle,]" />
     </div>
 
 </div>

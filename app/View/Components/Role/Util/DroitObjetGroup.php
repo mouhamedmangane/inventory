@@ -20,10 +20,12 @@ class DroitObjetGroup extends Component
     }
 
     public function getRoleObjectByObjet($objet){
-      
-        return  collect($this->role->role_objects)->first(function($value,$key){
-            return $value->objet_id == $objet->id;
+       $id=$objet->id;
+       return collect($this->role->role_objets)->first(function($value,$key) use($id){
+            return $value->objet_id == $id;
         });
+
+
            
     }
 

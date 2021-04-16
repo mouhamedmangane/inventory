@@ -5,6 +5,7 @@
             name="myDataTable" url="{{ url('/produit/data/') }}" :columns="$columns()"
             idDivPaginate="bass-right" idDivInfo="bas-left" pageLength="10"
             selectName="myDataTableSelect" searchId='mySearch'
+
             pageLength="25"
             idAlert="addProduitAlert"
             groupByEnable="true"

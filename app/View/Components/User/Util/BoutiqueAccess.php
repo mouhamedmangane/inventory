@@ -14,23 +14,23 @@ class BoutiqueAccess extends Component
 
     public $user,$roles,$boutiques;
 
-    private $boutiqueAccees
+    private $boutiqueAccess=[]
             ,$editable;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($user=null,$Editable=false)
+    public function __construct($user=null,$editable=false)
     {
         $this->user=$user;
         $this->editable=$editable;
         //
-        $this->roles=Roles::get()->pluck('role_nom','id');
-        $this->boutiques=Boutiques::get()->pluck('nom','id');
+        $this->roles=Role::all()->pluck('nom','id');
+        $this->boutiques=Boutique::all();
         
-        if($user){
-            $this->boutiqueAccess= $user->boutiqueAccess;
+        if($user && isset($user->id)){
+            $this->boutiqueAccess= $user->boutique_users;
             
         }
     }
@@ -40,15 +40,13 @@ class BoutiqueAccess extends Component
     }
 
     public function getAccessBoutique($boutique){
-        return collect($this->boutiqueAcess)->first(function($value,$key){
-            return $value->boutique_id == $boutique_id;
+        return collect($this->boutiqueAccess)->first(function($value,$key)use($boutique){
+            return $value->boutique_id == $boutique->id;
         });
     }
 
-    // ce
-    public function getIdRoleForSelect($boutiqueAccess){
-        return ($boutiqueAccess) ? $boutiqueAccees->role_id : -1;
-    }
+    
+
 
 
     /**
@@ -58,10 +56,10 @@ class BoutiqueAccess extends Component
      */
     public function render()
     {
-        if($this->editable)
-            return view('components.param-compte.util.boutique-access');
+        if(!$this->editable)
+            return view('components.user.util.boutique-access');
         else
-            return view('components.param-compte.util.boutique-access-editable');
+            return view('components.user.util.boutique-access-editable');
 
     }
 }

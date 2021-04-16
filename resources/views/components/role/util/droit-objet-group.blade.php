@@ -19,7 +19,7 @@
     </thead>
     <tbody>
         @foreach ($objets as $objet )
-        <x-role.util.droit-objet :objet="$objet"  roleObjet="$getRoleObjectByObjet($objet)"  />    
+            <x-role.util.droit-objet :objet="$objet"  :roleObjet="$getRoleObjectByObjet($objet)"  />    
         @endforeach
         
     </tbody>

@@ -4,9 +4,48 @@ namespace App\Http\Controllers\ParamCompte;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\BoutiqueUser;
+use App\Util\HydrateFacade;
+use DB,DataTables,Validator;
 
 class UserController extends Controller
 {
+
+    public function getData(Request $request){
+        $validator = Validator::make($request->all(),[
+            'nom'=>'max:200'
+        ]);
+        $users=User::all();
+        $message="";
+        $status="true";
+        if($validator->fails()){
+            $users=[];
+            $message="";
+            $status=false;
+        }
+        
+        return DataTables::of($users)
+                ->addColumn("boutiques",function($user){
+                    return BoutiqueUser::where('user_id',$user->id)->distinct()->count().' boutiques (s)';
+                })
+                ->addColumn("nom",function($user){
+                    return view('components.generic.links.simple')
+                    ->with('url',url("param-compte/users/".$user->id))
+                    ->with('text',$user->name)
+                    ->with('class','lien-sp');
+                })
+                ->addColumn("created_at_f",function($user){
+                    return $user->created_at->format('d-m-Y H:i');
+                })
+                ->addColumn("updated_at_f",function($user){
+                    return $user->updated_at->format('d-m-Y H:i');
+                })
+                ->rawColumns(['name','email','tel','boutiques','created_at_f','updated_at_f'])
+                ->with('message',$message)
+                ->with('status',$status)
+                ->toJson();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +53,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users=User::all();
+        return view("page.param-compte.user.liste",compact('users'));
     }
 
     /**
@@ -24,7 +64,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view("page.param-compte.user.create");
+        $user=new User;
+        return view("page.param-compte.user.create",compact('user'));
     }
 
     /**
@@ -35,7 +76,83 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $response=$this->save($request,$this->memeValidationSave()+[
+            "login"=>"required|max:100|unique:users,email",
+            "pwd"=>"required|confirmed|max:100",
+            ],
+            ['name'=>'nom','email'=>'login','password'=>'pwd','ncni','tel'],
+            'save'
+        );
+        
+        return response()->json($response);
+       
+    }
+
+    public function save(Request $request,Array $validationArray,$hydrateArray,$dataBaseMethod){
+         $validator = Validator::make($request->all(), $validationArray);
+        if($validator->fails()){
+            return \App\Http\ResponseAjax\Validation::validate($validator);
+        }
+        else{
+            DB::beginTransaction();
+            try {
+                $user=new User;
+                HydrateFacade::make($user,$request,$hydrateArray);
+                if($user->$dataBaseMethod()){
+                    $this->saveBoutiqueUsers($request->ba,$user->id);
+                }
+                DB::commit();
+                return [
+                    'status'=>true,
+                    'message'=>'Enregistrement effectué avec success'
+                ];
+            } catch (\Throwable $th) {
+                DB::rollback();
+                
+                return [
+                    'status'=>false,
+                    'message'=>__('messages.erreur_inconnu').' '.__('messages.operation_encore'),
+                    'srr'=>dd($th)
+                ];
+            }
+           
+        }
+
+    }
+
+    public function memeValidationSave(){
+        
+        $tab=[
+            "nom"=>"required|max:100",
+            
+            "ba"=>"array",
+            "ba.*.boutique"=>"numeric|required_with:ba.*.role|exists:App\Models\Boutique,id",
+            "ba.*.role.*"=>'numeric|exists:App\Models\Role,id',
+            "ba.*.activer"=>"max:100",
+            "image"=>"image",
+            'ncni'=>'max:50',
+            'tel' =>'max:20'
+        ];
+        return $tab;
+    }
+
+    public function saveBoutiqueUsers($bu_rqts,$user_id){
+        foreach($bu_rqts as $bu_rqt){
+            $bu =BoutiqueUser::where('user_id',$user_id)->where('boutique_id',$bu_rqt['boutique'])->first(); 
+            if($bu){
+                $bu->role_id = $bu_rqt['role'];
+                $bu->role_id = ($bu_rqt['activer'])? 1 : 0;
+                $bu->update();
+            }
+            else{
+                $bu= new BoutiqueUser;
+                $bu->boutique_id = $bu_rqt['boutique'];
+                $bu->user_id = $user_id;
+                $bu->role_id = $bu_rqt['role'];
+                $bu->activer= (isset($bu_rqt['activer']))? 1 : 0;
+                $bu->save();
+            }
+        }
     }
 
     /**
@@ -46,7 +163,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user= User::where('id',$id)->first();
+        return view("page.param-compte.user.create",compact('user'));
+        
     }
 
     /**
@@ -57,7 +176,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user= User::where('id',$id);
+        return view("page.param-compte.user.create",compact('user'));
     }
 
     /**
@@ -68,8 +188,16 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        $request->id=$id;
+        $response = $this->save($request,$this->memeValidationSave()+[
+            "login"=>"required|max:100|unique:users,email",
+            "id"=>"required|numeric|exists:users,id",
+            ],
+            ['name'=>'nom','email'=>'login/exist','password'=>'pwd','ncni','tel'],
+            'save'
+        );
+        return response()->json($response);
     }
 
     /**
@@ -82,4 +210,40 @@ class UserController extends Controller
     {
         //
     }
+
+    public function destroyMany(Request $request)
+    {
+        $validator=Validator::make($request->all(),
+        [
+            'role_select'=>'array|required',
+            'role_select.*'=>['numeric','exists:App\Models\Role,id',
+                              new \App\Rules\DbDependance('boutique_users','role_id',[['activer',1]])]
+        ]);
+
+        if($validator->fails()){
+            return response()->json(\App\Http\ResponseAjax\Validation::validate($validator));
+        }
+        else{
+            return response()->json(\App\Http\ResponseAjax\DeleteRow::many('roles',$request->role_select));
+           
+        }
+    }
+
+    public function archiver(Request $request){
+        $validator=Validator::make($request->all(),
+        [   
+            'role_select'=>'array|required',
+            'role_select.*'=>['numeric','exists:App\Models\Role,id',]
+        ]);
+        if($validator->fails()){
+            return response()->json(\App\Http\ResponseAjax\Validation::validate($validator));
+        }
+        else{
+            return response()->json(\App\Http\ResponseAjax\UpdateRow::manyForOnAttr('roles',$request->role_select,
+                                                                                            ['archiver'=>1],
+                                                                                            'messages.nbr_update'));
+           
+        }
+    }
+
 }

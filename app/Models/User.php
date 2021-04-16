@@ -65,9 +65,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\DroitSpecifique');
     }
 
-    public function boutiques()
+    public function boutique_users()
     {
-         return $this->belongsToMany('App\Models\Boutique');
+         return $this->hasMany('App\Models\BoutiqueUser');
    }
     public function evenements()
     {

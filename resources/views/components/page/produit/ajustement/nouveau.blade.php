@@ -1,25 +1,25 @@
 
-@extends('layouts.ly')
+@extends('layouts.ly-list')
 @section('ly-toolbar')
     <x-generic.tool-bar.bar >
         <x-generic.tool-bar.prev-button id="prev_tb"  url="/produit/ajustement"  />
-        <x-generic.input.button-submit  id="test-button-submit"
-                                        idForm="addProduct"
-                                        idContentAlert="addProduitAlert"
+        {{-- <x-generic.input.button-submit  id="test-button-submit"
+                                        idForm="ajustement"
+                                        idContentAlert="ajustementAlert"
                                         class="btn btn-primary btn-sm d-flex align-items-center mr-3 "
                                         text="Enregistrer"
                                         isReset="true"
-                                        {{-- hrefId="/produit/list" --}}
+                                        hrefId="/produit/list"
                                         parentMessageClass="n-form-table-col-input"
                                         elementMessageClass="form-table-feedback"
-                                        icon="save"/>
+                                        icon="save"/> --}}
         <x-generic.tool-bar.button id="modifier_prod_tb" text="Annuler" icon="clear" evidence=""  />
 
     </x-generic.tool-bar.bar >
 @endsection
 
 @section('ly-alert')
-    <div class="" id="addProduitAlert" style="position: sticky;top:43px;border-radius:0px;"></div>
+    <div class="" id="ajustementAlert" style="position: sticky;top:43px;border-radius:0px;"></div>
 @endsection
 @section('ly-title')
 <div class="d-flex align-items-center justify-content-between px-4 mt-1">

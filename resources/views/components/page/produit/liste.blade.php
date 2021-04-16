@@ -17,8 +17,8 @@
         <x-generic.tool-bar.button id="archiver_prod_tb" text="Archiver" icon="archive" disabled="disabled" />
         <x-generic.tool-bar.button id="favoris_prod_tb" text="Favoris" icon="grade"  disabled="disabled" />
         <x-generic.filters.filter :filter="$getFilter()"/>
-        <x-generic.data-table.group-by-btn id="groupby_prod_tb"  label="Grouper Par" idDataTable="myDataTable"
-                                           :dt="['categorie'=>'categorie','fournisseur'=>'Fournisseur']" defaultSelected=''  />
+
+
     </x-generic.tool-bar.bar>
 @endsection
 
@@ -34,9 +34,12 @@
         <x-slot name="image">
             <x-generic.icon.simple name="assignment" taille="16" />
         </x-slot>
-        <x-generic.links.select-link contentCible="my-main" value="test1" class="mx-2"
-            :dt="['/produit/data/'=>'Mes Produits','/produit/list/non_archived'=>'Produit Composés','/produit/list/archived'=>'Produits Archivés','/test2'=>'Produit  Vendable']" />
-
+            <x-generic.links.select-link-dt idDataTable="myDataTable" value="tous"
+            :dt="[
+                url('produit/data')=>'Mes produits',
+                url('produit/data/archiver')=>'Produits Archivé',
+            ]"
+            class="mx-2" />
         <x-slot name="right">
             <x-generic.filters.search-filter id="mySearch" name="all" dataTableId='myDataTable' />
         </x-slot>

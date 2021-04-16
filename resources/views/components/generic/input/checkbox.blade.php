@@ -5,8 +5,14 @@
     @props(['idd' => App\ViewModel\GenId::newId()])
 @endif
 
-<div class="custom-control  custom-switch custom-control-inline" class="">
+<div class="d-flex align-items-center">
 
+@if ($attributes['prev'])
+    <span class="d-inline-block mr-2">{{ $attributes['prev'] }}</span>
+@endif
+
+<div class="custom-control  custom-switch custom-control-inline" class="">
+ 
     <input  type="checkbox"
             name="{{ $name }}"
             value="{{ $value }}"
@@ -26,4 +32,9 @@
     <label for="{{ $idd }}" class="custom-control-label">
     </label>
 
+</div>
+
+@if ($attributes['next'])
+    <span class="d-inline-block ">{{ $attributes['next'] }}</span>
+@endif
 </div>

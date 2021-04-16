@@ -11,7 +11,7 @@
                                        parentMessageClass=""
                                        elementMessageClass=""
                                        icon="save"/>
-        <x-generic.tool-bar.link id="all_user" icon="person" url="/param-compte/users" text="Tous les utilisateurs"  />
+        <x-generic.tool-bar.link id="all_user" icon="group  " url="/param-compte/users" text="Tous les utilisateurs"  />
 
     </x-generic.tool.bar.bar>
 @endsection
@@ -36,5 +36,5 @@
 @endsection
 
 @section('ly-main-content')
-    <x-user.util.create  />
+    <x-user.util.create  :user="$user" />
 @endsection

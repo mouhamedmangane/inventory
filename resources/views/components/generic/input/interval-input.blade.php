@@ -40,18 +40,18 @@
     $(document).ready(function(){
 
         $("input[name='{{ $name }}__radio']").on("change",function(e){
-            let type= $("input[name='{{ $name }}__radio']:checked").val();
-            if(type =='fixe'){
-                $('#{{ $idd }}__max__content').hide();
-                $("#{{ $idd }}__min").attr('placeholder','{{ $attributes['placehoder'] }}')
-                $("#{{ $idd }}__seperateur").hide();
-            }
-            else{
-                $('#{{ $idd }}__max__content').show();
-                $("#{{ $idd }}__min").attr('placeholder','min');
-                $("#{{ $idd }}__seperateur").show();
+              let type= $("input[name='{{ $name }}__radio']:checked").val();
+              if(type =='fixe'){
+                  $('#{{ $idd }}__max__content').hide();
+                  $("#{{ $idd }}__min").attr('placeholder','{{ $attributes['placehoder'] }}')
+                  $("#{{ $idd }}__seperateur").hide();
+              }
+              else{
+                  $('#{{ $idd }}__max__content').show();
+                  $("#{{ $idd }}__min").attr('placeholder','min');
+                  $("#{{ $idd }}__seperateur").show();
 
-            }
+              }
         });
     });
 </script>

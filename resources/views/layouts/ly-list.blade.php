@@ -1,10 +1,10 @@
-
+@section('content')
 
 
     <div class="ly-toolbar">
         @yield('ly-toolbar')
     </div>
-    
+
     <div class="ly-content ly-list-content">
         <div class="ly-alert">
             @yield('ly-alert')
@@ -21,4 +21,6 @@
             </div>
         </div>
     </div>
+
+@endsection
 

@@ -4,7 +4,7 @@
         @props(['req'=> 'false'])
 @endif
 
-<x-generic.forms.form-table-line class="{{ $attributes['class'] }}" disposition="{{ $attributes['disposition'] }}">
+<x-generic.forms.form-table-line class="{{ $attributes['class'] }}" disposition="{{ $attributes['disposition'] }}" :idMessage="'form__message__'.$name">
 
     <x-slot name="label">
         <x-generic.forms.form-table-label  :labelText="$labelText" required="{{ $req }}"  disposition="{{ $attributes['disposition'] }}" />

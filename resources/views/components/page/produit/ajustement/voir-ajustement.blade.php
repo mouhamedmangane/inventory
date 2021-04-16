@@ -1,5 +1,5 @@
 
-@extends('layouts.ly')
+@extends('layouts.ly-list')
 
 @section('header')
     <link rel="stylesheet" href="{{ URL::asset('plugin/DataTables/datatables.min.css') }}">
@@ -9,7 +9,10 @@
 
 @section('ly-toolbar')
     <x-generic.tool-bar.bar >
-        <x-generic.tool-bar.link id="nouveau_prod_tb" text="Nouveau" icon="add" url="produit/new" evidence="btn-primary" />
+
+        <x-generic.tool-bar.prev-button id="prev_tb"  url="/produit/ajustement"  />
+
+        <x-generic.tool-bar.link id="nouveau_prod_tb" text="Nouveau" icon="add" :url="url('produit/ajustement/new')" evidence="btn-primary" />
         <x-generic.tool-bar.button id="modifier_prod_tb" text="Modifier" icon="edit"  disabled="disabled" />
         <x-generic.tool-bar.button id="supprimer_prod_tb" text="Supprimer" icon="delete"  disabled="disabled" />
         <x-generic.tool-bar.divider/>
@@ -43,6 +46,13 @@
         </div>
          <x-generic.links.select-link contentCible="my-main" value="test1" :dt="['/produit/newProd'=>'Ajustements/DateAjustement','/test2'=>'Nouveau Produit Composé']" />
     </div>
+    <div class="">
+        <x-generic.infos.info-list>
+            <x-generic.infos.info-item title="Enregistré le" :value="$ajustement->created_at" icon="save" />
+
+        </x-generic.infos.info-list>
+    </div>
+
 
 </div>
 @endsection

@@ -21,13 +21,13 @@ class VoirAjustement extends Component
     }
     public function columns(){
         return [
-            (object)  ['name'=>'Produit','propertyName'=>'produit','taille'=>"75px","classStyle"=>""],
-            (object)  ['name'=>'Categorie ','propertyName'=>'categorie','taille'=>"75px","classStyle"=>""],
-            (object)  ['name'=>'S. Avant | Apres','propertyName'=>'stock',"classStyle"=>"dt-col-1 text-align-center"],
+            (object)  ['name'=>'Produit','propertyName'=>'produit'],
+            (object)  ['name'=>'Categorie ','propertyName'=>'categorie'],
+            (object)  ['name'=>'S. Avant -> Apres','propertyName'=>'stock',"classStyle"=>"dt-col-1 text-align-center"],
             (object)  ['name'=>'P.ajusté','propertyName'=>'ajuste',"classStyle"=>"dt-col-1 text-align-center"],
-            // (object)  ['name'=>'Date','propertyName'=>'date',"classStyle"=>"dt-col-3"],
-            // (object)  ['name'=>'Prix','propertyName'=>'prix','visible'=>false,"classStyle"=>""],
-            (object)  ['name'=>'Notes','propertyName'=>'notes','visible'=>false,"classStyle"=>""],
+            (object)  ['name'=>'Date','propertyName'=>'date',"classStyle"=>"dt-col-3"],
+            (object)  ['name'=>'Prix','propertyName'=>'prix','visible'=>false,"classStyle"=>""],
+            (object)  ['name'=>'Notes','propertyName'=>'notes','visible'=>false,]
         ];
 
 
@@ -46,7 +46,7 @@ class VoirAjustement extends Component
                        height='35px'
                        class='rounded-circle'
                        >
-                <a href='".url("produit/".$la->id)."' class='lien-sp ft-14px ml-2'>".$la->produit->libelle."</a>";
+                <a href='".url("produit/".$la->produit->id)."' class='lien-sp ft-14px ml-2'>".$la->produit->libelle."</a>";
             })
 
              ->addColumn('categorie',function($la){
@@ -56,7 +56,7 @@ class VoirAjustement extends Component
                 return view('components.generic.bagde.compare')
                             ->with('text1',$la->qteAvant)
                             ->with('text2',$la->qteReelle)
-                            ->with('separateur',' => ');
+                            ->with('separateur','  ->   ');
             })
             ->addColumn('ajuste',function($la){
 
@@ -83,7 +83,7 @@ class VoirAjustement extends Component
                     ->make(true);
                     $response=$json->getData(true);
                    // dd($json);
-
+                    //dd($response['data']);
                     return $response['data'];
         }
 
