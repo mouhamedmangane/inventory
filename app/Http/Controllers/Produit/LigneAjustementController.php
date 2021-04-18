@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Produit;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DataTables;
 
 class LigneAjustementController extends Controller
 {
@@ -41,6 +42,7 @@ class LigneAjustementController extends Controller
 
 
     }
+
     public function returnData(){
 
 

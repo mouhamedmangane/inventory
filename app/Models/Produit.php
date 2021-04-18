@@ -38,13 +38,15 @@ class Produit extends Model
 
     public function done_by_user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User','done_by_user','id');
     }
+
     public function composants()
     {
-        return $this->hasMany('App\Models\Composant', 'paquet_id', 'produit_id');
+        return $this->hasMany('App\Models\Composant', 'paquet_id', 'id');
 
     }
+
     public function reductions()
     {
         return $this->hasMany('App\Models\Reduction');

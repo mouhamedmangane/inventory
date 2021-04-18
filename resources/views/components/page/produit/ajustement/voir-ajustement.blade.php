@@ -1,6 +1,5 @@
-@extends('layouts.ly-list')
 
-
+@extends('layouts.ly')
 
 @section('header')
     <link rel="stylesheet" href="{{ URL::asset('plugin/DataTables/datatables.min.css') }}">
@@ -10,7 +9,7 @@
 
 @section('ly-toolbar')
     <x-generic.tool-bar.bar >
-        <x-generic.tool-bar.link id="nouveau_prod_tb" text="Nouveau" icon="add" url="produit/ajustement/new" evidence="btn-primary" />
+        <x-generic.tool-bar.link id="nouveau_prod_tb" text="Nouveau" icon="add" url="produit/new" evidence="btn-primary" />
         <x-generic.tool-bar.button id="modifier_prod_tb" text="Modifier" icon="edit"  disabled="disabled" />
         <x-generic.tool-bar.button id="supprimer_prod_tb" text="Supprimer" icon="delete"  disabled="disabled" />
         <x-generic.tool-bar.divider/>
@@ -51,11 +50,19 @@
 
 
 @section('ly-main-content')
-    <x-produit.ajustement.voir_ajustement $ajustement="ajustement"/>
+    <x-produit.ajustement.voir_ajustement :ajus="$ajustement"/>
 @endsection
 
 
+@section('ly-main-bot')
+    <div class="d-flex justify-content-between align-items-center  border">
+        <div id='bas-left' class="ml-2">
+        </div>
+        <div id="bass-right" class="mr-2 d-flex">
 
+        </div>
+    </div>
+@endsection
 @once
     @push('script')
         <script type="text/javascript">

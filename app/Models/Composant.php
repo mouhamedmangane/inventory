@@ -9,12 +9,13 @@ class Composant extends Model
 {
     use HasFactory;
 
+    public function produit()
+    {
+        return $this->belongsTo('App\Models\Produit', 'produit_id', 'id');
+    }
     public function paquet()
     {
-        return $this->belongsTo('App\Models\Produit', 'produit_id', 'composant_id');
+        return $this->belongsTo('App\Models\Produit', 'paquet_id', 'id');
     }
-    // public function videos()
-    // {
-    //     return $this->morphedByMany(Video::class, 'taggable');
-    // }
+
 }

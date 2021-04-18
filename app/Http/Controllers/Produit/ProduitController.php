@@ -138,7 +138,8 @@ class ProduitController extends Controller
 
         //dd($request);
         $validator=$this->setValidProduct($request);
-        if ( $validator->fails()) {
+
+        if ($validator->fails()) {
             return response()->json([
                 "status"=>false,
                 "message"=>"Certains valeurs du formulaire ne sont pas renseigné ou sont incorrects:",
@@ -151,23 +152,24 @@ class ProduitController extends Controller
         $produit->libelle=$request->libelle;
         $produit->code=$request->code;
         $produit->rI=$request->rI;
-        $produit->type=$request->type;
         $produit->qteSeuil=$request->qteSeuil;
         $produit->qteStock=$request->qteStock;
         $produit->groupe_produit_id=GroupeProduit::find($request->categorie)->id;
         $produit->unite=$request->unite;
         $produit->vendable=$this->achatable;
         $produit->achetable=$this->vendable;
+
         if (!$request->type) {
             $produit->type='consommable';
         }
         else
-        $produit->type=$request->type;
+             $produit->type=$request->type;
+
         $produit->qteStock=$request->qteStock;
         $produit->qteSeuil=$request->qteSeuil;
         $produit->prixVenteMin=$request->prix_vente_min;
 
-        if($request->prix_vente_max)
+        if(isset($request->prix_vente_max) && $request->prix_vente_max > $request->prix_vente_min )
           $produit->prixVenteMax=$request->prix_vente_max;
         else
           $produit->prixVenteMax=$request->prix_vente_min;
@@ -175,7 +177,7 @@ class ProduitController extends Controller
 
 
         $produit->prixAchatMin=$request->prix_achat_min;
-        if($request->prix_achat_max)
+        if(isset($request->prix_achat_max) && $request->prix_achat_max > $request->prix_achat_min)
           $produit->prixAchatMax=$request->prix_achat_max;
         else
           $produit->prixAchatMax=$request->prix_achat_min;
@@ -196,18 +198,19 @@ class ProduitController extends Controller
                         $produit->img=$filename;
                         if($save)
                             $produit->save();
-                        }
+                    }
 
 
                     if($request->produits){
+                        //dd($request->produits);
                         $products=$request->produits;
                         for ($i=0; $i <count($products); $i++) {
                             $composant= new Composant();
                             $composant->paquet_id=$produit->id;
                             $prod = Produit::findOrFail($products[$i]);
                             $composant->produit_id=$prod->id;
-                            $composant->quantite=(int) $request->quantite[$i];
-                             $composant->unite= $prod->unite;
+                            $composant->quantite=(double) $request->quantite[$i];
+                            $composant->unite= $prod->unite;
                             $composant->save();
                         }
                     }
@@ -325,28 +328,6 @@ class ProduitController extends Controller
 
             }
 
-
-
-
-        // $modif= DB::update('update produits set
-        //  libelle = ?,
-        // groupe_produit_id = ?,
-        // prixAchatMin =?,
-        // prixAchatMax=?,
-        // prixVenteMin =?,
-        // prixVenteMax=?
-        // code =?,
-        // img=?,
-        // vendable=?,
-        // achetable=?,
-        // qteSeuil=?,
-        // archived=?,
-        // where id = ?',
-        // [$request->libelle,$request->categorie,$request->prixAchatMin,
-        // $request->PrixAchatMax,$request->prixVenteMin,$request->prixVenteMax,
-        // $request->code,$request->img,$request->vendable,$request->achetable,$request->qteSeuil,
-        // $request->archived,$request->id]);
-
         if($produit->save()) {
 
             return response()->json([
@@ -420,7 +401,7 @@ class ProduitController extends Controller
         $messages=[
             'required'=>"Le champ ':attribute' doit être renseigné'",
             'unique'=>"Le champ ':attribute' existe déjà dans la base",
-            'regex'=>"Le champ ':attribute' doit être nombre décimal ou entierqsd ",
+            'regex'=>"Le champ ':attribute' doit être nombre décimal ou entier ",
             'not:in'=>"Le champ ':attribute' doit être positive ",
 
 
@@ -462,7 +443,7 @@ class ProduitController extends Controller
                 if($request->prix_vente_min==null){
                      $this->validator->errors()->add('prix_vente_min','Le prix de vente n\'est pas renseigné');
                 }
-               else if($request->prix_vente_max!=null && $request->prix_vente_min >= $request->prix_vente_max){
+               else if($request->prix_vente_max!=null && $request->prix_vente_min > $request->prix_vente_max){
                     $this->validator->errors()->add('prix_vente_max','Le prix de vente maximal doit être supérieur au prix de vente Minimal');
               }
             }
@@ -470,7 +451,7 @@ class ProduitController extends Controller
                 if($request->prix_achat_min==null){
                     $this->validator->errors()->add('prix_achat_min','Le prix d\'achat n\'est pas renseigné');
                 }
-               else if($request->prix_achat_max!=null && $request->prix_achat_min >= $request->prix_achat_max){
+               else if($request->prix_achat_max!=null && $request->prix_achat_min > $request->prix_achat_max){
                 $this->validator->errors()->add('prix_achat_max','Le prix d\'achat maximal doit être supérieur au prix d\'achat Minimal');
               }
             }
@@ -510,4 +491,52 @@ class ProduitController extends Controller
         return response()->json($json);
     }
 
+
+    public function archivedProduct($id){
+        $this->validator = Validator::make($request->all(),[
+            'id' => 'required|exists:produits,id',
+            //'photo'
+            ] );
+
+        if($request->$id){
+
+        }
+    }
+
+    public function saveImgProduct($id){
+
+
+        $this->validator = Validator::make($request->all(),[
+            'id' => 'required|exists:produits,id',
+            //'photo'
+            ] );
+
+        if($request->hasFile('photo')){
+            //change tof
+            $produit=Produit::findOrFail($id);
+            if($produit){
+                $image = $request->file('photo');
+                $ext = $image->getClientOriginalExtension();
+                $filename = $produit->id.'.'.$ext;
+                $save = $image->move('images/produits', $filename);
+                $produit->img=$filename;
+                if($save)
+                  $produit->save();//repertorie dans l'historique le changement de photo product
+
+                return response()->json([
+                    "status"=>true,
+                    "message"=>"Certains valeurs du formulaire ne sont pas renseigné ou sont incorrects:",
+                    'errors'=>$validator->errors(),
+                    ]);
+
+            }
+
+        }
+        return response()->json([
+            "status"=>false,
+            "message"=>"Certains valeurs du formulaire ne sont pas renseigné ou sont incorrects:",
+            'errors'=>$validator->errors(),
+            ]);
+
+     }
 }

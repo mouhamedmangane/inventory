@@ -8,6 +8,7 @@ use App\Models\Produit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use DataTables;
 
 
 class AjustementController extends Controller
@@ -46,38 +47,35 @@ class AjustementController extends Controller
 
 
     }
+
+
     public function returnData(){
 
 
          $status=true;
-         $ajustements=LigneAjustement::all();
+         $ajustements=Ajustement::all();
         // dd($ajustements);
 
          $json = DataTables::of($ajustements)
             ->addColumn('inventaire',function($ajustement){
-                $srcImag='images/produits/'.$ajustement->produit->img;
-                return "<img src=".asset($srcImag)."
-                       width='35px'
-                       height='35px'
-                       class='rounded-circle'
-                       >
-                <a href='".url("produit/".$produit->id)."' class='lien-sp ft-14px ml-2'>".$ajustement->produit->libelle."</a>";
+                return"
+                        <a href='".url("produit/ajustement/".$ajustement->id)."' class='lien-sp ft-14px ml-2'>".$ajustement->numero."</a>";
             })
 
-             ->addColumn('categorie',function($ajustement){
-                 return $ajustement->produit->groupe_produit->groupe_name;
-            })
-            ->addColumn('stock',function($ajustement){
-                return view('components.generic.bagde.compare')
-                            ->with('text1',$ajustement->qteAvant)
-                            ->with('text2',$ajustement->qteReelle)
-                            ->with('separateur',' | ');
-            })
+            ->addColumn('nbre_prod_ajuste',function($ajustement){
+                return 5;
+           })
+           ->addColumn('date',function($ajustement){
+                 return $ajustement->created_at;
+           })
 
-            ->rawColumns(['produit','cqtegorie','stock','ajuste','date',"prix",'notes'])
+
+            ->rawColumns(['inventaire','nbre_prod_ajuste','date','note'])
             ->with('status',$status)
-            ->with('message',$message)
+            ->with('message',"success")
             ->toJson();
+
+
           return $json;
      }
 
@@ -173,9 +171,9 @@ class AjustementController extends Controller
 
         if(\is_numeric($id)){
             $ajustement= Ajustement::findOrFail($id);
-            $lA=$ajustement->ligne_ajustements;
 
-            return view('page.produit.ajustement.voir_ajustement');
+
+            return view('page.produit.ajustement.voir_ajustement',compact("ajustement"));
 
         }
 

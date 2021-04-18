@@ -11,11 +11,13 @@ class VoirAjustement extends Component
      *
      * @return void
      */
-    public function __construct()
+    public $ajustement;
+
+    public function __construct($ajus)
     {
         //
+        $this->ajustement=$ajus;
     }
-
     /**
      * Get the view / contents that represent the component.
      *

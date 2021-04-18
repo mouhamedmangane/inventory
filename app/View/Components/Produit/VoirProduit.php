@@ -30,41 +30,42 @@ class VoirProduit extends Component
 
         return [
             (object)  ['name'=>'Produit','propertyName'=>'produit',"classStyle"=>""],
-            (object)  ['name'=>'Categorie','propertyName'=>'categorie','visible'=>false,"classStyle"=>""],
-            (object)  ['name'=>'Quantite ','propertyName'=>'quantite','taille'=>"75px","classStyle"=>""],
+            (object)  ['name'=>'Categorie','propertyName'=>'categorie','visible'=>true,"classStyle"=>""],
+            (object)  ['name'=>'Quantite ','propertyName'=>'quantite',"classStyle"=>""],
 
         ];
 
     }
     public function getComposants(){
         $composants=$this->produit->composants;
-       // dd($composants);
+        //dd($composants);
         $dataTable = DataTables::of($composants)
+
         ->addColumn('produit',function($composant){
-                $srcImag='images/produits/'.$composant->img;
+                $srcImag='images/produits/'.$composant->produit->img;
 
                 return "<img src=".asset($srcImag)."
-                        width='30px'
-                        height='30px'
+                        width='50px'
+                        height='50px'
                         class='rounded-circle'
                         >
-                        <span class='ml-2 '> ".$composant->libelle."</span>";
+                        <span class='ml-2 '> ".$composant->produit->libelle."</span>";
             })
         ->addColumn('categorie',function($composant){
-            return $composant->groupe_produit->groupe_name;
+            return $composant->produit->groupe_produit->groupe_name;
             })
 
         ->addColumn('quantite',function($composant){
                 return "
-                        <div class='d-flex justify-content-center w-100' style='font-size:20px;'>
-                             <span class='badge badge-success '>".$ligneVentes->quantiteDemande."</span>
+                        <div class='d-flex justify-content-start w-100' style='font-size:20px;'>
+                             <span class='badge badge-success '>".$composant->quantite."</span>
                         </div>" ;
                 })
 
         ->rawColumns(['produit','categorie','quantite'])
         ->make(true);
         $response=$dataTable->getData(true);
-
+               // dd($response);
         return $response['data'];
     }
 

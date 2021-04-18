@@ -10,7 +10,7 @@
 
 @section('ly-toolbar')
     <x-generic.tool-bar.bar >
-        <x-generic.tool-bar.link id="nouveau_prod_tb" text="Nouveau" icon="add" url="produit/ajustement/new" evidence="btn-primary" />
+        <x-generic.tool-bar.link id="nouveau_prod_tb" text="Nouveau" icon="add" url="/ajustement/new" evidence="btn-primary" />
         <x-generic.tool-bar.button id="modifier_prod_tb" text="Modifier" icon="edit"  disabled="disabled" />
         <x-generic.tool-bar.button id="supprimer_prod_tb" text="Supprimer" icon="delete"  disabled="disabled" />
         <x-generic.tool-bar.divider/>

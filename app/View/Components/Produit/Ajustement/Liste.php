@@ -17,13 +17,12 @@ class Liste extends Component
      }
     public function columns(){
         return [
-            (object)  ['name'=>'Produit','propertyName'=>'produit','taille'=>"75px","classStyle"=>""],
-            (object)  ['name'=>'Categorie ','propertyName'=>'categorie','taille'=>"75px","classStyle"=>""],
-            (object)  ['name'=>'S. Avant | Apres','propertyName'=>'stock',"classStyle"=>"dt-col-1 text-align-center"],
-            (object)  ['name'=>'P.ajusté','propertyName'=>'ajuste',"classStyle"=>"dt-col-1 text-align-center"],
+            (object)  ['name'=>'Inventaire','propertyName'=>'inventaire','taille'=>"75px","classStyle"=>""],
+            (object)  ['name'=>'Notes ','propertyName'=>'note','taille'=>"75px","classStyle"=>""],
+            (object)  ['name'=>'Nbre produits ajustés','propertyName'=>'nbre_prod_ajuste',"classStyle"=>"dt-col-1 text-align-center"],
+            // (object)  ['name'=>'Date'=>'ajuste',"classStyle"=>"dt-col-1 text-align-center"],
             (object)  ['name'=>'Date','propertyName'=>'date',"classStyle"=>"dt-col-3"],
-            (object)  ['name'=>'Prix','propertyName'=>'prix','visible'=>false,"classStyle"=>""],
-            (object)  ['name'=>'Notes','propertyName'=>'notes','visible'=>false,"classStyle"=>""],
+
         ];
 
 

@@ -1,2 +1,2 @@
 @extends("layouts-page.inventory")
-    <x-page.produit.ajustement.voir_ajustement/>
+    <x-page.produit.ajustement.voir_ajustement :ajus="$ajustement"/>

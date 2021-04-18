@@ -41,7 +41,7 @@ Route::get('produit/produit', function () {
 
 Route::get('produit/ajustement/new',[AjustementController::class,'create' ]);
 Route::get('produit/ajustement/',[AjustementController::class,'index' ]);
-Route::get('produit/ajustement/data',[AjustementController::class,'returnData   ' ]);
+Route::get('produit/ajustement/data/',[AjustementController::class,'returnData' ]);
 
 Route::get('produit', [ProduitController::class,'index']);
 Route::post('produit/save',[ProduitController::class,'store'])->name('produit.save');
@@ -54,6 +54,7 @@ Route::post('produit/newProd', function(){
 Route::get('produit/{id}/edit', [ProduitController::class,'edit']);
 
 Route::get('produit/{id}', [ProduitController::class,'show']);
+Route::get('produit/ajustement/{id}', [AjustementController::class,'show']);
 Route::post("produit/update/{id}",[ProduitController::class ,"update"]);
 
 

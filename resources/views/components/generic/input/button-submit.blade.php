@@ -12,14 +12,14 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-    
+
     var idForm= '#'+'{{ $idForm }}';
     var id = '#'+'{{ $id }}';
     $(id).on('click',function(){
         $(idForm).submit();
     });
-    
-    $(idForm).submit(function (e) { 
+
+    $(idForm).submit(function (e) {
         console.log($(this).serialize());
         e.preventDefault();
         let form=$(idForm).get(0);
@@ -31,11 +31,11 @@ $(document).ready(function(){
         if(enctype=="multipart/form-data"){
             data= new FormData(form);
             contentType=false;
-        } 
+        }
         else{
             data= $(this).serializeObject();
         }
-            
+
         console.log(data);
         $.ajax({
             type: $(this).attr('method'),
@@ -46,7 +46,7 @@ $(document).ready(function(){
             contentType: contentType,
             cache: false,
             timeout: 600000,
-           
+
             beforeSend:function(){
                 $(idForm).find('.is-valid').removeClass('is-valid');
                 $(idForm).find('.is-invalid').removeClass('is-invalid');
@@ -56,17 +56,15 @@ $(document).ready(function(){
                 console.log(response.errors);
                 if(response.status){
                     alerter(response.message,'alert alert-success','alert alert-danger',1);
-                    @if($attributes['isReset'])
-                        $(idForm)[0].reset();                        
-                    @else                        
-                        @if($attributes['hrefId'])
-                            window.location.href = "{{ url($hrefId) }}"+'/'+response.id;
-                        @elseif ($attributes['href'])
-                            window.location.href = "{{ url($href) }}";
-                        @else
-                            $(this).reset();
-                        @endif
+
+                    @if($attributes['hrefId'])
+                        window.location.href = "{{ url($hrefId) }}"+'/'+response.id;
+                    @elseif ($attributes['href'])
+                        window.location.href = "{{ url($href) }}";
+                    @elseif($attributes['isReset'])
+                        $(this).reset();
                     @endif
+
                 }
                 else{
                     alerter(response.message,'alert alert-danger','alert alert-success');
@@ -75,7 +73,7 @@ $(document).ready(function(){
                        console.log(item);
                        console.log(response.errors[item]);
                    }
-                
+
                     for (const error in response.errors) {
                             var input = $(idForm).find('input[name="'+error+'"]');
                             input.addClass('is-invalid');
@@ -91,8 +89,8 @@ $(document).ready(function(){
                                 console.log('active')
                             @endif
                         }
-                        
-                        
+
+
                     }
                     resetAlert();
                     // let idContentAlert = '#'+'{{ $idContentAlert }}';
@@ -118,7 +116,7 @@ $(document).ready(function(){
             }
 
         }
-        
+
         function resetAlert(){
             $(idForm).find('.is-valid, .is-invalid').on('keyup change',function(e){
                 console.log('resetAlert');
@@ -129,7 +127,7 @@ $(document).ready(function(){
                 $(this).removeClass('is-valid is-invalid');
             });
         }
-        
+
     });
 });
 

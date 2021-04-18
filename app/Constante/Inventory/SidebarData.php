@@ -13,7 +13,9 @@ class SidebarData{
             ->addNavGroupModel(NavModelFactory::navGroupModel("Produit Groupe","home")
                 ->addNavItemModel("Produits","produit")
                 ->addNavItemModel("Ajustement","produit/ajustement",)
-                ->addNavItemModel("Rebut","produit/rebut")
+                ->addNavItemModel("Rejet","produit/rebut")
+                ->addNavItemModel("Reduction","produit/rebut")
+                ->addNavItemModel("Mouvement Stock","produit/rebut")
             )
 
         )

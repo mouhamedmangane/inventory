@@ -12,94 +12,89 @@
         <x-generic.navs-tabs.content id="tabProductContent" class="px-4 py-3" >
 
                 <x-generic.navs-tabs.pane id="general" active="true"  >
-                    <div class="row">
-                        <div class="col-md-3 justify-content-start">
+                    <div class="row m-auto">
+                        <div class="col-md-8">
+                                <div class="col-md-12 justify-content-center mr-0">
 
-                            <h4 class="text-primary" >{{$produit->libelle}}</h4>
+                                    <x-generic.forms.form-table >
+                                        <x-generic.forms.form-table-item>
+                                            <h4 class="text-primary" >{{$produit->libelle}}</h4>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <x-slot name="label">
+                                                        <x-generic.forms.form-table-label  labelText="Image" :required="false" />
+                                                    </x-slot>
+                                                    <x-generic.input.photo id="photo" name="photo" activeText="false" :url='asset("images/produits/$produit->img")' x="220" y="220" />
 
-                            <img src='{{ asset("images/produits/$produit->img") }}'
-                                width="200px"
-                                height="200px"
-                                class=""
-                                style=""
-                            >
-                            <x-generic.forms.form-table >
-                                <x-generic.forms.form-table-item>
-                                    <tr style="line-height: 50%">
-                                        <td class="text-muted ">Peut être vendu :</td>
-                                        <th>
-                                            @if ($produit->vendable)
-                                                <span class="material-icons">
-                                                                        thumb_up_off_alt
-                                                                        </span>
-                                            @else
-                                                <span class="material-icons">
-                                                    remove_done
-                                                </span>
-                                            @endif
+                                                </div>
 
-                                        </th>
-                                    </tr>
-                                    <tr style="line-height: 20%">
-                                        <td class="text-muted ">Peut être acheté :</td>
-                                        <th>
-                                            @if ($produit->achetable)
-                                                <span class="material-icons">
-                                                                        thumb_up_off_alt
-                                                                        </span>
-                                            @else
-                                                <span class="material-icons">
-                                                    remove_done
-                                                </span>
-                                            @endif
+                                                <div class="col-md-8">
+                                                    <table style="font-size: 0.8rem;">
 
-                                        </th>
-                                    </tr>
-                                </x-generic.forms.form-table-item>
-                            </x-generic.forms.form-table >
+                                                    <tr style="line-height: 70%">
+                                                        <td style="width: 70%;"class="text-muted">Categorie :</td>
+                                                        <td> <span class="font-weight-bold" style="font-size:15px ">{{$produit->groupe_produit->groupe_name}}</span></td>
+
+                                                    </tr>
+                                                    <tr style="line-height: 50%">
+                                                        <td style="width: 50%;"class="text-muted">Type :</td>
+                                                        <th> <span class="font-weight-bold" style="font-size:15px ">{{$produit->type}}</span></th>
+
+                                                    </tr>
+
+                                                    <tr style="">
+                                                        <td class="text-muted ">Code :</td>
+                                                        <th > <span class="font-weight-bold" style="font-size:15px ">{{$produit->code}}</span></th>
+
+                                                    </tr>
+                                                    <tr style="line-height: 50%">
+                                                        <td class="text-muted ">R.Interne :</td>
+                                                        <th> <span class="font-weight-bold" style="font-size:15px ">{{$produit->rI}}</span></th>
+                                                    </tr>
+                                                    <tr style="line-height: 50%">
+                                                        <td class="text-muted ">Peut être vendu :</td>
+                                                        <th>
+                                                                <x-generic.input.checkbox id="estvendu" name="estvendu" checked="{{$produit->vendable}}" disabled="disabled" />
+                                                        </th>
+                                                    </tr>
+                                                    <tr style="line-height: 20%">
+                                                        <td class="text-muted ">Peut être acheté :</td>
+                                                        <th>
+                                                            <x-generic.input.checkbox id="estvendu" name="estvendu" checked="{{$produit->achetable}}" disabled="disabled" />
+
+
+                                                        </th>
+                                                    </tr>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+
+                                        </x-generic.forms.form-table-item>
+                                    </x-generic.forms.form-table >
+                                </div>
+
+
+
+                                 @if ($produit->isPaquet())
+                                <div class="col-md-12 ">
+                                    <x-generic.forms.form-table>
+                                        <x-generic.forms.form-table-item>
+                                            <h5 class="text-primary mt-2" >Composants</h5>
+                                            <x-generic.data-table.simple class="" name="myDataTable" :data="$getComposants()" :columns="$composants()" dom="t"
+                                            idDivPaginate="bass-right" idDivInfo="bas-left" searchId='mySearch'/>
+                                        </x-generic.forms.form-table-item>
+
+                                    </x-generic.forms.form-table>
+
+                                </div>
+                                 @endif
+
                         </div>
-                        <div class="col-md-9">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <x-generic.forms.form-table >
-                                        <x-generic.forms.form-table-item>
-                                            <tr style="line-height: 50%">
-                                                <td style="width: 50%;"class="text-muted">Categorie :</td>
-                                                <th> <span class="font-weight-bold" style="font-size:15px ">{{$produit->groupe_produit->groupe_name}}</span></th>
 
-                                            </tr>
-                                            <tr style="line-height: 50%">
-                                                <td style="width: 50%;"class="text-muted">Type :</td>
-                                                <th> <span class="font-weight-bold" style="font-size:15px ">{{$produit->type}}</span></th>
-
-                                            </tr>
-                                        </x-generic.forms.form-table-item>
-                                    </x-generic.forms.form-table >
-
-                                </div>
-
-                                <div class="col-md-4">
-                                    <x-generic.forms.form-table >
-                                        <x-generic.forms.form-table-item>
-                                            <tr style="line-height: 50%">
-                                                <td class="text-muted ">Code :</td>
-                                                <th > <span class="font-weight-bold" style="font-size:15px ">{{$produit->code}}</span></th>
-
-                                            </tr>
-                                            <tr style="line-height: 50%">
-                                                <td class="text-muted ">R.Interne :</td>
-                                                <th> <span class="font-weight-bold" style="font-size:15px ">{{$produit->rI}}</span></th>
-                                            </tr>
-                                        </x-generic.forms.form-table-item>
-                                    </x-generic.forms.form-table >
-
-                                </div>
-                                <div class="col-md-4">
+                        <div class="col-md-4">
 
 
-                                </div>
-
-                                <div class="col-md-4">
                                     <x-generic.forms.form-table>
                                         <x-generic.forms.form-table-item>
 
@@ -128,104 +123,77 @@
 
                                     </x-generic.forms.form-table>
 
+                             @if ($produit->prixVenteMin!= NULL)
 
-                                </div>
-                                @if ($produit->prixVenteMin!= NULL)
+                                <x-generic.forms.form-table>
+                                    <x-generic.forms.form-table-item>
 
-                                <div class="col-md-4">
-                                    <x-generic.forms.form-table>
-                                        <x-generic.forms.form-table-item>
+                                        <table class="table table-sm m-auto" >
+                                            <h6 class="text-primary" >Prix de Vente</h6>
 
-                                            <table class="table table-sm m-auto" >
-                                                <h6 class="text-primary" >Prix de Vente</h6>
+                                            <tr style="line-height: 50% ;">
+                                                <th style="width: 30%;"> <span class="font-weight-lighter text-muted text-align-center" style="font-size:10px ">min</span></th>
 
-                                                <tr style="line-height: 50% ;">
-                                                    <th style="width: 30%;"> <span class="font-weight-lighter text-muted text-align-center" style="font-size:10px ">min</span></th>
-
-                                                    @if ($produit->prixVenteMin!==$produit->prixVenteMax)
-                                                        <th style="width: 30%;"> <span class="font-weight-lighter text-muted text-align-center" style="font-size:10px ">max</span></th>
-                                                    @endif
-                                                    <th style="width: 30%;"> <span class="font-weight-lighter text-muted text-align-center" style="font-size:10px "></span></th>
+                                                @if ($produit->prixVenteMin!==$produit->prixVenteMax)
+                                                    <th style="width: 30%;"> <span class="font-weight-lighter text-muted text-align-center" style="font-size:10px ">max</span></th>
+                                                @endif
+                                                <th style="width: 30%;"> <span class="font-weight-lighter text-muted text-align-center" style="font-size:10px "></span></th>
 
 
 
-                                                </tr>
+                                            </tr>
 
-                                                <tr>
-                                                    <th> <span class="font-weight-bold" style="font-size:15px ">{{number_format($produit->prixVenteMin,0,','," ")}}</span></th>
-                                                    @if ($produit->prixVenteMin!==$produit->prixVenteMax)
+                                            <tr>
+                                                <th> <span class="font-weight-bold" style="font-size:15px ">{{number_format($produit->prixVenteMin,0,','," ")}}</span></th>
+                                                @if ($produit->prixVenteMin!==$produit->prixVenteMax)
 
-                                                        <th> <span class="font-weight-bold" style="font-size:15px ">{{number_format($produit->prixVenteMax,0,','," ")}}</span></th>
-                                                    @endif
-                                                    <th> <span class="badge badge-primary">FCFA </span></th>
-                                                </tr>
+                                                    <th> <span class="font-weight-bold" style="font-size:15px ">{{number_format($produit->prixVenteMax,0,','," ")}}</span></th>
+                                                @endif
+                                                <th> <span class="badge badge-primary">FCFA </span></th>
+                                            </tr>
 
-                                            </table>
-                                        </x-generic.forms.form-table-item>
+                                        </table>
+                                    </x-generic.forms.form-table-item>
 
-                                    </x-generic.forms.form-table>
+                                </x-generic.forms.form-table>
 
-                                </div>
-                                @endif
-                                @if ($produit->prixAchatMin!= NULL)
+                            @endif
+                            @if ($produit->prixAchatMin!= NULL)
 
-                                <div class="col-md-4">
-                                    <x-generic.forms.form-table>
-                                        <x-generic.forms.form-table-item>
+                                <x-generic.forms.form-table>
+                                    <x-generic.forms.form-table-item>
 
-                                            <table class="table table-sm m-auto" >
-                                                <h6 class="text-primary" >Prix d'Achat</h6>
+                                        <table class="table table-sm m-auto" >
+                                            <h6 class="text-primary" >Prix d'Achat</h6>
 
-                                                <tr style="line-height: 50% ;">
-                                                    <th style="width: 30%;"> <span class="font-weight-lighter text-muted text-align-center" style="font-size:10px ">min</span></th>
+                                            <tr style="line-height: 50% ;">
+                                                <th style="width: 30%;"> <span class="font-weight-lighter text-muted text-align-center" style="font-size:10px ">min</span></th>
 
-                                                    @if ($produit->prixAchatMin!==$produit->prixAchatMax)
-                                                        <th style="width: 30%;"> <span class="font-weight-lighter text-muted text-align-center" style="font-size:10px ">max</span></th>
-                                                    @endif
-                                                    <th style="width: 30%;"> <span class="font-weight-lighter text-muted text-align-center" style="font-size:10px "></span></th>
+                                                @if ($produit->prixAchatMin!==$produit->prixAchatMax)
+                                                    <th style="width: 30%;"> <span class="font-weight-lighter text-muted text-align-center" style="font-size:10px ">max</span></th>
+                                                @endif
+                                                <th > <span class="font-weight-lighter text-muted text-align-center" style="font-size:10px "></span></th>
 
 
 
-                                                </tr>
+                                            </tr>
 
-                                                <tr>
-                                                    <th> <span class="font-weight-bold" style="font-size:15px ">{{number_format($produit->prixAchatMin,0,','," ")}}</span></th>
-                                                    @if ($produit->prixAchatMin!==$produit->prixAchatMax)
-                                                        <th> <span class="font-weight-bold" style="font-size:15px ">{{number_format($produit->prixAchatMax,0,','," ")}}</span></th>
-                                                    @endif
-                                                    <th> <span class="badge badge-primary">FCFA </span></th>
-                                                </tr>
+                                            <tr>
+                                                <th> <span class="font-weight-bold" style="font-size:15px ">{{number_format($produit->prixAchatMin,0,','," ")}}</span></th>
+                                                @if ($produit->prixAchatMin!==$produit->prixAchatMax)
+                                                    <th> <span class="font-weight-bold" style="font-size:15px ">{{number_format($produit->prixAchatMax,0,','," ")}}</span></th>
+                                                @endif
+                                                <th> <span class="badge badge-primary">FCFA </span></th>
+                                            </tr>
 
-                                            </table>
-                                        </x-generic.forms.form-table-item>
+                                        </table>
+                                    </x-generic.forms.form-table-item>
 
-                                    </x-generic.forms.form-table>
+                                </x-generic.forms.form-table>
 
-                                </div>
-                                @endif
-
-
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="row ">
-                     @if ($produit->isPaquet())
-                        <div class="col-6 m-auto">
-                            <x-generic.forms.form-table>
-                                <x-generic.forms.form-table-item>
-                                    <h5 class="text-primary mt-2" >Composants</h5>
-                                    <x-generic.data-table.simple class="" name="myDataTable" :data="$getComposants()" :columns="$composants()" dom="t"
-                                    idDivPaginate="bass-right" idDivInfo="bas-left" searchId='mySearch'/>
-                                </x-generic.forms.form-table-item>
-
-                            </x-generic.forms.form-table>
+                            @endif
 
                         </div>
-                    @endif
-
                     </div>
                 </x-generic.navs-tabs.pane>
 
@@ -239,17 +207,6 @@
                             les quantité d'achats par jour
                     </div>
                 </x-generic.navs-tabs.pane>
-
-
-
-                {{-- <x-generic.navs-tabs.pane id="statistique" >
-                    <div class="row">
-
-
-                    </div>
-                </x-generic.navs-tabs.pane> --}}
-
-
 
 
                 <x-generic.navs-tabs.pane id="vente" >
@@ -317,6 +274,42 @@
          </x-generic.navs-tabs.content>
 
 
+    @once
+         @push('script')
+             <script type="text/javascript">
+                $("#photo").on("change",function(){
+                    alert("changement phote");
+                    $.ajaxSetup({
+                        headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    $.ajax({
+                    type:'',
+                    url: "produit/edit/img/ ",
+                    data: "data",
+                    dataType: "json",
+                    success: function (response) {
+                        if(response.status){
+                            alerter(btn_data,'Operation effectuée '+btn_data.op,message,true);
+                            disabledAllActions(false);
+                        }
+                        else{
+                            alerter(btn_data,'Echec Opération '+btn_data.op,message,false);
+                        }
+                    },
+                    error: async function (err){
+                        $("#modal_suppression").on('hidden.bs.modal', function (e) {
+                            $("#modal_suppression").remove();
+                        });
+                        await $("#modal_suppression").modal('hide');
+                        alerter(btn_data,'Echec Opération '+btn_data.op,'Ressource Indisponible, Vérifier la connexion',false);
+                    }
+                    });
+                });
+
+             </script>
+         @endpush
+     @endonce
 
 
 

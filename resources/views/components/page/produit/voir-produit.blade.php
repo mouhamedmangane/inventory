@@ -16,7 +16,7 @@
         <x-generic.tool-bar.button id="imprimer_prod_tb" text="Imprimer" icon="print"  />
         <x-generic.tool-bar.button id="archiver_prod_tb" text="Archiver" icon="archive"  />
         <x-generic.tool-bar.divider/>
-        <x-generic.tool-bar.button id="ajuster_prod_tb" text="Ajuster" icon="archive"  />
+        {{-- <x-generic.tool-bar.button id="ajuster_prod_tb" text="Ajuster" icon="archive"  /> --}}
         <x-generic.tool-bar.button id="rejet_prod_tb" text="Rejeter" icon="archive"  />
 
 
@@ -51,10 +51,9 @@
     </div>
     <div class="">
         <x-generic.infos.info-list>
-            {{-- mettre l'image du créateur --}}
             <x-generic.infos.info-item title="Ratio Vente" value="2 100/ Mois" icon="trending_down" />
             <x-generic.infos.info-item title="Ratio Vente" value="3 100 / Mois" icon="equalizer" />
-            {{-- <x-generic.infos.info-item title="{{$produit->done_by_user->name }} Ousmane SALL" value="Enregistré le {{$produit->created_at}}" icon="save" typeIcon="material-icons-outlined" /> --}}
+            <x-generic.infos.info-item name="user" :title="$produit->done_by_user" :value='$produit->created_at' icon="save" typeIcon="material-icons-outlined" />
 
         </x-generic.infos.info-list>
     </div>
@@ -74,5 +73,4 @@
 
         </div>
     </div>
-
 @endsection
