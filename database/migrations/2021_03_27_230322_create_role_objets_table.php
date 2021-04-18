@@ -29,7 +29,7 @@ class CreateRoleObjetsTable extends Migration
             $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
 
-            $table->unsignedBigInteger('objet_name');  
+            $table->unsignedBigInteger('objet_id');  
             $table->foreign('objet_id')->references('id')->on('objets')->onDelete('cascade');
 
             $table->unsignedBigInteger('done_by_user')->default(1);//Auth::user()->id) par defaut user connecté

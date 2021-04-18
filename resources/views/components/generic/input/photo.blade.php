@@ -15,7 +15,11 @@
                        accept="image/png, image/jpeg"
                        class="border rounded {{ $attributes['classImage'] }}"
                        name={{ $name }}
+                       id={{ $id }} 
                        style="display: none;">
+                <button class="btn btn-sm btn-primary" type="button" style="padding:2px 5px;" id="{{ $id }}-edit" >
+                    <i class="material-icons md-14" >edit</i>
+                </button>
                 <button class="btn btn-sm btn-danger ml-1" type="button" style="padding:2px 5px;" id="{{ $id }}-sup">
                     <i class="material-icons md-14">delete</i>
                 </button>
@@ -34,8 +38,6 @@
                     @endif          
     </div>
 </div>
-
-
 @push('script')
 <script>
     $(document).ready(function(){
@@ -64,4 +66,5 @@
     });
 </script>
 @endpush
+    
     

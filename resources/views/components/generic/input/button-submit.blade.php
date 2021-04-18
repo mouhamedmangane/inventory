@@ -1,4 +1,9 @@
-<button type="submit" id="{{ $id }}" class="{{ $attributes['class'] }}" style="{{ $attributes['style'] }}">
+@props(['parentMessageClass'=>'n__parent__message','elementMessageClass'=>'n__element__message'])
+<button type="submit" id="{{ $id }}" class="{{ $attributes['class'] }}" 
+        @if($attributes['activeOnModify'])
+            disabled="disabled";
+        @endif
+        style="{{ $attributes['style'] }}" >
     @if (!empty($icon))
         <i class="material-icons mr-1 md-16 " >{{ $icon }}</i>
     @endif
@@ -27,10 +32,12 @@ $(document).ready(function(){
         let enctype=$(this).attr('enctype');
         console.log(enctype);
         let data=null;
-        let contentType='json';
+        let contentType='application/x-www-form-urlencoded; charset=UTF-8';
+        let processData=true;
         if(enctype=="multipart/form-data"){
             data= new FormData(form);
             contentType=false;
+            processData=false;
         } 
         else{
             data= $(this).serializeObject();
@@ -42,7 +49,7 @@ $(document).ready(function(){
             enctype: enctype,
             url: $(this).attr('action'),
             data: data,
-            processData: false,
+            processData: processData,
             contentType: contentType,
             cache: false,
             timeout: 600000,
@@ -60,12 +67,18 @@ $(document).ready(function(){
                         $(idForm)[0].reset();                        
                     @else                        
                         @if($attributes['hrefId'])
-                            window.location.href = "{{ url($hrefId) }}"+'/'+response.id;
+                            window.location.href = "{{ url($attributes['hrefId']) }}"+'/'+response.id;
                         @elseif ($attributes['href'])
-                            window.location.href = "{{ url($href) }}";
-                        @else
-                            $(this).reset();
+                            window.location.href = "{{ url($attributes['href']) }}";
                         @endif
+                    @endif
+                    
+                    @if ($attributes['update_id'])
+                        $('#{{ $attributes["update_id"] }}').val(response.id);
+                    @endif
+
+                    @if ($attributes['activeOnModify'])
+                        $(id).prop('disabled',true);
                     @endif
                 }
                 else{
@@ -79,16 +92,20 @@ $(document).ready(function(){
                     for (const error in response.errors) {
                             var input = $(idForm).find('input[name="'+error+'"]');
                             input.addClass('is-invalid');
-                            @if($attributes['parentMessageClass'] && $attributes['elementMessageClass'])
-                                console.log("activation error message");
-                                let element = input.parents('.{{ $attributes['parentMessageClass'] }}').children('.{{ $attributes['elementMessageClass'] }}');
-                                element.addClass('invalid-feedback');
-                                let text="";
-                                for(const message of response.errors[error]){
-                                    text=text+' '+message;
+                            input.data('idMessage',error)
+                            @if($attributes['activeMessage'])
+                                let element = $("#form__message__"+error);
+                                if(element){
+                                    element.addClass('invalid-feedback');
+                                    let text="";
+                                    for(const message of response.errors[error]){
+                                        text=text+' '+message;
+                                    }
+                                    element.html(text);
+                                    element.show();
+                                    console.log('active')
                                 }
-                                element.html(text);
-                                console.log('active')
+                                
                             @endif
                         }
                         
@@ -122,15 +139,30 @@ $(document).ready(function(){
         function resetAlert(){
             $(idForm).find('.is-valid, .is-invalid').on('keyup change',function(e){
                 console.log('resetAlert');
-                @if($attributes['elementMessageClass'])
-                    let element = $(this).parents('.{{ $attributes['parentMessageClass'] }}').children('.{{ $attributes['elementMessageClass'] }}');
-                    element.html('');
+                @if($attributes['activeMessage'])
+                    let element = $("#form__message__"+$(this).data('idMessage'));
+                    if(element){
+                        element.html('');
+                    }
                 @endif
                 $(this).removeClass('is-valid is-invalid');
             });
         }
+
+       
         
     });
+
+    @if ($attributes['activeOnModify'])
+        $(idForm+" :input").on('change',function(){
+            if($(this).prop('name'))
+                $(id).prop('disabled',false);
+        });
+   @endif
+
+
+
+
 });
 
 </script>

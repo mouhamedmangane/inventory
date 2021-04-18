@@ -6,7 +6,7 @@
         </div>
         {{ $slot }}
     </div>
-    <div class="flex-grow-1 d-flex aligns-items-center pr-2 justify-content-end w-100 " style="overflow-x: hidden;">
+    <div class="flex-grow-1 d-flex aligns-items-center pr-2 justify-content-end  " style="overflow-x: hidden;">
         {{ $right }}
     </div>
 </div>

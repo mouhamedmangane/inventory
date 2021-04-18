@@ -22,7 +22,7 @@
 
 <div class="position-relative table-responsive w-100" id="{{ $name }}__content">
 
-    <table class="dataTable-simple table table-condensed  table-borderless w-100 table-hover   {{ $attributes['class'] }}" id="{{ $name }}">
+    <table class="dataTable-simple table table-condensed  table-borderless w-100 table-hover  mb-0 {{ $attributes['class'] }}" id="{{ $name }}">
         <thead class="dataTable-simple-head  py-2 ">
             {{-- si selectionnable --}}
             @if ($attributes["selectName"])
@@ -150,7 +150,8 @@
              "url":"{{ $url }}",
              @if($searchId && !empty($searchId))
                 "data": function(d){
-                    return $('#{{ $searchId }}').serializeObject();
+                    console.log($('#{{ $searchId }}__form_search').serializeObject());
+                    return $('#{{ $searchId }}__form_search').serializeObject();
                 },
              @endif
              "dataSrc": function ( json ) {
@@ -161,6 +162,8 @@
                     json.data[i].select = '<input type="checkbox" name="{{ $attributes['selectName'] }}[]" class="dataTable-simple-selectItem @if($attributes['groupBy']) decaler-a-droit-1 @endif" value="'+json.data[i].{{ $selectDataName }}+'"  >';
                 }
                 @endif
+                $.rmchargement();
+
                 return json.data;
              }
              @if($attributes['idForm'])
@@ -185,7 +188,10 @@
           //scolumnDef
           "columnDefs": [
                 @isset($attributes['selectName'] )  
-                    {'targets':[0],'width':'50px;','className':'valign-center'},
+                    {
+                        'targets':[0],'width':' @if($attributes["selectColWidth"]) {{ $attributes['selectColWidth']  }} @else 50px @endif',
+                        'className':'valign-center dt-col-2'
+                    },
                 @endisset
                 @foreach($columns as $key => $column)
                    { 
@@ -385,7 +391,7 @@
             }
           console.log('Size changed');
         });
-        //presizeObserver.observe($("#{{ $name }}__tbody").get(0));
+        resizeObserver.observe($("#{{ $name }}__tbody").get(0));
         $("#{{ $name }}__tbody ").resize(function(){
                 
                 
@@ -463,7 +469,7 @@
         // Alerter
         function alerter(btn_data,title,message,success){
             if(btn_data.typeAlert=='modal'){
-                let type = (success)?'panel-warning':'bg-danger text-white';
+                let type = (success)?'bg-success text-white':'bg-danger text-white';
                 let modalAlert=$.fn.nplModalAlert({
                             id:'modal_alert',
                             text:message,
@@ -472,6 +478,9 @@
                             data:btn_data,
                         });
                 modalAlert.modal('show');
+                modalAlert.on('hidden.bs.modal',function(){
+                    $(this).modal('dispose');
+                })
             }
             else{
                 let classAdded='alert alert-success';
@@ -488,39 +497,58 @@
         // Les Actions
         @if($attributes['actions']) 
             actions=@json($attributes['actions']);
+            
+            //definition de la function ajax
             function ajaxAction(btn_data){
+                if(!btn_data.method){
+                    btn_data.method='get';
+                }
+                $.ajaxSetup({
+                    headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                console.log($('#{{ $name }} .dataTable-simple-selectItem').serializeObject());
+                $("#modal__dt").bind('hidden.bs.modal', function (e) {
+                            $(this).remove();
+                });
                 $.ajax({
-                    type:'delete',
                     url: btn_data.url,
-                    data: "data",
+                    type: btn_data.method,
+                    data:$('#{{ $name }} .dataTable-simple-selectItem').serializeObject(),
                     dataType: "json",
                     success: function (response) {
+                        $("#modal__dt").on('hidden.bs.modal', function (e) {
+                                $("#modal__dt").remove();
+                        });
+                        $("#modal__dt").modal('hide');         
+
                         if(response.status){
-                            alerter(btn_data,'Operation effectuée '+btn_data.op,message,true);
+                            alerter(btn_data,'Operation effectuée '+btn_data.op,response.message,true);
                             disabledAllActions(false);
+                            
+                            {{ $name }}.ajax.reload();
                         }
                         else{
-                            alerter(btn_data,'Echec Opération '+btn_data.op,message,false);
+                            alerter(btn_data,'Echec Opération '+btn_data.op,response.message,false);
                         }
                     },
                     error: async function (err){
-                        $("#modal_suppression").on('hidden.bs.modal', function (e) {
-                            $("#modal_suppression").remove();
-                        });
-                        await $("#modal_suppression").modal('hide');         
+                        
+                        await $("#modal__dt").modal('hide');         
                         alerter(btn_data,'Echec Opération '+btn_data.op,'Ressource Indisponible, Vérifier la connexion',false);
                     }
                 });
             }
-
+            // Lors d'un clique sur un button btn_data
             function onClickBtnAction(btn_data){
                 $("#"+btn_data.id).on('click',function(e){
                     if(btn_data.confirm){
                         let modalConfirm=$.fn.nplModalConfirm({
-                            id:'modal_suppression',
+                            id:'modal__dt',
                             text:'Êtes vous sûre de vouloir continuer l\'operation '+btn_data.op,
                             type:'panel-warning',
-                            title:'Suppression ',
+                            title:btn_data.op ,
                             data:btn_data,
                             fonction: ajaxAction
                         });
@@ -533,6 +561,7 @@
                 });
             }
 
+            //lors d'un clique sur un lien btn_data
             function onClickBtnLink(btn_data){
                 $("#"+btn_data.id).on('click',function(e){
                     let selectedInput = $(selectNameSelector).filter(':checked');
@@ -542,6 +571,8 @@
                 });
             }
             
+
+            //Enregistrement des Actions
             for(action of actions){
                 if(action.type=='action'){
                     onClickBtnAction(action);

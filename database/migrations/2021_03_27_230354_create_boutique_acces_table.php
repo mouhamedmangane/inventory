@@ -13,13 +13,13 @@ class CreateBoutiqueAccesTable extends Migration
      */
     public function up()
     {
-        Schema::create('boutique_acces', function (Blueprint $table) {
+        Schema::create('boutique_access', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("role_id");
             $table->unsignedBigInteger("user_id");
             $table->unsignedBigInteger("boutique_id");
 
-            $table->boolean('active')->default(true);
+            $table->boolean('activer')->default(true);
 
 
 

@@ -30,6 +30,9 @@ $(function(){
         $('#'+options.id+'__btn').on('click',function(){
             options.fonction(options.data);
         });
+        $('#'+options.id).on('shown.bs.modal',function(){
+            $("#"+options.id+'__btn').focus();
+        });
         return $('#'+options.id);
     };
 });

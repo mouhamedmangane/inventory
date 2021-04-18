@@ -26,6 +26,8 @@ class CreateBoutiqueUsersTable extends Migration
 
             $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+
+            $table->boolean('activer');
             
             $table->unsignedBigInteger('done_by_user')->default(1);//Auth::user()->id) par defaut user connecté
             $table->foreign('done_by_user')

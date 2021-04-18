@@ -118,12 +118,19 @@ Route::get('vente/view/{id}', [VenteController::class,'show']);
 Route::get('venteProduit/categorie/{id}',[VenteController::class,'getProducts']);
 
 // Param User
-Route::resources([
-    'param-compte/users'=>PCUserController::class]
-);
-Route::resources([
-    'param-compte/roles'=>App\Http\Controllers\ParamCompte\RoleController::class]
-);
+Route::get('param-compte/users/data',[PCUserController::class,'getData']);
+Route::delete('param-compte/users',[PCUserController::class,'destroyMany']);
+
+Route::resources(['param-compte/users'=>PCUserController::class]);
+
+Route::get('param-compte/roles/data',[App\Http\Controllers\ParamCompte\RoleController::class,'getData']);
+Route::get('param-compte/roles/data/{filter}',[App\Http\Controllers\ParamCompte\RoleController::class,'getData']);
+
+Route::put('param-compte/roles/archiver',[App\Http\Controllers\ParamCompte\RoleController::class,'archiver']);
+Route::delete('param-compte/roles',[App\Http\Controllers\ParamCompte\RoleController::class,'destroyMany']);
+Route::resources(['param-compte/roles'=>App\Http\Controllers\ParamCompte\RoleController::class]);
+
+
 
 
 

@@ -1,6 +1,5 @@
 <div>
-    @foreach ($boutique as $b)
-        @props(['bA'=> getAccessBoutique($boutique)])
+    @foreach ($boutiques as $b)
         <form class="row" action="">
             <div class="col-md-3">{{ $b->nom }}</div>
             <div class="col-md-3">

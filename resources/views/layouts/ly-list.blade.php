@@ -1,4 +1,4 @@
-
+@section('content')
 
 
     <div class="ly-toolbar">
@@ -21,4 +21,6 @@
             </div>
         </div>
     </div>
+    
+@endsection
 

@@ -15,7 +15,8 @@ class DroitObjet extends Component
     public function __construct($objet,$roleObjet=null)
     {
         $this->objet=$objet;
-        if($this->roleObjet)
+        
+        if($roleObjet)
             $this->roleObjet=$roleObjet;
         else
             $this->roleObjet= $this->newRoleObjet();
