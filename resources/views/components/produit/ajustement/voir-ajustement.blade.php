@@ -1,4 +1,4 @@
-
+<div class="row">
       <div class="col-md-3">
 
         <x-generic.forms.form-table >
@@ -17,28 +17,9 @@
         </x-generic.forms.form-table >
     </div>
 
-            <div class=" col-md-6">
-
-        <x-generic.forms.form-table >
-            <x-generic.forms.form-table-item>
-                <h6 class="text-primary" >Note: </h6>
 
 
-                    <tr style="line-height: 70%">
-                        <td>
-                            <textarea class="form-control" name="" id="" rows="2">{{$ajustement->note}}</textarea>
-                        </td>
-
-                    </tr>
-
-                </x-generic.forms.form-table-item>
-
-            </x-generic.forms.form-table >
-
-
-            </div>
-
-
+</div>
 
         <x-generic.data-table.simple
         class="ly-list-table table-fixed"
