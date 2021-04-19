@@ -20,7 +20,7 @@ class BoutiqueAccessItem extends Component
     }
 
     public function getIdRoleForSelect(){
-        return (isset($this->boutiqueAccess)) ? $this->boutiqueAccees->role_id : -1;
+        return (isset($this->boutiqueAccess)) ? $this->boutiqueAccess->role_id : -1;
     }
 
 

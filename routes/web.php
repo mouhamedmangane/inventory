@@ -119,7 +119,11 @@ Route::get('venteProduit/categorie/{id}',[VenteController::class,'getProducts'])
 
 // Param User
 Route::get('param-compte/users/data',[PCUserController::class,'getData']);
-Route::delete('param-compte/users',[PCUserController::class,'destroyMany']);
+Route::get('param-compte/users/data/{filter}',[PCUserController::class,'getData']);
+Route::get('param-compte/users/archiver/{id}',[PCUserController::class,'archiver']);
+Route::get('param-compte/users/desarchiver/{id}',[PCUserController::class,'desarchiver']);
+Route::get('param-compte/users/archiverMany',[PCUserController::class,'archiverMany']);
+Route::get('param-compte/users/desarchiverMany',[PCUserController::class,'desarchiverMany']);
 
 Route::resources(['param-compte/users'=>PCUserController::class]);
 

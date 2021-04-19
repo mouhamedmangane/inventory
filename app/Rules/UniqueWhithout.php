@@ -1,20 +1,24 @@
 <?php
 
 namespace App\Rules;
+use DB;
 
 use Illuminate\Contracts\Validation\Rule;
 
 class UniqueWhithout implements Rule
 {
-    public $table,$attr,$id;
+    public $table,$attr,$idName,$idValue;
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct($table,$attr,$id)
+    public function __construct($table,$attr,$idValue,$idName='id')
     {
-        
+        $this->table=$table;
+        $this->attr=$attr;
+        $this->idName=$idName;
+        $this->idValue=$idValue;
     }
 
     /**
@@ -26,7 +30,7 @@ class UniqueWhithout implements Rule
      */
     public function passes($attribute, $value)
     {
-        //
+        return DB::table($table)->where($idName,'<>',$idValue)->where($attr,$value)->exists();
     }
 
     /**
@@ -36,6 +40,6 @@ class UniqueWhithout implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'eCe attrobites existe deja';
     }
 }

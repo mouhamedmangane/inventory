@@ -6,7 +6,7 @@
         {{ $boutique->nom }}
     </div>
     <div class="col-md-3">
-            <x-generic.input.select name="ba[{{ $id_select}}][role]" :id="$id_select" :dt="$roles" value="" />
+            <x-generic.input.select name="ba[{{ $id_select}}][role]" :id="$id_select" :dt="$roles" :value="$getIdRoleForSelect()" />
     </div>
     <div class="col-md-2 ">
         <div class="d-flex justify-content-end">

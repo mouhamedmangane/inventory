@@ -15,7 +15,7 @@ class Hydrate {
     public function addProp($source,$cible){
         $this->props[$source]=$cible;
     }
-    private function exists($element,$prop,$attrs=[]){
+    private function exist($element,$prop,$attrs=[]){
         if(isset($element->$prop) && !empty($element->$prop))
             return true;
         else 
