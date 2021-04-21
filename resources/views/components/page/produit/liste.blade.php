@@ -17,6 +17,8 @@
         <x-generic.tool-bar.button id="archiver_prod_tb" text="Archiver" icon="archive" disabled="disabled" />
         <x-generic.tool-bar.button id="favoris_prod_tb" text="Favoris" icon="grade"  disabled="disabled" />
         <x-generic.filters.filter :filter="$getFilter()"/>
+        <x-generic.data-table.group-by-btn id="groupby_prod_tb"  label="Grouper Par" idDataTable="myDataTable"
+                                           :dt="['categore'=>'Catégorie','stock'=>'Situation Stock']" defaultSelected=''  />
 
 
     </x-generic.tool-bar.bar>

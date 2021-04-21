@@ -22,7 +22,7 @@ class CreateReductionsTable extends Migration
             $table->string('unite', 50);
             $table->double('montant', 15, 2)->nullable();
             $table->boolean('etat')->default(true);
-            $table->dateTime('date_debut')->nullable()->default(new DateTime());
+         //   $table->dateTime('date_debut')->nullable()->default(new DateTime());
             $table->dateTime('date_fin')->nullable();
             $table->string('type',50);
             $table->text('description')->nullable()->default('');

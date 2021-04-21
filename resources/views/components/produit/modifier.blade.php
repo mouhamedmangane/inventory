@@ -28,10 +28,6 @@
                             :dt="['consomable'=>'Consommable','service'=>'Service']" value="{{$produit->type}}"/>
                         <x-generic.forms.form-table-select name="categorie" labelText="Categorie Produit" id="categorie"
                             :dt="$categories" value="{{$produit->groupe_produit->groupe_name}}" />
-
-
-
-
                     </x-generic.forms.form-table>
                 </div>
                 <div class="col-md-4 col-sm-12">

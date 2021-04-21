@@ -19,20 +19,18 @@ class VoirAjustement extends Component
         //
         $this->ajustement=$ajus;
     }
+
     public function columns(){
         return [
             (object)  ['name'=>'Produit','propertyName'=>'produit'],
             (object)  ['name'=>'Categorie ','propertyName'=>'categorie'],
-            (object)  ['name'=>'S. Avant -> Apres','propertyName'=>'stock',"classStyle"=>"dt-col-1 text-align-center"],
-            (object)  ['name'=>'P.ajusté','propertyName'=>'ajuste',"classStyle"=>"dt-col-1 text-align-center"],
-            (object)  ['name'=>'Date','propertyName'=>'date',"classStyle"=>"dt-col-3"],
-            (object)  ['name'=>'Prix','propertyName'=>'prix','visible'=>false,"classStyle"=>""],
+            (object)  ['name'=>'code ','propertyName'=>'code'],
+            (object)  ['name'=>'S. Avant -> Apres','propertyName'=>'stock',"classStyle"=>"text-align-center"],
+            (object)  ['name'=>'P.ajusté','propertyName'=>'ajuste',"classStyle"=>"text-align-center"],
+            (object)  ['name'=>'Valorisation','propertyName'=>'prix','visible'=>false,"classStyle"=>""],
             (object)  ['name'=>'Notes','propertyName'=>'notes','visible'=>false,]
         ];
-
-
     }
-
 
     public function lignes(){
 
@@ -52,12 +50,29 @@ class VoirAjustement extends Component
              ->addColumn('categorie',function($la){
                  return $la->produit->groupe_produit->groupe_name;
             })
+            ->addColumn('code',function($la){
+                return $la->produit->code;
+                })
             ->addColumn('stock',function($la){
-                return view('components.generic.bagde.compare')
+
+                $className="badge-primary";
+                if($la->ajuste){
+                    if($la->qteAvant > $la->qteReelle){
+                        $className="badge-warning";
+                    }
+                    else if($la->qteAvant < $la->qteReelle){
+                        $className="badge-success";
+                    }
+                }
+                    return view('components.generic.bagde.compare')
+
                             ->with('text1',$la->qteAvant)
                             ->with('text2',$la->qteReelle)
-                            ->with('separateur','  ->   ');
+                            ->with('separateur','    ->     ')
+                            ->with('className',$className);
+
             })
+
             ->addColumn('ajuste',function($la){
 
                 if($la->ajuste){
@@ -68,18 +83,17 @@ class VoirAjustement extends Component
                 else{
                     return view('components.generic.bagde.simple')
                     ->with('name','')
-                    ->with('classStyle','bg-primary');
+                    ->with('classStyle','bg-danger');
                 }
 
             })
 
+
             ->addColumn('prix',function($lA){
                 $lA->produit->prixAchatMin;
             })
-            ->addColumn('date',function($lA){
-                $lA->ajustement->created_at;
-            })
-            ->rawColumns(['produit','categorie','stock','ajuste','notes'])
+
+            ->rawColumns(['produit','code','categorie','stock','ajuste','notes'])
                     ->make(true);
                     $response=$json->getData(true);
                    // dd($json);

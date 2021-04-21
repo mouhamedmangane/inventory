@@ -70,7 +70,7 @@ class VenteController extends Controller
         $messages=[
 
         ];
-        if($request->client==0){//s'il n est pas un client
+        if($request->client==0 || $request==NULL){//s'il n est pas un client
             $rules['mrecu']='required';
 
         }
@@ -97,20 +97,19 @@ class VenteController extends Controller
                 "message"=>"Certains valeurs du formulaire ne sont pas renseigné ou sont incorrects:",
                 'errors'=>$validator->errors()
                 ])  ;
-
         }
-
 
         $vente= new Vente();
         $client= new Client();
 
-
         $vente->numeroVente="CL".$request->client."V".(DB::table('ventes')->count()+1);
+        $vente->montantTotal=0;
 
         DB::beginTransaction();
         try {
-            $vente->save();
+
             if($request->produits){//existe au moins 1 produit selectionné
+                $vente->save();
                 $montant=0;
                for ($i=0; $i <count($request->produits) ; $i++) {
                     $lv=new LigneVente();
@@ -120,7 +119,9 @@ class VenteController extends Controller
                     $lv->prixUnite=$request->prix[$i];
                     $lv->quantiteDemande=$request->quantiteD[$i];;
                     $lv->quantiteRecu=$request->quantiteR[$i];;
-                    $lv->unite=$request->unites[$i];
+                    $lv->unite=$produit->unite;
+                    //          unite=$request->unites[$i];
+
                     $quantite=0;
                     $quantite=$lv->quantiteRecu;
 
@@ -136,19 +137,23 @@ class VenteController extends Controller
 
 
                 }
-
+                dd($montant);
                 $lignePaie=new LignePayementVentes();
                 $lignePaie->montant=$request->mrecu;
                 $lignePaie->montantRestant=$montant-$request->mrecu;
                 $lignePaie->vente_id=$vente->id;
                 $lignePaie->save();
+
                 echo $montant;
                 //$vente->montantTotal=$montant;
                 if($request->client>0){//s'il le client est mentionné
                     $client= Client::findOrFail($request->client);
                     $vente->client_id=$client->id;
+
                     $client->compte-=$montant;
+
                     if($request->mrecu){
+                        //ajouter le montant recu comme un depot sur le compte du client
                         $client->compte+=$request->mrecu;
                     }
                     $client->save();

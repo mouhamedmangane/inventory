@@ -24,13 +24,12 @@ class CreateDroitDefaultsTable extends Migration
             $table->boolean('ro')->default(false);
             $table->boolean('uo')->default(false);
             $table->boolean('do')->default(false);
-            $table->string('role_id');
+            $table->unsignedBigInteger('role_id');
             $table->unsignedBigInteger('objet_id');
-           
-        
-            $table->foreign('role_id')->references('role')->on('roles')->onDelete('cascade');
-            $table->foreign('objet_id')->references('id')->on('objets')->onDelete('cascade');
 
+
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->foreign('objet_id')->references('id')->on('objets')->onDelete('cascade');
             $table->timestamps();
 
         });

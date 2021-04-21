@@ -56,14 +56,27 @@ class ProduitController extends Controller
 
              })
              ->addColumn('categorie',function($produit){
-                 return $produit->groupe_produit->groupe_name;
-            })
+                return $produit->groupe_produit->groupe_name;
+           })
+            ->addColumn('code',function($produit){
+            return "<code class='text-muted '>$produit->code</code>";
+                })
 
             ->addColumn('seuilstock',function($produit){
+                $className="badge-warning";
+
+                    if($produit->qteStock < $produit->qteSeuil){
+                        $className="badge-danger";
+                    }
+                    else if($produit->qteStock > $produit->qteSeuil){
+                        $className="badge-success";
+                    }
+
                 return view('components.generic.bagde.compare')
                             ->with('text1',$produit->qteStock)
                             ->with('text2',$produit->qteSeuil)
-                            ->with('separateur','/');
+                            ->with('separateur',' /  ')
+                            ->with('className',$className);
             })
             ->addColumn('status_stock',function($produit){
 
@@ -71,7 +84,7 @@ class ProduitController extends Controller
                 if($produit->qteStock <=0 && $produit->qteSeuil<=0){
                     return view('components.generic.bagde.simple')
                     ->with('name','')
-                    ->with('classStyle','bg-danger');
+                    ->with('classStyle','bg-warning');
                 }
                 else if($produit->qteStock < $produit->qteSeuil)
                     $classStyle = 'bg-danger';
@@ -86,11 +99,28 @@ class ProduitController extends Controller
             ->addColumn('fournisseur',function($produit){
             })
             ->addColumn('prixVente',function($produit){
-                if($produit->prixVenteMax > 0){
-                    return "[$produit->prixVenteMin  --  $produit->prixVenteMax]";
+                if($produit->prixVenteMin==NULL)
+                    return "-";
+                if($produit->prixVenteMax != $produit->prixVenteMin){
+                    return
+                        "
+                    <table>
+                        <tr style='line-height: 0% ;'>
+                                <th style='width: 30%;'> <span class='font-weight-lighter text-muted text-align-center' style='font-size:9px '>min</span></th>
+                                <th style='width: 30%;'> <span class='font-weight-lighter text-muted text-align-center' style='font-size:9px '>max</span></th>
+
+                        </tr>
+                        <tr style='line-height: 0% ;'>
+                            <th class=''> <span class='font-weight-bold' >$produit->prixVenteMin</span></th>
+                            <th > <span class='font-weight-lighter'>$produit->prixVenteMax</span></th>
+                        </tr>
+                    </table>
+                        ";
                 }
                 else{
-                    return $produit->prixVenteMin;
+                    return "  <tr class='align-middle'style='line-height: 0% ;'>
+                                <th classœ='align-middle'> <span class='font-weight-lighter'>$produit->prixVenteMin</span></th>
+                             </tr>";
                 }
             })
             ->addColumn('prixAchat',function($produit){
@@ -357,11 +387,15 @@ class ProduitController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //supprimer au cas où aucun enregistrement(vente, achat, depenses, ) n'a été fait pour se produit sinon archive
         $produit= new Produit();
         $produit = Produit::find($id);
         $produit->archived=false;
-        //$produit->save();
+        $produit->save();
+        return response()->json([
+            "status"=>true,
+            "message"=>"Modification Reussie",
+            'errors'=>''   ]);
 
 
     }

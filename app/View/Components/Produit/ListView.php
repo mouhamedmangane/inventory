@@ -18,7 +18,7 @@ class ListView extends  ComponentWithId
             (object)  ['name'=>'Categorie','propertyName'=>'categorie',"classStyle"=>""],
             (object)  ['name'=>'S. Stock','propertyName'=>'status_stock',"classStyle"=>"dt-col-1 text-align-center"],
             (object)  ['name'=>'Stock / Seuil','propertyName'=>'seuilstock',"classStyle"=>"dt-col-1 text-align-center"],
-            (object)  ['name'=>'Prix Vente','propertyName'=>'prixVente',"classStyle"=>"dt-col-3"],
+            (object)  ['name'=>'Prix Vente','propertyName'=>'prixVente',"classStyle"=>"dt-col-4 text-align-center"],
             (object)  ['name'=>'Prix Achat','propertyName'=>'prixAchat','visible'=>false,"classStyle"=>""],
             (object)  ['name'=>'Référence Interne ','propertyName'=>'rI','visible'=>false,"classStyle"=>""],
             (object)  ['name'=>'Fournisseur ','propertyName'=>'fournisseur','visible'=>false,"classStyle"=>""],

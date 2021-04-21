@@ -50,6 +50,9 @@ Route::post('produit/newProd', function(){
 });
 
 Route::get('produit/{id}/edit', [ProduitController::class,'edit']);
+Route::get('produit/delete/{id}', [ProduitController::class,'delete']);
+Route::get('produit/archived/{id}', [ProduitController::class,'destroy']);
+Route::get('produit/favoris/{id}', [ProduitController::class,'favoris']);
 
 Route::get('produit/{id}', [ProduitController::class,'show']);
 Route::get('produit/ajustement/{id}', [AjustementController::class,'show']);

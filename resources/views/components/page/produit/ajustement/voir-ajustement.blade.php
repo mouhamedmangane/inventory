@@ -49,6 +49,7 @@
     <div class="">
         <x-generic.infos.info-list>
             <x-generic.infos.info-item title="Enregistré le" :value="$ajustement->created_at" icon="save" />
+            <x-generic.infos.info-item title="produit(s) ajusté(s)" :value="$ajustement->ligne_ajustements->count('ajuste',true)" icon="save" />
 
         </x-generic.infos.info-list>
     </div>
