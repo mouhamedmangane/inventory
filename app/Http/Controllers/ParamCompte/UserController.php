@@ -7,27 +7,49 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\BoutiqueUser;
 use App\Util\HydrateFacade;
+use App\Util\ImageFactory;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 use DB,DataTables,Validator;
 
 class UserController extends Controller
 {
 
-    public function getData(Request $request){
-        $validator = Validator::make($request->all(),[
-            'nom'=>'max:200'
-        ]);
-        $users=User::all();
-        $message="";
-        $status="true";
-        if($validator->fails()){
-            $users=[];
+    public function getData(Request $request,$filter=""){
+            $validator = Validator::make($request->all(),[
+                'nom'=>'max:200',
+                'all'=>'max:100',
+                'filter'=>'max:100'
+            ]);
+            $users=User::select();
+            switch($filter){
+                case 'archiver': 
+                    $users->where('archiver',1);
+                    break;
+                default : 
+                    $users->where('archiver',0);
+    
+            }
+    
+            if($request->has('tous')){
+                $users->where('name','like',$request->tous.'%');
+            }
+            
             $message="";
-            $status=false;
-        }
+            $status="true";
+            if($validator->fails()){
+                $users=[];
+                $message="Les données ne sont pas valides";
+                $status=false;
+            }
+            else{
+                $users=$users->get();
+            }
+    
         
         return DataTables::of($users)
                 ->addColumn("boutiques",function($user){
-                    return BoutiqueUser::where('user_id',$user->id)->distinct()->count().' boutiques (s)';
+                    return BoutiqueUser::where('user_id',$user->id)->where('activer',1)->distinct()->count().' boutiques (s)';
                 })
                 ->addColumn("nom",function($user){
                     return view('components.generic.links.simple')
@@ -88,8 +110,8 @@ class UserController extends Controller
        
     }
 
-    public function save(Request $request,Array $validationArray,$hydrateArray,$dataBaseMethod){
-         $validator = Validator::make($request->all(), $validationArray);
+    public function save(Request $request,Array $validationArray,$hydrateArray,$dataBaseMethod,$id=0){
+         $validator = Validator::make($request->all()+['id'=>$id], $validationArray);
         if($validator->fails()){
             return \App\Http\ResponseAjax\Validation::validate($validator);
         }
@@ -97,14 +119,23 @@ class UserController extends Controller
             DB::beginTransaction();
             try {
                 $user=new User;
+                if($id>0){
+                    $user=User::where('id',$id)->first();
+                }
                 HydrateFacade::make($user,$request,$hydrateArray);
+                ImageFactory::store($request,$user,'photo','images/users',$user->id);
+                if($request->filled('pwd')) {
+                        $user->password=Hash::make($request->newPassword);
+                }
                 if($user->$dataBaseMethod()){
                     $this->saveBoutiqueUsers($request->ba,$user->id);
                 }
                 DB::commit();
+               
                 return [
                     'status'=>true,
-                    'message'=>'Enregistrement effectué avec success'
+                    'message'=>'Enregistrement effectué avec success',
+                    'id'=>$user->id
                 ];
             } catch (\Throwable $th) {
                 DB::rollback();
@@ -141,7 +172,7 @@ class UserController extends Controller
             $bu =BoutiqueUser::where('user_id',$user_id)->where('boutique_id',$bu_rqt['boutique'])->first(); 
             if($bu){
                 $bu->role_id = $bu_rqt['role'];
-                $bu->role_id = ($bu_rqt['activer'])? 1 : 0;
+                $bu->activer = (isset($bu_rqt['activer']))? 1 : 0;
                 $bu->update();
             }
             else{
@@ -189,14 +220,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {   
-        $request->id=$id;
+        $request->input('id',$id);
         $response = $this->save($request,$this->memeValidationSave()+[
-            "login"=>"required|max:100|unique:users,email",
             "id"=>"required|numeric|exists:users,id",
+            "login"=>["required","max:100",Rule::unique('users', 'email')->ignore($id),],
+            
             ],
-            ['name'=>'nom','email'=>'login/exist','password'=>'pwd','ncni','tel'],
-            'save'
+            ['name'=>'nom','email'=>'login','password'=>'pwd/exist','ncni','tel'],
+            'save',$id
         );
+       
         return response()->json($response);
     }
 
@@ -211,38 +244,52 @@ class UserController extends Controller
         //
     }
 
-    public function destroyMany(Request $request)
-    {
-        $validator=Validator::make($request->all(),
-        [
-            'role_select'=>'array|required',
-            'role_select.*'=>['numeric','exists:App\Models\Role,id',
-                              new \App\Rules\DbDependance('boutique_users','role_id',[['activer',1]])]
-        ]);
-
-        if($validator->fails()){
-            return response()->json(\App\Http\ResponseAjax\Validation::validate($validator));
-        }
-        else{
-            return response()->json(\App\Http\ResponseAjax\DeleteRow::many('roles',$request->role_select));
-           
-        }
+    public function archiver($id){
+        return response()->json($this->abstractArchiver($id,1));
     }
 
-    public function archiver(Request $request){
-        $validator=Validator::make($request->all(),
-        [   
-            'role_select'=>'array|required',
-            'role_select.*'=>['numeric','exists:App\Models\Role,id',]
+    public function desarchiver($id){
+        return response()->json($this->abstractArchiver($id,0));
+    }
+
+    public function archiverMany(Request $request){
+        return response()->json($this->abstractArchiverMany($request,1));
+    }
+
+    public function desarchiverMany(Request $request){
+        return response()->json($this->abstractArchiverMany($request,0));
+    }
+
+    private function abstractArchiver($id,$isAchived)
+    {
+        $validator=Validator::make(['id',$id],
+        [
+            'id'=>['numeric','exists:App\Models\User,id']
         ]);
+
         if($validator->fails()){
-            return response()->json(\App\Http\ResponseAjax\Validation::validate($validator));
+            return \App\Http\ResponseAjax\Validation::validate($validator);
         }
         else{
-            return response()->json(\App\Http\ResponseAjax\UpdateRow::manyForOnAttr('roles',$request->role_select,
-                                                                                            ['archiver'=>1],
-                                                                                            'messages.nbr_update'));
-           
+            return \App\Http\ResponseAjax\UpdateRow::manyForOnAttr('users',[$id],
+            ['archiver'=>$isAchived],
+            'messages.nbr_update');
+        }  
+    }
+    
+    private function abstractArchiverMany(Request $request,$isAchived){
+        $validator=Validator::make($request->all(),
+        [   
+            'user_select'=>'array|required',
+            'user_select.*'=>['numeric','exists:App\Models\User,id']
+        ]);
+        if($validator->fails()){
+            return \App\Http\ResponseAjax\Validation::validate($validator);
+        }
+        else{
+            return \App\Http\ResponseAjax\UpdateRow::manyForOnAttr('users',$request->user_select,
+                                                                                            ['archiver'=>$isAchived],
+                                                                                            'messages.nbr_update');
         }
     }
 

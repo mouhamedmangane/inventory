@@ -60,7 +60,7 @@
                         <x-slot name="label">
                             <x-generic.forms.form-table-label  labelText="Photo Profil" :required="false" />
                         </x-slot>
-                        <x-generic.input.photo id="photo" name="photo" url="" x="150" y="150" classImage=" rounded-circle"/>
+                        <x-generic.input.photo id="photo" name="photo" :url="(!empty($user->photo))?asset('images/users/'.$user->photo):''" x="150" y="150" classImage=" rounded-circle"/>
                      </x-generic.forms.form-table-line>
                 </div>
 

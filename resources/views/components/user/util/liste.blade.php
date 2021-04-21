@@ -14,10 +14,14 @@
          'canSelect'=>'*','confirm'=>true,'typeAlert'=>'modal'
         ],
         ['op'=>'Archivage','id'=>'archiver_user_tb',
-         'url'=>'/testRemove','type'=>'action',
-         'canSelect'=>'*','confirm'=>true
+         'url'=>url('param-compte/users/archiverMany'),'type'=>'action',
+         'canSelect'=>'*','confirm'=>true,'typeAlert'=>'modal'
         ],
-        ['op'=>'Modification','id'=>'modifier_prod_tb',
+        ['op'=>'Archivage','id'=>'desarchiver_user_tb',
+         'url'=>url('param-compte/users/desarchiverMany'),'type'=>'action',
+         'canSelect'=>'*','confirm'=>true,'typeAlert'=>'modal'
+        ],
+        ['op'=>'Modification','id'=>'modifier_user_tb',
         'url'=>url('param-compte/users'),
         'type'=>'link','canSelect'=>'1'
         ],
