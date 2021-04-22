@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components\Produit\Ajustement;
+namespace App\View\Components\Generic\Images;
 
 use Illuminate\View\Component;
 
-class create extends Component
+class simple extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class create extends Component
      */
     public function render()
     {
-        return view('components.produit.ajustement.create');
+        return view('components.generic.images.simple');
     }
 }

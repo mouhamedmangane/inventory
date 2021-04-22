@@ -52,7 +52,7 @@ class RoleController extends Controller
 
         return DataTables::of($roles)
                 ->addColumn("nbr_user",function($role){
-                    return BoutiqueUser::where('role_id',$role->id)->distinct()->count().' utilisateur(s)';
+                    return BoutiqueUser::where('role_id',$role->id)->distinct('user_id')->count().' utilisateur(s)';
                 })
                 ->addColumn("nom_role",function($role){
                     return view('components.generic.links.simple')
@@ -315,20 +315,52 @@ class RoleController extends Controller
         }
     }
 
-    public function archiver(Request $request){
+    public function archiver($id){
+        return response()->json($this->abstractArchiver($id,1));
+    }
+
+    public function desarchiver($id){
+        return response()->json($this->abstractArchiver($id,0));
+    }
+
+    public function archiverMany(Request $request){
+        return response()->json($this->abstractArchiverMany($request,1));
+    }
+
+    public function desarchiverMany(Request $request){
+        return response()->json($this->abstractArchiverMany($request,0));
+    }
+
+    private function abstractArchiver($id,$isAchived)
+    {
+        $validator=Validator::make(['id',$id],
+        [
+            'id'=>['numeric','exists:App\Models\Role,id']
+        ]);
+
+        if($validator->fails()){
+            return \App\Http\ResponseAjax\Validation::validate($validator);
+        }
+        else{
+            return \App\Http\ResponseAjax\UpdateRow::manyForOnAttr('roles',[$id],
+            ['archiver'=>$isAchived],
+            'messages.nbr_update');
+        }  
+    }
+    
+    private function abstractArchiverMany(Request $request,$isAchived){
         $validator=Validator::make($request->all(),
         [   
             'role_select'=>'array|required',
-            'role_select.*'=>['numeric','exists:App\Models\Role,id',]
+            'role_select.*'=>['numeric','exists:App\Models\Role,id']
         ]);
         if($validator->fails()){
-            return response()->json(\App\Http\ResponseAjax\Validation::validate($validator));
+            return \App\Http\ResponseAjax\Validation::validate($validator);
         }
         else{
-            return response()->json(\App\Http\ResponseAjax\UpdateRow::manyForOnAttr('roles',$request->role_select,
-                                                                                            ['archiver'=>1],
-                                                                                            'messages.nbr_update'));
-           
+            return \App\Http\ResponseAjax\UpdateRow::manyForOnAttr('roles',$request->role_select,
+                                                                                            ['archiver'=>$isAchived],
+                                                                                            'message.nbr_update');
         }
     }
 

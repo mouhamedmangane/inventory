@@ -41,7 +41,12 @@
         </div>
          <x-generic.links.select-link contentCible="my-main" value="test1" :dt="['/vente/new'=>'Nouvelle Vente','/test2'=>'Nouveau Produit Composé']" />
     </div>
-
+    <div>
+        <x-generic.infos.info-list>
+            <x-generic.infos.info-item title="Montant TOTAL" value="10 000 FCFA" icon="assignment_turned_in" couleur="success" />
+            <x-generic.infos.info-item title="Monnaie" value="3000 FCFA" icon="assignment_turned_in" couleur="danger" />
+        </x-generic.infos.info-list>
+    </div>
 </div>
 @endsection
 
@@ -52,18 +57,7 @@
 
 @section('ly-main-bot')
 
-<div class="d-flex justify-content-end">
-    <div id="" class="px-3 py-2" style="font-size:24px;" >
-        <x-generic.infos.info-item title="Montant TOTAL" value="10 000 FCFA" icon="assignment_turned_in" couleur="success" />
 
-    </div>
-    <div id="" class="px-3 py-2 ml-2" style="font-size:24px;">
-        {{-- Total : <label id="mtotal" for="">350 000 </label> FCFA --}}
-        <x-generic.infos.info-item title="Monnaie" value="3000 FCFA" icon="assignment_turned_in" couleur="danger" />
-
-    </div>
-
-</div>
 
 @endsection
 

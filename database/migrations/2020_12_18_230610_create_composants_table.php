@@ -20,8 +20,6 @@ class CreateComposantsTable extends Migration
             $table->foreign('paquet_id')->references('id')->on('produits')->onDelete('restrict');
             $table->unsignedBigInteger('produit_id');
             $table->foreign('produit_id')->references('id')->on('produits')->onDelete('restrict');
-
-            
             $table->double('quantite', 15, 3);
             $table->string('unite');
 

@@ -18,7 +18,7 @@ class Nouveau extends Component
      */
     public function __construct($clients=[])
     {
-        if(!$clients){        
+        if(!$clients){
             $this->clients=Client::all()->toArray();
             $this->cl=Client::all()->pluck('nom','id')->toArray();
             array_unshift($this->cl,'Client quelconque');
@@ -29,15 +29,15 @@ class Nouveau extends Component
     public function getColumns(){
         $columns=[];
         $categories = GroupeProduit::all();
-        
+
         $columns[]= GCellFactory::select("categories",'categories','categories')
                     ->setProp('groupe_name','id')
                     ->setData($categories)
-                    ->defaultOption('selectionner categorie');        
-        
+                    ->defaultOption('selectionner categorie');
+
         $columns[]= GCellFactory::selectFree('produits','produits','produits','categories',url('/venteProduit/categorie'))
                     ->setProp('libelle','id')
-                    ->setData([                         
+                    ->setData([
                     ])
                     ->unique(true)
                     ->defaultOption('selectionner Produit');
@@ -61,7 +61,7 @@ class Nouveau extends Component
                     ->type('number')
                     ->setClassTd('npl-editor-td-md  ')
                     ->defaultValue('0');
-        
+
         return $columns;
     }
 

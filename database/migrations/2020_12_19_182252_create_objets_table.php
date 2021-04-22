@@ -13,11 +13,18 @@ class CreateObjetsTable extends Migration
      */
     public function up()
     {
-       // Schema::disableForeignKeyConstraints();
-       
+        //Schema::disableForeignKeyConstraints();
+
         Schema::create('objets', function (Blueprint $table) {
-            $table->id('id');
-            $table->string('nom');
+            $table->id();
+            $table->string('objet_name')->unique();
+
+            $table->unsignedBigInteger('done_by_user')->default(1);//Auth::user()->id) par defaut user connecté
+            $table->foreign('done_by_user')
+            ->references('id')
+            ->on('users')
+            ->onDelete('restrict')
+            ->onUpdate('restrict');
             $table->timestamps();
         });
     }
@@ -31,7 +38,7 @@ class CreateObjetsTable extends Migration
 
     /**
      * Reverse the migrations.
-     *  
+     *
      * @return void
      */
     public function down()

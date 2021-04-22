@@ -17,15 +17,19 @@
         {{-- <link rel="stylesheet" href="{{ URL::asset('css/table-fixed.css') }}"> --}}
 
         <style>
+            
             body {
                 font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
             }
+
+            
+
         </style>
         
-        
+        @stack("styleBody")
     </head>
    
-    <body>
+    <body style=" ">
         
         <div id="load" class="d-flex justify-content-center flex-wrap align-items-center " 
             style="position: fixed;top:0px;left:0px;width:100%;height:100vh;background:#3F51B5;z-index:9999;" >

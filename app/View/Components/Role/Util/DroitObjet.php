@@ -32,7 +32,7 @@ class DroitObjet extends Component
     }
 
     public function isCheck($element){
-        if($element){
+        if(isset($element) && $element){
             return 'true';
         }
         else{

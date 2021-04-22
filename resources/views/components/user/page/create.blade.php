@@ -22,7 +22,10 @@
             :url="url($url_archiver.$user->id)" method="get"
             :redirect="'param-compte/users/'.$user->id" idAlert="listUserAlert" />
         @endif
-        {{-- <x-generic.tool-bar.link id="all_user" icon="group  " url="/param-compte/users" text="Tous les utilisateurs"  /> --}}
+
+        <x-generic.tool-bar.divider/>
+
+        <x-generic.tool-bar.link id="person_add" icon="person_add" url="/param-compte/users/create" text="Nouveau Utilisateur"  />
 
     </x-generic.tool.bar.bar>
 @endsection

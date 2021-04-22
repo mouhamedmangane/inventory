@@ -2,7 +2,7 @@
     <div class="my-3">
     <div class="d-flex justify-content-center ">
         <div class="" style="position: relative;">
-            <img src="{{ URL::asset('images/profig.jpg') }}" alt="" width="80px" height="80px"  class="rounded-circle">
+            <img src="{{ URL::asset($photo_profil) }}" alt="" width="80px" height="80px"  class="rounded-circle">
             <div style="position: absolute;width:32px;height:32px;line-height:29px;right:-10px;bottom:-10px;" 
                  class="rounded-circle bg-white text-center nav-link-primary text-secondary">
                 <i class="material-icons" style="font-size: 16px;">camera_alt</i>
@@ -20,10 +20,16 @@
             <i class="material-icons-outlined mr-2">edit</i>
             Modifier Profil
         </a>
-        <a href="" class="list-group-item nav-link-primary border-left-0 border-right-0">
-            <i class="material-icons-outlined mr-2">power_settings_new</i>
-            Deconnexion
-        </a>
+        <form method="POST" action="{{ route('logout') }}" class="list-group-item">
+            @csrf
+            <a href="" class="nav-link-primary border-left-0 border-right-0" onclick="event.preventDefault();
+            this.closest('form').submit();">
+                <i class="material-icons-outlined mr-2">power_settings_new</i>
+                {{ __('Log out') }}
+            </a>
+            
+        </form>
+        
         
         
     </div>

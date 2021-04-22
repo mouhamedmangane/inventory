@@ -8,7 +8,7 @@ use Auth;
 
 class UserContent extends Component
 {
-    public $user;
+    public $user,$photo_profil;
     /**
      * Create a new component instance.
      *
@@ -25,6 +25,14 @@ class UserContent extends Component
             $this->user->login ="Test Login user";
 
         }
+        $this->photo_profil = $this->init_photo_profil();
+    }
+
+    public function init_photo_profil(){
+        $path='images/users/'.$this->user->photo;
+        if(file_exists(public_path($path)))
+            return $path;
+        return 'images/profig.jpg';
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace App\ViewModel\Navs;
 
 class NavBlocModel implements NavElementModel {
- 
+
 
     public $navElementModels;
     public $name;
@@ -24,7 +24,7 @@ class NavBlocModel implements NavElementModel {
             array_splice($navElementModels,$index,$index);
         else
             throw new \Exception("La suppresion ne marche pas car index no trouvé");
-        
+
         return $this;
     }
 
@@ -36,7 +36,7 @@ class NavBlocModel implements NavElementModel {
         return $this->addNavElementModel($navGroupModel);
     }
 
-  
+
     public function getName(){
 
     }

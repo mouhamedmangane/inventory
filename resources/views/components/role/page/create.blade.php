@@ -12,15 +12,22 @@
                                        activeOnModify="true"
                                        :isReset="false"
                                        icon="save"/>
-        <x-generic.tool-bar.divider/>
-        {{-- <x-generic.tool-bar.link id="all_user" icon="gavel" url="{{ url('param-compte/roles') }}" text="Tous les roles"  /> --}}
-        {{-- si different de nouveau --}}
-        @if($role->id)
+         @if($role->id)
+            @if(empty($role->archiver))
+                @props(['icon_archiver'=>'archive','text_archiver'=>'Archiver','url_archiver'=>'param-compte/roles/archiver/'])
+            @else
+                @props(['icon_archiver'=>'unarchive','text_archiver'=>'Désarchiver','url_archiver'=>'param-compte/roles/desarchiver/'])
+            @endif
+            <x-generic.tool-bar.ajax id="archiver_user_tb" :icon="$icon_archiver"  :text="$text_archiver"
+            :url="url($url_archiver.$role->id)" method="get"
+            :redirect="'param-compte/roles/'.$role->id" idAlert="listUserAlert" />
             <x-generic.tool-bar.ajax id="supp_role" icon="delete_forever"  text="supprimer"
                                      :url="url('param-compte/roles/'.$role->id)" method="DELETE"
                                      redirect="param-compte/roles" idAlert="listRoleAlert" />
+            <x-generic.tool-bar.divider/>
             <x-generic.tool-bar.link id="add_role" icon="add" url="{{ url('param-compte/roles/create') }}" text="Nouveau Role"  />
         @endif
+        
     </x-generic.tool.bar.bar>
 @endsection
 

@@ -35,6 +35,6 @@ $(function(){
         return $('#'+options.id);
     };
 });
-</script>      
+</script>
 @endpush
 @endonce

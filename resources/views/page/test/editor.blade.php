@@ -1,6 +1,6 @@
 @extends('layouts.noppal')
 @section('content')
-    <x-generic.noppal-editor-table.table 
+    <x-generic.noppal-editor-table.table
             idTable='tableComposant'
             :dd="[
                (object)['categorie'=>'ct1','produit'=>'1','prix'=>'100'],
@@ -15,7 +15,7 @@
                                 'classGCell'=>'GCellSelect',
                                 'data'=>[
                                   @foreach($categories as $categorie => $value)
-                                    
+
                                   @endforeach
                                   (object)['value'=>'$value','text'=>],
                                   (object)['value'=>'ct2','text'=>'boutique'],
@@ -32,7 +32,7 @@
                                  'label'=>'Produit',
                                  'classGCell'=>'GCellSelectFree',
                                  'dep' => [
-                                    (object)['name'=>'categorie','url'=>url('/test/categorie')], 
+                                    (object)['name'=>'categorie','url'=>url('/test/categorie')],
                                  ],
                                  'nameDep'=>'categorie',
                                  'urlDep'=>url('/test/categorie'),
@@ -65,7 +65,7 @@
                                  ],
             ]"
 
-            
+
 
             />
 @endsection
@@ -83,5 +83,5 @@
 
             });
         });
-      </script>        
+      </script>
   @endpush

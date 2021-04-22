@@ -1,5 +1,5 @@
 @props(['id' => App\ViewModel\GenId::newId(),])
-<li class="nav-v-item">
+<li class="nav-v-item position-relative">
     <a href="#navdown{{ $id }}" data-toggle="collapse" aria-expanded="false" 
         class="d-flex pr-3"
         style="position: relative;">
@@ -12,7 +12,7 @@
         </span>
         
     </a>
-    <ul class="list-unstyled components-group collapse show " id="navdown{{$id}}">
+    <ul class="list-unstyled components-group collapse show " id="navdown{{$id}}" style="">
         @foreach ($navElementModels as $navElementModel)
             @if ($isNavItemModel($navElementModel))
                 <x-generic.navs.nav-item :name="$navElementModel->name" :url="$navElementModel->url" :icon="$navElementModel->icon" :active="$navElementModel->active"  />           

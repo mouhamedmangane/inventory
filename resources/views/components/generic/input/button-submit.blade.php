@@ -17,14 +17,14 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-    
+
     var idForm= '#'+'{{ $idForm }}';
     var id = '#'+'{{ $id }}';
     $(id).on('click',function(){
         $(idForm).submit();
     });
-    
-    $(idForm).submit(function (e) { 
+
+    $(idForm).submit(function (e) {
         console.log($(this).serialize());
         e.preventDefault();
         let form=$(idForm).get(0);
@@ -42,7 +42,7 @@ $(document).ready(function(){
         else{
             data= $(this).serializeObject();
         }
-            
+
         console.log(data);
         $.ajax({
             type: $(this).attr('method'),
@@ -53,7 +53,7 @@ $(document).ready(function(){
             contentType: contentType,
             cache: false,
             timeout: 600000,
-           
+
             beforeSend:function(){
                 $(idForm).find('.is-valid').removeClass('is-valid');
                 $(idForm).find('.is-invalid').removeClass('is-invalid');
@@ -88,7 +88,7 @@ $(document).ready(function(){
                        console.log(item);
                        console.log(response.errors[item]);
                    }
-                
+
                     for (const error in response.errors) {
                             var input = $(idForm).find('input[name="'+error+'"]');
                             input.addClass('is-invalid');
@@ -108,8 +108,8 @@ $(document).ready(function(){
                                 
                             @endif
                         }
-                        
-                        
+
+
                     }
                     resetAlert();
                     // let idContentAlert = '#'+'{{ $idContentAlert }}';
@@ -135,7 +135,7 @@ $(document).ready(function(){
             }
 
         }
-        
+
         function resetAlert(){
             $(idForm).find('.is-valid, .is-invalid').on('keyup change',function(e){
                 console.log('resetAlert');

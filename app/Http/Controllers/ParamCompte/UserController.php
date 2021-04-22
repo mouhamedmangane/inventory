@@ -53,6 +53,7 @@ class UserController extends Controller
                 })
                 ->addColumn("nom",function($user){
                     return view('components.generic.links.simple')
+                    ->with('src',asset("images/users/".$user->photo))
                     ->with('url',url("param-compte/users/".$user->id))
                     ->with('text',$user->name)
                     ->with('class','lien-sp');
@@ -125,7 +126,7 @@ class UserController extends Controller
                 HydrateFacade::make($user,$request,$hydrateArray);
                 ImageFactory::store($request,$user,'photo','images/users',$user->id);
                 if($request->filled('pwd')) {
-                        $user->password=Hash::make($request->newPassword);
+                        $user->password=Hash::make($request->pwd);
                 }
                 if($user->$dataBaseMethod()){
                     $this->saveBoutiqueUsers($request->ba,$user->id);

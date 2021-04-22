@@ -17,6 +17,7 @@ class CreateAjustementsTable extends Migration
 
         Schema::create('ajustements', function (Blueprint $table) {
             $table->id();
+            $table->string('numero', 100)->unique()->default(NULL);
             $table->text('note')->nullable();
             $table->timestamps();
 

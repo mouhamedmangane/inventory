@@ -14,10 +14,14 @@
          'canSelect'=>'*','confirm'=>true,'typeAlert'=>'modal'
         ],
         ['op'=>'Archivage','id'=>'archiver_role_tb',
-         'url'=>url('param-compte/roles/archiver'), 'type'=>'action', 'method'=>'PUT',
+         'url'=>url('param-compte/roles/archiverMany'), 'type'=>'action', 
          'canSelect'=>'*','confirm'=>true,'typeAlert'=>'modal'
         ],
-        ['op'=>'Modification','id'=>'modifier_prod_tb',
+        ['op'=>'Archivage','id'=>'desarchiver_role_tb',
+         'url'=>url('param-compte/roles/desarchiverMany'),'type'=>'action',
+         'canSelect'=>'*','confirm'=>true,'typeAlert'=>'modal'
+        ],
+        ['op'=>'Modification','id'=>'modifier_role_tb',
         'url'=>url('param-compte/roles'),
         'type'=>'link','canSelect'=>'1'
         ],

@@ -21,7 +21,7 @@ class Produit extends Model
     public function ligne_achat_demandes()
     {
         return $this->hasMany('App\Models\LigneAchatDemande');
-    }   
+    }
     public function ajustements()
     {
         return $this->hasMany('App\Models\Ajustement');
@@ -36,13 +36,24 @@ class Produit extends Model
         return $this->belongsTo('App\Models\GroupeProduit');
     }
 
+    public function done_by_user()
+    {
+        return $this->belongsTo('App\Models\User','done_by_user','id');
+    }
+
     public function composants()
     {
-        return $this->hasMany('App\Models\Composant', 'paquet_id', 'produit_id');
+        return $this->hasMany('App\Models\Composant', 'paquet_id', 'id');
+
+    }
+
+    public function reductions()
+    {
+        return $this->hasMany('App\Models\Reduction');
     }
     public function isPaquet(){
-        return Composant::where('id',$this->id)->exists();
+        return Composant::where('paquet_id',$this->id)->exists();
     }
-    
- 
+
+
 }

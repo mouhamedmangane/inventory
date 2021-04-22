@@ -21,9 +21,9 @@ class CreateLignePayementAchatsTable extends Migration
             $table->double('montantRestant',15,2);
 
             $table->unsignedBigInteger('achat_id');
-        
+
             $table->foreign('achat_id')->references('id')->on('achats')->onDelete('cascade');
-        
+
             $table->timestamps();
         });
     }

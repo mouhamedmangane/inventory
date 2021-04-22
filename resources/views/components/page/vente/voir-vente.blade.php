@@ -5,18 +5,18 @@
 @section('ly-title')
 <div class="d-flex align-items-center justify-content-between px-4 mt-1">
     <div class="d-flex align-items-center">
-        <div  class="rounded-circle border  text-align center d-flex align-items-center justify-content-center" 
+        <div  class="rounded-circle border  text-align center d-flex align-items-center justify-content-center"
             style="width: 43px; height: 43px; background: rgba(0,0,0,.1);@if ($attributes['img'])border-color:black!important;@endif">
             @if ($attributes['img'])
-                <img src="{{ asset("images/profig.jpg") }}"  
+                <img src="{{ asset("images/profig.jpg") }}"
               width="43px"
               height="43px"
-              class="rounded-circle" 
+              class="rounded-circle"
               style="">
-            @else 
+            @else
              <i class="material-icons">add_shopping_cart</i>
             @endif
-            
+
         </div>
          <x-generic.links.select-link contentCible="my-main" value="/vente/allventes" :dt="['vente/'=>'Ventes','/vente/allventes'=>'Ventes / N° :']" />
             {{$vente->numeroVente}}
@@ -28,11 +28,11 @@
             @if($vente->complet)
                  <x-generic.infos.info-item title="Statut Vente" value="COMPLETE" icon="assignment_turned_in" couleur="success" />
             @elseif(!$vente->payement_complet()){{--  ou livraison incomplete --}}
-                 <x-generic.infos.info-item title="Statut Vente" value="INCOMPLETE" icon="assignment_turned_in" couleur="warning" /> 
+                 <x-generic.infos.info-item title="Statut Vente" value="INCOMPLETE" icon="assignment_turned_in" couleur="warning" />
             @else
                  <x-generic.infos.info-item title="Statut Vente" value="Incomplete" icon="assignment_turned_in" couleur="danger" />
             @endif
-               
+
         </x-generic.infos.info-list>
     </div>
 </div>
@@ -59,7 +59,7 @@
                    <u>Notes* </u>:  {{$vente->notes}}
                 </div>
              @endif
-            
+
        </div>
 @endsection
 
