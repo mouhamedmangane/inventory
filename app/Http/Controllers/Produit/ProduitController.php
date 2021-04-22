@@ -573,4 +573,21 @@ class ProduitController extends Controller
             ]);
 
      }
+     public function archiver(Request $request){
+        $validator=Validator::make($request->all(),
+        [
+            'role_select'=>'array|required',
+            'role_select.*'=>['numeric','exists:App\Models\Role,id',]
+        ]);
+        if($validator->fails()){
+            return response()->json(\App\Http\ResponseAjax\Validation::validate($validator));
+        }
+        else{
+            return response()->json(\App\Http\ResponseAjax\UpdateRow::manyForOnAttr('roles',$request->role_select,
+                                                                                            ['archiver'=>1],
+                                                                                            'messages.nbr_update'));
+
+        }
+    }
+
 }
