@@ -20,7 +20,7 @@
                 <div class="d-flex flex-wrap">
                     @foreach ($boutiques as $boutique)
                         <div class="col-md-2">
-                            <a href="">
+                            <a href="{{ url("b/$boutique->id/produit") }}">
                                 @php
                                    $background= App\Constante\Couleur::aléatoires($boutique->nom);
                                 @endphp

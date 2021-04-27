@@ -15,6 +15,7 @@ $(function(){
                 $(this).html('').append(div);
             });
         },
+
         loading:function(){
             return this.each(function(){
                 let div =document.createElement('div');
@@ -44,7 +45,13 @@ $(function(){
            return o;
         },
 
-    
+        // 
+        updateProfilImage:function(selectorTarget){
+            return this.each(function(){
+                let file = $(this)[0].files[0];
+                $(selectorTarget).attr('src',URL.createObjectURL(file));
+            });
+        }
     });
 
 
@@ -63,6 +70,8 @@ $(function(){
     $.fn.nplAlertHide = function(idContentAlert){
         $('#'+idContentAlert).alert('close');
     }
+
+
  
     // show and hide dropdown
     $(function(){

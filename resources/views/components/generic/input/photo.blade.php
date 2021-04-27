@@ -2,14 +2,15 @@
         'no_dispo'=>"Positionner sur l'image pour la changer"])
 <div class="d-flex align-items-center">
     <div style="width: {{ $x }}px; height:{{ $y }}px;background-size:{{ $x-10 }}px {{ $y-10 }}px;"
-         class="border rounded input-img-content">
+         class="border rounded input-img-content @if($attributes['circle']) rounded rounded-circle @endif">
 
          <img src="{{ $url }}"
               id="{{ $id }}-image"
               alt="Image du produit "
-              class="input-img rounded"
+              class="input-img rounded @if($attributes['circle']) rounded rounded-circle @endif"
               style="@if (empty ($url)) display:none;@endif">
 
+        @if($attributes['activeAction']=='false')
         <div class="input-img-action" >
                 <input type="file"
                        accept="image/png, image/jpeg"
@@ -20,13 +21,13 @@
                 <button class="btn btn-sm btn-primary" type="button" style="padding:2px 5px;" id="{{ $id }}-edit" >
                     <i class="material-icons md-14" >edit</i>
                 </button>
-                <button class="btn btn-sm btn-danger ml-1" type="button" style="padding:2px 5px;" id="{{ $id }}-sup">
-                    <i class="material-icons md-14">delete</i>
-                </button>
+                
         </div>
+        @endif
 
 
     </div>
+    
     <div style=" @if($attributes['activeText']=='false') display:none; @endif "
              id="{{ $id }}-text"
              class="input-image-text"
@@ -41,7 +42,7 @@
 @push('script')
 <script>
     $(document).ready(function(){
-        $("#{{ $id }}-edit").click(function(){
+        $("#{{ $id }}-edit,#{{ $attributes['idTriggerEdit'] }}").click(function(){
             $("#{{ $id }}").trigger('click')
         });
         $("#{{ $id }}").on('change',function(e){

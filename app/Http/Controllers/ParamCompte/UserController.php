@@ -224,6 +224,7 @@ class UserController extends Controller
         $request->input('id',$id);
         $response = $this->save($request,$this->memeValidationSave()+[
             "id"=>"required|numeric|exists:users,id",
+            "pwd"=>"confirmed|max:100",
             "login"=>["required","max:100",Rule::unique('users', 'email')->ignore($id),],
             
             ],

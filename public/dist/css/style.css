@@ -259,7 +259,15 @@ a, a:hover, a:focus {
 }
 .n-form-table-col-input{
 }
-
+.form-table-none{
+  border: none!important;
+}
+.form-table-shadow-none  , .form-table-none {
+  box-shadow: none!important;
+}
+.form-table-border-none td , .form-table-none td{
+  border-top: none!important;
+}
 
 /*TODO header 
 |------------------------------------------------------------------------------
@@ -354,6 +362,9 @@ a, a:hover, a:focus {
 
 
 /* c header-button */
+.c-head-button{
+  position: relative;
+}
 .c-head-button-profil {
     padding: 8px 15px;
 }
@@ -381,6 +392,14 @@ a, a:hover, a:focus {
     background-color: rgba(255, 255, 255, 0.99);
     outline: 1px solid white;
     color:black;
+}
+
+.c-head-message{
+  position:absolute;
+  left:25px;
+  top:6px;
+  height: 15px;
+  font-size: 9px;
 }
 
 /* notif */

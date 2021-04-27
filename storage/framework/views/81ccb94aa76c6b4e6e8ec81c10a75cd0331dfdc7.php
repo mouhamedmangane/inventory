@@ -4,7 +4,7 @@
 <?php $component->withName('util.head-bar-action.head-button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes([]); ?>
+<?php $component->withAttributes(['badge' => '15']); ?>
 <?php if (isset($__componentOriginald9ba04d15e7af484ec7315b63d610c0f905923d7)): ?>
 <?php $component = $__componentOriginald9ba04d15e7af484ec7315b63d610c0f905923d7; ?>
 <?php unset($__componentOriginald9ba04d15e7af484ec7315b63d610c0f905923d7); ?>
@@ -41,7 +41,7 @@
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php $component->withAttributes(['classBtn' => 'c-head-button-profil']); ?>
-        <img src="<?php echo e(URL::asset('images/profig.jpg')); ?>" alt="" width="32px" height="32px"  class="rounded-circle">
+        <img src="<?php echo e(url(\App\Util\ImageFactory::profil_current_user())); ?>" alt="" width="32px" height="32px"  class="rounded-circle n__profil_user_class">
      <?php if (isset($__componentOriginald9ba04d15e7af484ec7315b63d610c0f905923d7)): ?>
 <?php $component = $__componentOriginald9ba04d15e7af484ec7315b63d610c0f905923d7; ?>
 <?php unset($__componentOriginald9ba04d15e7af484ec7315b63d610c0f905923d7); ?>
@@ -84,7 +84,7 @@
     </div>
 </div>
 
-<?php if (! $__env->hasRenderedOnce('c9b496e6-326f-46f3-8996-79a794f99f90')): $__env->markAsRenderedOnce('c9b496e6-326f-46f3-8996-79a794f99f90'); ?>
+<?php if (! $__env->hasRenderedOnce('94e894af-3417-41ba-9fe7-abdbceaf536a')): $__env->markAsRenderedOnce('94e894af-3417-41ba-9fe7-abdbceaf536a'); ?>
     <?php $__env->startPush('script'); ?>
         <script type="text/javascript">
             $(document).ready(function(){
