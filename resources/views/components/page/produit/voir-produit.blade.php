@@ -14,7 +14,11 @@
         {{-- <x-generic.tool-bar.button id="supprimer_prod_tb" text="Supprimer" icon="delete"  disabled="disabled" /> --}}
         <x-generic.tool-bar.divider/>
         <x-generic.tool-bar.button id="imprimer_prod_tb" text="Imprimer" icon="print"  />
-        <x-generic.tool-bar.button id="archiver_prod_tb" text="Archiver" icon="archive"  />
+        @if ($produit->archived)
+            <x-generic.tool-bar.button id="archiver_prod_tb" text="Désarchiver" icon="archive"  />
+        @else
+            <x-generic.tool-bar.button id="archiver_prod_tb" text="Archiver" icon="archive"  />
+        @endif
         <x-generic.tool-bar.divider/>
         {{-- <x-generic.tool-bar.button id="ajuster_prod_tb" text="Ajuster" icon="archive"  /> --}}
         <x-generic.tool-bar.button id="rejet_prod_tb" text="Rejeter" icon="archive"  />
@@ -33,28 +37,24 @@
 @section('ly-title')
 <div class="d-flex align-items-center justify-content-between px-4 mt-1">
     <div class="d-flex align-items-center">
-        <div class="rounded-circle border  text-align center d-flex align-items-center justify-content-center"
-             style="width: 43px; height: 43px; background: rgba(0,0,0,.1);"{{--@if ($attributes['img'])border-color:black!important;@endif"--}}>
-           {{-- @if ($attributes['img'])    ! --}}
-           @if(false)
-                <img src="{{ asset("images/profig.jpg") }}"
-                    width="43px"
-                    height="43px"
-                    class="rounded-circle"
-                    style=""
-                >
-            @else
-             <i class="material-icons">add_shopping_cart</i>
-            @endif
-        </div>
-         <x-generic.links.select-link contentCible="my-main" value="" :dt="['/produit/idproduit'=>'Produit/'.$produit->libelle,'produit/'=>'Mes Produits']" />
+            <x-slot name="image">
+                <x-generic.icon.simple name="save" taille="16" />
+            </x-slot>
+            <x-generic.breadcumb.bar style="font-size: 18px;" class="py-0">
+                <x-generic.breadcumb.item  class="lien-sp">
+                    <a href="{{ url('/produit') }}">Produits</a>
+                </x-generic.breadcumb.item>
+                <x-generic.breadcumb.item active="true">
+                    {{ ($produit->id)?$produit->libelle:'voir produit' }}
+                </x-generic.breadcumb.item>
+            </x-generic.breadcumb>
+
     </div>
     <div class="">
         <x-generic.infos.info-list>
             <x-generic.infos.info-item title="Ratio Vente" value="2 100/ Mois" icon="trending_down" />
             <x-generic.infos.info-item title="Ratio Vente" value="3 100 / Mois" icon="equalizer" />
-            <x-generic.infos.info-item name="user" :title="$produit->done_by_user" :value='$produit->created_at' icon="save" typeIcon="material-icons-outlined" />
-
+            <x-generic.infos.info-item name="user" :title="$produit->done_by_user" :value='$produit->created_at' icon="save" typeIcon="material-icons-outlined" />:
         </x-generic.infos.info-list>
     </div>
 

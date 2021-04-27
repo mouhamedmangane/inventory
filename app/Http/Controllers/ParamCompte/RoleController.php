@@ -8,14 +8,14 @@ use App\Models\Objet;
 use App\Models\Role;
 use App\Models\RoleObjet;
 use App\Models\BoutiqueUser;
-use Validator,DB,DataTables;
+use Validator,DB,DataTables,Auth;
 
 class RoleController extends Controller
 {
 
     /**
      * retourn la liste de roles selon les parametre du request
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function getData(Request $request,$filter=""){
@@ -25,12 +25,12 @@ class RoleController extends Controller
             'filter'=>'max:100'
         ]);
         $roles=Role::select();
-        
+
         switch($filter){
-            case 'archiver': 
+            case 'archiver':
                 $roles->where('archiver',1);
                 break;
-            default : 
+            default :
                 $roles->where('archiver',0);
 
         }
@@ -38,7 +38,7 @@ class RoleController extends Controller
         if($request->tous){
             $roles->where('nom','like',$request->tous.'%');
         }
-        
+
         $message="";
         $status="true";
         if($validator->fails()){
@@ -52,7 +52,7 @@ class RoleController extends Controller
 
         return DataTables::of($roles)
                 ->addColumn("nbr_user",function($role){
-                    return BoutiqueUser::where('role_id',$role->id)->distinct()->count().' utilisateur(s)';
+                    return BoutiqueUser::where('role_id',$role->id)->distinct('user_id')->count().' utilisateur(s)';
                 })
                 ->addColumn("nom_role",function($role){
                     return view('components.generic.links.simple')
@@ -105,7 +105,7 @@ class RoleController extends Controller
             'nom'=> 'required|max:100',
             'archiver'=> 'max:100',
             'description'=> 'max:250',
-            
+
             'objet'=> 'array|required',
             'objet.*'=>'numeric',
 
@@ -118,7 +118,7 @@ class RoleController extends Controller
             'ro.'=>'array',
             'uo.'=>'array',
             'do.'=>'array',
-            
+
             'c.*'=>'numeric',
             'r.*'=>'numeric',
             'u.*'=>'numeric',
@@ -128,13 +128,13 @@ class RoleController extends Controller
             'ro.*'=>'numeric',
             'uo.*'=>'numeric',
             'do.*'=>'numeric',
-            
-            
+
+
         ];
         $messages=[
 
         ];
-        
+
 
         $validator = Validator::make($request->all(), $rules,$messages);
 
@@ -150,7 +150,7 @@ class RoleController extends Controller
                         'nom', 'Le nom existe dejadd'
                     );
                 }
-                
+
             }else{
                 if(Role::where('nom', $request->nom)->where('archiver',0)->exists()){
                     $validator->errors()->add(
@@ -159,7 +159,7 @@ class RoleController extends Controller
                 }
                 $testObject=true;
                 foreach($request->objet as $value){
-                    if(Objet::where('id',$value)->doesntExist())   
+                    if(Objet::where('id',$value)->doesntExist())
                         $testObject=false;
                 }
                 if($testObject==false){
@@ -181,8 +181,8 @@ class RoleController extends Controller
             DB::beginTransaction();
             try {
                 $role = new Role;
-                
-                
+
+
                 if(isset($request->id)  && $request->id!=0){
                     $role=Role::where('id',$request->id)->first();
                     //$role->update();
@@ -190,7 +190,7 @@ class RoleController extends Controller
                 $role->nom=$request->nom;
                 $role->archiver=(isset($request->archiver))?0:1;
                 $role->description = $request->description;
-                $role->done_by_user=1;
+                $role->done_by_user=Auth::user()->id;
                 $role->save();
                 foreach($request->objet as $objet_id){
                     $roleObjet=new RoleObjet;
@@ -200,19 +200,20 @@ class RoleController extends Controller
                     else{
                         $roleObjet->role_id=$role->id;
                         $roleObjet->objet_id=$objet_id;
+                        $roleObjet->done_by_user=Auth::user()->id;
                     }
                     $roleObjet->role_id;
                     $roleObjet->r=(isset($request->r) && in_array($objet_id,$request->r))?1:0;
                     $roleObjet->c=(isset($request->c) && in_array($objet_id,$request->c))?1:0;
                     $roleObjet->u=(isset($request->u) && in_array($objet_id,$request->u))?1:0;
                     $roleObjet->d=(isset($request->d) && in_array($objet_id,$request->d))?1:0;
-    
+
                     $roleObjet->ro=(isset($request->ro) && in_array($objet_id,$request->ro))?1:0;
                     $roleObjet->co=(isset($request->co) && in_array($objet_id,$request->co))?1:0;
                     $roleObjet->uo=(isset($request->uo) && in_array($objet_id,$request->uo))?1:0;
                     $roleObjet->do=(isset($request->do) && in_array($objet_id,$request->do))?1:0;
                     $roleObjet->done_by_user=1;
-                    $roleObjet->save();  
+                    $roleObjet->save();
                 }
                 DB::commit();
                 return response()->json([
@@ -229,10 +230,10 @@ class RoleController extends Controller
                     'data'=>$ex->getMessage(),
                  ])  ;
             }
-            
-            
+
+
         }
-        
+
     }
 
     /**
@@ -242,8 +243,8 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
-        
+    {
+
         $role=Role::where('id',$id)->first();
         if($role)
             return view("page.param-compte.role.create-role",compact('role'));
@@ -281,7 +282,7 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   
+    {
         $validator=Validator::make(['id',$id],
         [
             'id'=>['numeric','exists:App\Models\Role,id',
@@ -293,8 +294,8 @@ class RoleController extends Controller
         }
         else{
             return response()->json(\App\Http\ResponseAjax\DeleteRow::one('roles',$id));
-           
-        }   
+
+        }
     }
 
     public function destroyMany(Request $request)
@@ -311,26 +312,58 @@ class RoleController extends Controller
         }
         else{
             return response()->json(\App\Http\ResponseAjax\DeleteRow::many('roles',$request->role_select));
-           
+
         }
     }
 
-    public function archiver(Request $request){
-        $validator=Validator::make($request->all(),
-        [   
-            'role_select'=>'array|required',
-            'role_select.*'=>['numeric','exists:App\Models\Role,id',]
+    public function archiver($id){
+        return response()->json($this->abstractArchiver($id,1));
+    }
+
+    public function desarchiver($id){
+        return response()->json($this->abstractArchiver($id,0));
+    }
+
+    public function archiverMany(Request $request){
+        return response()->json($this->abstractArchiverMany($request,1));
+    }
+
+    public function desarchiverMany(Request $request){
+        return response()->json($this->abstractArchiverMany($request,0));
+    }
+
+    private function abstractArchiver($id,$isAchived)
+    {
+        $validator=Validator::make(['id',$id],
+        [
+            'id'=>['numeric','exists:App\Models\Role,id']
         ]);
+
         if($validator->fails()){
-            return response()->json(\App\Http\ResponseAjax\Validation::validate($validator));
+            return \App\Http\ResponseAjax\Validation::validate($validator);
         }
         else{
-            return response()->json(\App\Http\ResponseAjax\UpdateRow::manyForOnAttr('roles',$request->role_select,
-                                                                                            ['archiver'=>1],
-                                                                                            'messages.nbr_update'));
-           
+            return \App\Http\ResponseAjax\UpdateRow::manyForOnAttr('roles',[$id],
+            ['archiver'=>$isAchived],
+            'messages.nbr_update');
         }
     }
 
-   
+    private function abstractArchiverMany(Request $request,$isAchived){
+        $validator=Validator::make($request->all(),
+        [
+            'role_select'=>'array|required',
+            'role_select.*'=>['numeric','exists:App\Models\Role,id']
+        ]);
+        if($validator->fails()){
+            return \App\Http\ResponseAjax\Validation::validate($validator);
+        }
+        else{
+            return \App\Http\ResponseAjax\UpdateRow::manyForOnAttr('roles',$request->role_select,
+                                                                                            ['archiver'=>$isAchived],
+                                                                                            'message.nbr_update');
+        }
+    }
+
+
 }

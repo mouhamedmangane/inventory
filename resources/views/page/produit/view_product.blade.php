@@ -1,2 +1,2 @@
 @extends("layouts-page.inventory")
-    <x-page.produit.voir-produit :produit="$produit"/>
+    <x-produit.page.voir-produit :produit="$produit"/>

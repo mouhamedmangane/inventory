@@ -10,4 +10,8 @@ class BoutiqueUser extends Model
     use HasFactory;
 
 
+    public function boutiques(){
+        
+    }
+
 }

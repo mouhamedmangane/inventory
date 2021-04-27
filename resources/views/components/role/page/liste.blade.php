@@ -7,6 +7,8 @@
         <x-generic.tool-bar.button id="modifier_role_tb" icon="edit" text="Modifier"/>
         <x-generic.tool-bar.button id="supprimer_role_tb" icon="delete" text="Supprimer" />
         <x-generic.tool-bar.button id="archiver_role_tb" icon="archive" text="Archiver"/>
+        <x-generic.tool-bar.button id="desarchiver_role_tb" icon="unarchive" text="Déarchiver"/>
+
     </x-generic.tool-bar.bar>
 @endsection
 

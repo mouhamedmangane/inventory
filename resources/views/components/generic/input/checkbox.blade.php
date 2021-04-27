@@ -19,9 +19,8 @@
             id="{{ $idd }}"
             @if ($attributes['disabled'])
                 disabled="disabled"
-
             @endif
-            @if ((is_string($attributes['checked']) && $attributes["checked"]=='true') || $attributes["checked"])  checked="{{ $attributes['checked'] }}"  @endif
+            @if ((is_string($attributes['checked']) && $attributes["checked"]=='true') || (!is_string($attributes['checked']) && $attributes["checked"]))  checked="{{ $attributes['checked'] }}"  @endif
             class=" @if ($attributes['type'] == 'switch') custom-switch @else custom-checkbox @endif
                     custom-control-input {{ $attributes['class'] }}"
             @isset($attributes['data'])

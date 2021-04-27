@@ -18,8 +18,8 @@
         </x-slot>
         <x-generic.links.select-link-dt idDataTable="myDataTable" value="tous" 
                                     :dt="[
-                                        url('param-compte/users/data')=>'Liste des Roles',
-                                        url('param-compte/users/data/archiver')=>'Liste des Roles Archivées',
+                                        url('param-compte/users/data')=>'Liste des Utilisateurs',
+                                        url('param-compte/users/data/archiver')=>'Liste des Utilisateurs Archivées',
                                     ]" 
                                     class="mx-2" />
         <x-slot name="right">

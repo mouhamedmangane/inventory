@@ -1,6 +1,6 @@
 @extends('layouts.ly')
 @section('ly-toolbar')
-    <x-generic.tool-bar.bar> 
+    <x-generic.tool-bar.bar>
         <x-generic.tool-bar.prev-button id="prev_tb" :url="url('param-compte/users')"/>
         <x-generic.input.button-submit id="submit_produit_tb"
                                        idForm="create_user_form"
@@ -22,7 +22,10 @@
             :url="url($url_archiver.$user->id)" method="get"
             :redirect="'param-compte/users/'.$user->id" idAlert="listUserAlert" />
         @endif
-        {{-- <x-generic.tool-bar.link id="all_user" icon="group  " url="/param-compte/users" text="Tous les utilisateurs"  /> --}}
+
+        <x-generic.tool-bar.divider/>
+
+        <x-generic.tool-bar.link id="person_add" icon="person_add" url="/param-compte/users/create" text="Nouveau Utilisateur"  />
 
     </x-generic.tool.bar.bar>
 @endsection
@@ -41,15 +44,15 @@
                 <a href="{{ url('param-compte/users') }}">Utilisateurs</a>
             </x-generic.breadcumb.item>
             <x-generic.breadcumb.item active="true">
-                {{ ($user->id)?$user->name:'Nouveau Utilisateur' }}
+                {{ (isset($user->id)    )?$user->name:'Nouveau Utilisateur' }}
             </x-generic.breadcumb.item>
         </x-generic.breadcumb>
 
         <x-slot name="right">
             <div class="mr-4">
                 <x-generic.infos.info-list >
-                    
-                    @if($user)
+
+                    @if(isset($user->id))
                         <x-generic.infos.info-item title="Boutiques" :value="$nbrBoutiques" icon="store"  />
                         <x-generic.infos.info-item title="Statut" :value="$statusUser" icon="assignment_turned_in" :couleur="$couleurUser" />
 

@@ -1,5 +1,5 @@
 @extends('layouts-page.inventory')
 
 @section('content')
-    <x-produit.nouveau />
+    <x-produit.page.form />
 @endsection

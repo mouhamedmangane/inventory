@@ -2,12 +2,12 @@
    @props([
         'url_form'=>url("param-compte/users/".$user->id),
         'method_form'=>'post'
-   ]) 
+   ])
 @else
     @props([
         'url_form'=>url("param-compte/users/"),
         'method_form'=>'post'
-    ]) 
+    ])
 @endif
 
 
@@ -25,28 +25,28 @@
         @method('PUT')
     @endif
     @csrf
-    <input type="hidden" value="{{ $user->id }}">
-    <x-generic.navs-tabs.content id="myTabContent" class="px-4 py-3" >  
+    <input type="hidden" value="{{  (isset($user->id)) ? $user->id :''}}">
+    <x-generic.navs-tabs.content id="myTabContent" class="px-4 py-3" >
         {{-- div general --}}
         <x-generic.navs-tabs.pane id="general" active="true" >
             <div class="row">
-                
-                
-                
+
+
+
                 <div class="col-lg-7 col-md-6 col-sm-12">
                     <x-generic.forms.form-table >
 
                         <x-generic.forms.form-table-text name="nom" labelText="nom" :value="$user->name"
                                 required="true"  placeholder="Donner le nom" id="nom"  />
 
-                        <x-generic.forms.form-table-text name="login" labelText="login" :value="$user->email" 
-                                required="true" placeholder="Donner le login" id="login"/> 
+                        <x-generic.forms.form-table-text name="login" labelText="login" :value="$user->email"
+                                required="true" placeholder="Donner le login" id="login"/>
 
-                        <x-generic.forms.form-table-text name="pwd" labelText="Mot de passe" 
-                                required="true"  placeholder="Creer un mot de passe" id="password" typpe="password" />   
+                        <x-generic.forms.form-table-text name="pwd" labelText="Mot de passe"
+                                required="true"  placeholder="Creer un mot de passe" id="password" typpe="password" />
 
                         <x-generic.forms.form-table-text name="pwd_confirmation" labelText="Confirmer mot de passe"
-                                 required="true"  placeholder="Confirmer le mot de passe" id="password-confirm" typpe="password"/>              
+                                 required="true"  placeholder="Confirmer le mot de passe" id="password-confirm" typpe="password"/>
                         <x-generic.forms.form-table-text name="ncni" labelText="N° CNI" :value="$user->ncni"
                                  required="true"  placeholder="N° carte d'identité" id="ncni" />
                          <x-generic.forms.form-table-text name="tel" labelText="Telephone"  :value="$user->tel"
@@ -69,7 +69,7 @@
         {{-- droit --}}
         <x-generic.navs-tabs.pane id="droit"  >
            <x-user.util.boutique-access :user="$user" />
-            
+
         </x-generic.navs-tabs.pane>
 
 

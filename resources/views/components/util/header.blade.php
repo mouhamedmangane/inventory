@@ -9,6 +9,8 @@
                 NOPPAL INVENTORY
             </span>
 
+            
+
         </span>
     </div>
 
@@ -17,7 +19,7 @@
 
         <div class="d-flex justify-content-between m l-4" >
 
-                <div class="input-in " style="height: 30px;width:300px;">
+                {{-- <div class="input-in " style="height: 30px;width:300px;">
                     <input type="text" name="search"
                             placeholder="Search"
                             class="form-control  input-in-input"
@@ -25,7 +27,10 @@
                     <div class="input-in-in">
                         <i class="fas fa-search " style="font-size: 12px;"></i>
                     </div>
-                </div>
+                </div> --}}
+                <a href="{{ url('home') }}" class="btn btn-outline-primary mx-5">
+                    <i class="material-icons-outlined " style="font-size:24px;">home</i>
+                </a>
 
         </div>
 

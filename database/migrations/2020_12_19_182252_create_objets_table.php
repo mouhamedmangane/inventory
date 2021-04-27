@@ -17,7 +17,7 @@ class CreateObjetsTable extends Migration
 
         Schema::create('objets', function (Blueprint $table) {
             $table->id();
-            $table->string('objet_name')->unique();
+            $table->string('nom')->unique();
 
             $table->unsignedBigInteger('done_by_user')->default(1);//Auth::user()->id) par defaut user connecté
             $table->foreign('done_by_user')

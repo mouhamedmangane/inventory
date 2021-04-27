@@ -581,7 +581,6 @@
                 });
             }
 
-
             //Enregistrement des Actions
             for(action of actions){
                 if(action.type=='action'){

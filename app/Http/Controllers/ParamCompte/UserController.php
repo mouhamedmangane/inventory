@@ -23,18 +23,18 @@ class UserController extends Controller
             ]);
             $users=User::select();
             switch($filter){
-                case 'archiver': 
+                case 'archiver':
                     $users->where('archiver',1);
                     break;
-                default : 
+                default :
                     $users->where('archiver',0);
-    
+
             }
-    
+
             if($request->has('tous')){
                 $users->where('name','like',$request->tous.'%');
             }
-            
+
             $message="";
             $status="true";
             if($validator->fails()){
@@ -45,14 +45,15 @@ class UserController extends Controller
             else{
                 $users=$users->get();
             }
-    
-        
+
+
         return DataTables::of($users)
                 ->addColumn("boutiques",function($user){
                     return BoutiqueUser::where('user_id',$user->id)->where('activer',1)->distinct()->count().' boutiques (s)';
                 })
                 ->addColumn("nom",function($user){
                     return view('components.generic.links.simple')
+                    ->with('src',asset("images/users/".$user->photo))
                     ->with('url',url("param-compte/users/".$user->id))
                     ->with('text',$user->name)
                     ->with('class','lien-sp');
@@ -86,7 +87,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $user=new User;
+        $user= new User;
         return view("page.param-compte.user.create",compact('user'));
     }
 
@@ -105,9 +106,9 @@ class UserController extends Controller
             ['name'=>'nom','email'=>'login','password'=>'pwd','ncni','tel'],
             'save'
         );
-        
+
         return response()->json($response);
-       
+
     }
 
     public function save(Request $request,Array $validationArray,$hydrateArray,$dataBaseMethod,$id=0){
@@ -125,13 +126,13 @@ class UserController extends Controller
                 HydrateFacade::make($user,$request,$hydrateArray);
                 ImageFactory::store($request,$user,'photo','images/users',$user->id);
                 if($request->filled('pwd')) {
-                        $user->password=Hash::make($request->newPassword);
+                        $user->password=Hash::make($request->pwd);
                 }
                 if($user->$dataBaseMethod()){
                     $this->saveBoutiqueUsers($request->ba,$user->id);
                 }
                 DB::commit();
-               
+
                 return [
                     'status'=>true,
                     'message'=>'Enregistrement effectué avec success',
@@ -139,23 +140,23 @@ class UserController extends Controller
                 ];
             } catch (\Throwable $th) {
                 DB::rollback();
-                
+
                 return [
                     'status'=>false,
                     'message'=>__('messages.erreur_inconnu').' '.__('messages.operation_encore'),
                     'srr'=>dd($th)
                 ];
             }
-           
+
         }
 
     }
 
     public function memeValidationSave(){
-        
+
         $tab=[
             "nom"=>"required|max:100",
-            
+
             "ba"=>"array",
             "ba.*.boutique"=>"numeric|required_with:ba.*.role|exists:App\Models\Boutique,id",
             "ba.*.role.*"=>'numeric|exists:App\Models\Role,id',
@@ -168,8 +169,9 @@ class UserController extends Controller
     }
 
     public function saveBoutiqueUsers($bu_rqts,$user_id){
+        if($bu_rqts){
         foreach($bu_rqts as $bu_rqt){
-            $bu =BoutiqueUser::where('user_id',$user_id)->where('boutique_id',$bu_rqt['boutique'])->first(); 
+            $bu =BoutiqueUser::where('user_id',$user_id)->where('boutique_id',$bu_rqt['boutique'])->first();
             if($bu){
                 $bu->role_id = $bu_rqt['role'];
                 $bu->activer = (isset($bu_rqt['activer']))? 1 : 0;
@@ -184,6 +186,7 @@ class UserController extends Controller
                 $bu->save();
             }
         }
+        }
     }
 
     /**
@@ -196,7 +199,7 @@ class UserController extends Controller
     {
         $user= User::where('id',$id)->first();
         return view("page.param-compte.user.create",compact('user'));
-        
+
     }
 
     /**
@@ -219,17 +222,17 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
+    {
         $request->input('id',$id);
         $response = $this->save($request,$this->memeValidationSave()+[
             "id"=>"required|numeric|exists:users,id",
             "login"=>["required","max:100",Rule::unique('users', 'email')->ignore($id),],
-            
+
             ],
             ['name'=>'nom','email'=>'login','password'=>'pwd/exist','ncni','tel'],
             'save',$id
         );
-       
+
         return response()->json($response);
     }
 
@@ -274,12 +277,12 @@ class UserController extends Controller
             return \App\Http\ResponseAjax\UpdateRow::manyForOnAttr('users',[$id],
             ['archiver'=>$isAchived],
             'messages.nbr_update');
-        }  
+        }
     }
-    
+
     private function abstractArchiverMany(Request $request,$isAchived){
         $validator=Validator::make($request->all(),
-        [   
+        [
             'user_select'=>'array|required',
             'user_select.*'=>['numeric','exists:App\Models\User,id']
         ]);

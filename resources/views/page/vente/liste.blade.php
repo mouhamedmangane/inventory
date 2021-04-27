@@ -1,5 +1,5 @@
 @extends('layouts-page.inventory')
 
 @section('content')
-    <x-page.vente.liste/>
+    <x-vente.page.liste/>
 @endsection

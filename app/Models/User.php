@@ -68,7 +68,12 @@ class User extends Authenticatable
     public function boutique_users()
     {
          return $this->hasMany('App\Models\BoutiqueUser');
-   }
+    }
+
+    public function boutiques(){
+        return $this->belongsToMany(Boutique::class, 'boutique_users');
+    }
+
     public function evenements()
     {
         return $this->hasMany('App\Models\Evenement');

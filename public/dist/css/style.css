@@ -747,6 +747,10 @@ a[aria-expanded="true"] {
     padding: 10px 15px;
     background: #2e373c;
 }
+#sidebar-toggle  .components-group{
+  position: absolute;
+  to
+}
 
 
 /* TODO NPL EDITOR TABLE

@@ -26,6 +26,9 @@ class CreateLigneAjustementsTable extends Migration
             $table->unsignedBigInteger('ajustement_id');
 
             $table->foreign('ajustement_id')->references('id')->on('ajustements')->onDelete('cascade');
+
+            $table->timestamps();
+
         });
     }
 

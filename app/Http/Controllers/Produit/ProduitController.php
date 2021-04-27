@@ -248,7 +248,8 @@ class ProduitController extends Controller
                     return response()->json([
                         "status"=>true,
                         "message"=>"Le produit a été enregistré avec succès ",
-                        'data'=>''
+                        'data'=>'',
+                        'id'=>$produit->id
                     ]);
                 }
                 else{
@@ -363,6 +364,7 @@ class ProduitController extends Controller
             return response()->json([
                 "status"=>true,
                 "message"=>"Modification Reussie",
+                'id'=>$produit->id,
                 'errors'=>'',
 
 
@@ -533,8 +535,12 @@ class ProduitController extends Controller
             ] );
 
         if($request->$id){
+            $produit=Produit::findOrFail($request->id);
 
+            $produit->archived=true;
+            $produit->save();
         }
+
     }
 
     public function saveImgProduct($id){

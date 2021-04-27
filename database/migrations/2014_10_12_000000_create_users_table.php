@@ -25,9 +25,9 @@ class CreateUsersTable extends Migration
             $table->integer('ncni')->unique()->nullable();
             $table->boolean('archiver')->default(0);
 
-            $table->string('photo');
+            $table->string('photo')->nullable();
 
-            $table->unsignedBigInteger('done_by_user')->default(1);//Auth::user()->id) par defaut user connecté
+            $table->unsignedBigInteger('done_by_user')->nullable();//Auth::user()->id) par defaut user connecté
             $table->foreign('done_by_user')
             ->references('id')
             ->on('users')

@@ -1,6 +1,6 @@
-<li class="nav-v-item @if($active) active @endif @if(Request::is($url)) active @endif ">
+<li class="nav-v-item overflow-hidden @if($active) active @endif @if(Request::is($url.'*')) active @endif ">
     <a href="{{url($url) }}" 
-        class="  d-flex border-0"
+        class="  d-flex border-0 "
         style="position: relative;">
         
             <span class="trait-vertical rounded " style="position: absolute;top:0px;left:0px;height:100%;width:5px;"></span>

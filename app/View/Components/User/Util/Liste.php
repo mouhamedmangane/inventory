@@ -21,10 +21,10 @@ class Liste extends Component
         return [
             (object)['name'=>'Nom','propertyName'=>'nom','classStyle'=>""],
             (object)['name'=>"Email",'propertyName'=>'email','classStyle'=>""],
-            (object)['name'=>"Tél",'propertyName'=>'tel'],
-            (object)['name'=>"Boutique(s)",'propertyName'=>'boutiques'],
-            (object)['name'=>"Crée le",'propertyName'=>'created_at_f'],
-            (object)['name'=>"Modifier le",'propertyName'=>'updated_at_f'],
+            (object)['name'=>"Tél",'propertyName'=>'tel','classStyle'=>""],
+            (object)['name'=>"Boutique(s)",'propertyName'=>'boutiques','classStyle'=>""],
+            (object)['name'=>"Crée le",'propertyName'=>'created_at_f','classStyle'=>"","visible"=>false],
+            (object)['name'=>"Modifier le",'propertyName'=>'updated_at_f','classStyle'=>""],
         ];
     }
 
