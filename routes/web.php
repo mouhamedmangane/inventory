@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\Produit\AjustementController;
 use App\Http\Controllers\Produit\ProduitController;
 use App\Http\Controllers\Vente\VenteController;
@@ -12,7 +13,7 @@ use Illuminate\Contracts\Validation\Validator;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
+|j
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
@@ -21,26 +22,16 @@ use Illuminate\Contracts\Validation\Validator;
 
 
 require __DIR__.'/auth.php';
-
 Route::middleware(['auth'])->group(function () {
-
-    Route::get('/', function () {
-        return view('welcome');
+    Route::get('b/{boutiqueId}/produit/new', [ProduitController::class, 'create']);
+    Route::get('produit/produit', function () {
+        return view('page.produit.create');
     });
-
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-
-    // Home
-    Route::get('/home',[HomeController::class,'index']);
-
-    // Produit
-    Route::get('produit/new', [ProduitController::class, 'create']);
-
-    Route::get('produit', [ProduitController::class,'index']);
+    Route::get('b/{boutiqueId}/produit', [ProduitController::class,'index']);
     Route::post('produit/save',[ProduitController::class,'store'])->name('produit.save');
     Route::get('produit/data/', [ProduitController::class, 'returnData']);
+    Route::get('produit/data/{filter}',[ProduitController::class,'returnData']);
+
     Route::post('produit/newProd', function(){
         return view('components.produit.new-product');
     });
@@ -69,7 +60,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('produit/{id}/edit', [ProduitController::class,'edit']);
     Route::get('produit/delete/{id}', [ProduitController::class,'delete']);
-    Route::get('produit/archived/{id}', [ProduitController::class,'destroy']);
+   // Route::get('produit/archived/{id}', [ProduitController::class,'destroy']);
+    Route::get('produit/archiver/{id}',[ProduitController::class,'archiver']);
+    Route::get('produit/desarchiver/{id}',[ProduitController::class,'desarchiver']);
+    Route::get('produit/archiverMany',[ProduitController::class,'archiverMany']);
+    Route::get('produit/desarchiverMany',[ProduitController::class,'desarchiverMany']);
     Route::get('produit/favoris/{id}', [ProduitController::class,'favoris']);
 
     Route::get('produit/{id}', [ProduitController::class,'show']);
@@ -117,6 +112,28 @@ Route::middleware(['auth'])->group(function () {
     Route::get('vente/{date?}', [VenteController::class,'index']);
     Route::get('vente/view/{id}', [VenteController::class,'show']);
     Route::get('venteProduit/categorie/{id}',[VenteController::class,'getProducts']);
+});
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/', [HomeController::class,'index']);
+
+
+    //Changer profil
+    Route::get('photo_form',[ProfilController::class,'photoForm']);
+    Route::post('photo_save',[ProfilController::class,'savephoto']);
+    Route::get('profil_form',[ProfilController::class,'profilForm']);
+    Route::post('profil_save',[ProfilController::class,'profilSave']);
+
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    // Home
+    Route::get('/home',[HomeController::class,'index']);
+
+    // Produit
+
 
 });
 

@@ -4,17 +4,17 @@ namespace App\Http\ResponseAjax;
 use DB;
 
 class UpdateRow{
-   
 
-   
+
+
     public static function  manyForOnAttr($table,$ids,Array $updateSets,$succesMessage,$attr='id'){
         DB::beginTransaction();
         try {
             foreach($ids as $id){
                 $model=DB::table($table)->where($attr,$id)->update($updateSets);
-                
+
             }
-            
+
             DB::commit();
             return [
                 'status'=>true,
@@ -30,5 +30,5 @@ class UpdateRow{
         }
     }
 
-    
+
 }

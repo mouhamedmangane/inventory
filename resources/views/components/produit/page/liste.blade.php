@@ -38,7 +38,7 @@
             <x-generic.links.select-link-dt idDataTable="myDataTable" value="tous"
             :dt="[
                 url('produit/data')=>'Mes produits',
-                url('produit/data/archiver')=>'Produits Archivé',
+                url('produit/data/archiver')=>'Mes Produits Archivés',
             ]"
             class="mx-2" />
 

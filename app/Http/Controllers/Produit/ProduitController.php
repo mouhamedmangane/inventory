@@ -29,17 +29,51 @@ class ProduitController extends Controller
     protected $achatable=false;
 
 
-     public function returnData(){
+     public function returnData(Request $request,$filter=""){
+        $validator = Validator::make($request->all(),[
+            'libelle'=>'max:200',
+            'all'=>'max:100',
+            'filter'=>'max:100'
+        ]);
+        $produits=Produit::select();
+//tableau de filtre
+        switch($filter){
+            case 'archiver':
+                $produits->where('archived',1);
 
-        if($data="non_archived"){
-            $produits =Produit::where('archived',false);
-            $message='Les produits non archivés';
+                break;
+
+            case 'vendable':
+                    $produits->where('archived',0)
+                             ->orWhere('vendable',1);
+                    break;
+            case 'achetable':
+                    $produits->where('archived',0)
+                    ->orWhere('achetable',1);
+                    break;
+            case 'achetable':
+                    $produits->where('archived',1);
+                    break;
+
+            default :
+                $produits->where('archived',0);
+
         }
-        else if($data="archived"){
-              $produits =Produit::where('archived',true);
-              $message='Les produits archivés';
+        if($request->all){
+            $produits->where('libelle','like','%'.$request->all.'%')
+                     ->orWhere('code','like','%'.$request->all.'%');
         }
-           $status=true;
+
+        $message="";
+        $status="true";
+        if($validator->fails()){
+            $produits=[];
+            $message="Les données ne sont pas valides";
+            $status=false;
+        }
+        else{
+            $produits=$produits->get();
+        }
 
          $json = DataTables::of($produits)
             ->addColumn('libelle',function($produit){
@@ -528,26 +562,26 @@ class ProduitController extends Controller
     }
 
 
-    public function archivedProduct($id){
-        $this->validator = Validator::make($request->all(),[
-            'id' => 'required|exists:produits,id',
-            //'photo'
-            ] );
+    // public function archivedProduct($id){
+    //     $this->validator = Validator::make($request->all(),[
+    //         'id' => 'required|exists:produits,id',
+    //         //'photo'
+    //         ] );
 
-        if($request->$id){
-            $produit=Produit::findOrFail($request->id);
+    //     if($request->$id){
+    //         $produit=Produit::findOrFail($request->id);
 
-            $produit->archived=true;
-            $produit->save();
-        }
+    //         $produit->archived=true;
+    //         $produit->save();
+    //     }
 
-    }
+    // }
 
     public function saveImgProduct($id){
 
 
         $this->validator = Validator::make($request->all(),[
-            'id' => 'required|exists:produits,id',
+            'id' => 'required|numeric|exists:produits,id',
             //'photo'
             ] );
 
@@ -579,20 +613,52 @@ class ProduitController extends Controller
             ]);
 
      }
-     public function archiver(Request $request){
-        $validator=Validator::make($request->all(),
+     public function archiver($id){
+        return response()->json($this->abstractArchiver($id,1));
+    }
+
+    public function desarchiver($id){
+        return response()->json($this->abstractArchiver($id,0));
+    }
+
+    public function archiverMany(Request $request){
+        return response()->json($this->abstractArchiverMany($request,1));
+    }
+
+    public function desarchiverMany(Request $request){
+        return response()->json($this->abstractArchiverMany($request,0));
+    }
+
+    private function abstractArchiver($id,$isAchived)
+    {
+        $validator=Validator::make(['id',$id],
         [
-            'role_select'=>'array|required',
-            'role_select.*'=>['numeric','exists:App\Models\Role,id',]
+            'id'=>['numeric','exists:App\Models\Produit,id']
         ]);
+
         if($validator->fails()){
-            return response()->json(\App\Http\ResponseAjax\Validation::validate($validator));
+            return \App\Http\ResponseAjax\Validation::validate($validator);
         }
         else{
-            return response()->json(\App\Http\ResponseAjax\UpdateRow::manyForOnAttr('roles',$request->role_select,
-                                                                                            ['archiver'=>1],
-                                                                                            'messages.nbr_update'));
+            return \App\Http\ResponseAjax\UpdateRow::manyForOnAttr('produits',[$id],
+            ['archived'=>$isAchived],
+            'messages.nbr_update');
+        }
+    }
 
+    private function abstractArchiverMany(Request $request,$isAchived){
+        $validator=Validator::make($request->all(),
+        [
+            'produit_select'=>'array|required',
+            'produit_select.*'=>['numeric','exists:App\Models\Produit,id']
+        ]);
+        if($validator->fails()){
+            return \App\Http\ResponseAjax\Validation::validate($validator);
+        }
+        else{
+            return \App\Http\ResponseAjax\UpdateRow::manyForOnAttr('produits',$request->produit_select,
+                                                                                            ['archived'=>$isAchived],
+                                                                                            'message.nbr_update');
         }
     }
 

@@ -45,7 +45,7 @@
                     <a href="{{ url('/produit') }}">Produits</a>
                 </x-generic.breadcumb.item>
                 <x-generic.breadcumb.item active="true">
-                    {{ ($produit->id)?$produit->libelle:'voir produit' }}
+                    {{ ($produit->id)?$produit->libelle:'Produit' }}
                 </x-generic.breadcumb.item>
             </x-generic.breadcumb>
 

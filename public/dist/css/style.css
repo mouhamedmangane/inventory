@@ -306,6 +306,24 @@ a:focus {
 
 .n-form-table-col-input {}
 
+.form-table-none {
+    border: none!important;
+}
+
+.form-table-shadow-none,
+.form-table-none {
+    box-shadow: none!important;
+}
+
+.form-table-border-none td,
+.form-table-none td {
+    border-top: none!important;
+}
+
+.n-form-table-col-label {}
+
+.n-form-table-col-input {}
+
 
 /*TODO header
 |------------------------------------------------------------------------------
@@ -410,6 +428,10 @@ a:focus {
 
 /* c header-button */
 
+.c-head-button {
+    position: relative;
+}
+
 .c-head-button-profil {
     padding: 8px 15px;
 }
@@ -443,6 +465,14 @@ a:focus {
     background-color: rgba(255, 255, 255, 0.99);
     outline: 1px solid white;
     color: black;
+}
+
+.c-head-message {
+    position: absolute;
+    left: 25px;
+    top: 6px;
+    height: 15px;
+    font-size: 9px;
 }
 
 
@@ -747,9 +777,10 @@ a[aria-expanded="true"] {
     padding: 10px 15px;
     background: #2e373c;
 }
-#sidebar-toggle  .components-group{
-  position: absolute;
-  to
+
+#sidebar-toggle .components-group {
+    position: absolute;
+    to
 }
 
 

@@ -36,7 +36,7 @@ class RoleController extends Controller
         }
 
         if($request->tous){
-            $roles->where('nom','like',$request->tous.'%');
+            $roles->where('nom','like','%'.$request->tous.'%');
         }
 
         $message="";

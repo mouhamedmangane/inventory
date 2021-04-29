@@ -1,9 +1,9 @@
 <div class="c-head-bar-action" id="head-bar-action" >
-    <x-util.head-bar-action.head-button idContent="#head-bar-action-notif" icon="campaign" />
+    <x-util.head-bar-action.head-button idContent="#head-bar-action-notif" icon="campaign" badge="15"/>
     <x-util.head-bar-action.head-button idContent="#head-bar-param-bar" icon="brightness_7" />
     <x-util.head-bar-action.head-button idContent="#head-bar-aide-bar" icon="contact_support" />
-    <x-util.head-bar-action.head-button idContent="#head-bar-action-user"  classBtn="c-head-button-profil">
-        <img src="{{ URL::asset('images/profig.jpg') }}" alt="" width="32px" height="32px"  class="rounded-circle">
+    <x-util.head-bar-action.head-button idContent="#head-bar-action-user"  classBtn="c-head-button-profil" >
+        <img src="{{ url(\App\Util\ImageFactory::profil_current_user()) }}" alt="" width="32px" height="32px"  class="rounded-circle n__profil_user_class">
     </x-util.head-bar-action.head-button>
  
   

@@ -70,6 +70,8 @@
 
                     </x-generic.forms.form-table>
                 </div>
+
+                {{-- REDUCTIONS DES PRODUITS --}}
                 {{-- reductions produit --}}
                  {{-- <div class="col-lg-12 col-md-12 col-sm-12  ">
                     <x-generic.forms.form-table>
@@ -110,10 +112,13 @@
 
         </x-generic.navs-tabs.pane>
 
+    {{-- <x-generic.modal-simple id="modal" titre="Nouvelle Categorie"/> --}}
+
 
 
           <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+          {{-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -128,7 +133,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> --}}
 
     </x-generic.navs-tabs.content>
 
