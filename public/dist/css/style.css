@@ -217,6 +217,10 @@ a, a:hover, a:focus {
 |
 |-------------------------------------------------------------------------------
 */
+.indicatif{
+  max-width: 75px;
+  text-align: right;
+}
 .form-p-group{
     display: flex;
     align-items: center;

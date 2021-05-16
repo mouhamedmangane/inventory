@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Contact\ContactController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\Produit\AjustementController;
 use App\Http\Controllers\Produit\ProduitController;
@@ -25,7 +26,7 @@ use Illuminate\Contracts\Validation\Validator;
 
 
 require __DIR__.'/auth.php';
-Route::middleware(['auth'])->group(function () {
+Route::middleware([])->group(function () {
     Route::get('b/{boutiqueId}/produit/new', [ProduitController::class, 'create']);
     Route::get('produit/produit', function () {
         return view('page.produit.create');
@@ -74,6 +75,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/editorTable', function(Request $request){
         return view('page.test.editor');
     });
+
+    // Contact
+    Route::get('contact/data',[ContactController::class,'getData']);
+    Route::get('contact/data/{filter}',[ContactController::class,'getData']);
+    Route::get('contact/archiver/{id}',[ContactController::class,'archiver']);
+    Route::get('contact/desarchiver/{id}',[ContactController::class,'desarchiver']);
+    Route::get('contact/archiverMany',[ContactController::class,'archiverMany']);
+    Route::get('contact/desarchiverMany',[ContactController::class,'desarchiverMany']);
+    Route::resources(['contact'=>ContactController::class]);
     
     //Vente
     Route::post('vente/save',  [VenteController::class,'store']);
@@ -83,7 +93,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('vente/view/{id}', [VenteController::class,'show']);
     Route::get('venteProduit/categorie/{id}',[VenteController::class,'getProducts']);
 });
-Route::middleware(['auth'])->group(function () {
+Route::middleware([])->group(function () {
 
     Route::get('/', [HomeController::class,'index']);
 
@@ -108,7 +118,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Group Admin
-Route::middleware(['auth'])->group(function () {
+Route::middleware([])->group(function () {
 
     // User
     Route::get('param-compte/users/data',[PCUserController::class,'getData']);

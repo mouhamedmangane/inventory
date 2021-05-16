@@ -10,7 +10,7 @@
               class="input-img rounded @if($attributes['circle']) rounded rounded-circle @endif"
               style="@if (empty ($url)) display:none;@endif">
 
-        @if($attributes['activeAction']=='false')
+        @if($attributes['activeAction']!='false')
         <div class="input-img-action" >
                 <input type="file"
                        accept="image/png, image/jpeg"
@@ -24,8 +24,6 @@
                 
         </div>
         @endif
-
-
     </div>
     
     <div style=" @if($attributes['activeText']=='false') display:none; @endif "
@@ -39,10 +37,12 @@
                     @endif
     </div>
 </div>
+
+
 @push('script')
 <script>
     $(document).ready(function(){
-        $("#{{ $id }}-edit,#{{ $attributes['idTriggerEdit'] }}").click(function(){
+        $("#{{ $id }}-edit {{ ($attributes['idTriggerEdit'])? ',#'.$attributes['idTriggerEdit']:'' }}").click(function(){
             $("#{{ $id }}").trigger('click')
         });
         $("#{{ $id }}").on('change',function(e){

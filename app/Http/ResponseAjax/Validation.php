@@ -6,13 +6,9 @@ Use Validator;
 class Validation{
 
     public static function validate($validator){
-        $message='';
-        foreach($validator->errors()->all() as $mes){
-            $message.=$mes.' <br>';
-        }
         return [
             'status'=>false,
-            'message'=>$message,
+            'message'=>\App\Util\Validation::textMessages($validator),
             "errors"=>$validator->errors()
         ];
     }

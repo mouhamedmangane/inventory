@@ -22,7 +22,7 @@ class GroupeProduitFactory extends Factory
     public function definition()
     {
         return [
-            'groupe_name' => $this->faker->unique()->groupe_name,
+            'groupe_name' => $this->faker->unique()->name,
         ];
     }
 }

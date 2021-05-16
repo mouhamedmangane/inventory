@@ -24,8 +24,14 @@ class ImageFactory {
 
     }
     public static function profil_user($user){
-        $path='images/users/'.$user->photo;
-        return self::url_image($path,'images/profig.jpg');
+        if(isset($user->photo)){
+            $path='images/users/'.$user->photo;
+            return self::url_image($path,'images/profig.jpg');
+        }
+        else{
+            return '';
+        }
+        
     }
 
     public static function profil_current_user(){
