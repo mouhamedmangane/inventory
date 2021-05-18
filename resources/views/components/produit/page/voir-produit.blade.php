@@ -15,9 +15,14 @@
         <x-generic.tool-bar.divider/>
         <x-generic.tool-bar.button id="imprimer_prod_tb" text="Imprimer" icon="print"  />
         @if ($produit->archived)
-            <x-generic.tool-bar.button id="archiver_prod_tb" text="Désarchiver" icon="archive"  />
+                <x-generic.tool-bar.ajax id="archiver_prod_tb" icon="archive" text="Désarchiver"
+                :url="url('produit/desarchiver/'.$produit->id)" method="get"
+                :redirect="'produit/'.$produit->id" idAlert="OneProdAlert" />>
+
         @else
-            <x-generic.tool-bar.button id="archiver_prod_tb" text="Archiver" icon="archive"  />
+            <x-generic.tool-bar.ajax id="archiver_prod_tb" icon="archive" text="Archiver"
+            :url="url('produit/archiver/'.$produit->id)" method="get"
+            :redirect="'produit/'.$produit->id" idAlert="OneProdAlert" />
         @endif
         <x-generic.tool-bar.divider/>
         {{-- <x-generic.tool-bar.button id="ajuster_prod_tb" text="Ajuster" icon="archive"  /> --}}
@@ -31,14 +36,15 @@
 
 
 @section('ly-alert')
-    <x-generic.alert.bar id='' />
+    <x-generic.alert.bar id='OneProdAlert' />
 @endsection
 
 @section('ly-title')
 <div class="d-flex align-items-center justify-content-between px-4 mt-1">
     <div class="d-flex align-items-center">
+        <x-generic.title-bar.bar>
             <x-slot name="image">
-                <x-generic.icon.simple name="save" taille="16" />
+                <x-generic.icon.simple name="article" taille="16" />
             </x-slot>
             <x-generic.breadcumb.bar style="font-size: 18px;" class="py-0">
                 <x-generic.breadcumb.item  class="lien-sp">
@@ -48,6 +54,11 @@
                     {{ ($produit->id)?$produit->libelle:'Produit' }}
                 </x-generic.breadcumb.item>
             </x-generic.breadcumb>
+            <x-slot name="right">
+                <i class="fas fa-dice-five    "></i>
+
+            </x-slot>
+        </x-generic.title-bar.bar >
 
     </div>
     <div class="">

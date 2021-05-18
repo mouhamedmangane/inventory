@@ -21,8 +21,8 @@
                                              >
                         </div>
                            <x-generic.input.text  name="code" placeholder=""  id="nom" :value="$vente->client->nom" />
-
-                     </x-generic.forms.form-table-line>
+{{--
+                     </x-generic.forms.form-table-line> --}}
 
                   </x-generic.forms.form-table >
                   <x-generic.forms.form-table >

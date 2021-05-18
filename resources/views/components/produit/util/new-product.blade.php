@@ -28,24 +28,14 @@
                             :dt="['consomable'=>'Consommable','service'=>'Service']" value="consomable" />
                         <x-generic.forms.form-table-select name="categorie" labelText="Categorie Produit" id="categorie"
                             :dt="$categories" value="" />
-                            <div><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                +
-                              </button>
-                            </div>
-
-
-
                     </x-generic.forms.form-table>
                 </div>
                 <div class="col-md-4 col-sm-12">
                     <x-generic.forms.form-table >
-
                             <x-generic.forms.form-table-text typpe="number" name="qteStock" labelText="Quantité Stock " placeholder="quantité initial du produit" id="qteStock" step="0.01"/>
                             <x-generic.forms.form-table-text typpe="number" name="qteSeuil" labelText="Quantité Seuil "  placeholder="quantité minimal en stock" id="qteSeuil"  step="0.01" />
                             <x-generic.forms.form-table-select name="unite" labelText="Unite | U " required="true"  id="unite"
-                                :dt="['Unite'=>'Par Unité','kilo'=>'Kilogramme | kg','m'=>'Longueur | m','L'=>'Litre | l',''=>'Mettre | m2']" value="Unite" />
-
-
+                                :dt="['unite'=>'par Unité','kilo'=>'Kilogramme | kg','m'=>'Longueur | m','L'=>'Litre | L',''=>'Mettre | m2']" value="Unite" />
                     </x-generic.forms.form-table>
                 </div>
 
@@ -57,8 +47,6 @@
                         <x-generic.forms.form-table-text name="rI" labelText="Référence Interne " placeholder="Comment vous reconnez votre produit en interne" id="rI"/>
                     </x-generic.forms.form-table>
                 </div>
-
-
             </div>
         </x-generic.navs-tabs.pane>
 
@@ -67,10 +55,8 @@
                 <div class="col-md-6 col-sm-12">
                     <x-generic.forms.form-table>
                         <x-generic.forms.form-table-interval  name="prix_vente" labelText="Prix de Vente" id="prix_vente" type="fixe" minValue="" maxValue=""/>
-
                     </x-generic.forms.form-table>
                 </div>
-
                 {{-- REDUCTIONS DES PRODUITS --}}
                 {{-- reductions produit --}}
                  {{-- <div class="col-lg-12 col-md-12 col-sm-12  ">
@@ -137,8 +123,8 @@
 
     </x-generic.navs-tabs.content>
 
-    <button type="submit">Envoyer</button>
-
+    {{-- <button type="submit">Envoyer</button>
+ --}}
 </form>
 @once
     @push('script')

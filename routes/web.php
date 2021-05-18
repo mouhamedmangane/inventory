@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\Produit\AjustementController;
 use App\Http\Controllers\Produit\ProduitController;
+use App\Http\Controllers\Produit\CategorieController;
 use App\Http\Controllers\Vente\VenteController;
 use App\Http\Controllers\ParamCompte\UserController as PCUserController;
 use App\Rules\Ninterval;
@@ -69,7 +70,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('produit/{id}', [ProduitController::class,'show']);
     Route::get('produit/ajustement/{id}', [AjustementController::class,'show']);
-    Route::post("produit/update/{id}",[ProduitController::class ,"update"]);
+    Route::get("produit/update/{id}",[ProduitController::class ,"update"]);
+
+    Route::post('categorie/save',[CategorieController::class,'store']);
+    Route::get('categorie',[CategorieController::class,'index']);
+
+
 
 
     // Ajustement

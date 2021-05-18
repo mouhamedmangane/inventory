@@ -55,6 +55,9 @@ class VenteController extends Controller
      // dd($request);
         $rules=[
             'client'=>'required|integer',
+            'produits'=>'array',
+            'quantiteD'=>'array',
+            'quantiteR'=>'array',
             'produits.*'=>'required|distinct',
             'quantiteD.*'=>'nullable|integer',
             'quantiteR.*'=>'required|integer',
@@ -108,10 +111,12 @@ class VenteController extends Controller
         DB::beginTransaction();
         try {
 
+
             if($request->produits){//existe au moins 1 produit selectionné
                 $vente->save();
-                $montant=0;
+
                for ($i=0; $i <count($request->produits) ; $i++) {
+                $montant=0;
                     $lv=new LigneVente();
                     $produit=Produit::findOrFail($request->produits[$i]);
                     $lv->produit_id=$produit->id;
@@ -132,20 +137,20 @@ class VenteController extends Controller
 
                         //pour enregistrer livraison
                        // $ligneVenteRecu-> quantité et la quantité restant pour le produit
-                        $montant+=$lv->prixUnite * $lv->quantiteDemande;
+                        $montant+=(double)$lv->prixUnite * (double)$lv->quantiteDemande;
                    }
 
 
                 }
-                dd($montant);
+                //dd($montant);
                 $lignePaie=new LignePayementVentes();
                 $lignePaie->montant=$request->mrecu;
                 $lignePaie->montantRestant=$montant-$request->mrecu;
                 $lignePaie->vente_id=$vente->id;
                 $lignePaie->save();
 
-                echo $montant;
-                //$vente->montantTotal=$montant;
+                //dd($montant);
+                $vente->montantTotal=$montant;
                 if($request->client>0){//s'il le client est mentionné
                     $client= Client::findOrFail($request->client);
                     $vente->client_id=$client->id;
@@ -170,7 +175,7 @@ class VenteController extends Controller
             "status"=>true,
             "message"=>"Vente effectué avec succès",
             'errors'=>''
-            ])  ;
+            ]);
         } catch(\Exception $ex){
             DB::rollBack();
             return response()->json([
@@ -283,7 +288,7 @@ class VenteController extends Controller
                 if($vente->complet)
                    return '<span class="badge bagde-success circle">ok</span> ' ;
                 else
-                    return '<span class="badge bagde-danger circle">ok</span>';
+                    return '<span class="badge bagde-danger circle">non ok</span>';
             })
 
             ->addColumn('numeroVente',function($vente){

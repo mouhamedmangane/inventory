@@ -3,8 +3,8 @@
     <div class="d-flex justify-content-center ">
         <div class="" style="position: relative;">
             <img src="{{ URL::asset($photo_profil) }}" alt="" width="80px" height="80px"  class="rounded-circle n__profil_user_class" >
-            
-            <div style="position: absolute;width:32px;height:32px;line-height:29px;right:-10px;bottom:-10px;" 
+
+            <div style="position: absolute;width:32px;height:32px;line-height:29px;right:-10px;bottom:-10px;"
                  class="rounded-circle bg-white text-center nav-link-primary text-secondary">
                  <x-generic.input.show-ajax-modal
                      :url="url('photo_form')"
@@ -13,7 +13,7 @@
                     <i class="material-icons" style="font-size: 16px;">camera_alt</i>
                 </x-generic.input.show-ajax-modal>
             </div>
-        </div> 
+        </div>
     </div>
     <div class="my-1 mt-2">
         <div class="text-center  font-weight-bold ">{{ $user->name }}</div>
@@ -31,7 +31,7 @@
                 Modifier Profil
             </span>
         </x-generic.input.show-ajax-modal>
-        
+
         <form method="POST" action="{{ route('logout') }}" class="list-group-item border-left-0 border-right-0">
             @csrf
             <a href="" class="nav-link-primary " onclick="event.preventDefault();
@@ -39,10 +39,10 @@
                 <i class="material-icons-outlined mr-2">power_settings_new</i>
                 {{ __('Log out') }}
             </a>
-            
+
         </form>
-        
-        
-        
+
+
+
     </div>
 </div>

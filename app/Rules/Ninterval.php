@@ -11,7 +11,7 @@ class Ninterval implements Rule
     public const NUMBER='numeric';
     public const DATE='date';
     private $mes;
-    private $code_error=0;//code pour 
+    private $code_error=0;//code pour
     private $type;
     /*  *
      * Create a new rule instance.
@@ -31,7 +31,7 @@ class Ninterval implements Rule
      * @return bool
      */
     public function passes($attribute, $value)
-    {   
+    {
         $formOp=['op_name','max','min'];
         $possible_op=LigneFilterIntervalMd::POSSIBLE_OPS;
         $message=NplValidator::oneByOne($attribute,$value,[
@@ -47,11 +47,11 @@ class Ninterval implements Rule
             $this->mes=$message;
             return false;
         }
-       
+
         // $validated=true;
         // $keys = array_keys($value);
         // $keys_control=['op_name','max','min'];
-        // for ($i=0; $i < count($keys) ; $i++) { 
+        // for ($i=0; $i < count($keys) ; $i++) {
         //     if($keys_control[$i] != $keys[$i]){
         //         $this->code_error=$i;
         //         $validated = false;
@@ -64,7 +64,7 @@ class Ninterval implements Rule
         // }
         // else {
         //     $validator = Validator::make([$attribute=>$value], [
-                
+
         //         ($attribute.'.min') => $this->type,
         //         ($attribute.'.max') => $this->type,
         //     ]);
@@ -86,19 +86,19 @@ class Ninterval implements Rule
      * @return string
      */
     public function message()
-    {   
+    {
         // $message= $this->code_error."";
         // switch($this->code_error){
-        //     case 0: case 1: case 2: 
+        //     case 0: case 1: case 2:
         //         $message .= trans('validation.custom.ninterval.forme');
         //         break;
-        //     case 3: 
+        //     case 3:
         //         $message .= trans('validation.custom.ninterval.operation');
         //         break;
-        //     case 4: 
+        //     case 4:
         //         $message .= trans('validation.custom.ninterval.'.$this->type);
         //         break;
-        //     case 5: 
+        //     case 5:
         //         $message .= trans('validation.custom.ninterval.maxInferieur');
         //         break;
         // }

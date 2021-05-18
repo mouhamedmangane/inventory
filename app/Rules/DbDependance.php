@@ -26,7 +26,7 @@ class DbDependance implements Rule
             $nameClause=(isset($clause[2]))? $clause[2] : self::DEFAULT_NAME_CLAUSE;
             $this->addClause($clause[0],$clause[1],$nameClause,$op);
         }
-        
+
     }
 
     public function addClause($attr,$value,$nameClause=self::DEFAULT_NAME_CLAUSE,$op=self::DEFAULT_OP){
@@ -51,7 +51,7 @@ class DbDependance implements Rule
         // DB::enableQueryLog(); // Enable query log
         // $model->exists();
         // dd(DB::getQueryLog());
-      
+
         return !$model->exists();
     }
 

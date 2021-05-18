@@ -1,6 +1,10 @@
 <?php
 
 namespace App\View\Components\Vente\Util;
+use App\Models\GroupeProduit;
+use App\ViewModel\NplEditorTableMd\GCellFactory;
+use Illuminate\View\Component;
+use App\Models\Client;
 
 class Nouveau extends Component
 {

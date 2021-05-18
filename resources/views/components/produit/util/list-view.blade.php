@@ -10,11 +10,10 @@
             groupBy=""
             :actions="[
                 ['op'=>'Suppression','id'=>'supprimer_prod_tb','url'=>'produit/delete/','type'=>'action','canSelect'=>'*','confirm'=>true,'typeAlert'=>'modal'],
-                ['op'=>'Archivage','id'=>'archiver_prod_tb','url'=>'/produit/archiver/','type'=>'action','canSelect'=>'*','confirm'=>true],
+                ['op'=>'Archivage','id'=>'archiver_prod_tb','url'=>'/produit/archiverMany/','type'=>'action','canSelect'=>'*','confirm'=>true],
                 ['op'=>'Favoris','id'=>'favoris_btn_id','url'=>'/produit/favoris','type'=>'action','canSelect'=>'*','confirm'=>true],
                 ['op'=>'Modifier','id'=>'modifier_prod_tb','url'=>'/produit/{id}/edit','type'=>'link','canSelect'=>'1'],
                 ['op'=>'Filtre','id'=>'filtrer_prod_tb','url'=>'/produit/filtrer/{filter}','type'=>'link','canSelect'=>'1'],
             ]"
             />
-
 

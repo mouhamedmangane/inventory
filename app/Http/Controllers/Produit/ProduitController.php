@@ -10,6 +10,7 @@ use App\Models\Composant;
 use Illuminate\Support\Facades\DB;
 use DataTables;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 
 
@@ -463,9 +464,18 @@ class ProduitController extends Controller
         ];
 
         if($action!="save"){
-            $rules=[
+            $produit=Produit::where('libelle',$request->libelle)->get();
+
+
+
+            $rules['libelle']=
+            [
+                    'required',
+                    Rule::unique('produits')->ignore($produit->libelle),
+
 
             ];
+
         }
 
         $messages=[

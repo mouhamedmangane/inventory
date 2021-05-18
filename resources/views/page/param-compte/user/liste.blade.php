@@ -1,3 +1,3 @@
 @extends('layouts-page.param-compte')
 
-<x-user.page.liste :users="$users"/>
+    <x-user.page.liste :users="$users"/>

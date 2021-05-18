@@ -14,7 +14,7 @@
                                         elementMessageClass="form-table-feedback"
                                         icon="save"/>
         <x-generic.tool-bar.button id="modifier_prod_tb" text="Annuler" icon="clear" evidence=""  />
-        <x-generic.tool-bar.button id="new_categorie" text="Nouvelle Catégorie" icon="add" evidence="" />
+        <x-generic.tool-bar.button-modal id="new_categorie" text="Nouvelle Catégorie" icon="add" target="form_new_categorie"/>
 
     </x-generic.tool-bar.bar >
 @endsection
@@ -46,16 +46,14 @@
 @endsection
 
 
-
 @section('ly-main-content')
     <x-produit.util.new-product  />
 @endsection
 
 
+@push('modal')
+    <x-categorie.util.new-categorie />
+@endpush
 
-@once
-    @push('script')
-        <script type="text/javascript">
-        </script>
-    @endpush
-@endonce
+
+

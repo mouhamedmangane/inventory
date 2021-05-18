@@ -17,7 +17,7 @@ class LigneFilterIntervalMd extends LigneFilterMd{
         else{
             throw new Exception("le type donne dans le ligneFilterOneMd n'est pas accepté .
             Seull 'date','number'sont acceptés ", 1);
-            
+
         }
         if(in_array(strtolower($op),self::POSSIBLE_OPS)){
             $this->op = strtolower($op);

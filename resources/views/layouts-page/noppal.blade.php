@@ -77,6 +77,8 @@
                 @yield('content')
             </div>
         </div>
+
+        @stack('modal')
       <script>
 
             window.onload=function() {

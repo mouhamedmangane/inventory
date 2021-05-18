@@ -6,21 +6,21 @@
                     required="true"  placeholder="il est obligatoire" id="password" typpe="password" />
 
             <x-generic.forms.form-table-text name="login" labelText="login" :value="$user->email" disposition="block"
-                    required="true" placeholder="Donner le login" id="login"/> 
-            
+                    required="true" placeholder="Donner le login" id="login"/>
+
             <x-generic.forms.form-table-text name="pwd" labelText="Mot de passe"  disposition="block"
-                    required="false"  placeholder="Creer un mot de passe" id="password" typpe="password" />   
+                    required="false"  placeholder="Creer un mot de passe" id="password" typpe="password" />
 
             <x-generic.forms.form-table-text name="pwd_confirmation" labelText="Confirmer mot de passe" disposition="block"
-                     required="false"  placeholder="Confirmer le mot de passe" id="password-confirm" typpe="password"/>              
+                     required="false"  placeholder="Confirmer le mot de passe" id="password-confirm" typpe="password"/>
 
         </x-generic.forms.form-table>
-        
+
     </div>
-    
-    
-    
-    
+
+
+
+
     <x-slot name="actions">
 
     </x-slot>

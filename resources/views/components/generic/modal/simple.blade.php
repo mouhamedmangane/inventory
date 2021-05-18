@@ -44,12 +44,15 @@
   <script>
       $(function(){
         let idForm="#{{ $attributes['idForm'] }}";
+        alert('ok');
+
         $('#{{ $attributes['idForm'] }}').on('submit',function(e){
+            alert($(idForm).prop('action');
             let idAlert="#{{ $id }}__alert";
             e.preventDefault();
             $("#{{ $id }}__spinner").show();
             let form=$(idForm).get(0);
-            let enctype=$(this).attr('enctype');
+            let enctype=$(idForm).prop('enctype');
             let data=null;
             let contentType='application/x-www-form-urlencoded; charset=UTF-8';
             let processData=true;
@@ -59,14 +62,14 @@
                 processData=false;
             }
             else{
-                data= $(this).serializeObject();
+                data= $(idForm).serializeObject();
             }
 
             console.log(data);
             $.ajax({
-                type: $(this).attr('method'),
+                type: $(idForm).prop('method'),
                 enctype: enctype,
-                url: $(this).attr('action'),
+                url: $(idForm).prop('action'),
                 data: data,
                 processData: processData,
                 contentType: contentType,

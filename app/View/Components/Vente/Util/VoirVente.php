@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Vente;
+namespace App\View\Components\Vente\Util;
 
 use Illuminate\View\Component;
 use DataTables;

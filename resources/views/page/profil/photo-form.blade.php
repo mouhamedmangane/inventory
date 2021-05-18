@@ -5,25 +5,25 @@
             $path='images/profig.jpg';
     @endphp
     <div class="d-flex justify-content-center my-3 flex-wrap">
-        <x-generic.input.photo :url="URL::asset($path)"  name="photo" 
+        <x-generic.input.photo :url="URL::asset($path)"  name="photo"
                                 x="150" y="150" circle="true"
                                 id="photo_profil" idTriggerEdit="tigger_edit_photo_profil"
                                 activeText="false" activeAction="false" />
         <div class="text my-2 col-md-12 text-center">
             Cliquer sur le button modifier phofil pour changer la photo
-            
+
         </div>
         <div class="col-md-12">
             <div class="my-2 text-center">
                 <button type="button" id="tigger_edit_photo_profil" class="btn btn-light text-primary">Modifier Photo</button>
             </div>
         </div>
-        
+
     </div>
-    
-    
-    
-    
+
+
+
+
     <x-slot name="actions">
 
     </x-slot>

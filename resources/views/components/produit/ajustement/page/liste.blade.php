@@ -26,29 +26,23 @@
 @section('ly-alert')
     <div class="" id="" style="position: sticky;top:43px;border-radius:0px;"></div>
 @endsection
-@section('ly-title')
-<div class="d-flex align-items-center justify-content-between px-4 mt-1">
-    <div class="d-flex align-items-center">
-        <div class="rounded-circle border  text-align center d-flex align-items-center justify-content-center"
-             style="width: 43px; height: 43px; background: rgba(0,0,0,.1);"
-             {{--@if ($attributes['img'])border-color:black!important;@endif"--}}>
-           {{-- @if ($attributes['img'])    ! --}}
-           @if(false)
-                <img src="{{ asset("images/profig.jpg") }}"
-                    width="43px"
-                    height="43px"
-                    class="rounded-circle"
-                    style=""
-                >
-            @else
-             <i class="material-icons">adjust</i>
-            @endif
-        </div>
-         <x-generic.links.select-link contentCible="my-main" value="test1" :dt="['/produit/newProd'=>'Mes Ajustements','/test2'=>'Nouveau Produit Composé']" />
-    </div>
-
-</div>
+@section("ly-title")
+    <x-generic.title-bar.bar>
+        <x-slot name="image">
+            <x-generic.icon.simple name="gavel" taille="16"/>
+        </x-slot>
+        <x-generic.links.select-link-dt idDataTable="myDataTable" value="tous"
+                                    :dt="[
+                                        url('produit/ajustement/data')=>'Liste Ajustements',
+                                        url('produit/ajustement/data/')=>'Liste Ajustements Archivés',
+                                    ]"
+                                    class="mx-2" />
+        <x-slot name="right">
+            <x-generic.filters.search-filter id='mySearch' name="tous" dataTableId="myDataTable" />
+        </x-slot>
+    </x-generic.title-bar.bar>
 @endsection
+
 
 
 

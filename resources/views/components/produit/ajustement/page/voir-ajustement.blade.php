@@ -27,12 +27,12 @@
     <div class="" id="" style="position: sticky;top:43px;border-radius:0px;"></div>
 @endsection
 @section('ly-title')
-<div class="d-flex align-items-center justify-content-between px-4 mt-1">
-    <div class="d-flex align-items-center">
+ <div class="d-flex align-items-center justify-content-between px-4 mt-1">
+  {{--  <div class="d-flex align-items-center">
         <div class="rounded-circle border  text-align center d-flex align-items-center justify-content-center"
              style="width: 43px; height: 43px; background: rgba(0,0,0,.1);"
-             {{--@if ($attributes['img'])border-color:black!important;@endif"--}}>
-           {{-- @if ($attributes['img'])    ! --}}
+             {{--@if ($attributes['img'])border-color:black!important;@endif"-->
+           {{-- @if ($attributes['img'])    ! --
            @if(false)
                 <img src="{{ asset("images/profig.jpg") }}"
                     width="43px"
@@ -45,14 +45,28 @@
             @endif
         </div>
          <x-generic.links.select-link contentCible="my-main" value="test1" :dt="['/produit/newProd'=>'Ajustements/DateAjustement','/test2'=>'Nouveau Produit Composé']" />
-    </div>
-    <div class="">
-        <x-generic.infos.info-list>
-            <x-generic.infos.info-item title="Enregistré le" :value="$ajustement->created_at" icon="save" />
-            <x-generic.infos.info-item title="produit(s) ajusté(s)" :value="$nbre" icon="save" />
+    </div> --}}
+    <x-generic.title-bar.bar>
+        <x-slot name="image">
+            <x-generic.icon.simple name="adjust" taille="16"/>
+        </x-slot>
+        <x-generic.links.select-link-dt idDataTable="myDataTable" value="tous"
+                                    :dt="[
+                                        url('produit/ajustement/data')=>'Liste Ajustements',
+                                    ]"
+                                    class="mx-2" />
+        <x-slot name="right">
+            <div class="">
+                <x-generic.infos.info-list>
+                    <x-generic.infos.info-item title="Enregistré le" :value="$ajustement->created_at" icon="save" />
+                    <x-generic.infos.info-item title="produit(s) ajusté(s)" :value="$nbre" icon="save" />
 
-        </x-generic.infos.info-list>
-    </div>
+
+                </x-generic.infos.info-list>
+            </div>
+
+        </x-slot>
+    </x-generic.title-bar.bar>
 
 
 </div>
