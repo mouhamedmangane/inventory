@@ -7,11 +7,10 @@ use App\Http\Controllers\Produit\AjustementController;
 use App\Http\Controllers\Produit\ProduitController;
 use App\Http\Controllers\Vente\VenteController;
 use App\Http\Controllers\ParamCompte\UserController as PCUserController;
-use App\Models\Ajustement;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+
 use App\Rules\Ninterval;
-use Illuminate\Contracts\Validation\Validator;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,12 +25,27 @@ use Illuminate\Contracts\Validation\Validator;
 
 
 require __DIR__.'/auth.php';
-Route::middleware([])->group(function () {
-    Route::get('b/{boutiqueId}/produit/new', [ProduitController::class, 'create']);
+
+Route::get('toggle_sidebar',function(Request $request){
+    $validator=Validator::make($request->all(),[
+        'active'=>'string|required'
+    ]);
+    if(!$validator->fails()){
+        session(['toggle_sidebar'=>$request->active]);
+
+    }
+    return response()->json(['status'=>true]);
+
+});
+
+Route::middleware([])->prefix('b/{urlBoutiqueId}')->group(function () {
+
+
+    Route::get('produit/new', [ProduitController::class, 'create']);
     Route::get('produit/produit', function () {
         return view('page.produit.create');
     });
-    Route::get('b/{boutiqueId}/produit', [ProduitController::class,'index']);
+    Route::get('produit', [ProduitController::class,'index']);
     Route::post('produit/save',[ProduitController::class,'store'])->name('produit.save');
     Route::get('produit/data/', [ProduitController::class, 'returnData']);
     Route::post('produit/newProd', function(){
@@ -44,7 +58,7 @@ Route::middleware([])->group(function () {
 
     // Ajustement
     Route::get('produit/ajustements/create',[AjustementController::class,'create' ]);
-    
+
     // test datatable
     Route::get('produit/testDataTable', function(Request $request){
         $messages="";
@@ -55,7 +69,7 @@ Route::middleware([])->group(function () {
             $messages = $data_validation->messages();
         }
         return response()->json([
-    
+
                 "status"=>true,
                 "message"=> "Saisie Incorrent veillee mettre des donnees valide",
                 "validation"=> $messages,
@@ -66,7 +80,7 @@ Route::middleware([])->group(function () {
                     (object)['id'=> 6,'prenom'=> 'asee','nom'=>'Livre','age'=>441],
                     (object)['id'=> 3,'prenom'=> 'boubou','nom'=>'koro','age'=>78],
                     (object)['id'=> 4,'prenom'=> 'boubou','nom'=>'TeBA','age'=>45]
-                
+
             ]
         ]);
     });
@@ -84,7 +98,7 @@ Route::middleware([])->group(function () {
     Route::get('contact/archiverMany',[ContactController::class,'archiverMany']);
     Route::get('contact/desarchiverMany',[ContactController::class,'desarchiverMany']);
     Route::resources(['contact'=>ContactController::class]);
-    
+
     //Vente
     Route::post('vente/save',  [VenteController::class,'store']);
     Route::get('vente/new',[VenteController::class,'create']);
@@ -108,12 +122,12 @@ Route::middleware([])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    
+
     // Home
     Route::get('/home',[HomeController::class,'index']);
 
     // Produit
-    
+
 
 });
 

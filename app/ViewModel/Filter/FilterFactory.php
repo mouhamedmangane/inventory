@@ -7,7 +7,7 @@ use App\ViewModel\Filter\LigneFilterOneMd;
 use App\ViewModel\Filter\FilterMd;
 
 class FilterFactory {
-    
+
     public static function filterMd($idSelect="",$list=[]){
         return new FilterMd($idSelect,$list);
     }
@@ -21,6 +21,6 @@ class FilterFactory {
     }
 
     public static function ligneOneMd($name,$label,$type,$value,$op='egal'){
-        return new LigneFilterOneMd($name,$label,$type,$op,$value);
+        return new LigneFilterOneMd($name,$label,$type,$value,$op);
     }
 }

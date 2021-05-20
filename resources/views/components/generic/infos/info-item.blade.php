@@ -13,16 +13,16 @@
             <i class=" @if($attributes['typeIcon']){{ $attributes['typeIcon'] }} @else material-icons  @endif md-32 mr-3" style="color:#6c757d;">
                 {{ $attributes['icon'] }}
             </i>
-        </div>    
+        </div>
     @endif
-    
+
     <div class="">
-        
+
         <div class="" style="font-size: 14px;">
             @empty ($link)
-                <span style="color: {{$couleur}};">{{ $value }}</span>
+                <span style="color: {{$couleur ?? ''}};">{{ $value }}</span>
             @else
-                <a href="$link" style="color: {{$couleur}};">{{ $value }}</a>
+                <a href="$link" style="color: {{$couleur ?? ''}};">{{ $value }}</a>
             @endif
         </div>
         @if (!empty($title))
@@ -30,7 +30,7 @@
                 {{ $title }}
             </div>
         @endif
-        
-    </div> 
-    
+
+    </div>
+
 </li>

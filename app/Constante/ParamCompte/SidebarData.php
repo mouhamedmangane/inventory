@@ -14,6 +14,7 @@ class SidebarData{
             ->addNavItemModel("Securité","user","receipt")            
        
         )
+        ->activer();
         ;
     }
 }

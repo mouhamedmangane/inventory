@@ -12,7 +12,7 @@
                                        elementMessageClass=""
                                        :isReset="false"
                                        icon="save"/>
-        @if($user->id)
+        @if(isset($user->id))
             @if(empty($user->archiver))
                 @props(['icon_archiver'=>'archive','text_archiver'=>'Archiver','url_archiver'=>'param-compte/users/archiver/'])
             @else
@@ -52,7 +52,7 @@
             <div class="mr-4">
                 <x-generic.infos.info-list >
                     
-                    @if($user)
+                    @if(isset($user))
                         <x-generic.infos.info-item title="Boutiques" :value="$nbrBoutiques" icon="store"  />
                         <x-generic.infos.info-item title="Statut" :value="$statusUser" icon="assignment_turned_in" :couleur="$couleurUser" />
 

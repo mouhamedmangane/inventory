@@ -14,31 +14,21 @@ class CreateContactsTable extends Migration
    public function up()
    {
        Schema::disableForeignKeyConstraints();
-       Schema::create('contact', function (Blueprint $table) {
+       Schema::create('contacts', function (Blueprint $table) {
            $table->id();
            $table->string('nom', 250);
-           $table->string('email', 100);
-           $table->double('compte', 15, 2);
-           $table->string('ncni', 50);
-           $table->string('photo', 250);
+           $table->string('email', 100)->nullable();
+           $table->double('compte', 15, 2)->nullable();
+           $table->string('ncni', 50)->nullable();
+           $table->string('fonction', 250)->nullable();
+           $table->string('photo', 250)->nullable();
 
-           $table->unsignedBigInteger('telephone_id_1')->nullable()->unique();
-           $table->foreign('telephone_id_1')
-           ->references('id')
-           ->on('telephones')
-           ->onDelete('cascade')
-           ->onUpdate('cascade');
-           
-           $table->unsignedBigInteger('telephone_id_2')->nullable()->unique();
-           $table->foreign('telephone_id_2')
-           ->references('id')
-           ->on('telephones')
-           ->onDelete('cascade')
-           ->onUpdate('cascade');
 
-           $table->boolean('is_client');
-           $table->boolean('is_fournisseur');
-           $table->boolean('archiver');
+
+
+           $table->boolean('is_client')->default(0);
+           $table->boolean('is_fournisseur')->default(0);
+           $table->boolean('archiver')->default(0);
 
            $table->unsignedBigInteger('done_by_user')->default(1);//Auth::user()->id) par defaut user connecté
            $table->foreign('done_by_user')

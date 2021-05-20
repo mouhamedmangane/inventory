@@ -23,6 +23,7 @@ class GroupeProduitFactory extends Factory
     {
         return [
             'groupe_name' => $this->faker->unique()->name,
+            'done_by_user'=> 1
         ];
     }
 }

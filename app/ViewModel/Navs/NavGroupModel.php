@@ -5,7 +5,7 @@ namespace App\ViewModel\Navs;
 Class NavGroupModel implements NavElementModel{
 
 
-    public $name,$icon;
+    public $name,$icon,$active;
     public $navElementModels;
 
     public function __construct($name,$icon="",$navElementModels=[])

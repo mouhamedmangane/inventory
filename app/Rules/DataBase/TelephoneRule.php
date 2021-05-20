@@ -11,8 +11,11 @@ class TelephoneRule implements Rule
     public const ADD_METHOD=0;
     public const UPDATE_METHOD=1;
 
+    private const IS_EXIST_NUMBER=0;
+    private const IS_NOT_NUMERIC=1;
 
-    private $code 
+
+    private $code
     ;
 
 
@@ -27,6 +30,7 @@ class TelephoneRule implements Rule
     {
         $this->table=$table;
         $this->id=$id;
+        $this->code=[];
     }
 
     /**
@@ -44,16 +48,20 @@ class TelephoneRule implements Rule
         $validator = Validator::make([$attribute=>$value],[
             $attribute.'.indicatif'=>'numeric',
             $attribute.'.numero'=>'numeric',
+            $attribute.'.id'=>'numeric',
+
         ]);
+        $this->code[]=self::IS_NOT_NUMERIC;
         return !$validator->fails();
     }
 
     public function testUnique($attribute,$value){
-        if($this->)
-        return !DB::table($this->telephone)->where('indicatif',$value->indicatif)
-                                   ->where('numero',$value->numero)
-                                   ->where('id','<>',$this->id)
-                                   ->exists();
+        $test= DB::table($this->telephone)->where('indicatif',$value->indicatif)
+        ->where('numero',$value->numero)
+        ->where('id','<>',$value->id)
+        ->exists();
+        $this->code[]=self::IS_EXIST_NUMBER;
+        return !$test;
     }
 
     /**
@@ -63,6 +71,14 @@ class TelephoneRule implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        if(in_array(self::IS_EXIST_NUMBER,$this->code)){
+            return "le numero de telephone :attribute existe déja";
+        }
+        elseif(in_array(self::IS_NOT_NUMERIC,$this->code)){
+            return "les champs de :attribute doit être numerique";
+        }
+        else{
+            return "numero de telephone invalide";
+        }
     }
 }

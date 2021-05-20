@@ -9,12 +9,13 @@
     <x-slot name="label">
         <x-generic.forms.form-table-label  :labelText="$labelText" required="{{ $req }}"  disposition="{{ $attributes['disposition'] }}" />
     </x-slot>
-    
-    <x-generic.input.telephone :name="$name" 
+
+    <x-generic.input.telephone :name="$name"
                                :indicatif="$indicatif"
                                :numero="$numero"
-                               id="{{ $attributes['id'] }}" 
+                               :idTelephone="$idTelephone"
+                               id="{{ $attributes['id'] }}"
                                required="{{ $req }}"
                                placeholder="{{ $attributes['placeholder'] }}" />
-    
+
 </x-generic.forms.form-table-line>

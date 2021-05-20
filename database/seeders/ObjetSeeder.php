@@ -3,8 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use DB,Str;
-use App\Models\Objet;
+use DB;
 
 class ObjetSeeder extends Seeder
 {
@@ -15,8 +14,22 @@ class ObjetSeeder extends Seeder
      */
     public function run()
     {
-        Objet::factory()
-        ->count(5)
-        ->create();
+        DB::table('objets')->insert([
+            'objet_name' => 'Vente',
+            'done_by_user' => 1,
+        ]);
+        DB::table('objets')->insert([
+            'objet_name' => 'Achat',
+            'done_by_user' => 1,
+        ]);
+        DB::table('objets')->insert([
+            'objet_name' => 'Contact',
+            'done_by_user' => 1,
+        ]);
+        DB::table('objets')->insert([
+            'objet_name' => 'Produit',
+            'done_by_user' => 1,
+        ]);
+
     }
 }

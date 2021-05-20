@@ -165,6 +165,9 @@
                 $.rmchargement();
 
                 return json.data;
+             },
+             "error": function(error){
+                $.rmchargement();
              }
              @if($attributes['idForm'])
                  "data":$('#{{ $attributes['idForm'] }}').serialize(),
@@ -187,7 +190,7 @@
 
           //scolumnDef
           "columnDefs": [
-                @isset($attributes['selectName'] )  
+                @isset($attributes['selectName'] )
                     {
                         'targets':[0],'width':' @if($attributes["selectColWidth"]) {{ $attributes['selectColWidth']  }} @else 50px @endif',
                         'className':'valign-center dt-col-2'
@@ -497,7 +500,7 @@
         // Les Actions
         @if($attributes['actions'])
             actions=@json($attributes['actions']);
-            
+
             //definition de la function ajax
             function ajaxAction(btn_data){
                 if(!btn_data.method){
@@ -521,12 +524,12 @@
                         $("#modal__dt").on('hidden.bs.modal', function (e) {
                                 $("#modal__dt").remove();
                         });
-                        $("#modal__dt").modal('hide');         
+                        $("#modal__dt").modal('hide');
 
                         if(response.status){
                             alerter(btn_data,'Operation effectuée '+btn_data.op,response.message,true);
                             disabledAllActions(false);
-                            
+
                             {{ $name }}.ajax.reload();
                         }
                         else{
@@ -534,8 +537,8 @@
                         }
                     },
                     error: async function (err){
-                        
-                        await $("#modal__dt").modal('hide');         
+
+                        await $("#modal__dt").modal('hide');
                         alerter(btn_data,'Echec Opération '+btn_data.op,'Ressource Indisponible, Vérifier la connexion',false);
                     }
                 });
@@ -570,7 +573,7 @@
                     }
                 });
             }
-            
+
 
             //Enregistrement des Actions
             for(action of actions){

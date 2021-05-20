@@ -2,28 +2,34 @@
 namespace App\Constante\Inventory;
 use App\ViewModel\Navs\NavModelFactory;
 
-class SidebarData{
+use App\Helpers\URLInventory;
 
+class SidebarData{
+    public static function prevBoutiqueUrl($url){
+        $boutiqueId = request()->urlBoutiqueId;
+        return 'b/'.$boutiqueId.'/'.$url;
+    }
     public static function data(){
+
         return NavModelFactory::navModel()
         ->addNavBlocModel(
             NavModelFactory::navBlocModel()
-            ->addNavItemModel("Dashbord","/ ","home")
-            ->addNavItemModel("Contact","contact/","account_box ")
+            ->addNavItemModel("Dashbord",URLInventory::wB("/ "),"home")
+            ->addNavItemModel("Contact",URLInventory::wB("contact"),"account_box ")
             ->addNavGroupModel(NavModelFactory::navGroupModel("Produit Groupe","home")
-                ->addNavItemModel("Produits","produit","home")
-                ->addNavItemModel("Ajustement","produit/ajustement",'home')
-                ->addNavItemModel("Rejet","produit/rebut")
-                ->addNavItemModel("Reduction","produit/rebut")
-                ->addNavItemModel("Mouvement Stock","produit/rebut")
+                ->addNavItemModel("Produits",URLInventory::wB("produit"))
+                ->addNavItemModel("Ajustement",URLInventory::wB("produit/ajustement"))
+                ->addNavItemModel("Rejet",URLInventory::wB("produit/rebut"))
+                ->addNavItemModel("Reduction",URLInventory::wB("produit/rebut"))
+                ->addNavItemModel("Mouvement Stock",URLInventory::wB("produit/rebut"))
             )
 
         )
         ->addNavBlocModel(
             NavModelFactory::navBlocModel()
-            ->addNavItemModel("Vente","vente/","shopping_cart")
-            ->addNavItemModel("Achat","achat/","receipt")
-            ->addNavItemModel("Depense","/depense","remove_shopping_cart")
+            ->addNavItemModel("Vente",URLInventory::wB("vente"),"shopping_cart")
+            ->addNavItemModel("Achat",URLInventory::wB("achat/"),"receipt")
+            ->addNavItemModel("Depense",URLInventory::wB("depense"),"remove_shopping_cart")
 
         )
         ->addNavBlocModel(
@@ -31,6 +37,7 @@ class SidebarData{
             ->addNavItemModel("Integration","integration","integration_instructions")
             ->addNavItemModel("Rapport","rapport","flag")
         )
-        ;
+        ->activer();
+
     }
 }

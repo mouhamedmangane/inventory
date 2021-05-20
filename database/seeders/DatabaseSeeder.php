@@ -20,10 +20,14 @@ class DatabaseSeeder extends Seeder
     {
        // Models\Entreprise::factory(1)->create();
       //  Models\Boutique::factory(5)->create();
-        Models\GroupeProduit::factory()->count(2)->create();
         Models\User::factory()->count(10)->create();
-         
-        Models\Role::factory()->count(3)->create();
+        Models\GroupeProduit::factory()->count(2)->create();
+
+        $this->call([
+            BoutiqueSeeder::class,
+            ObjetSeeder::class
+        ]);
+        //Models\Role::factory()->count(3)->create();
 
      // Models\Client::factory(10)->create();
       // Models\Fournisseur::factory(10)->create();

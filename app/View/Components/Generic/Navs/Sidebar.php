@@ -6,7 +6,7 @@ use Illuminate\View\Component;
 
 class Sidebar extends Component
 {
-    public $model,$id;
+    public $model,$id,$active;
     /**
      * Create a new component instance.
      *
@@ -16,6 +16,13 @@ class Sidebar extends Component
     {
         $this->model=$model;
         $this->id=$id;
+        //dd(request()->session());
+
+        if(request()->session()->has('toggle_sidebar') &&
+                request()->session()->get('toggle_sidebar')=='on' )
+            $this->active=true;
+        else
+            $this->active=false;
     }
 
     /**

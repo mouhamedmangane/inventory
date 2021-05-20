@@ -6,7 +6,7 @@
     'idBtnOperation'=> App\ViewModel\GenId::newId(),
     'idElement' => App\ViewModel\GenId::newId(),
 ])
-<a class="{{ $attributes['class'] }} dropdown-item text-sm ligne-filter-select p-0  " id="{{ $id }}" 
+<a class="{{ $attributes['class'] }} dropdown-item text-sm ligne-filter-select p-0  " id="{{ $id }}"
     style="font-size: 14px;">
 
     <span class="form-check form-check-inline w-100 d-inline-block" style="padding: 4px 10px;">
@@ -16,12 +16,12 @@
 
 
     <div class="d-flex border" style="max-width:100%;margin: 1px 10px;">
-        
+
         <input type="{{ $ligne->type }}" id="{{ $idInputMin }}" style="min-width:10px;" class="form-control form-control-sm no-spinner no-date-spinner">
         <button class="btn btn-sm btn-success px-0"  data-id-element="{{ $idElement }}"
                 style="width: 22px;text-align:center;" id="{{ $idBtnOperation }}"></button>
         <input type="{{ $ligne->type }}" id={{ $idInputMax }} style="min-width:10px;" class="form-control form-control-sm border-0 no-spinner no-date-spinner">
-    
+
     </div>
 
 </a>
@@ -44,15 +44,15 @@ $(function(){
                 $(idBtnOperation).html(ops[i].text);
                 $(idBtnOperation).data('it',i);
                 break;
-           } 
+           }
         }
         // masquage de inputMIn  lorqu elle est egal a egal
         if(op_name == ops[0].op_name){
-            
+
             $(idInputMin).hide();
         }
-        
-        
+
+
 
         function nextOp(){
             let i=$(idBtnOperation).data('it');
@@ -63,8 +63,8 @@ $(function(){
             else{
                 $(idBtnOperation).data('it',0);
                 return ops[0];
-            }  
-           
+            }
+
         }
 
         function run(){
@@ -80,27 +80,27 @@ $(function(){
                 let value={
                     'op_name':ops[i].op_name,
                     'max':$(idInputMax).val(),
-                    'min':min+' qsf',
+                    'min':min+'',
                 };
-                
+
                 $.pushFilterToSearch(idSearch,idElement,idCkeck,name,value,label,text);
             }
             else{
-                
+
                 if($("#"+idElement)){
                     $.removeFilterToSearch("#"+idElement,idSearch);
                 }
             }
         }
-        
+
         $(idCkeck).on('change',function(){
             run();
         });
         $(idInputMax+','+idInputMin).on('change',function(){
             run();
         });
-         
-       
+
+
         //lorqu on clique sur le btn
         $(idBtnOperation).on('click',function(){
             let op = nextOp();
@@ -111,17 +111,17 @@ $(function(){
             else{
                 $(idInputMin).show();
             }
-            run();   
+            run();
         });
-        
 
-        
+
+
 
 
     }
 
 });
-</script>    
+</script>
 @endpush
 @endonce
 
@@ -139,8 +139,8 @@ $(function(){
                       "#{{ $idBtnOperation }}",
                       "{{ $ligne->op }}");
     });
-     
+
 </script>
-   
+
 @endpush
 @endif

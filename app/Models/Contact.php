@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Client extends Model
+class Contact extends Model
 {
     use HasFactory;
 
@@ -13,5 +13,9 @@ class Client extends Model
     {
         return $this->hasMany('App\Models\Vente');
     }
-    
+
+
+    public function telephones(){
+        return $this->hasMany('App\Models\Telephone');
+    }
 }

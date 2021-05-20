@@ -1,6 +1,6 @@
 <tr>
     <td>
-        {{ $objet->nom }}
+        {{ $objet->objet_name }}
         <input type="hidden" name="objet[{{ $objet->id }}]" value="{{ $objet->id }}" >
     </td>
 

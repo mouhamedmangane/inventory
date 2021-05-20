@@ -2,31 +2,31 @@
 
 namespace App\Rules;
 
+use App\ViewModel\Filter\LigneFilterOneMd;
 use Illuminate\Contracts\Validation\Rule;
 
 class NOp implements Rule
 {
-    public $possible_ops;
-    public $key_control;
-    public $type_control;
-
-    /**
+    public const NUMBER='numeric';
+    public const TEXT='string';
+    public const DATE='date';
+    private $mes;
+    private $code_error=0;//code pour
+    private $type;
+    /*  *
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct($possible_ops,$key_control,$type_control)
+    public function __construct($type)
     {
-        $this->possible->ops = $possible_ops;
-        $this->key_control=$key_control;
-        $this->type_control = $type_control;
-
+        $this->type=$type;
     }
- 
+
 
 
     public function possibleOp($attribute,$value){
-        
+
     }
 
     public function verificationType($attribute,$value){
@@ -49,25 +49,21 @@ class NOp implements Rule
      */
     public function passes($attribute, $value)
     {
-        $validated=true;
-        $keys = array_keys($value);
-        for ($i=0; $i < count($keys) ; $i++) { 
-            if($keys_control[$i] != $keys[$i]){
-                $this->code_error=$i;
-                $validated = false;
-                break;
-            }
+        $formOp=['op_name','valeur'];
+        $possible_op=LigneFilterOneMd::POSSIBLE_OPS;
+        $message=NplValidator::oneByOne($attribute,$value,[
+            new NplOpForm($formOp),
+            new NplOPPossible($value[$formOp[0]],$possible_op),
+            new NplOpType($this->type,[$formOp[0]])
+
+        ]);
+        if($message==null){
+            return true;
         }
-        if($validated && !in_array($value['op_name'],LigneFilterIntervalMd::POSSIBLE_OPS)){
-            $this->code_error=3;
-            $this->validated=false;
+        else{
+            $this->mes=$message;
+            return false;
         }
-        else 
-        if($validated && $value['min'] > $value['max']){
-            $validated=false;
-            $this->code_error=5;
-        }
-        return $validated;
     }
 
     /**
@@ -77,6 +73,6 @@ class NOp implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return $this->mes;
     }
 }

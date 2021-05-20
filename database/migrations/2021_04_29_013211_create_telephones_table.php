@@ -17,6 +17,13 @@ class CreateTelephonesTable extends Migration
             $table->id();
             $table->smallInteger('indicatif')->nullable();
             $table->bigInteger('numero')->nullable();
+
+            $table->unsignedBigInteger('contact_id');
+            $table->foreign('contact_id')
+           ->references('id')
+           ->on('contacts')
+           ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

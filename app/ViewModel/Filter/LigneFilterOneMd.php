@@ -5,7 +5,7 @@ use App\ViewModel\Filter\LigneFilterMd;
 
 class LigneFilterOneMd extends LigneFilterMd{
     private  const POSSIBLE_TYPES=['text','date','number'];
-    private  const POSSIBLE_OPS=['egal','like'];
+    public const POSSIBLE_OPS=['egal','like'];
     public $op,$value;
 
     public function __construct($name,$label,$type,$value,$op="egal"){
@@ -16,7 +16,7 @@ class LigneFilterOneMd extends LigneFilterMd{
         else{
             throw new Exception("le type donne dans le ligneFilterOneMd n'est pas accepté .
             Seull 'text','date','number'sont acceptés ", 1);
-            
+
         }
         if(in_array(strtolower($op),self::POSSIBLE_OPS)){
             $this->op = strtolower($op);

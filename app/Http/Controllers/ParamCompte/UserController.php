@@ -169,20 +169,22 @@ class UserController extends Controller
     }
 
     public function saveBoutiqueUsers($bu_rqts,$user_id){
-        foreach($bu_rqts as $bu_rqt){
-            $bu =BoutiqueUser::where('user_id',$user_id)->where('boutique_id',$bu_rqt['boutique'])->first(); 
-            if($bu){
-                $bu->role_id = $bu_rqt['role'];
-                $bu->activer = (isset($bu_rqt['activer']))? 1 : 0;
-                $bu->update();
-            }
-            else{
-                $bu= new BoutiqueUser;
-                $bu->boutique_id = $bu_rqt['boutique'];
-                $bu->user_id = $user_id;
-                $bu->role_id = $bu_rqt['role'];
-                $bu->activer= (isset($bu_rqt['activer']))? 1 : 0;
-                $bu->save();
+        if(isset($bu_rqts)){
+            foreach($bu_rqts as $bu_rqt){
+                $bu =BoutiqueUser::where('user_id',$user_id)->where('boutique_id',$bu_rqt['boutique'])->first(); 
+                if($bu){
+                    $bu->role_id = $bu_rqt['role'];
+                    $bu->activer = (isset($bu_rqt['activer']))? 1 : 0;
+                    $bu->update();
+                }
+                else{
+                    $bu= new BoutiqueUser;
+                    $bu->boutique_id = $bu_rqt['boutique'];
+                    $bu->user_id = $user_id;
+                    $bu->role_id = $bu_rqt['role'];
+                    $bu->activer= (isset($bu_rqt['activer']))? 1 : 0;
+                    $bu->save();
+                }
             }
         }
     }

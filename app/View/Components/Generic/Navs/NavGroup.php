@@ -9,14 +9,15 @@ class NavGroup extends Component
 {
     use NavTestClasse; 
 
-    public $name,$icon, $navElementModels;
+    public $name,$icon,$active, $navElementModels;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($navElementModels,$name,$icon="")
+    public function __construct($navElementModels,$name,$icon="",$active)
     {   
+        $this->active = $active;
         $this->icon = $icon;
         $this->name=$name;
         $this->navElementModels = $navElementModels;
