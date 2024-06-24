@@ -8,14 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class LigneVente extends Model
 {
     use HasFactory;
-
-    public function vente()
-    {
-        return $this->belongsTo('App\Models\Vente');
-    }
-
+    
     public function produit()
     {
         return $this->belongsTo('App\Models\Produit');
     }
+    public function vente()
+    {
+        return $this->belongsTo('App\Models\Vente');
+    }
+    public function ligne_vente_recus()
+    {
+        return $this->hasMany('App\Models\LigneVenteRecu');
+    }
+
 }

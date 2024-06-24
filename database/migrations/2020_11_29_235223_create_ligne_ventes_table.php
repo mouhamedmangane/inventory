@@ -17,7 +17,9 @@ class CreateLigneVentesTable extends Migration
         Schema::create('ligne_ventes', function (Blueprint $table) {
             $table->id();
             $table->double('prixUnite', 15, 2);
-            $table->double('quantite',15,2);
+            $table->double('quantiteDemande',15,2)->nullable();
+            $table->double('quantiteRecu',15,2)->nullable();
+            $table->string('unite')->nullable();
 
             $table->unsignedBigInteger('vente_id');
             
@@ -30,7 +32,7 @@ class CreateLigneVentesTable extends Migration
             $table->unsignedBigInteger('produit_id');
             $table->foreign('produit_id')
             ->references('id')
-            ->on('produit')
+            ->on('produits')
             ->onDelete('restrict')
             ->onUpdate('restrict');
             

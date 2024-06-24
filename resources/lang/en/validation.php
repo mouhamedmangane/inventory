@@ -134,6 +134,13 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'ninterval' => [
+            'forme' => 'l \'attribut :attribute ne respecte la forme d une paramètre interval. Etes vous pirate',
+            'operation' => 'l\'opération pour l\':attribute n\'est pas prise en compte. Etes vous pirate',
+            'numeric' => 'l\'attribut :attribute doit étre de type "nombre" . Etes vous pirate',
+            'date' => 'l\'attribut :attribute doit étre de type "date" . Etes vous pirate',
+            'maxInferieur' => 'l\'attribut :attribute doit avoir un max superieur au min',
+        ],
     ],
 
     /*

@@ -22,9 +22,6 @@ class CreateBoutiquesTable extends Migration
             $table->timestamps();
 
 
-            $table->unsignedBigInteger('entreprise_id');
-            $table->foreign('entreprise_id')->references('id')->on('entreprises')
-            ->onDelete('restrict')->onUpdate('restrict');
         });
     }
 
@@ -36,5 +33,6 @@ class CreateBoutiquesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('boutiques');
+        Schema::enableForeignKeyConstraints();
     }
 }

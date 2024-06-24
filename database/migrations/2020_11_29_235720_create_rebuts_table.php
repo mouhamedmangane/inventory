@@ -20,8 +20,17 @@ class CreateRebutsTable extends Migration
             $table->timestamps();
 
 
+
             $table->unsignedBigInteger('produit_id');
             $table->foreign('produit_id')->references('id')->on('produits')->onDelete('restrict')->onUpdate('restrict');
+
+            $table->unsignedBigInteger('done_by_user')->default(1);//Auth::user()->id) par defaut user connecté
+            $table->foreign('done_by_user')
+            ->references('id')
+            ->on('users')
+            ->onDelete('restrict')
+            ->onUpdate('restrict');
+
         });
     }
 
@@ -33,5 +42,6 @@ class CreateRebutsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('rebuts');
+        Schema::enableForeignKeyConstraints();
     }
 }

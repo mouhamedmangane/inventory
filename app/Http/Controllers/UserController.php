@@ -14,5 +14,5 @@ class UserController extends Controller
 
         //
     }
-    
+
 }

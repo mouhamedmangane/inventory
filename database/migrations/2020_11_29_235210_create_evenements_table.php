@@ -16,6 +16,15 @@ class CreateEvenementsTable extends Migration
         Schema::disableForeignKeyConstraints();
         Schema::create('evenements', function (Blueprint $table) {
             $table->id();
+            $table->string('action');
+        
+            $table->string('description', 2000);
+            
+            $table->unsignedBigInteger('user_id');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+
             $table->timestamps();
         });
     }

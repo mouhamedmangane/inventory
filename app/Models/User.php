@@ -46,10 +46,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Depense');
     }
 
-    public function boutique()
-    {
-        return $this->belongsTo('App\Models\Boutique');
-    }
+
     public function ventes()
     {
         return $this->hasMany('App\Models\Vente');
@@ -58,4 +55,35 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Achat');
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\Models\Role', 'role_users_table', 'user_id', 'role');
+    }
+    public function droit_specifiques()
+    {
+        return $this->hasMany('App\Models\DroitSpecifique');
+    }
+
+    public function boutique_users()
+    {
+         return $this->hasMany('App\Models\BoutiqueUser');
+    }
+
+    public function boutiques(){
+        return $this->belongsToMany(Boutique::class, 'boutique_users');
+    }
+
+    public function evenements()
+    {
+        return $this->hasMany('App\Models\Evenement');
+    }
+    public function produits()
+    {
+        return $this->hasMany('App\Models\Produit');
+    }
+
+
+
+
 }

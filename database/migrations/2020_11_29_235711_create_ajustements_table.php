@@ -14,20 +14,25 @@ class CreateAjustementsTable extends Migration
     public function up()
     {
         Schema::disableForeignKeyConstraints();
+
         Schema::create('ajustements', function (Blueprint $table) {
             $table->id();
-            $table->double('quantiteInitial', 15, 2);
-            $table->double('quantiteFinal', 15, 2);
+            $table->string('numero', 100)->unique()->default(NULL);
+            $table->text('note')->nullable();
             $table->timestamps();
 
-            $table->unsignedBigInteger('produit_id');
-            $table->foreign('produit_id')->references('id')->on('produits')
-            ->onDelete('restrict')->onUpdate('restrict');
+
+            $table->unsignedBigInteger('done_by_user')->default(1);//Auth::user()->id) par defaut user connecté
+            $table->foreign('done_by_user')
+            ->references('id')
+            ->on('users')
+            ->onDelete('restrict')
+            ->onUpdate('restrict');
+         });
 
 
-            });
         }
-        
+
         /**
          * Reverse the migrations.
          *

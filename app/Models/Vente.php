@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Vente extends Model
 {
     use HasFactory;
-
+    
     public function user()
     {
         return $this->belongsTo('App\Models\User');
@@ -22,6 +22,19 @@ class Vente extends Model
     public function client()
     {
         return $this->belongsTo('App\Models\Client');
+    }
+    public function ligne_payement_ventes()
+    {
+        return $this->hasMany('App\Models\LignePayementVentes');
+    }
+    public function livraison_complet(){
+        
+    }
+    public function payement_complet(){
+        return ($this->montantTotal- $this->ligne_payement_ventes->sum('montant'))==0;
+    }
+    public function sumPayement(){
+        return $this->ligne_payement_ventes->sum('montant');
     }
 
 

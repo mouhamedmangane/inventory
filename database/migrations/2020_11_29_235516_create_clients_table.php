@@ -19,7 +19,18 @@ class CreateClientsTable extends Migration
             $table->string('nom', 700);
             $table->double('compte', 15, 2);
             $table->string('ncni', 50);
-            $table->integer('tel')->unsigned()->nullable()->default(700000000);
+            $table->integer('tel')->unsigned()->nullable()->unique();
+
+
+            $table->unsignedBigInteger('done_by_user')->default(1);//Auth::user()->id) par defaut user connecté
+            $table->foreign('done_by_user')
+            ->references('id')
+            ->on('users')
+            ->onDelete('restrict')
+            ->onUpdate('restrict');
+
+
+
             $table->timestamps();
         });
     }

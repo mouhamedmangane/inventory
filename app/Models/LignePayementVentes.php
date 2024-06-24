@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class LignePayementVentes extends Model
 {
     use HasFactory;
+    public function vente()
+    {
+        return $this->belongsTo('App\Models\Vente');
+    }
 }

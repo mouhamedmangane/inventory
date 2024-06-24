@@ -20,23 +20,24 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('tel', 30);
-            $table->integer('ncni');
-            $table->unsignedBigInteger('boutique_id');
+            $table->string('tel', 30)->unique()->nullable();
+            $table->string('type_user', 200)->default("Utilisateur Simple");
+            $table->integer('ncni')->unique()->nullable();
+            $table->boolean('archiver')->default(0);
 
-            $table->foreign('boutique_id')
+            $table->string('photo')->nullable();
+
+            $table->unsignedBigInteger('done_by_user')->nullable();//Auth::user()->id) par defaut user connecté
+            $table->foreign('done_by_user')
             ->references('id')
-            ->on('boutiques')
+            ->on('users')
             ->onDelete('restrict')
             ->onUpdate('restrict');
 
-            
-            
-        
             $table->rememberToken();
             $table->timestamps();
 
-            
+
 
         });
     }

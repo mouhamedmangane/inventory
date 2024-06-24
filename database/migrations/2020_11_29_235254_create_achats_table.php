@@ -18,9 +18,22 @@ class CreateAchatsTable extends Migration
             $table->id();
             $table->string('numeroAchat', 100);
             $table->double('montantTotal', 15, 2);
+            $table->boolean('complet')->nullable()->default(false);
+            $table->unsignedBigInteger('fournisseur_id')->nullable()->default(NULL);
+
+            $table->foreign('fournisseur_id')->references('id')->on('fournisseurs')->onDelete('restrict');
+
+            $table->unsignedBigInteger('done_by_user')->default(1);//Auth::user()->id) par defaut user connecté
+            $table->foreign('done_by_user')
+            ->references('id')
+            ->on('users')
+            ->onDelete('restrict')
+            ->onUpdate('restrict');
+
+
             $table->timestamps();
 
-          
+
         });
     }
 
